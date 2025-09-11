@@ -1,0 +1,10 @@
+---
+model: gemini-2.5-flash-image-preview
+---
+
+Visualize device 1 on the left with its 3.5mm jack plugged into device 2 on the right, and being held by a user.
+
+1. The CB radio speaker-mic handheld device with a tri-state slider switch: Off/On/Programming. The unit has a coiled cord ending in a 3.5mm TRRS jack.
+2. The metal box is in the form factor of a mac mini. The top surface of the box has 9 headphone jacks, laid out in a 3 x 3 grid.
+
+Generate the sketch in industrial design concept art style. Focus on communicating the form and function in context. Clean white background. No text labels.

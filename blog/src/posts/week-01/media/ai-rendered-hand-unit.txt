@@ -1,0 +1,5 @@
+---
+model: gemini-2.5-flash-image-preview
+---
+
+Visualize a CB radio speaker-mic handheld device with a tri-state slider switch: Off/On/Programming. The unit has a coiled cord ending in a 3.5mm TRRS jack. Clean, modern design sketch again pure white background.

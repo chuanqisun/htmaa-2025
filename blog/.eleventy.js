@@ -1,4 +1,4 @@
-import { HtmlBasePlugin, IdAttributePlugin, InputPathToUrlTransformPlugin } from "@11ty/eleventy";
+import { IdAttributePlugin, InputPathToUrlTransformPlugin } from "@11ty/eleventy";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import { createHighlighter } from "shiki";
 
@@ -11,7 +11,6 @@ import { createHighlighter } from "shiki";
  * @returns
  */
 export default async function (eleventyConfig) {
-  eleventyConfig.addPlugin(HtmlBasePlugin);
   eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
   eleventyConfig.addPlugin(IdAttributePlugin);
   eleventyConfig.addPlugin(feedPlugin, {
@@ -31,7 +30,8 @@ export default async function (eleventyConfig) {
     },
   });
   eleventyConfig.addPassthroughCopy("src/style.css");
-  eleventyConfig.addPassthroughCopy("src/media");
+  eleventyConfig.addPassthroughCopy("src/**/*.webp", { mode: "html-relative" });
+  eleventyConfig.addPassthroughCopy("src/**/*.txt", { mode: "html-relative" });
 
   eleventyConfig.addFilter("humanDate", (dateObj) => {
     return new Date(dateObj).toLocaleDateString("en-US");

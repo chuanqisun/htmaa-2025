@@ -1,0 +1,5 @@
+---
+model: gemini-2.5-flash-image-preview
+---
+
+Visualize a metal box in the form factor of a mac mini. The top surface of the box has 9 headphone jacks, laid out in a 3 x 3 grid. Clean, modern design sketch again pure white background.
