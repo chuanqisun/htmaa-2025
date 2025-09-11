@@ -1,0 +1,71 @@
+:root {
+  color-scheme: light;
+  --background-color: #f8f4f2;
+  --caption-color: #555;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: "IBM Plex Mono", "Courier New", Courier, monospace;
+  font-size: 120%;
+  line-height: 1.5;
+
+  background-color: #f8f4f2;
+  max-width: 60rem;
+  margin: 1rem auto 2rem auto;
+  padding: 0 1rem;
+}
+
+blockquote {
+  margin-inline: 0;
+  padding-inline-start: 1.5rem;
+  border-left: 1px solid ButtonBorder;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  max-height: 40vh;
+  margin-inline: auto;
+}
+img[src^="https://developer.stackblitz.com/"]
+{
+  margin: 0;
+}
+
+img + strong {
+  display: block;
+  margin: auto;
+  text-align: center;
+  font-weight: normal;
+  color: var(--caption-color);
+}
+
+table {
+  width: 100%;
+  border: 1px solid ButtonBorder;
+  border-collapse: collapse;
+  text-align: left;
+
+  th,
+  td {
+    padding: 2px 8px;
+    vertical-align: top;
+  }
+
+  thead th {
+    font-weight: bold;
+    border-bottom: 1px solid ButtonBorder;
+  }
+}
+
+pre:has(code) {
+  overflow: auto;
+}
+
+.shiki {
+  padding: 1ch;
+}

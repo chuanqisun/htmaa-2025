@@ -1,0 +1,21 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "clean": "rm -rf ../gitlab/posts",
+    "dev": "npm run clean && eleventy --serve",
+    "build": "npm run clean && eleventy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "description": "Course blog for HTMAA 2025",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "@11ty/eleventy-plugin-rss": "^2.0.4",
+    "prettier": "^3.6.2",
+    "shiki": "^3.12.2"
+  }
+}

@@ -1,0 +1,9 @@
+---
+title: Replace with Real Title
+date: YYYY-MM-DD
+keywords: ["keyword1"]
+---
+
+[Example link to other posts](./name-of-file.md)
+
+
