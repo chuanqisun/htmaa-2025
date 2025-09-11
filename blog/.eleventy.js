@@ -1,4 +1,4 @@
-import { IdAttributePlugin, InputPathToUrlTransformPlugin } from "@11ty/eleventy";
+import { HtmlBasePlugin, IdAttributePlugin, InputPathToUrlTransformPlugin } from "@11ty/eleventy";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import { createHighlighter } from "shiki";
 
@@ -11,6 +11,7 @@ import { createHighlighter } from "shiki";
  * @returns
  */
 export default async function (eleventyConfig) {
+  eleventyConfig.addPlugin(HtmlBasePlugin);
   eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
   eleventyConfig.addPlugin(IdAttributePlugin);
   eleventyConfig.addPlugin(feedPlugin, {
@@ -50,7 +51,7 @@ export default async function (eleventyConfig) {
   return {
     dir: {
       input: "src",
-      output: "../gitlab",
+      output: "../gitlab" /* replace this with wherever your GitLab repo is, relative to this repo */,
     },
   };
 }
