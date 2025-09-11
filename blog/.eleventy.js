@@ -1,4 +1,4 @@
-import { IdAttributePlugin, InputPathToUrlTransformPlugin } from "@11ty/eleventy";
+import { HtmlBasePlugin, IdAttributePlugin, InputPathToUrlTransformPlugin } from "@11ty/eleventy";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import { createHighlighter } from "shiki";
 
@@ -11,6 +11,7 @@ import { createHighlighter } from "shiki";
  * @returns
  */
 export default async function (eleventyConfig) {
+  eleventyConfig.addPlugin(HtmlBasePlugin);
   eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
   eleventyConfig.addPlugin(IdAttributePlugin);
   eleventyConfig.addPlugin(feedPlugin, {
@@ -55,3 +56,7 @@ export default async function (eleventyConfig) {
     },
   };
 }
+
+export const config = {
+  pathPrefix: "/classes/863.25/people/SunChuanqi/",
+};
