@@ -34,7 +34,7 @@ Next, let's visualize the hand-held device. I want to model it after a CB radio 
 ![Hand unit](./media/ai-rendered-hand-unit.webp)
 **Hand unit ([prompt](./media/ai-rendered-hand-unit.txt))**
 
-Finally, let's put them together and add bit context. I haven't decided the exact size for each component yet. I think that will have to wait until I figured out the electronics first.
+Finally, let's put them together and add some context. I haven't decided the exact size for each component yet. I think that will have to wait until I figured out the electronics first.
 
 ![In use](./media/ai-rendered-in-use.webp)
 **In use ([prompt](./media/ai-rendered-in-use.txt))**
@@ -112,5 +112,5 @@ Things I need to keep learning/practicing on:
 Things I am reflecting on:
 
 - The constraints system in CAD is very similar to the responsive design principle in CSS, and even more similar to the iOS app layout system.
-- I can see some parallel between functional programming and CAD. If each operator is a pure function, the entire process can be modeled as a composion of functions.
+- I can see some parallel between functional programming and CAD. If each operator is a pure function, the entire process can be modeled as a composition of functions.
 - Usability matters. No matter how powerful the system is, if the entry bar is too high, novice users will build their habits around the easier products and get locked into their ecosystem.
