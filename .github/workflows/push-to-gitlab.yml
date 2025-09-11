@@ -37,8 +37,6 @@ jobs:
       - name: Check out gitlab repo
         run: |
           git clone https://SunChuanqi:${{ secrets.GITLAB_ACCESS_TOKEN }}@gitlab.cba.mit.edu/classes/863.25/people/SunChuanqi.git public
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
       - name: npm
         run: |
           npm install
