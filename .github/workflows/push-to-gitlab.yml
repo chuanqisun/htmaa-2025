@@ -49,4 +49,4 @@ jobs:
           git add .
           git commit -m "${{ github.event.head_commit.message }}"
           git status
-          git push https://SunChuanqi:${{ secrets.GITLAB_ACCESS_TOKEN }}@gitlab.cba.mit.edu/classes/863.25/people/SunChuanqi.git main
+          git push origin main
