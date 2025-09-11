@@ -4,4 +4,6 @@ date: 2025-09-11
 keywords: ["cutting"]
 ---
 
-TBD
+## Cutting and Construction kit
+
+## Final project update
