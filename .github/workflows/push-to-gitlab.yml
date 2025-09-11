@@ -1,22 +1,21 @@
-# Simple workflow for deploying static content to GitHub Pages
+# Setup
+# =====
+# 1. Go to GitLab, generate a developer acccess token with `write_repository` scope. In the UI, it's in settings > access tokens.
+# 2. Edit this file, replace `SunChuanqi` with your GitLab username in two places, your commiter name and email with yours.
+# 3. Adjust build script and deployment folder to match your static site generator. Mine is `public`.
+
 name: Build and push to GitLab
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["master"]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -35,13 +34,16 @@ jobs:
         with:
           node-version: "22.x"
       - name: Check out gitlab repo
+        # Customize git clone url here
         run: |
           git clone https://SunChuanqi:${{ secrets.GITLAB_ACCESS_TOKEN }}@gitlab.cba.mit.edu/classes/863.25/people/SunChuanqi.git public
       - name: npm
+        # Customize build script here
         run: |
           npm install
           npm run build
       - name: Push
+        # Customize deployment folder here
         run: |
           cd public
           git config --global user.name "Sun, Chuanqi"
