@@ -52,7 +52,7 @@ export default async function (eleventyConfig) {
   return {
     dir: {
       input: "src",
-      output: "../gitlab" /* replace this with wherever your GitLab repo is, relative to this repo */,
+      output: "public" /* replace this with wherever your GitLab repo is, relative to this repo */,
     },
   };
 }
