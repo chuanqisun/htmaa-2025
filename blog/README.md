@@ -136,6 +136,6 @@ The `README.md` can be re-generated with the following prompt:
 
 > Scan the content of the repo to write a minimum README.md to help other developers use this repo.
 
-## 📄 License
+## License
 
 MIT License
