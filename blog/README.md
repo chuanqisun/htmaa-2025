@@ -26,6 +26,9 @@ npm install
 
 3. Start the development server:
 
+> [!WARNING]
+> We output files into a `/gitlab` dir, a sibling to `/blog`. The dev and build scripts will delete some of the files in the `/gitlab` dir. Make sure you have version control setup properly or you will lose data.
+
 ```bash
 npm run dev
 ```
@@ -63,7 +66,7 @@ The site will be available at `http://localhost:8080` with live reload enabled.
 - **Keywords**: Tags for categorization and filtering
 - **Content**: Written in Markdown with support for syntax highlighting
 
-## 🛠️ Available Scripts
+## Available Scripts
 
 - `npm run dev` - Start development server with live reload
 - `npm run build` - Build the site for production
