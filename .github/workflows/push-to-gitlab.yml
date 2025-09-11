@@ -1,8 +1,9 @@
 # Setup
 # =====
 # 1. Go to GitLab, generate a developer acccess token with `write_repository` scope. In the UI, it's in settings > access tokens.
-# 2. Edit this file, replace `SunChuanqi` with your GitLab username in two places, your commiter name and email with yours.
-# 3. Adjust build script and deployment folder to match your static site generator. Mine is `public`.
+# 2. In GitLab, relax branch protection policy to allow direct push permission on the `main` branch by your user's role. In my case, the role is `Developer`, not `Maintainer`.
+# 3. Edit this file, replace `SunChuanqi` with your GitLab username in two places, your commiter name and email with yours.
+# 4. Adjust build script and deployment folder to match your static site generator. Mine is `public`.
 
 name: Build and push to GitLab
 
