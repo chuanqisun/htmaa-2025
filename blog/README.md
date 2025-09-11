@@ -83,7 +83,6 @@ The site will be available at `http://localhost:8080` with live reload enabled.
 │   ├── posts/            # Blog posts (Markdown)
 │   ├── index.md          # Homepage content
 │   └── style.css         # Styles
-├── posts/                # Generated post pages
 ├── .eleventy.js          # Eleventy configuration
 ├── package.json          # Dependencies and scripts
 └── README.md            # This file
@@ -128,7 +127,7 @@ Adjust site settings in `.eleventy.js` including:
 
 ## Deployment
 
-This project includes GitLab CI configuration (`.gitlab-ci.yml`) for automatic deployment. The site builds and deploys to `/var/www/classes/863.25/people/SunChuanqi/` when changes are pushed to the main branch.
+We manually build the project into a sibling `/gitlab` directory, manually commit and push from there. The GitLab CI script will handle the deployment upon commit.
 
 ## Prompt
 
