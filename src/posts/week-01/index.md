@@ -43,8 +43,6 @@ Finally, let's put them together and add some context. I haven't decided the exa
 
 While it's still too early to fully specify the project, I have the following high level design.
 
-#### Hardware Components
-
 **Main Board**
 
 - Grid of 3.5mm audio jacks serving as physical computation nodes
@@ -59,7 +57,7 @@ While it's still too early to fully specify the project, I have the following hi
 - Mode switch (interaction/programming)
 - Built-in speaker for AI audio output
 
-#### Operating Modes
+### Operating Modes
 
 **Interaction Mode**
 
