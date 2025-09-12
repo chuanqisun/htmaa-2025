@@ -15,7 +15,7 @@ A course blog for HTMAA (How to Make Almost Anything) 2025, built with [Eleventy
 
 ```bash
 git clone <repository-url>
-cd blog
+cd htmaa-2025
 ```
 
 2. Install dependencies:
@@ -26,14 +26,9 @@ npm install
 
 3. Start the development server:
 
-> [!WARNING]
-> We output files into a `/gitlab` dir, a sibling to `/blog`. The dev and build scripts will delete some of the files in the `/gitlab` dir. Make sure you have version control setup properly or you will lose data.
-
 ```bash
 npm run dev
 ```
-
-The site will be available at `http://localhost:8080` with live reload enabled.
 
 ## Writing Posts
 
@@ -42,22 +37,26 @@ The site will be available at `http://localhost:8080` with live reload enabled.
 1. Create a new Markdown file in `src/posts/` following the naming convention:
 
    ```
-   src/posts/week-X-topic.md
+   src/posts/week-XX/index.md
    ```
 
-2. Use the following frontmatter template:
+2. Use the following frontmatter template (reference `src/posts/week-00-template.txt`):
 
    ```markdown
    ---
-   title: Your Post Title
+   title: Replace with Real Title
    date: YYYY-MM-DD
-   keywords: ["tag1", "tag2"]
+   keywords: ["keyword1"]
    ---
 
    Your content here...
    ```
 
-3. You can reference the template file at `src/posts/20000101-template.txt`
+### Adding Media Files
+
+- Place images and other media in `src/posts/week-XX/media/`
+- FreeCAD models can be stored in `src/posts/week-XX/models/`
+- Supported formats: `.webp`, `.FCStd`, `.txt` files are automatically copied during build. Additional formats should be configured in `.eleventy.js`.
 
 ### Post Structure
 
@@ -68,9 +67,9 @@ The site will be available at `http://localhost:8080` with live reload enabled.
 
 ## Available Scripts
 
-- `npm run dev` - Start development server with live reload
+- `npm run dev` - Start development server with live reload (automatically cleans and rebuilds)
 - `npm run build` - Build the site for production
-- `npm run clean` - Remove generated files
+- `npm run clean` - Remove generated `public/posts` directory
 
 ## Project Structure
 
@@ -81,8 +80,15 @@ The site will be available at `http://localhost:8080` with live reload enabled.
 │   │   ├── post.njk      # Post template
 │   │   └── partials/     # Reusable template parts
 │   ├── posts/            # Blog posts (Markdown)
+│   │   ├── posts.json    # Post configuration
+│   │   ├── week-00-template.txt # Template for new posts
+│   │   └── week-XX/      # Individual week folders
+│   │       ├── index.md  # Post content
+│   │       ├── media/    # Images and media files
+│   │       └── models/   # 3D models (FreeCAD files)
 │   ├── index.md          # Homepage content
 │   └── style.css         # Styles
+├── public/               # Generated site output
 ├── .eleventy.js          # Eleventy configuration
 ├── package.json          # Dependencies and scripts
 └── README.md            # This file
@@ -91,10 +97,12 @@ The site will be available at `http://localhost:8080` with live reload enabled.
 ## Features
 
 - **Static Site Generation**: Fast, secure, and SEO-friendly
-- **Syntax Highlighting**: Code blocks with Shiki highlighter
+- **Syntax Highlighting**: Code blocks with Shiki highlighter supporting JS, TS, HTML, CSS, YAML, JSON, and more
 - **RSS Feed**: Automatically generated at `/feed.xml`
 - **Responsive Design**: Mobile-friendly layout
 - **Live Reload**: Automatic browser refresh during development
+- **Media Support**: Automatic copying of images (.webp), models (.FCStd), and text files
+- **MIT Deployment Ready**: Configured for MIT Fab Academy deployment
 
 ## Customization
 
@@ -114,9 +122,11 @@ Modify templates in `src/_includes/` to change the layout and structure:
 
 Adjust site settings in `.eleventy.js` including:
 
-- Input/output directories
-- Plugin configuration
+- Input/output directories (src → public)
+- Plugin configuration (RSS, HTML base, syntax highlighting)
 - Custom filters and functions
+- Path prefix for MIT Fab Academy deployment
+- File passthrough for media assets
 
 ## Dependencies
 
@@ -127,7 +137,13 @@ Adjust site settings in `.eleventy.js` including:
 
 ## Deployment
 
-We manually build the project into a sibling `/gitlab` directory, manually commit and push from there. The GitLab CI script will handle the deployment upon commit.
+This blog is configured for deployment to MIT's Fab Academy infrastructure with:
+
+- Base URL: `https://fab.cba.mit.edu/classes/863.25/people/SunChuanqi/`
+- Path prefix: `/classes/863.25/people/SunChuanqi/`
+- RSS feed metadata for course context
+
+To deploy, build the site and upload the `public/` directory contents to your assigned web space.
 
 ## Prompt
 
