@@ -1,0 +1,28 @@
+# Epilog Laser Legend EXT
+
+## Q&A
+
+### Authors: Dan
+
+## Software:
+
+1. Corel Draw 2017
+2. Skip
+3. New Document
+4. OK
+5. Import your drawing
+6. File → Print → Print
+7. Epilog Dashboard opens
+8. Under Processes:
+   - Don't use Auto focus
+   - Do use Air Assist
+9. Print
+
+## Hardware:
+
+1. On switch
+2. X Y off
+   - ↳ Enter
+3. Put 2" focal length tool
+4. Use up/down switch to bring bed up or down with material
+5. Reset
