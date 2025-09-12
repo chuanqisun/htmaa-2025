@@ -1,5 +1,5 @@
 ---
-title: Week 1
+title: Week 1 - Getting Started
 date: 2025-09-03
 keywords: ["cad"]
 ---
