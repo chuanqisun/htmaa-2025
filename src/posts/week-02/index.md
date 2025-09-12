@@ -73,7 +73,7 @@ Through testing, we confirmed:
 This is because kerf effectively shrinks pegs and enlarges holes.
 
 ![Kerf testing results](./media/test-v2.webp)
-**Notice the "Tight", "Loose" written next to slits**
+**We wrote down "Outward/Loose", "Inward/Tight" next to slits**
 
 ### Systematic Kerf Testing
 
@@ -89,7 +89,8 @@ We created test slits with the following parameters:
 
 - Positive kerf offset → looser fit
 - Negative kerf offset → tighter fit
-- The 4mm dimension was arbitrary but consistent (this "lazy" approach works for single-material projects but not for multi-component assemblies where the final dimension of the one material depends on the measurements of another)
+
+We acknowedge that the 4mm width was loosly based on the average thickness of the cardboard at 4.19mm. This "lazy" estimate works because we are only looking for a fit, and don't care about the final dimension.
 
 ![Discussion](./media/discussing-and-understanding-kerf.webp)
 **We hypothesized, debated, observed, and learned as a group**
@@ -106,10 +107,12 @@ Based on initial results showing 0.03-0.04mm kerf offset as optimal, we refined 
 
 **Results:**
 
-| Kerf Offset | Fit Type  |
-| ----------- | --------- |
-| 0.04mm      | Loose fit |
-| 0.05mm      | Snug fit  |
+| Kerf Offset\* | Fit Type  |
+| ------------- | --------- |
+| ±0.04mm       | Loose fit |
+| ±0.05mm       | Snug fit  |
+
+\*Positive offset on pegs, negative offset on holes
 
 ![Final result](./media/test-v3.webp)
 **Testing different orientations for best fit**
