@@ -32,6 +32,7 @@ export default async function (eleventyConfig) {
   });
   eleventyConfig.addPassthroughCopy("src/style.css");
   eleventyConfig.addPassthroughCopy("src/**/*.webp", { mode: "html-relative" });
+  eleventyConfig.addPassthroughCopy("src/**/*.FCStd", { mode: "html-relative" });
   eleventyConfig.addPassthroughCopy("src/**/*.txt", { mode: "html-relative" });
 
   eleventyConfig.addFilter("humanDate", (dateObj) => {
