@@ -40,7 +40,9 @@ We began by determining the minimum power required to cut through our material. 
 
 ### Initial Kerf Testing: Learning from Mistakes
 
-For our first approach, we cut a test piece with dimensions 16mm × 30mm × 4.19mm to insert into 30mm long slits ranging from 4.1mm to 4.9mm width. This revealed two critical issues:
+For our first approach, we cut a test piece with dimensions 16mm × 30mm to insert into 30mm long slits ranging from 4.1mm to 4.9mm width. The width range was determined by the measured cardboard thickness around 4.2mm, which varies and can go up to 4.6mm, depending on the position of measurement.
+
+This revealed two critical issues:
 
 1. **Oversized slits:** The kerf caused all slits to be much wider than their specified dimensions
 2. **Impractical data:** Knowing the exact measurement of a well-fitting slit wasn't as useful as knowing the machine-specific kerf setting
