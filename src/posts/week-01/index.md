@@ -83,7 +83,7 @@ I want to stay in Linux so my options are a more limited. I looked into FreeCAD 
 
 I also attempted running VS Code + GitHub Copilot (gemini 2.5 pro) + FreeCAD MCP. It works as a proof of concept but the AI struggles to make the right editing decision. I do foresee text-to-CAD becoming viable in the next year or two.
 
-Before I give up on AI assisted CAD (AAD?), I gave the code-first approach a shot. My first intuitation is that the declarative syntax of OpenSCAD will be perfect for AI code generation. But upon a closer look, there are still gaps:
+Before giving up on AI assisted CAD (AAD?), I want give the code-first approach a shot. My first intuitation is that the declarative syntax of OpenSCAD will be perfect for AI code generation. But upon a closer look, there are still gaps:
 
 - Lack of type annotation, reducing LLM's ability to validate results
 - Syntax extremely verbose, further increasing error rate.
