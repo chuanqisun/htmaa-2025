@@ -8,7 +8,7 @@ keywords: ["cutting"]
 
 ### Introduction
 
-Our group challenge was to study the kerf characteristics of the laser cutter. We selected the xTool P2 desktop laser cutter for its usability:
+I joined force with [Miranda](https://fab.cba.mit.edu/classes/863.25/people/MirandaLi/) and [Ray](https://fab.cba.mit.edu/classes/863.25/people/RaySong/) to study the kerf characteristics of the laser cutter. After receicing the demo and training from the lab manager, we selected the xTool P2 desktop laser cutter for its usability:
 
 - Camera-guided UI was very easy to use
 - Built-in templates for creating a test grid with varying parameters
