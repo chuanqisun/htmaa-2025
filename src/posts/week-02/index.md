@@ -137,7 +137,7 @@ I was about to give up at this point and started considering asking to borrow so
 
 Let's test this timeless symbol. It has two colors, and my plan is to cut the four pieces separately and assemble them manually.
 
-![Yin Yang](./media/Yin_and_Yang_symbol.svg)
+![Yin Yang](./media/yin-yang.svg)
 **Yin and Yang ([source](https://en.wikipedia.org/wiki/Yin_and_yang#/media/File:Yin_and_Yang_symbol.svg))**
 
 Uploading the SVG was smooth. But to my surprise, the app automatically planned a simpler cut:
@@ -151,24 +151,28 @@ Uploading the SVG was smooth. But to my surprise, the app automatically planned 
 ![Second cut design](./media/app-04.webp)
 **Cut the white next**
 
-This strategy would result in a non-flat surface but easier assembly. I decided to proceed with this approach.
+This strategy would result in a non-flat surface but easier assembly. Being a beginner, I opted for simplicity.
 
 I found this [YouTube tutorial](https://www.youtube.com/watch?v=VDdDAkGLnn8) on using the machine mat.
 
-First, carefully remove the protective film. This helps preserve the sticky layer of the mat.
+First, carefully remove the protective film. The film helps preserve the sticky layer of the mat and should be put back on after use.
 
 ![Protective film](./media/peel-off-film.webp)
+**Peeling off the film**
 
 Line up the vinyl sheets. I could only find black with matte finish and white with glossy finish.
 
 ![Layout](./media/layout.webp)
+**Prepare both colors on the same mat**
 
 First, cut the black.
 
 ![First cut done](./media/cut-01.webp)
 **Cutter only cuts through the surface layer**
 
-Rotate 180 degrees and cut the white.
+Rotate 180 degrees to cut the white.
+![Second cut done](./media/cut-02.webp)
+**Prepare for cutting the white**
 
 ![Second cut done](./media/cut-03.webp)
 **Bending the vinyl helps reveal the gap**
@@ -183,7 +187,12 @@ Finish up with the small black circle.
 ![Finish up](./media/assembly-02.webp)
 **Last piece in manual assembly**
 
-Testing the final result reveals an issue: it looks poor due to the very noticeable black rim outside the white half. What caused this?
+Testing the final result. Did you notice the issue?
+
+![Sticker on laptop](./media/untrimmed.webp)
+**Notice the black rim**
+
+What caused the very noticeable black rim outside the white half?
 
 - It could be my assembly skills. Steadier hands might help.
 - Mixing different materials might be a factor, but it shouldn't be that noticeable.
