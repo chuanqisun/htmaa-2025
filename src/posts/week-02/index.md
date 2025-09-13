@@ -8,7 +8,7 @@ keywords: ["cutting"]
 
 ### Introduction
 
-I joined force with [Miranda](https://fab.cba.mit.edu/classes/863.25/people/MirandaLi/) and [Ray](https://fab.cba.mit.edu/classes/863.25/people/RaySong/) to study the kerf characteristics of the laser cutter. After receicing the demo and training from the lab manager, we selected the xTool P2 desktop laser cutter for its usability:
+I joined forces with [Miranda](https://fab.cba.mit.edu/classes/863.25/people/MirandaLi/) and [Ray](https://fab.cba.mit.edu/classes/863.25/people/RaySong/) to study the kerf characteristics of the laser cutter. After receiving the demo and training from the lab manager, we selected the xTool P2 desktop laser cutter for its usability:
 
 - Camera-guided UI was very easy to use
 - Built-in templates for creating a test grid with varying parameters
@@ -90,7 +90,7 @@ We created test slits with the following parameters:
 - Positive kerf offset → looser fit
 - Negative kerf offset → tighter fit
 
-We acknowedge that the 4mm width was loosly based on the average thickness of the cardboard at 4.19mm. This "lazy" estimate works because we are only looking for a fit, and don't care about the final dimension.
+We acknowledge that the 4mm width was loosely based on the average thickness of the cardboard at 4.19mm. This "lazy" estimate works because we are only looking for a fit, and don't care about the final dimension.
 
 ![Discussion](./media/discussing-and-understanding-kerf.webp)
 **We hypothesized, debated, observed, and learned as a group**
@@ -124,18 +124,18 @@ Based on initial results showing 0.03-0.04mm kerf offset as optimal, we refined 
 
 ## Vinyl Cutting
 
-I found Cricut Maker 3 and Roland GS-24 in the shop. Following the threads from online forum, I tried installing the approperiate software for Linux. Sadly, none of them works:
+I found Cricut Maker 3 and Roland GS-24 in the shop. Following threads from online forums, I tried installing the appropriate software for Linux. Unfortunately, none of them work:
 
-1. Several places mentioned [inkcut](https://github.com/inkcut/inkcut). The official installation guide works but it does not have the matching device profile for our machines.
+1. Several places mentioned [inkcut](https://github.com/inkcut/inkcut). The official installation guide works but it does not have matching device profiles for our machines.
 2. [One forum](https://en.industryarena.com/forum/free-tux-plot-v2-2-vinyl-cutters-engravers-pen-plotters-etc--147178.html) mentioned tux plot, but the [download link](http://securetech-ns.ca/camm-linux.html) is dead.
 3. I managed to download and install Cricut Windows software using [Wine](https://www.winehq.org/) and [Bottles](https://usebottles.com/). The software crashes immediately after launch.
 
-I was about to give up at this point and started considering begging someone to borrow their Windows laptop. But to my surprise, Cricut has an iOS app which upon further probing, allows file upload. I see hope!
+I was about to give up at this point and started considering asking to borrow someone's Windows laptop. However, to my surprise, Cricut has an iOS app which, upon further investigation, allows file upload. There was hope!
 
 ![File upload](./media/app-01.webp)
 **File upload via iOS app**
 
-Let's give this timeless symbol a try. It has two colors. My plan is to cut the four pieces separately and assemble them manually.
+Let's test this timeless symbol. It has two colors, and my plan is to cut the four pieces separately and assemble them manually.
 
 ![Yin Yang](./media/Yin_and_Yang_symbol.svg)
 **Yin and Yang ([source](https://en.wikipedia.org/wiki/Yin_and_yang#/media/File:Yin_and_Yang_symbol.svg))**
@@ -151,11 +151,11 @@ Uploading the SVG was smooth. But to my surprise, the app automatically planned 
 ![Second cut design](./media/app-04.webp)
 **Cut the white next**
 
-This strategy would result in a non-flat surface but easier assembly. Let's go with it!
+This strategy would result in a non-flat surface but easier assembly. I decided to proceed with this approach.
 
 I found this [YouTube tutorial](https://www.youtube.com/watch?v=VDdDAkGLnn8) on using the machine mat.
 
-First carefully remove the protective film. This helps preserve the sticky layer of the mat.
+First, carefully remove the protective film. This helps preserve the sticky layer of the mat.
 
 ![Protective film](./media/peel-off-film.webp)
 
@@ -163,14 +163,14 @@ Line up the vinyl sheets. I could only find black with matte finish and white wi
 
 ![Layout](./media/layout.webp)
 
-First cut the black.
+First, cut the black.
 
 ![First cut done](./media/cut-01.webp)
 **Cutter only cuts through the surface layer**
 
-Rotate 180 degress and cut the white.
+Rotate 180 degrees and cut the white.
 
-![Second cut done](./media//cut-03.webp)
+![Second cut done](./media/cut-03.webp)
 **Bending the vinyl helps reveal the gap**
 
 It's time for the final assembly. Angled tweezers are very helpful.
@@ -178,23 +178,23 @@ It's time for the final assembly. Angled tweezers are very helpful.
 ![Assembly](./media/assemble-01.webp)
 **Assemble the parts**
 
-Finish up with the small black circle
+Finish up with the small black circle.
 
 ![Finish up](./media/assembly-02.webp)
 **Last piece in manual assembly**
 
-Test it out. And... it looks terrible due to the very noticeable black rim outside the white half. What happened?
+Testing the final result reveals an issue: it looks poor due to the very noticeable black rim outside the white half. What caused this?
 
-- It could be my poor assembly skills. Steady hands might help.
-- Mixing different material might be a material, but it shouldn't be that noticeable.
-- It shouldn't be a kerf issue. While I did not adjust for kerf, the black and white parts should be affected equally had kerf been a problem.
+- It could be my assembly skills. Steadier hands might help.
+- Mixing different materials might be a factor, but it shouldn't be that noticeable.
+- It shouldn't be a kerf issue. While I did not adjust for kerf, the black and white parts should be affected equally if kerf were the problem.
 
-I think it's most likely a skill issue. For now, I need to wrap this up before the shop closes at mid night. So I just trimmed the black rim with the scissors.
+I believe it's most likely a skill issue. With the shop closing in less than 30 minutes, I want to make sure I can wrap up in time, so I trimmed the black rim with scissors as a quick fix.
 
 ![Trimmed](./media/trimmed.webp)
 **Trimmed with scissors**
 
-Looking better now, isn't it?
+The result looks much better after trimming.
 
 ## Construction Kit: Mini Printing Press
 
