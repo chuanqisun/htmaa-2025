@@ -124,7 +124,77 @@ Based on initial results showing 0.03-0.04mm kerf offset as optimal, we refined 
 
 ## Vinyl Cutting
 
-TBD
+I found Cricut Maker 3 and Roland GS-24 in the shop. Following the threads from online forum, I tried installing the approperiate software for Linux. Sadly, none of them works:
+
+1. Several places mentioned [inkcut](https://github.com/inkcut/inkcut). The official installation guide works but it does not have the matching device profile for our machines.
+2. [One forum](https://en.industryarena.com/forum/free-tux-plot-v2-2-vinyl-cutters-engravers-pen-plotters-etc--147178.html) mentioned tux plot, but the [download link](http://securetech-ns.ca/camm-linux.html) is dead.
+3. I managed to download and install Cricut Windows software using [Wine](https://www.winehq.org/) and [Bottles](https://usebottles.com/). The software crashes immediately after launch.
+
+I was about to give up at this point and started considering begging someone to borrow their Windows laptop. But to my surprise, Cricut has an iOS app which upon further probing, allows file upload. I see hope!
+
+![File upload](./media/app-01.webp)
+**File upload via iOS app**
+
+Let's give this timeless symbol a try. It has two colors. My plan is to cut the four pieces separately and assemble them manually.
+
+![Yin Yang](./media/Yin_and_Yang_symbol.svg)
+**Yin and Yang ([source](https://en.wikipedia.org/wiki/Yin_and_yang#/media/File:Yin_and_Yang_symbol.svg))**
+
+Uploading the SVG was smooth. But to my surprise, the app automatically planned a simpler cut:
+
+1. First pass: cut the large and small circles on black
+2. Second pass: cut the irregular shape and small circle on white
+
+![First cut design](./media/app-03.webp)
+**Cut the black first**
+
+![Second cut design](./media/app-04.webp)
+**Cut the white next**
+
+This strategy would result in a non-flat surface but easier assembly. Let's go with it!
+
+I found this [YouTube tutorial](https://www.youtube.com/watch?v=VDdDAkGLnn8) on using the machine mat.
+
+First carefully remove the protective film. This helps preserve the sticky layer of the mat.
+
+![Protective film](./media/peel-off-film.webp)
+
+Line up the vinyl sheets. I could only find black with matte finish and white with glossy finish.
+
+![Layout](./media/layout.webp)
+
+First cut the black.
+
+![First cut done](./media/cut-01.webp)
+**Cutter only cuts through the surface layer**
+
+Rotate 180 degress and cut the white.
+
+![Second cut done](./media//cut-03.webp)
+**Bending the vinyl helps reveal the gap**
+
+It's time for the final assembly. Angled tweezers are very helpful.
+
+![Assembly](./media/assemble-01.webp)
+**Assemble the parts**
+
+Finish up with the small black circle
+
+![Finish up](./media/assembly-02.webp)
+**Last piece in manual assembly**
+
+Test it out. And... it looks terrible due to the very noticeable black rim outside the white half. What happened?
+
+- It could be my poor assembly skills. Steady hands might help.
+- Mixing different material might be a material, but it shouldn't be that noticeable.
+- It shouldn't be a kerf issue. While I did not adjust for kerf, the black and white parts should be affected equally had kerf been a problem.
+
+I think it's most likely a skill issue. For now, I need to wrap this up before the shop closes at mid night. So I just trimmed the black rim with the scissors.
+
+![Trimmed](./media/trimmed.webp)
+**Trimmed with scissors**
+
+Looking better now, isn't it?
 
 ## Construction Kit: Mini Printing Press
 
