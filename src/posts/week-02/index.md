@@ -270,7 +270,7 @@ I want to cut out the letter and use pencil/paper for a transfer print. The idea
 ![Transfer test](./media/shop-03.webp)
 **Transfer test, failed**
 
-I also realized another issue with cutting out the letter. Some characters have shapes that enclose other shapes, think `P`, `O`, `D` in English, and `口` and `回` in Chinese. The inner shape would become free-floating after the cut. The idea won't work.
+Seeing the issue, [Dan](https://dangilbert.pages.cba.mit.edu/home/), suggested a great idea of using the cutout as a spray painting mask. But I realized another issue with cutting out the letter. Some characters have enclosed shapes, think `P`, `O`, `D` in English, and `口` and `回` in Chinese. The inner shape would become free-floating after the cut. The idea won't work.
 
 What if we emboss the character by engraving the negative space? I tested with a sharpie. It could have worked had there been more oily ink. The sharpie got aborbed by paper and instantly dried up so I wasn't able to make the transfer. If you read Chinese/Japanese, you will notice the character is mirrored.
 
