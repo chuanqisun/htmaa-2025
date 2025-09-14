@@ -270,14 +270,14 @@ I want to cut out the letter and use pencil/paper for a transfer print. The idea
 ![Transfer test](./media/shop-03.webp)
 **Transfer test, failed**
 
-I also realized another issue with cutting out the letter. Some characters have shapes that enclose other shapes, think `P`, `O`, `D` in English, and `口` and `回`. The inner shape would become free-floating after the cut. The idea won't work.
+I also realized another issue with cutting out the letter. Some characters have shapes that enclose other shapes, think `P`, `O`, `D` in English, and `口` and `回` in Chinese. The inner shape would become free-floating after the cut. The idea won't work.
 
 What if we emboss the character by engraving the negative space? I tested with a sharpie. It could have worked had there been more oily ink. The sharpie got aborbed by paper and instantly dried up so I wasn't able to make the transfer. If you read Chinese/Japanese, you will notice the character is mirrored.
 
 ![Sharpie test](./media/shop-05-printing.webp)
 **Printing test, failed**
 
-Given the limited time, I decided to build a modular paper display, using scored or engraved Kanji only. Testing showed that engraving can create beautiful horizontal stripes.
+Given the limited time and no access to other paint/ink, I decided to build a modular paper display, using scored or engraved Kanji only. Testing showed that engraving can create beautiful horizontal stripes.
 
 ![Engraving test](./media/shop-04-alt-transfer.webp)
 **Engraving test, success**
