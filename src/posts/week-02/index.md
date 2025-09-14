@@ -292,7 +292,7 @@ Success upon first assembly! In [Chinese](https://en.wikipedia.org/wiki/Chengyu)
 ![First assembly](./media/shop-10-first-assembly.webp)
 **Kanji 一期一会 (ichigo ichie), meaning once-in-a-lifetime encounter**
 
-I added all the tiles to display the phrase "The Future of Parametric Design", something we are doing for this class, "Stand out", "Blaze the trail", and "Make mountains", values I learned from my professor [Hiroshi Ishii](https://www.media.mit.edu/people/ishii/overview/).
+I added all the tiles to display the phrase "The Future of Parametric Design", something we are doing for this class; "Stand out", "Blaze the trail", and "Make mountains", values I learned from my professor [Hiroshi Ishii](https://www.media.mit.edu/people/ishii/overview/).
 
 ![Final assembly](./media/shop-11-final-assembly.webp)
 **Final assembly**
