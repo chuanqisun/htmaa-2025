@@ -213,12 +213,12 @@ I'm planning to construct a miniature printing press using cardboard movable typ
 - **Cut mode:** Build a 3D structure to configure and hold the letter plates in position
 - **Printing method:** Use pencil and thin paper for word transfer
 
-After a quick sketch, I decided to use latticed walls as support platform and square tiles for the letters.
+After a quick sketch, I decided to use latticed walls as a support platform and square tiles for the letters.
 
 ![Sketch](./media/sketch.webp)
 **Initial sketch**
 
-I found that sketching is very poor medium for spatial reasoning. I needed to try different shapes and slide them around to "feel" the material. Let's bring in CAD! However, I don't want to be slowed down the by details in settings constraints and switching between 2D and 3D modes. In other words, I need a tool for 3D prototyping, not modeling. Maybe [Tinkercad](https://www.tinkercad.com/dashboard)?
+I found that sketching is a very poor medium for spatial reasoning. I needed to try different shapes and slide them around to "feel" the material. Let's bring in CAD! However, I don't want to be slowed down by the details of setting constraints and switching between 2D and 3D modes. In other words, I need a tool for 3D prototyping, not modeling. Maybe [Tinkercad](https://www.tinkercad.com/dashboard)?
 
 I realized tiling on a lattice is not easy. The shape of the tile must account for the extrusion from the lattice. My first few lattice designs resulted in an unstable and assymetric tile. Let's play with the geometry a bit more.
 
@@ -230,7 +230,7 @@ A few iterations later, I landed on a geometry that works. I can't imagine doing
 ![Second prototype](./media/draft-05.webp)
 **Revised prototype**
 
-Let's visualize the full kit, with a base for stablizing the walls.
+Let's visualize the full kit, with a base for stabilizing the walls.
 
 ![Kit prototype](./media/draft-06.webp)
 **Prototyping the kit ([open](https://www.tinkercad.com/things/iHp7Bxp9Onp-movable-type-prototype?sharecode=bYhST49tU9vGhXVUZNt28QIcgHIHKFvyDy96pVRKxtk))**
@@ -240,14 +240,14 @@ Tinkercad does not allow instancing of a master model, nor does it have parametr
 ![Parts design](./media/cad-01.webp)
 **Parts design converted from Tinkercad**
 
-After the 2D sketching, I tested the assembly. Glad to see everything fiting together.
+After the 2D sketching, I tested the assembly. Glad to see everything fitting together.
 
-![Virual assembly](./media/cad-02.webp)
+![Virtual assembly](./media/cad-02.webp)
 **Virtual assembly**
 
-To add engraving, I sketched the texts and removed them from the surface of the tiles. I was able to represent the text as a aparameter but I couldn't find a way to map an array of characters onto an array of part instances. So I manually created the text grid, one by one, to match the position of the tiles. This is an 80%-time effort in the 80/20 rule.
+To add engraving, I sketched the text and removed it from the surface of the tiles. I was able to represent the text as a parameter, but I couldn't find a way to map an array of characters onto an array of part instances. So I manually created the text grid, one by one, to match the position of the tiles. This is an 80%-time effort in the 80/20 rule.
 
-![Text sketch](./media//cad-03.webp)
+![Text sketch](./media/cad-03.webp)
 **Text sketch**
 
 The final kit has all the tiles, one for each character, the base, and the X/Y lattice walls.
@@ -255,12 +255,12 @@ The final kit has all the tiles, one for each character, the base, and the X/Y l
 ![Full kit](./media/cad-04.webp)
 **Full kit ([open](https://cad.onshape.com/documents/0a294381c272da023ac4d4bd/w/7e9dc8833e6fc5270abc7d8c/e/766b306b154d4536663d85ba?renderMode=0&uiState=68c6d7c62a40ce68118af406))**
 
-Enough pixels. Let's go to the machine. I cut the lattice and the a single tile to test the fit. I didn't not use kerfing offset because I want to have a good baseline on how the fit feels.
+Enough pixels. Let's go to the machine. I cut the lattice and a single tile to test the fit. I didn't use a kerf offset because I want to have a good baseline on how the fit feels.
 
 ![Shop test](./media/shop-01.webp)
 **Loose fit due to kerf**
 
-As expected, the laser made the tile a bit smaller and the slot a bit bigger. So I print a square, measure the difference between the whole and the square, divided by 2, and got the 0.24mm kerf offset.
+As expected, the laser made the tile a bit smaller and the slot a bit bigger. So I printed a square, measured the difference between the hole and the square, divided by 2, and got a 0.24mm kerf offset.
 
 ![Kerf test](./media/shop-02.webp)
 **Kerf test**
@@ -277,12 +277,12 @@ What if we emboss the character by engraving the negative space? I tested with a
 ![Sharpie test](./media/shop-05-printing.webp)
 **Printing test, failed**
 
-Given the limited time, I decided to build a modular paper display, using scored or engraved Kanji only. Testing showed that engraving could creates beautiful horizontal stripes.
+Given the limited time, I decided to build a modular paper display, using scored or engraved Kanji only. Testing showed that engraving can create beautiful horizontal stripes.
 
 ![Engraving test](./media/shop-04-alt-transfer.webp)
 **Engraving test, success**
 
-Cutting the tiles require some planning. We need to engrave the characters before cutting the tiles. The machine autommatically figured this out but I need to keep this in mind had the machine been manual.
+Cutting the tiles requires some planning. We need to engrave the characters before cutting the tiles. The machine automatically figured this out, but I need to keep this in mind if the machine were manual.
 
 ![Cutting tiles](./media/shop-09-two-process-one-job.webp)
 **Cutting tiles after engraving**
@@ -290,11 +290,11 @@ Cutting the tiles require some planning. We need to engrave the characters befor
 Success upon first assembly! In [Chinese](https://en.wikipedia.org/wiki/Chengyu) and [Japanese](https://en.wikipedia.org/wiki/Yojijukugo), we have many four characters words, making this system the perfect tool for exploring the combinatorial possibilities!
 
 ![First assembly](./media/shop-10-first-assembly.webp)
-**Kanji 一期一会 (ichigoichie), meaning once-in-a-lifetime encounter**
+**Kanji 一期一会 (ichigo ichie), meaning once-in-a-lifetime encounter**
 
-I added all the tiles, display the phrase "The Future of Parametric Design", something we are doing for this class, "Stand out", "Blaze the trail", and "Make mountains", values I learned from my professor [Hiroshi Ishii](https://www.media.mit.edu/people/ishii/overview/).
+I added all the tiles to display the phrase "The Future of Parametric Design", something we are doing for this class, "Stand out", "Blaze the trail", and "Make mountains", values I learned from my professor [Hiroshi Ishii](https://www.media.mit.edu/people/ishii/overview/).
 
-![Final aseembly](./media/shop-11-final-assembly.webp)
+![Final assembly](./media/shop-11-final-assembly.webp)
 **Final assembly**
 
 When viewed at certain angles, the engraving marks shine beautifully. It reminds me of the [Tatami making](https://www.youtube.com/shorts/WkftZ3dWNW40) technique by [Kenji Yamada](https://art-tatami.com/history/).
