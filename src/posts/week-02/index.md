@@ -205,7 +205,7 @@ I believe it's most likely a skill issue. With the shop closing in less than 30 
 
 The result looks much better after trimming.
 
-## Construction Kit: Mini Printing Press
+## Construction Kit: Movable Type on Paper
 
 I'm planning to construct a miniature printing press using cardboard movable type with the following approach:
 
