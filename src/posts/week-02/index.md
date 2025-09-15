@@ -306,7 +306,7 @@ When viewed at certain angles, the engraving marks shine beautifully. It reminds
 
 After the conceptual exploration from last week, I switched focus to the electronics. I hope the electronics design can help inform the exterior of the system.
 
-I had three approaches in mind.
+I started off with off-the-shelf components and iterated the idea to build more from sractch.
 
 ### Proof of concept with off-the-shelf components
 
