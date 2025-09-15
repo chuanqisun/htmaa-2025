@@ -308,7 +308,7 @@ After the conceptual exploration from last week, I switched focus to the electro
 
 I had three approaches in mind.
 
-### Proof of concept with off-the-shelf
+### Proof of concept with off-the-shelf components
 
 I can prototype almost the entire experience with cheap off-the-shelf products:
 
