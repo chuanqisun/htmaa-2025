@@ -98,7 +98,7 @@ This is what I've got for my projects. (Screenshots for now. I will try make a l
 **Hand unit with FreeCAD ([download](./models//speaker-mic.FCStd))**
 
 ![Full system](./media/combined-model-onshape.webp)
-**Full system with Onshape ([open](https://cad.onshape.com/documents/bddad7cfe9b09bef3d1d02f7/w/3baf1737dbef89e860311d27/e/d8d33703d33fee5812349d75?renderMode=0&uiState=68c37782a3e4c108139d5805))**
+**Full system with Onshape ([download](./models/FPGAI-concept.step))**
 
 Things I need to keep learning/practicing on:
 
