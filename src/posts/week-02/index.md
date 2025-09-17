@@ -233,7 +233,7 @@ A few iterations later, I landed on a geometry that works. I can't imagine doing
 Let's visualize the full kit, with a base for stabilizing the walls.
 
 ![Kit prototype](./media/draft-06.webp)
-**Prototyping the kit ([open](https://www.tinkercad.com/things/iHp7Bxp9Onp-movable-type-prototype?sharecode=bYhST49tU9vGhXVUZNt28QIcgHIHKFvyDy96pVRKxtk))**
+**Prototyping the kit ([download](./models/Movable-Type-Prototype.stl))**
 
 Tinkercad does not allow instancing of a master model, nor does it have parametric design. We need a proper CAD tool like [Onshape](https://www.onshape.com/). I started with parts design, using parameters for tile width, tile notch depth, paper thickness, wall height. Everything else should be calculated based on those.
 
@@ -253,7 +253,7 @@ To add engraving, I sketched the text and removed it from the surface of the til
 The final kit has all the tiles, one for each character, the base, and the X/Y lattice walls.
 
 ![Full kit](./media/cad-04.webp)
-**Full kit ([open](https://cad.onshape.com/documents/0a294381c272da023ac4d4bd/w/7e9dc8833e6fc5270abc7d8c/e/766b306b154d4536663d85ba?renderMode=0&uiState=68c6d7c62a40ce68118af406))**
+**Full kit ([download](./models/construction-kit.step))**
 
 Enough pixels. Let's go to the machine. I cut the lattice and a single tile to test the fit. I didn't use a kerf offset because I want to have a good baseline on how the fit feels.
 
