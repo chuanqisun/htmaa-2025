@@ -41,11 +41,40 @@ export default async function (eleventyConfig) {
   });
 
   const highlighter = await createHighlighter({ themes: ["dark-plus"], langs: ["js", "jsx", "ts", "tsx", "html", "css", "diff", "yaml", "json"] });
+
+  // Custom markdown-it plugin to add lazy loading attributes to images
+  function lazyImagesPlugin(md) {
+    const defaultRender =
+      md.renderer.rules.image ||
+      function (tokens, idx, options, env, renderer) {
+        return renderer.renderToken(tokens, idx, options);
+      };
+
+    md.renderer.rules.image = function (tokens, idx, options, env, renderer) {
+      const token = tokens[idx];
+
+      // Add loading="lazy" if not already present
+      if (!token.attrGet("loading")) {
+        token.attrSet("loading", "lazy");
+      }
+
+      // Add decoding="async" if not already present
+      if (!token.attrGet("decoding")) {
+        token.attrSet("decoding", "async");
+      }
+
+      return defaultRender(tokens, idx, options, env, renderer);
+    };
+  }
+
   // ref: https://www.hoeser.dev/blog/2023-02-07-eleventy-shiki-simple/
   eleventyConfig.amendLibrary("md", (md) => {
     md.set({
       highlight: (code, lang) => highlighter.codeToHtml(code, { lang, theme: "dark-plus" }),
     });
+
+    // Add the lazy images plugin
+    md.use(lazyImagesPlugin);
   });
 
   return {
