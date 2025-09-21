@@ -1,7 +1,7 @@
 ---
 title: "Week 2: Making The Cut"
 date: 2025-09-11
-keywords: ["cutting"]
+keywords: ["cutting", "vinyl", "paper"]
 ---
 
 ## Group Assignment: Characterizing the Laser Cutter
