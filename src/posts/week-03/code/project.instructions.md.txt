@@ -29,6 +29,6 @@ You are editing an Arduino sketch, .ino file.
 # Software defined behavior
 
 - 6 total touch sensors
-- Touch threshold: 30
+- Touch threshold: 10
 - Uses capacitive touch sensing with pull-up timing measurement
-- Count measurements up to 200
+- Count measurements up to 50
