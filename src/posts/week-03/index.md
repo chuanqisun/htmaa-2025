@@ -153,6 +153,8 @@ I also set up an AI coding environment using Copilot instructions. Unlike chat-d
 - [.github/instructions/oled.instructions.md](./code/oled.instructions.md.txt)
 - [.github/instructions/project.instructions.md](./code/project.instructions.md.txt)
 
+## Networking
+
 I was planning to use the serial port and the [Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) to render the same 3D cube in the browser. Unfortunately, the OLED screen was ripped off during transport in my bag. I will need a new board.
 
 ![Broken screen](./media/damaged-01.webp)
