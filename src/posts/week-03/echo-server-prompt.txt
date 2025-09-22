@@ -1,0 +1,7 @@
+---
+IDE: VS Code
+model: gpt-5
+mode: Agent
+---
+
+Convert this demo app to a minimum web server where user can type in a message via form with input box, and the server just echos back whatever user types

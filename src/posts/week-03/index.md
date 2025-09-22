@@ -28,7 +28,7 @@ I'd love to stay in the VSCode environment because I can use all of my familiar 
 Without any peripherals, I tried to make the most out of the jumper wires. I had fun building an "Affective computing" demo where plugging a jumper wire pin into the board causes "ouch" to appear from serial port.
 
 <video src="./media/group-activity-02.mp4" controls></video>
-**Single jumper wire interaction ([source](./code/jumper-wire.cpp))**
+**Single jumper wire interaction ([source](./code/jumper-wire/jumper-wire.cpp))**
 
 After the group activity, I felt dissatisfied with the workflow: Arduino IDE has limited programming language support. Compared to the TypeScript and Node.js ecosyste I'm familiar with, I can't easily look up symbols and `.h` header files in any of the tools above. Programming feels slow.
 
@@ -44,7 +44,7 @@ The photo above encoded two of the my lessions:
 
 My soldering was working upon first attempt. I moved on to programming the board.
 
-## Individual
+## Individual project
 
 Reading the [data sheet for RP2040](https://files.seeedstudio.com/wiki/XIAO-RP2040/res/rp2040_datasheet.pdf). It was overwhelming. I'm thanking the Arduino library has taken care most of the low level details regarding clock, memory, I/O. I had the mental model that JavanScript and Python are high level programming, and C is low level programming. Reading the datasheet gave me concrete examples of what low level programming actually involves. Definitely a humbling moment for me.
 
@@ -153,6 +153,24 @@ I also setup an AI coding environment using copilot instructions. Unlike chat dr
 - [.github/instructions/oled.instructions.md](./code/oled.instructions.md.txt)
 - [.github/instructions/project.instructions.md](./code/project.instructions.md.txt)
 
-## Final project
+I was planning to use serial port and the [Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) to render the same 3D cube in the browser. Unfortunately, the OLED screen was ripped off during transport in my bag. I will need a new board.
 
-- I plan to prototype on ESP32 with networking, see if we can send texts onto the device, wired or wireless
+![Broken screen](./media/damaged-01.webp)
+**Broken OLED screen, bummer**
+
+Given the limited time left, I went ahead to find another ESP32 chip in my lab and tested its wireless capabilities. I generated a program with copilot to run the ESP32 as a wife access point.
+
+![ESP32](./media/wifi-01.webp)
+**Smallest WiFi access point + web server**
+
+I was able to see the access point on my laptop as well as smartphone.
+
+![Access point](./media/wifi-02.webp)
+**Access point visible to my laptop**
+
+Opening the server, I can send a message to ESP32 and see it echoed back.
+
+![Echo](./media/wifi-03.webp)
+**Echo test success**
+
+Here is [the full program](./code/echo-server/echo-server.ino) of the echo server. It was based on the [official demo](./code/simple-web-server/simple-web-server.ino), modified with a short [AI prompt](./echo-server-prompt.txt). As web developer, I wish there is a mature framework to serve the HTML pages, JSON payloads, as well as binary streams. I will need these capabilities for my final project.
