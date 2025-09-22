@@ -140,3 +140,11 @@ The next level is replacing the ESP32-based audio kit with a custom PCB, with sp
 **Build microphone and speaker on custom PCB**
 
 My next step is taking the idea to a TA for advice. This is my first time designing with electronics, so I do anticipate big revisions. Stay tuned.
+
+### Networking
+
+Learning about embedded programming confirmed my design above. After getting hands-on building an [echo server with ESP32](./posts/week-03/index.md), I felt confident that I can relay data between the ESP32 hand unit and a nearby laptop, using either WiFi or serial connection. I can explore serveral things in parallel next:
+
+- Learn 3D printing (next week) and prototype the hand unit as well as the main body
+- Program microphone and speaker with ESP32, which can inform me of the circuit design for the custom PCB week
+- Explore low latency audio two-way data streaming between laptop and ESP32
