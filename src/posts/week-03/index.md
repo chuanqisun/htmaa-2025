@@ -1,7 +1,7 @@
 ---
 title: "Week 3: Embedded Programming"
 date: 2025-09-21
-keywords: ["arduino", "digital-electronics", "pcb"]
+keywords: ["arduino", "electronics", "soldering"]
 ---
 
 (this post is a work in progress)
