@@ -31,7 +31,7 @@ export default async function (eleventyConfig) {
     },
   });
   eleventyConfig.addPassthroughCopy("src/style.css");
-  eleventyConfig.addPassthroughCopy("src/**/*.{webp,step,FCStd,txt,svg}", { mode: "html-relative" });
+  eleventyConfig.addPassthroughCopy("src/**/*.{webp,step,FCStd,txt,svg,mp4,cpp}", { mode: "html-relative" });
 
   eleventyConfig.addFilter("humanDate", (dateObj) => {
     return new Date(dateObj).toLocaleDateString("en-US");
@@ -40,7 +40,10 @@ export default async function (eleventyConfig) {
     return new Date(dateObj).toISOString();
   });
 
-  const highlighter = await createHighlighter({ themes: ["dark-plus"], langs: ["js", "jsx", "ts", "tsx", "html", "css", "diff", "yaml", "json"] });
+  const highlighter = await createHighlighter({
+    themes: ["dark-plus"],
+    langs: ["js", "jsx", "ts", "tsx", "html", "css", "diff", "yaml", "json", "cpp", "sh"],
+  });
 
   // Custom markdown-it plugin to add lazy loading attributes to images
   function lazyImagesPlugin(md) {

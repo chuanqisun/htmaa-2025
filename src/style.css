@@ -25,6 +25,7 @@ blockquote {
   border-left: 1px solid ButtonBorder;
 }
 
+video,
 img {
   display: block;
   max-width: 100%;
@@ -36,7 +37,7 @@ img[src^="https://developer.stackblitz.com/"]
   margin: 0;
 }
 
-img + strong {
+:where(img, video) + strong {
   display: block;
   margin: auto;
   text-align: center;
