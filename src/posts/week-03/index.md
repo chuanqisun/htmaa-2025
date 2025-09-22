@@ -163,7 +163,7 @@ I was planning to use the serial port and the [Web Serial API](https://developer
 Given the limited time left, I went ahead and found another ESP32 chip in my lab and tested its wireless capabilities. I generated a program with Copilot to run the ESP32 as a Wi‑Fi access point.
 
 ![ESP32](./media/wifi-01.webp)
-**Smallest WiFi access point + web server**
+**Smallest WiFi access point + web server I've seen**
 
 I was able to see the access point on my laptop as well as my smartphone.
 
