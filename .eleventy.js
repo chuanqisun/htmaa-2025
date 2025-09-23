@@ -32,6 +32,10 @@ export default async function (eleventyConfig) {
   });
   eleventyConfig.addPassthroughCopy("src/style.css");
   eleventyConfig.addPassthroughCopy("src/**/*.{webp,step,FCStd,txt,svg,mp4,cpp,ino}", { mode: "html-relative" });
+  eleventyConfig.addPassthroughCopy("src/**/code/**/*.{html,md}", { mode: "html-relative" });
+
+  // Ignore specific files from template processing
+  eleventyConfig.ignores.add("src/posts/*/code/**");
 
   eleventyConfig.addFilter("humanDate", (dateObj) => {
     return new Date(dateObj).toLocaleDateString("en-US");

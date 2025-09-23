@@ -149,9 +149,9 @@ My biggest learning is that we measure how many loop cycles it takes to pull the
 
 I also set up an AI coding environment using Copilot instructions. Unlike chat-driven development, my strategy is to maintain a human-readable source of truth for [instructing Copilot](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions?tool=vscode). You can recreate this environment with the following instruction files:
 
-- [.github/instructions/coding.instructions.md](./code/coding.instructions.md.txt)
-- [.github/instructions/oled.instructions.md](./code/oled.instructions.md.txt)
-- [.github/instructions/project.instructions.md](./code/project.instructions.md.txt)
+- [.github/instructions/coding.instructions.md](./code/coding.instructions.md)
+- [.github/instructions/oled.instructions.md](./code/oled.instructions.md)
+- [.github/instructions/project.instructions.md](./code/project.instructions.md)
 
 ## Networking
 
@@ -179,7 +179,7 @@ Here is [the full program](./code/echo-server/echo-server.ino) for the echo serv
 
 ## Second attempt
 
-After I broke the OLED, I went back and re-soldered the same components to a new board. This time, I added a [web browser app](./code/cobe-viewer/cube-viewer.html.txt) to view the cube. The idea is worth mentioning here as it is a proof of concept for networking on the serial port.
+After I broke the OLED, I went back and re-soldered the same components to a new board. This time, I added a [web browser app](./code/cobe-viewer/cube-viewer.html) to view the cube. The idea is worth mentioning here as it is a proof of concept for networking on the serial port.
 
 <video src="./media/cube-02.mp4" controls></video>
 **Cube viewer with web interface**
