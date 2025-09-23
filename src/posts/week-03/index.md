@@ -176,3 +176,12 @@ Opening the server, I could send a message to the ESP32 and see it echoed back.
 **Echo test success**
 
 Here is [the full program](./code/echo-server/echo-server.ino) for the echo server. It was based on the [official demo](./code/simple-web-server/simple-web-server.ino), modified with a short [AI prompt](./echo-server-prompt.txt). As a web developer, I wish there were a mature framework to serve HTML pages, JSON payloads, as well as binary streams. I'll need these capabilities for my final project.
+
+## Second attempt
+
+After I broke the OLED, I went back and re-soldered the same components to a new board. This time, I added a [web browser app](./code/cobe-viewer/cube-viewer.html.txt) to view the cube. The idea is worth mentioning here as it is a proof of concept for networking on the serial port.
+
+<video src="./media/cube-02.mp4" controls></video>
+**Cube viewer with web interface**
+
+To take the networking to the next level, I want to have bi-directional communication. Writing a serial port data parser in C++ is not as easy as in JavaScript. Another challenge is sending binary data, e.g. audio stream. I will save those challenges for another time.
