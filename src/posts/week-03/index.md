@@ -151,6 +151,60 @@ void detect_touch() {
 
 My biggest learning is that we measure how many loop cycles it takes to pull the voltage up. The human body slows down the process because current is "leaking" through our fingers. And if it takes more than the `THRESHOLD` amount of ticks to reach high, we can assume a touch.
 
+To handle continuous input while holding down a touch pad, I implemented a hold-to-repeat mechanism similar to keyboard repeat functionality. This allows smooth, continuous adjustments to the cube's zoom, pitch, and yaw without requiring rapid tapping.
+
+```cpp
+void handle_touch(long &zoom, long &pitch, long &yaw) {
+  unsigned long now = millis();
+
+  if (pin_touched_now[0]) {
+    if (!pin_touched_past[0]) {
+      zoom += 1;
+      lastRepeatMillis_A = now;
+    } else {
+      while (now - lastRepeatMillis_A >= REPEAT_MS) {
+        zoom += 1;
+        lastRepeatMillis_A += REPEAT_MS;
+      }
+    }
+  }
+
+  if (pin_touched_now[1]) {
+    if (!pin_touched_past[1]) {
+      zoom -= 1;
+      lastRepeatMillis_B = now;
+    } else {
+      while (now - lastRepeatMillis_B >= REPEAT_MS) {
+        zoom -= 1;
+        lastRepeatMillis_B += REPEAT_MS;
+      }
+    }
+  }
+
+  // Down pad (index 2) -> pitch-
+  if (pin_touched_now[2]) {
+    // omitted for brevity
+  }
+
+  // Left pad (index 3) -> yaw-
+  if (pin_touched_now[3]) {
+    // omitted for brevity
+  }
+
+  // Right pad (index 4) -> yaw+
+  if (pin_touched_now[4]) {
+    // omitted for brevity
+  }
+
+  // Up pad (index 5) -> pitch+
+  if (pin_touched_now[5]) {
+    // omitted for brevity
+  }
+}
+```
+
+The hold-to-repeat logic works by tracking the last time each action was performed. On initial touch, it immediately applies the change and records the timestamp because I want it to feel responsive. While the touch is held, it checks if enough time has passed since the last repeat, and if so, applies another increment.
+
 I also set up an AI coding environment using Copilot instructions. Unlike chat-driven development, my strategy is to maintain a human-readable source of truth for [instructing Copilot](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions?tool=vscode). You can recreate this environment with the following instruction files:
 
 - [.github/instructions/coding.instructions.md](./code/coding.instructions.md)
