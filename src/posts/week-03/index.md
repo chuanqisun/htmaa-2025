@@ -102,11 +102,13 @@ I built a basic "cube viewer" using VSCode + Arduino CLI.
 <video src="./media/cube-01.mp4" controls></video>
 **Cube viewer**
 
+You may download the source files and put them into a `/code/cube-viewer` folder to run as a project.
+
 - Source code
-  - [app.ino](./code/cobe-viewer/app.ino)
-  - [lib-01-touch.ino](./code/cobe-viewer/lib-01-touch.ino)
-  - [lib-02-led.ino](./code/cobe-viewer/lib-02-led.ino)
-  - [lib-04-screen.ino](./code/cobe-viewer/lib-04-screen.ino)
+  - [cube-viewer.ino](./code/cube-viewer/cube-viewer.ino)
+  - [lib-01-touch.ino](./code/cube-viewer/lib-01-touch.ino)
+  - [lib-02-led.ino](./code/cube-viewer/lib-02-led.ino)
+  - [lib-04-screen.ino](./code/cube-viewer/lib-04-screen.ino)
 
 I spent lots of time tuning the capacitive touch pads to achieve the balance of sensitivity and debouncing. This is the core logic of my capacitive sensing, adapted from Quentin's code
 
@@ -179,7 +181,7 @@ Here is [the full program](./code/echo-server/echo-server.ino) for the echo serv
 
 ## Second attempt
 
-After I broke the OLED, I went back and re-soldered the same components to a new board. This time, I added a [web browser app](./code/cobe-viewer/cube-viewer.html) to view the cube. The idea is worth mentioning here as it is a proof of concept for networking on the serial port.
+After I broke the OLED, I went back and re-soldered the same components to a new board. This time, I added a [web browser app](./code/cube-viewer/cube-viewer.html) to view the cube. The idea is worth mentioning here as it is a proof of concept for networking on the serial port.
 
 <video src="./media/cube-02.mp4" controls></video>
 **Cube viewer with web interface**
