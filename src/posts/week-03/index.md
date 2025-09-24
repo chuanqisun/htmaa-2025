@@ -27,7 +27,7 @@ I'd love to stay in the VSCode environment because I can use all of my familiar 
 
 Without any peripherals, I tried to make the most out of the jumper wires. I had fun building an "Affective computing" demo where plugging a jumper wire pin into the board causes "ouch" to appear from the serial port.
 
-<video src="./media/group-activity-02.mp4" controls></video>
+<video src="./media/group-activity-02.mp4" controls muted></video>
 **Single jumper wire interaction ([source](./code/jumper-wire/jumper-wire.cpp))**
 
 After the group activity, I felt dissatisfied with the workflow: the Arduino IDE has limited programming language support. Compared to the TypeScript and Node.js ecosystem I'm familiar with, I can't easily look up symbols and `.h` header files in any of the tools above. Programming feels slow.
@@ -99,7 +99,7 @@ This is by far the most productive setup. Here is my full comparison:
 
 I built a basic "cube viewer" using VSCode + Arduino CLI.
 
-<video src="./media/cube-01.mp4" controls></video>
+<video src="./media/cube-01.mp4" controls muted></video>
 **Cube viewer**
 
 You may download the source files and put them into a `/code/cube-viewer` folder to run as a project.
@@ -183,7 +183,7 @@ Here is [the full program](./code/echo-server/echo-server.ino) for the echo serv
 
 After I broke the OLED, I went back and re-soldered the same components to a new board. This time, I added a [web browser app](./code/cube-viewer/cube-viewer.html) to view the cube. The idea is worth mentioning here as it is a proof of concept for networking on the serial port.
 
-<video src="./media/cube-02.mp4" controls></video>
+<video src="./media/cube-02.mp4" controls muted></video>
 **Cube viewer with web interface**
 
 To take the networking to the next level, I want to have bi-directional communication. Writing a serial port data parser in C++ is not as easy as in JavaScript. Another challenge is sending binary data, e.g. audio stream. I will save those challenges for another time.
