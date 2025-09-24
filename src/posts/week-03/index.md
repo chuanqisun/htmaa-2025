@@ -12,8 +12,8 @@ Before attending the soldering workshop, I met up with [Ceci](https://fab.cba.mi
 
 We borrowed equipment from Ceci's lab. After a brief intro by Ceci, we fired up the Arduino IDE and started programming. The setup was very simple.
 
-![Arduino Mega](./media/group-activity-04.webp)
-**Testing Arduino Mega**
+![Arduino Mega 2560](./media/group-activity-04.webp)
+**Testing Arduino Mega 2560**
 
 After trying the official [Arduino IDE](https://www.arduino.cc/en/software/), I tested out VSCode + [PlatformIO](https://platformio.org/). It supports a wide variety of platforms and boards.
 
