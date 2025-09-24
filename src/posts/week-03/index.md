@@ -46,6 +46,8 @@ My soldering worked on the first attempt. I moved on to programming the board.
 
 ## Individual project
 
+Following the [instructions by our TA](https://quentinbolsee.pages.cba.mit.edu/qpad-page/), I picked QPAD-xiao, based on RP2040.
+
 Reading the [datasheet for RP2040](https://files.seeedstudio.com/wiki/XIAO-RP2040/res/rp2040_datasheet.pdf) was overwhelming. I'm thankful the Arduino library has taken care of most of the low-level details regarding the clock, memory, and I/O. I had the mental model that JavaScript and Python are high-level languages, and C is a low-level language. Reading the datasheet gave me concrete examples of what low-level programming actually involves. Definitely a humbling moment for me.
 
 Practically speaking, I think the datasheet is not a textbook. I can't read it from cover to cover. It is more useful as a reference when I have a specific question to ask or a problem to solve.
