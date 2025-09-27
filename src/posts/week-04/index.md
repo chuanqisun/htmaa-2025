@@ -76,7 +76,7 @@ In order to make the support structure part of the final print, I extensively cu
 
 I attempted a few different sizes and materials. The largest one printed with PETG turned out the best. The middle-sized print used the default organic support settings, which suffered "broken leg" failure, while the small version lost too much detail.
 
-I think the project was a success according to my TA's feedback.
+I really appreciated the feedback from our TA:
 
 > I find this disturbing.  
 > -- [Alan Han](https://fab.cba.mit.edu/classes/863.23/CBA/people/Alan/)
