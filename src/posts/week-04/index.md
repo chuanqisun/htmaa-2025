@@ -23,7 +23,7 @@ Next, I wanted to print a feather inside the cage to add a poetic touch. I desig
 ![Cage with feather](./media/cage-v2.webp)
 **Feature is barely visible**
 
-I enlarged the feature and printed it separately. This time it worked perfectly.
+I enlarged the design and printed it separately. This time it worked perfectly. I have unforunately overwritten the CAD file with another design and could only recover an `*.obj` file. I should use the version history feature to backup more often in Onshape.
 
 ![Feather on flat](./media/feather-flat.webp)
 **Separate the feature ([model](./models/feather.obj))**
@@ -31,17 +31,17 @@ I enlarged the feature and printed it separately. This time it worked perfectly.
 Combining the feather with the previous cage design created a mini sculpture.
 
 ![Cage with feather](./media/cage-v3.webp)
-**A touch of poetry ([model](./models/cage.obj))**
+**A touch of poetry ([model](./models/cage.step))**
 
 Next, I wanted to challenge myself by printing something more difficult. I designed a 4D cube, also known as a tesseract, and placed it in the same cage. The CAD work was much more difficult with this design. I had to use several boolean operations to get the cube inside the cube, and connecting their vertices required creating new planes that are not coplanar with any existing faces.
 
 ![Tesseract in cage](./media/cube-in-cage.webp)
-**Cube inside cube inside cage ([model](./models/cube-in-cage.obj))**
+**Cube inside cube inside cage ([model](./models/cube-in-cage.step))**
 
 Finally, I wanted to introduce a movable element, so I printed a ball inside a cube cage. The ball's diameter is the same as the cube's interior dimension so it won't fall out.
 
 ![Ball in cube](./media//ball-in-cube.webp)
-**Ball inside cube ([model](./models/ball-in-cube.obj))**
+**Ball inside cube ([model](./models/ball-in-cube.step))**
 
 Notice the support material inside the cube. I used the default snug fit support provided by PrusaSlicer, and it worked as expected: it was easy to remove and prevented any spaghetti from overhang issues.
 
