@@ -76,6 +76,9 @@ In order to make the support structure part of the final print, I extensively cu
 
 I attempted a few different sizes and materials. The largest one printed with PETG turned out the best. The middle-sized print used the default organic support settings, which suffered "broken leg" failure, while the small version lost too much detail.
 
+![Zombie](./media/zombies.webp)
+**Zombies of different sizes and materials.**
+
 I really appreciated the feedback from our TA:
 
 > I find this disturbing.  
