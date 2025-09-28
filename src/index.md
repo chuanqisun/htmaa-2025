@@ -161,6 +161,9 @@ The hand unit will be built around a Xiao ESP32-C3 microcontroller, with upgrade
 
 The main unit uses a simpler design with a Xiao ESP32-C3 microcontroller controlling 4 LEDs and 4 3.5mm TRRS jacks for the 2x2 grid configuration.
 
+![High-level schematic](./media/parts.webp)
+**High-level design for the electronic components**
+
 For connection detection, I want to eventually support multiple hand units speaking simultaneously, which requires tracking which hand unit is plugged into which jack. Traditional physical TRS plug detection doesn't differentiate between different plugs, so I propose using TRRS jacks as a clever hack. By treating high/low voltage as 1/0 bits and using the sleeve as ground while the other 3 connections serve as signal lines, I can create 2^3 = 8 unique values. This allows each jack in the 2x2 grid to be uniquely identified by a 3-bit code. The main unit will be responsible for pulling up/down the 3 signal lines on the jacks, while the hand unit decodes the 3-bit code and sends it to the laptop along with its own unique ID.
 
 ![TRRS socket](./media/trrs-socket.webp)
@@ -185,11 +188,6 @@ This design enables all necessary communication between the PC, hand unit, and m
 | 3AA battery pack + voltage regulator                                                                                                     | 1        | Optional       | Alternative power solution          |
 
 \*For a single hand unit. Need more for additional units
-
-High-level schematic
-
-![High-level schematic](./media/parts.webp)
-**High-level design for the electronic components**
 
 With this design update, it became clear that the main unit is essentially a "dumb" device that encodes the TRRS socket and displays which AI agent is speaker and doesn't care about audio processing at all.
 
