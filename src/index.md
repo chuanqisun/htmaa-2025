@@ -153,62 +153,36 @@ Learning about embedded programming validated the design above. After getting ha
 
 ### Electronics design update
 
-- I consulted with our TA [Quentin Bolsee](https://fabacademy.org/2020/labs/ulb/students/quentin-bolsee/about/) regarding electronics design
-- Received help on input/output device
-- Did additional research with YouTube tutorials from [atomic14](https://www.youtube.com/@atomic14)
-- I was able to fully spec out the electronics:
-- Hand unit
-  - Micro-controller: Xiao ESP32-C3
-    - Upgrade option to ESP32-C6 if WiFi performance bottlenecks
-    - Upgrade to WROOM-32E if I need more GPIO pins
-  - Audio input: ICS-43434 I2S MEMS Microphone
-  - Audio output: MAX98357A I2S Class D Amplifier + 8-ohm speaker
-    - The specified response frequency is 600hz - 4000hz, which may not be ideal for voice. Might need alternative
-  - Physical inputs
-    - 2 buttons
-      - single button: push-to-talk
-      - both buttons: broadcast
-    - 2 switched
-      - Power On/Off
-      - Mode switch interaction/programming
-  - Power: 3.7V LiPo battery
-    - With upgrade to 3AA battery pack + voltage regulator. Need to check with electronics expert on how this works. I prefer AA batteries for easier replacement and more vintage feel
-  - Connectivity: 3.5mm TRRS jack (see discussion in connection detection)
-- Main unit
-  - Micro-controller: Xiao ESP32-C3
-  - Outpu:
-    - 4 LEDs
-    - 4 3.5mm TRRS jacks (see discussion in connection detection)
-- Connection detection
-  - I would like to eventually support multiple hand units speaking at the same time
-  - Therefore, I need to track which hand unit is plugged into which jack
-    - Tradition physical TRS plug detection doesn't differentiate between different plugs
-  - I propose to use TRRS jack as a hack to detect plugs. Consider the following:
-    - We can use high/low voltage as 1/0 bit. Combining multiple bits can give us more unique values
-    - TRRS has 4 connections. We can use the sleeve as ground, and the other 3 connections as signal
-    - This gives us 2^3 = 8 unique values
-    - Hence I'm reducing the number of jacks to a 2 by 2 grid, allowing each jack to be uniquely identified by the 3-bit code
-  - The main unit is responsible to pull up/down the 3 signal lines on the jacks
-  - The hand unit is responsible to decode the 3-bit code and send it to the laptop along with its own unique ID
-  - This should be all the communication needed among the PC, the hand unit and the main unit:
-    - Hand unit plug in: hand unit sends "plug in" message to PC with the 3-bit code associated with its wireless ID
-    - Hand unit send audio to PC: hand unit streams audio data associated with its wireless ID
-    - PC send audio to hand unit: PC streams audio data to the hand unit using the associated wireless ID
-    - PC send LED state to main unit: PC sends LED state using the 3-bit code to identify which jack to light up
+I consulted with our TA [Quentin Bolsee](https://fabacademy.org/2020/labs/ulb/students/quentin-bolsee/about/) regarding electronics design and received valuable help on input/output devices. I also conducted additional research using YouTube tutorials from [atomic14](https://www.youtube.com/@atomic14), which enabled me to fully spec out the electronics for both components.
 
-Parts list
+<iframe src="https://www.youtube.com/embed/d_h38X4_eQQ?si=qrE0fMYY1X2jP3Q9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-- [Xiao ESP32-C3](https://www.digikey.com/en/products/detail/seeed-technology-co-ltd/113991054/16652880) x2 (1\* for hand units, 1 for main unit) (stocked by CBA)
-- [ICS-43434 I2S MEMS Microphone](https://www.digikey.com/en/products/detail/tdk-invensense/ICS-43434/6140298)\* (stocked)
-- [MAX98357A I2S Class D Amplifier](https://www.digikey.com/en/products/detail/analog-devices-inc-maxim-integrated/MAX98357AETE-T/4936122)\* (stocked)
-- [PSR-57N08A01-AQ 8-ohm speaker](https://www.digikey.com/en/products/detail/mallory-sonalert-products-inc/PSR-57N08A01-AQ/2071452)\* (stocked)
-- [3.5mm TRRS jack](https://www.sparkfun.com/audio-jack-3-5mm-trrs-smd.html) x5 (1\* for hand unit, 4 for main unit) (need to order)
-- [TRRS audio cable](https://www.monoprice.com/product?p_id=24437&srsltid=AfmBOorjZ4_M3Uo6oXfcsZa9juhuYBGbdvfnJ7mGzuYrVbLg65MT6nCNH84)\* (need to order)
-- [3.7V LiPo battery](https://www.digikey.com/en/products/detail/mikroelektronika/MIKROE-698/13679450)\* (need to order)
-- [Button](https://www.digikey.com/en/products/detail/omron-electronics-inc-emc-div/B3SN-3112P/27856) x2 (check stock)
-- [Slide](https://www.digikey.com/en/products/detail/c-k/AYZ0102AGRLC/1640108) x2 (check stock)
-- [LED](https://www.digikey.com/en/products/detail/lumex-opto-components-inc/SML-LX1206IC-TR/229140) x4 (check stock)
-- 3AA battery pack + voltage regulator (optional)
+The hand unit will be built around a Xiao ESP32-C3 microcontroller, with upgrade options to ESP32-C6 if WiFi performance becomes a bottleneck, or to WROOM-32E if more GPIO pins are needed. For audio processing, I've selected the ICS-43434 I2S MEMS Microphone for input and the MAX98357A I2S Class D Amplifier paired with an 8-ohm speaker for output. However, the amplifier's specified response frequency of 600hz - 4000hz may not be ideal for voice applications, so I might need to find an alternative. The physical interface will include two buttons (single button for push-to-talk, both buttons for broadcast) and two switches (Power On/Off and Mode switch for interaction/programming). Power will come from a 3.7V LiPo battery, with a potential upgrade to a 3AA battery pack plus voltage regulator for easier replacement and a more vintage feel, though I need to consult with an electronics expert about the implementation details. Connectivity will be handled through a 3.5mm TRRS jack.
+
+The main unit uses a simpler design with a Xiao ESP32-C3 microcontroller controlling 4 LEDs and 4 3.5mm TRRS jacks for the 2x2 grid configuration.
+
+For connection detection, I want to eventually support multiple hand units speaking simultaneously, which requires tracking which hand unit is plugged into which jack. Traditional physical TRS plug detection doesn't differentiate between different plugs, so I propose using TRRS jacks as a clever hack. By treating high/low voltage as 1/0 bits and using the sleeve as ground while the other 3 connections serve as signal lines, I can create 2^3 = 8 unique values. This allows each jack in the 2x2 grid to be uniquely identified by a 3-bit code. The main unit will be responsible for pulling up/down the 3 signal lines on the jacks, while the hand unit decodes the 3-bit code and sends it to the laptop along with its own unique ID.
+
+![TRRS socket](./media/trrs-socket.webp)
+**TRRS socket has 4 pins**
+
+This design enables all necessary communication between the PC, hand unit, and main unit: hand unit plug-in messages with 3-bit codes and wireless IDs, audio streaming from hand units to PC using wireless IDs, audio streaming from PC to hand units using wireless IDs, and LED state updates from PC to main unit using 3-bit codes to identify specific jacks.
+
+### Parts list
+
+| Component                                                                                                                                | Quantity | Availability   | Notes                               |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------- | ----------------------------------- |
+| [Xiao ESP32-C3](https://www.digikey.com/en/products/detail/seeed-technology-co-ltd/113991054/16652880)                                   | 2        | Stocked by CBA | 1\* for hand units, 1 for main unit |
+| [ICS-43434 I2S MEMS Microphone](https://www.digikey.com/en/products/detail/tdk-invensense/ICS-43434/6140298)                             | 1\*      | Stocked        |                                     |
+| [MAX98357A I2S Class D Amplifier](https://www.digikey.com/en/products/detail/analog-devices-inc-maxim-integrated/MAX98357AETE-T/4936122) | 1\*      | Stocked        |                                     |
+| [PSR-57N08A01-AQ 8-ohm speaker](https://www.digikey.com/en/products/detail/mallory-sonalert-products-inc/PSR-57N08A01-AQ/2071452)        | 1\*      | Stocked        |                                     |
+| [3.5mm TRRS jack](https://www.sparkfun.com/audio-jack-3-5mm-trrs-smd.html)                                                               | 5        | Need to order  | 1\* hand unit + 4 main              |
+| [TRRS audio cable](https://www.monoprice.com/product?p_id=24437&srsltid=AfmBOorjZ4_M3Uo6oXfcsZa9juhuYBGbdvfnJ7mGzuYrVbLg65MT6nCNH84)     | 1\*      | Need to order  |                                     |
+| [3.7V LiPo battery](https://www.digikey.com/en/products/detail/mikroelektronika/MIKROE-698/13679450)                                     | 1\*      | Need to order  |                                     |
+| [Button](https://www.digikey.com/en/products/detail/omron-electronics-inc-emc-div/B3SN-3112P/27856)                                      | 2\*      | Check stock    |                                     |
+| [Slide switch](https://www.digikey.com/en/products/detail/c-k/AYZ0102AGRLC/1640108)                                                      | 2\*      | Check stock    |                                     |
+| [LED](https://www.digikey.com/en/products/detail/lumex-opto-components-inc/SML-LX1206IC-TR/229140)                                       | 4        | Check stock    |                                     |
+| 3AA battery pack + voltage regulator                                                                                                     | 1        | Optional       | Alternative power solution          |
 
 \*For a single hand unit. Need more for additional units
 
@@ -227,4 +201,11 @@ Here are new and remaining questions which I plan to resolve by going to TAs as 
 2. Packaging design. How do I hold the components in place? especially the 3.5mm TRRS jacks which will receive physical stress.
 3. Physical interaction. How do I put buttons and sliding switch on the hand unit? I want a good tactile feel.
 4. LED lighting. How do make a ring that lights up around the TRRS socket?
-5. The CBA electronics shop inventory doesn't match what the website says. Need to follow up
+5. The CBA electronics shop inventory doesn't match what the website says. For example, the ESP32s are out of stock but the website didn't reflect that.
+
+And here are the things I can prototype now:
+
+1. Play voice from ESP32 over WiFi
+2. Capture sound from ESP32 over WiFi
+3. Address and light-up 4 LEDs with ESP32
+4. Encode and decode TRRS identities between two ESP32 boards
