@@ -209,3 +209,4 @@ And here are the things I can prototype now:
 2. Capture sound from ESP32 over WiFi
 3. Address and light-up 4 LEDs with ESP32
 4. Encode and decode TRRS identities between two ESP32 boards
+5. Design a case roughly based on atomic14's PCB foot-print.
