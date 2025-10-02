@@ -208,3 +208,18 @@ And here are the things I can prototype now:
 3. Address and light-up 4 LEDs with ESP32
 4. Encode and decode TRRS identities between two ESP32 boards
 5. Design a case roughly based on atomic14's PCB foot-print.
+
+### Sound output
+
+With the help from our TA [Quentin Bolsee](https://fabacademy.org/2020/labs/ulb/students/quentin-bolsee/about/), I installed the official ESP32 board manager following its [documentation](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html). Then I installed the specific library for Arduino ESP32 Nano from the board manager.
+
+I used the official example code to play a square wave tone, with a few lines of modification to set the right output pin. Here is the full [source](./code/sound-test.ino).
+
+```cpp
+#define I2S_BCLK D7
+#define I2S_LRC  D8
+#define I2S_DIN  D9
+```
+
+<video controls src="./media/sound-out.mp4"></video>
+**Sound output from ESP32 using MAX98357A amplifier**

@@ -35,7 +35,7 @@ export default async function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/**/code/**/*.{html,md}", { mode: "html-relative" });
 
   // Ignore specific files from template processing
-  eleventyConfig.ignores.add("src/posts/*/code/**");
+  eleventyConfig.ignores.add("src/**/code/**");
 
   eleventyConfig.addFilter("humanDate", (dateObj) => {
     return new Date(dateObj).toLocaleDateString("en-US");
