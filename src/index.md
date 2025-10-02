@@ -223,3 +223,13 @@ I used the official example code to play a square wave tone, with a few lines of
 
 <video controls src="./media/sound-out.mp4"></video>
 **Sound output from ESP32 using MAX98357A amplifier**
+
+I found a powerful library for audio processing by Phil Schatzmann, called [Arduino Audio Toolkit](https://github.com/pschatzmann/arduino-audio-tools). After studying his examples, I was able to get my computer to send live microphone audio to the ESP32 over WiFi, and play it back immediately. The latency is about 1 second, which concerns me but isn't a deal breaker.
+
+This POC validated the idea that we can shift all the computation to a PC nearby and let ESP32 handle audio input/output.
+
+- [Server code (PC)](./code/streaming-test-server.js)
+- [Client code (ESP32)](./code/streaming-test-client.ino)
+
+<video controls src="./media/latency-test.mp4"></video>
+**Latency test result: 1 second delay**
