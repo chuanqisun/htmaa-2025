@@ -31,7 +31,7 @@ export default async function (eleventyConfig) {
     },
   });
   eleventyConfig.addPassthroughCopy("src/style.css");
-  eleventyConfig.addPassthroughCopy("src/**/*.{webp,step,FCStd,txt,svg,mp4,cpp,ino,3mf,obj}", { mode: "html-relative" });
+  eleventyConfig.addPassthroughCopy("src/**/*.{webp,step,FCStd,txt,svg,mp4,cpp,ino,3mf,obj,zip}", { mode: "html-relative" });
   eleventyConfig.addPassthroughCopy("src/**/code/**/*.{html,md}", { mode: "html-relative" });
 
   // Ignore specific files from template processing
