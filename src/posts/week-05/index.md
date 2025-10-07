@@ -105,8 +105,3 @@ We used saleae Logic 2 analyzer with the [companion software](https://www.saleae
   - Apply design rules before starting PCB layout
   - Check constraints often
   - Do not lay the wires too early. They are not easy to change
-
-TODOs:
-
-- Identify Mic requirements
-- Layout both Mic, Amp, two buttons, and TRRS jack
