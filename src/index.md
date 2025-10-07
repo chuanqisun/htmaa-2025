@@ -233,3 +233,7 @@ This POC validated the idea that we can shift all the computation to a PC nearby
 
 <video controls src="./media/latency-test.mp4"></video>
 **Latency test result: 1 second delay**
+
+### PCB Design
+
+I designed both the hand-held device (Operator) and the main body (Switchboard) as part of this week's PCB design exercise. See details in the [weekly post](./posts/week-05/index.md).

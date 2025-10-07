@@ -35,7 +35,7 @@ I also wanted to simulate the main body device. It has two roles: lighting up an
 <video controls muted src="./media/simulation-2.mp4"></video>
 **Simulate the main device**
 
-## PCB Design
+## Designing the Operator
 
 I wanted to start the PCB design towards my final project, using KiCad. The schematic design is very simple: layout the Xiao-ESP32-C3, I2S Microphone, I2S DAC/Amp, a TRRS jack, and a couple of switches.
 
@@ -96,6 +96,8 @@ Adding a jumper was not as straightforward as I thought. I had to go back to add
 
 ![Final 3D view](./media/3d-02.webp)
 **3D view with the jumper**
+
+## Designing the Switchboard
 
 After designing the hand-held device PCB, I felt more comfortable with the tool and quickly designed the main body PCB. For each TRRS jack, I added an LED as status indicator. I "hardwired" the 3-bit address from Xiao to each jack. I used resistors to protect the LEDs from high voltage.
 
