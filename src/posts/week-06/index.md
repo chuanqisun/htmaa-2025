@@ -1,10 +1,10 @@
 ---
-title: "Week 6: Wish I were the Steves"
+title: "Week 6: Wish I Were The Steves"
 date: 2025-10-13
 keywords: ["electronics", "pcb", "fabrication"]
 ---
 
-The legend goes that Steve Jobs and Steve Wozniak hand-built the first Apple-1 computers in their garage. This week, I'm going to learn how to hand-build something simpler, but in the same spirit: a custom microcontroller board.
+The legend goes that Steve Jobs and Steve Wozniak hand-built the first Apple-1 computers in their garage. This week, I learned how to hand-build something simpler, but in the same spirit: a custom microcontroller board.
 
 ## Group assignment
 
@@ -20,11 +20,11 @@ Later, I attended a second session with Kristof where we debugged the milling ma
 
 ## Fabricating
 
-For my final project, I'm designing two main components: a hand-held unit I call "the Operator" and a main body unit called "the Switchboard." Having completed the circuit simulations in the previous week, I already had initial designs for both boards. This week, my focus shifted to the physical milling and fabrication process.
+For my final project, I designed two main components: a hand-held unit I call "the Operator" and a main body unit called "the Switchboard." Having completed the circuit simulations in the previous week, I already had initial designs for both boards. This week, my focus shifted to the physical milling and fabrication process.
 
 ### The Operator
 
-Milling the first version of the Operator board, a single-sided design, was straightforward.
+The Operator is a dev board for Xiao-ESP32-C3 that connects a Microphone, DAC/Amp, TRRS jack, and a couple of switches. Milling the first version of the Operator board, a single-sided design, was straightforward.
 
 In KiCad, export the PCB design as Gerber files and drill files.
 ![Export Gerber files](./media/operator-01.webp)
@@ -101,6 +101,8 @@ Soldering this board was much harder than expected. The non-plated through-holes
 
 ### The Switchboard
 
+The Switchboard is an array of TRRS jacks, each with an LED to indicate status.
+
 For the Switchboard PCB, I made almost all the same mistakes as with the Operator. My original design also assumed plated through-holes. Luckily, the Switchboard is a single-sided board, so I could move all the components to the other side and adjust the circuit without needing vias.
 
 ![Original Design](./media/switchboard-00.webp)
@@ -128,7 +130,7 @@ I followed a [YouTube tutorial](https://www.youtube.com/watch?v=8peIFpolsmk) to 
 ![Failed laser cutting](./media/audio-01.webp)
 **Failed test**
 
-I soon realized the problem was the image format. Switching to SVG files exposed the correct settings. The `gerber2img` tool doesn't export SVGs, and KiCad's native SVG export but it produced wrong shapes when opened in xTool. I ended up using the [Adobe PNG to Vector converter](https://www.adobe.com/express/feature/image/convert/png-to-svg) and then manually cleaned up the SVG in [Figma](https://www.figma.com/).
+I soon realized the problem was the image format. Switching to SVG files exposed the correct settings. The `gerber2img` tool didn't export SVGs, and KiCad's native SVG export produced wrong shapes when opened in xTool. I ended up using the [Adobe PNG to Vector converter](https://www.adobe.com/express/feature/image/convert/png-to-svg) and then manually cleaned up the SVG in [Figma](https://www.figma.com/).
 
 I settled on the following workflow:
 
