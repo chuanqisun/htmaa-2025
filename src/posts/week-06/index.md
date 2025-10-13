@@ -103,12 +103,21 @@ Soldering this board was much harder than expected. The non-plated through-holes
 
 For the Switchboard PCB, I made almost all the same mistakes as with the Operator. My original design also assumed plated through-holes. Luckily, the Switchboard is a single-sided board, so I could move all the components to the other side and adjust the circuit without needing vias.
 
+![Original Design](./media/switchboard-00.webp)
+**Original design without considering soldering**
+
 However, I then made two more errors:
 
 1.  I forgot to mirror the component footprints after flipping them to the other side.
 2.  I used the wrong pins for the connectors after flipping the design and only realized it after milling.
 
+![Corrected Design](./media/switchboard-02.webp)
+**Corrected design with mirrored footprints and correct pins**
+
 I didn't notice the mirroring problem until I had finished soldering all the resistors for the LEDs. At that point, I decided to capitalize on the mistake and use the partially assembled board to test the LED circuit. I placed an LED on the pads without solder and used a multimeter to light it up. It worked!
+
+![Testing LED circuit](./media/switchboard-03.webp)
+**Testing LED circuit**
 
 ### Bonus: Laser cutting my own ICS-43434 breakout board
 
