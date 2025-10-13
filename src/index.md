@@ -237,3 +237,7 @@ This POC validated the idea that we can shift all the computation to a PC nearby
 ### PCB Design
 
 I designed both the hand-held device (Operator) and the main body (Switchboard) as part of this week's PCB design exercise. See details in the [weekly post](./posts/week-05/index.md).
+
+### PCB Production
+
+I milled boards for both the Operator and the Switchboard using the Carvera Desktop CNC Machine. See details in the [weekly post](./posts/week-06/index.md).
