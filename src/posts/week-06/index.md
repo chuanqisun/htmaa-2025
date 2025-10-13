@@ -161,6 +161,8 @@ After applying a manual offset, my fourth attempt produced a very good result an
 
 In retrospect, I could have drilled the holes and cut the outline in one go before laser cutting. That would save a trip to the mill.
 
+I also checked with TA Quentin that the xTool software has its own vectorize tool. I planned to use that next time instead of using Adobe and Figma.
+
 Soldering the ICS-43434 was nightmarish. The component has tiny pads on its underside, which are unreachable with a soldering iron. The laser-etched traces were so thin they could barely hold any solder.
 
 ![How to solder this?](./media/audio-05.webp)
@@ -168,7 +170,45 @@ Soldering the ICS-43434 was nightmarish. The component has tiny pads on its unde
 
 I used a heat gun, hoping surface tension would do the work, but the heat began to damage the microphone's plastic casing. An attempt to heat the board from the bottom burned the PCB before the solder melted. After many tries, I managed to get it positioned with no shorts between the pads, but I have yet to test if the microphone actually works.
 
+![Damaged PCB](./media/audio-09.webp)
+**Heating up the PCB from the bottom resulted in damage**
+
+I tested with a multimeter and confirmed there was no short. But it was unclear whether the microphone survived the heat damage.
+
+![Front view](./media/audio-08.webp)
+**Microphone breakout, soldered**
+
 At this point, I realized that the pinout on my board is not the same as the Adafruit breakout board which my Operator board assumes. The only way for it to be compatible is to use jumper wires to sort out the connections. This was not ideal, but I had no choice now as it was already 3 AM.
+
+### Integration Test
+
+These were all the components I made this week. From top, clockwise:
+
+- ICS-43434 breakout board (laser cut)
+- Switchboard (milled, single-sided)
+- Operator (milled, two-sided)
+
+![Components](./media/test-00.webp)
+**All the components fabricated this week**
+
+Let's assemble and test. Since we planned to have a dedicated I/O and networking weeks, I focused only on basic connectivity.
+
+I programmed the Switchboard to supply digital signals to each TRRS socket, and programmed the Operator to read the digital signal and determine which pins have high voltage. To simulate the final project scenario, I used a real TRRS male and female connector pair.
+
+![Assembly](./media/test-01.webp)
+**Assembly with real TRRS connectors**
+
+I was able to confirm from serial output that all the TRRS sockets are giving out distinct high/low voltage patterns.
+
+![Digital readings](./media/test-02.webp)
+**Digital readings from TRRS sockets**
+
+Key observation:
+
+- Unplug/replug caused the reading to be high momentarily
+- It took 1-2 seconds for the reading to stabilize after plugging in
+
+I would have to keep this in mind as I design the human interaction experience.
 
 ## Key lessons
 
