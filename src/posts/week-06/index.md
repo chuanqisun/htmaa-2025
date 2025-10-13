@@ -123,7 +123,12 @@ I didn't notice the mirroring problem until I had finished soldering all the res
 
 I needed a breakout board for the ICS-43434 microphone, similar to [this one from Adafruit](https://www.digikey.com/en/products/detail/adafruit-industries-llc/6049/25589349). I decided to try fabricating it with a laser cutter.
 
-I followed a [YouTube tutorial](https://www.youtube.com/watch?v=8peIFpolsmk) to set up the machine, but the settings UI was different. Instead of speed (mm/s), I had dot duration (microseconds). My initial tests with PNG files were awful; some parts of the copper were burned away, but the surface wasn't fully removed. I soon realized the problem was the image format. Switching to SVG files exposed the correct settings.
+I followed a [YouTube tutorial](https://www.youtube.com/watch?v=8peIFpolsmk) to set up the machine, but his settings UI was differeht from mine. Instead of speed (mm/s), I had dot duration (microseconds). I proceeded with a test cut with varying duration values. The results were terrible: some parts of the copper were burned away, but the surface wasn't fully removed. The laser seemed to also have reduced power towards the edges of the cutting area.
+
+![Failed laser cutting](./media/audio-01.webp)
+**Failed test**
+
+I soon realized the problem was the image format. Switching to SVG files exposed the correct settings. The `gerber2img` tool doesn't export SVGs, and KiCad's native SVG export but it produced wrong shapes when opened in xTool. I ended up using the [Adobe PNG to Vector converter](https://www.adobe.com/express/feature/image/convert/png-to-svg) and then manually cleaning up the SVG in [Figma](https://www.figma.com/)
 
 I settled on the following workflow:
 
@@ -131,11 +136,37 @@ I settled on the following workflow:
 2.  Use the laser cutter to ablate the copper for the traces, using the holes for alignment.
 3.  Use the mill again to cut the board's outline.
 
-The `gerber2img` tool doesn't export SVGs, and KiCad's native SVG export had an inversion issue. I ended up using the [Adobe PNG to Vector converter](https://www.adobe.com/express/feature/image/convert/png-to-svg) and then cleaning up the resulting SVG in [Figma](https://www.figma.com/), where I also scaled it to the correct dimensions.
+I scaled the SVG to match the measured dimension in KiCad before applying it on top of drill holes.
+![Alignment](./media/audio-02.webp)
+**Alignment**
 
-The xTool V1 Ultra's camera alignment was slightly off. Even with careful alignment in the software, the first few results were shifted. After applying a manual offset, my fourth attempt produced a very good result. It took two full passes of 10 repetitions each to completely remove the copper.
+The xTool V1 Ultra's camera alignment was slightly off. Even with careful alignment in the software, the first few results were shifted.
 
-Soldering the ICS-43434 was extremely difficult. The component has tiny pads on its underside, which are unreachable with a soldering iron. The laser-etched traces were so thin they could barely hold any solder. I used a heat gun, hoping surface tension would do the work, but the heat began to damage the microphone's plastic casing. An attempt to heat the board from the bottom burned the PCB before the solder melted. After many tries, I managed to get it positioned with no shorts between the pads, but I have yet to test if the microphone actually works.
+![Misalignment](./media/audio-03.webp)
+**The perfect alignment turned out to be offset by 0.3mm on both axes**
+
+I also dialed the machine settings. It took two a total of 20 passes to completely remove the copper.
+
+![Perfect settings](./media/audio-07.webp)
+**10 passes each, process it twice**
+
+After applying a manual offset, my fourth attempt produced a very good result and ready for edge cut. The tolerance for edge cutting is wide. I visually aligned the outline using Carvera's laser scan. It worked perfectly.
+![Laser scan for edge cut](./media/audio-04.webp)
+**Laser scan for edge cut**
+
+![Multiple attempts](./media/audio-06.webp)
+**The fourth attempt was good enough for milling**
+
+In retrospect, I could have drilled the holes and cut the outline in one go before laser cutting. That would save a trip to the mill.
+
+Soldering the ICS-43434 was nightmarish. The component has tiny pads on its underside, which are unreachable with a soldering iron. The laser-etched traces were so thin they could barely hold any solder.
+
+![How to solder this?](./media/audio-05.webp)
+**How to solder this?**
+
+I used a heat gun, hoping surface tension would do the work, but the heat began to damage the microphone's plastic casing. An attempt to heat the board from the bottom burned the PCB before the solder melted. After many tries, I managed to get it positioned with no shorts between the pads, but I have yet to test if the microphone actually works.
+
+At this point, I realized that the pinout on my board is not the same as the Adafruit breakout board which my Operator board assumes. The only way for it to be compatible is to use jumper wires to sort out the connections. This was not ideal, but I had no choice now as it was already 3 AM.
 
 ## Key lessons
 
