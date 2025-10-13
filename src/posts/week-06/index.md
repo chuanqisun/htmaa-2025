@@ -8,36 +8,81 @@ The legend goes that Steve Jobs and Steve Wozniak hand-built the first Apple-1 c
 
 ## Group assignment
 
-Our group assignment was to characterize the design rules for our Carvera PCB milling machine. We started by reading the excellent [tutorial by our TA Quentin](https://quentinbolsee.pages.cba.mit.edu/carvera-pcb-tutorial/).
+Our group assignment was to characterize the design rules for our Carvera PCB milling machine. We started by reading the excellent [tutorial by our TA Quentin](https://quentinbolsee.pages.cba.mit.edu/carvera-pcb-tutorial/), then started producing a test PCB to understand the machine's capabilities.
+![Characterizing the Carvera PCB milling machine](./media/group-01.webp)
+**Characterizing the Carvera PCB milling machine**
 
-We produced a test PCB to understand the machine's capabilities. Our first run resulted in large amounts of burrs along the edges of the traces. We learned this was due to a damaged endmill and subsequently learned how to replace the bit. Later, I attended a second session with Kristof where we debugged the milling machine after it entered a halted state. We documented our debugging process and findings in our [group note](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week6/).
+Our first run resulted in large amounts of burrs along the edges of the traces. We learned this was due to a damaged endmill and subsequently learned how to replace the bit. The machine is able to consistently handle traces down to 0.2mm.
+![Burrs everywhere](./media/group-02.webp)
+**Burrs everywhere**
+
+Later, I attended a second session with Kristof where we debugged the milling machine after it entered a halted state. We documented our debugging process and findings in our [group note](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week6/).
 
 ## Fabricating
 
 For my final project, I'm designing two main components: a hand-held unit I call "the Operator" and a main body unit called "the Switchboard." Having completed the circuit simulations in the previous week, I already had initial designs for both boards. This week, my focus shifted to the physical milling and fabrication process.
 
-An additional challenge was that the ICS-43434 microphone I plan to use does not come with a breakout board, so I needed to fabricate one from scratch.
+### The Operator
 
-## The Operator
+Milling the first version of the Operator board, a single-sided design, was straightforward.
 
-Milling the first version of the Operator board, a single-sided design, was straightforward. My workflow was as follows:
+In KiCad, export the PCB design as Gerber files and drill files.
+![Export Gerber files](./media/operator-01.webp)
+**Export Gerber files**
 
-1.  In KiCad, export the PCB design as Gerber files and drill files.
-2.  Use Quentin's [gerber2img](https://quentinbolsee.pages.cba.mit.edu/gerber2img/) tool to convert the copper layer, edge cut layer, and drill files into PNG images.
-3.  For the exterior cut, I used the "Black and white" setting and checked "Fill edge cut" to create a solid outline including the drill holes. For the traces, I unchecked this option.
-4.  Use Neal's [modsproject](https://modsproject.org/) with the Carvera mill 2D PCB program to generate the final G-code for the milling machine.
+![Export drill files](./media/operator-02.webp)
+**Export drill files**
 
-The initial milling produced some burrs, but after a bit of sanding, the results were very good. However, as I gathered components for stuffing the board, I hit my first roadblock: we didn't have any surface-mount pin connector sockets in the lab. I could either bend the legs of the through-hole connectors or redesign the board. This was a key lesson: **check component availability and stay flexible during the design process.**
+Upload both files at the same time to Quentin's [gerber2img](https://quentinbolsee.pages.cba.mit.edu/gerber2img/) tool to convert the copper layer, edge cut layer, and drill files into PNG images.
 
-Taking TA feedback into account, I decided to redesign the board as a two-sided PCB with a ground plane on the back, which would also simplify routing. I learned how to fill a ground plane in KiCad and produced my new design.
+- For the exterior cut, I used the "Black and white" setting and checked "Fill edge cut" to create a solid outline including the drill holes.
+- For the traces, I unchecked this option.
+
+Use Neal's [modsproject](https://modsproject.org/) with the Carvera mill 2D PCB program to generate the final G-code for the milling machine. The tool is self-explanatory. Just follow the pipeline to proceed.
+
+The initial milling produced some burrs, but after a bit of sanding, the results were very good.
+
+![Milled PCB](./media/operator-03-A.webp)
+**Before sanding**
+
+![Milled PCB](./media/operator-03-B.webp)
+**After sanding**
+
+However, as I gathered components for stuffing the board, I saw my mistake: we didn't have any surface-mount pin connector sockets in the lab. I could either bend the legs of the through-hole connectors or redesign the board. This was a key lesson: **check component availability and stay flexible during the design process.**
+
+Bending the legs of the through-hole connectors was not ideal: they added extra height, and also undermined the reliability of the connection. I also took TA feedback's into account, I decided to redesign the board as a two-sided PCB with a ground plane on the back, which would also simplify routing.
+
+![Two-sided PCB design](./media/operator-04.webp)
+**Two-sided PCB design**
+
+Thanks to this change, I learned how to fill a ground plane in KiCad and produced my new design.
+
+![Ground plane filling](./media/operator-05.webp)
+**Ground plane filling**
 
 This led to my second mistake, which I thankfully caught before milling. When I switched from surface-mount to through-hole components, I didn't consider the soldering process. I had assumed we would have plated through-holes (PTH), allowing me to solder on either side. Without PTH, I would have to solder components on the opposite side of the board and use vias to connect traces between the front and back. This required another complete redesign to account for these manufacturing constraints. **Lesson learned: think about the manufacturing process during design.**
 
+![Socket solder issue](./media/operator-05-B.webp)
+**You cannot solder under the plastic**
+
 In the final redesign, I added vias, M2 mounting holes, and rounded edges for a more polished board.
+
+![Final two-sided PCB design](./media/operator-07.webp)
+**Final two-sided PCB design**
 
 Milling a two-sided PCB proved to be a challenge. While there is [a clever trick](https://sibusaman.fabcloud.io/doublepcb/) using symmetry to create a fixture for perfect alignment, I opted for a manual calibration method. I milled the first side, measured the machine's offset, and calculated the new origin for the second side.
 
-My first attempt failed because I forgot to mirror the backside image and didn't include the tab offset for both sides, resulting in total misalignment. The second attempt, however, was a success. Here are the calculations I used to align the origins:
+My first attempt failed because I forgot to mirror the backside image and didn't include the tab offset for both sides, resulting in total misalignment.
+
+![Misaligned holes](./media/operator-06.webp)
+**Everything that could have gone wrong did go wrong**
+
+The second attempt, however, was a success. The holes aligned perfectly.
+
+![Good alignment from manually calculating the offset](./media/operator-08.webp)
+**Good alignment from manually calculating the offset**
+
+Here are the calculations I used to align the origins:
 
 ```
 // Backside milled first
@@ -52,9 +97,9 @@ bottom_offset: 5 mm
 entered_left_offset: 3.156 mm = 4.74 - (5.51 - 3.9265)
 ```
 
-The holes aligned perfectly. Soldering this board was much harder than expected. The non-plated through-holes had limited grip on the solder, even with flux. I had to reflow several connections multiple times to ensure a solid connection.
+Soldering this board was much harder than expected. The non-plated through-holes had limited grip on the solder, even with flux. I had to reflow several connections multiple times to ensure a solid connection.
 
-## The Switchboard
+### The Switchboard
 
 For the Switchboard PCB, I made almost all the same mistakes as with the Operator. My original design also assumed plated through-holes. Luckily, the Switchboard is a single-sided board, so I could move all the components to the other side and adjust the circuit without needing vias.
 
@@ -65,7 +110,7 @@ However, I then made two more errors:
 
 I didn't notice the mirroring problem until I had finished soldering all the resistors for the LEDs. At that point, I decided to capitalize on the mistake and use the partially assembled board to test the LED circuit. I placed an LED on the pads without solder and used a multimeter to light it up. It worked!
 
-## Bonus: Laser cutting my own ICS-43434 breakout board
+### Bonus: Laser cutting my own ICS-43434 breakout board
 
 I needed a breakout board for the ICS-43434 microphone, similar to [this one from Adafruit](https://www.digikey.com/en/products/detail/adafruit-industries-llc/6049/25589349). I decided to try fabricating it with a laser cutter.
 
