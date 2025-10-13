@@ -99,6 +99,8 @@ entered_left_offset: 3.156 mm = 4.74 - (5.51 - 3.9265)
 
 Soldering this board was much harder than expected. The non-plated through-holes had limited grip on the solder, even with flux. I had to reflow several connections multiple times to ensure a solid connection.
 
+Checking with the TAs, I received the advice to use high temperature or to preheat the pins longer. They have diagnosed me with a "cold solder joint" issue.
+
 ### The Switchboard
 
 The Switchboard is an array of TRRS jacks, each with an LED to indicate status.
@@ -179,6 +181,14 @@ I tested with a multimeter and confirmed there was no short. But it was unclear 
 **Microphone breakout, soldered**
 
 At this point, I realized that the pinout on my board is not the same as the Adafruit breakout board which my Operator board assumes. The only way for it to be compatible is to use jumper wires to sort out the connections. This was not ideal, but I had no choice now as it was already 3 AM.
+
+Later, I received the advice from TA Quentin that I could use solder paste. The process looks like this:
+
+- Apply solder paste to the pads
+- Heat from above to let solder paste flow into the trace
+- Place the component and heat again from above and let surface tension do the work
+
+This could be something to try for v2.
 
 ### Integration Test
 
