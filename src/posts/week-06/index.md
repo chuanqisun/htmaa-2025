@@ -24,7 +24,7 @@ For my final project, I designed two main components: a hand-held unit I call "t
 
 ### The Operator
 
-The Operator is a dev board for Xiao-ESP32-C3 that connects a Microphone, DAC/Amp, TRRS jack, and a couple of switches. Milling the first version of the Operator board, a single-sided design, was straightforward.
+The Operator is a dev board for the Xiao-ESP32-C3 that connects a Microphone, DAC/Amp, TRRS jack, and a couple of switches. Milling the first version of the Operator board, a single-sided design, was straightforward.
 
 In KiCad, export the PCB design as Gerber files and drill files.
 ![Export Gerber files](./media/operator-01.webp)
@@ -50,7 +50,7 @@ The initial milling produced some burrs, but after a bit of sanding, the results
 
 However, as I gathered components for stuffing the board, I saw my mistake: we didn't have any surface-mount pin connector sockets in the lab. I could either bend the legs of the through-hole connectors or redesign the board. This was a key lesson: **check component availability and stay flexible during the design process.**
 
-Bending the legs of the through-hole connectors was not ideal: they added extra height, and also undermined the reliability of the connection. I also took TA feedback into account, I decided to redesign the board as a two-sided PCB with a ground plane on the back, which would also simplify routing.
+Bending the legs of the through-hole connectors was not ideal: they added extra height and also undermined the reliability of the connection. I also took TA feedback into account and decided to redesign the board as a two-sided PCB with a ground plane on the back, which would also simplify routing.
 
 ![Two-sided PCB design](./media/operator-04.webp)
 **Two-sided PCB design**
@@ -99,7 +99,7 @@ entered_left_offset: 3.156 mm = 4.74 - (5.51 - 3.9265)
 
 Soldering this board was much harder than expected. The non-plated through-holes had limited grip on the solder, even with flux. I had to reflow several connections multiple times to ensure a solid connection.
 
-Checking with the TAs, I received the advice to use high temperature or to preheat the pins longer. They have diagnosed me with a "cold solder joint" issue.
+Checking with the TAs, I received the advice to use a higher temperature or to preheat the pins longer. They diagnosed me with a "cold solder joint" issue.
 
 ### The Switchboard
 
@@ -127,12 +127,12 @@ I didn't notice the mirroring problem until I had finished soldering all the res
 
 I needed a breakout board for the ICS-43434 microphone, similar to [this one from Adafruit](https://www.digikey.com/en/products/detail/adafruit-industries-llc/6049/25589349). I decided to try fabricating it with a laser cutter.
 
-I followed a [YouTube tutorial](https://www.youtube.com/watch?v=8peIFpolsmk) to set up the machine, but his settings UI was different from mine. Instead of speed (mm/s), I had dot duration (microseconds). I proceeded with a test cut with varying duration values. The results were terrible: some parts of the copper were burned away, but the surface wasn't fully removed. The laser seemed to also have reduced power towards the edges of the cutting area.
+I followed a [YouTube tutorial](https://www.youtube.com/watch?v=8peIFpolsmk) to set up the machine, but his settings UI was different from mine. Instead of speed (mm/s), I had dot duration (microseconds). I proceeded with a test cut with varying duration values. The results were terrible: some parts of the copper were burned away, but the surface wasn't fully removed. The laser also seemed to have reduced power towards the edges of the cutting area.
 
 ![Failed laser cutting](./media/audio-01.webp)
 **Failed test**
 
-I soon realized the problem was the image format. Switching to SVG files exposed the correct settings. The `gerber2img` tool didn't export SVGs, and KiCad's native SVG export produced wrong shapes when opened in xTool. I ended up using the [Adobe PNG to Vector converter](https://www.adobe.com/express/feature/image/convert/png-to-svg) and then manually cleaned up the SVG in [Figma](https://www.figma.com/).
+I soon realized the problem was the image format. Switching to SVG files exposed the correct settings. The `gerber2img` tool didn't export SVGs, and KiCad's native SVG export produced the wrong shapes when opened in xTool. I ended up using the [Adobe PNG to Vector converter](https://www.adobe.com/express/feature/image/convert/png-to-svg) and then manually cleaned up the SVG in [Figma](https://www.figma.com/).
 
 I settled on the following workflow:
 
@@ -140,7 +140,7 @@ I settled on the following workflow:
 2.  Use the laser cutter to ablate the copper for the traces, using the holes for alignment.
 3.  Use the mill again to cut the board's outline.
 
-I scaled the SVG to match the measured dimension in KiCad before applying it on top of drill holes.
+I scaled the SVG to match the measured dimension in KiCad before applying it on top of the drill holes.
 ![Alignment](./media/audio-02.webp)
 **Alignment**
 
@@ -149,12 +149,12 @@ The xTool V1 Ultra's camera alignment was slightly off. Even with careful alignm
 ![Misalignment](./media/audio-03.webp)
 **The perfect alignment turned out to be offset by 0.3mm on both axes**
 
-I also dialed the machine settings. It took a total of 20 passes to completely remove the copper.
+I also dialed in the machine settings. It took a total of 20 passes to completely remove the copper.
 
 ![Perfect settings](./media/audio-07.webp)
-**10 passes each, process it twice**
+**10 passes each, processed twice**
 
-After applying a manual offset, my fourth attempt produced a very good result and ready for edge cut. The tolerance for edge cutting is wide. I visually aligned the outline using Carvera's laser scan. It worked perfectly.
+After applying a manual offset, my fourth attempt produced a very good result and was ready for the edge cut. The tolerance for edge cutting is wide. I visually aligned the outline using the Carvera's laser scan. It worked perfectly.
 ![Laser scan for edge cut](./media/audio-04.webp)
 **Laser scan for edge cut**
 
@@ -182,10 +182,10 @@ I tested with a multimeter and confirmed there was no short. But it was unclear 
 
 At this point, I realized that the pinout on my board is not the same as the Adafruit breakout board which my Operator board assumes. The only way for it to be compatible is to use jumper wires to sort out the connections. This was not ideal, but I had no choice now as it was already 3 AM.
 
-Later, I received the advice from TA Quentin that I could use solder paste. The process looks like this:
+Later, I received advice from TA Quentin that I could use solder paste. The process looks like this:
 
 - Apply solder paste to the pads
-- Heat from above to let solder paste flow into the trace
+- Heat from above to let the solder paste flow into the trace
 - Place the component and heat again from above and let surface tension do the work
 
 This could be something to try for v2.
@@ -201,24 +201,24 @@ These were all the components I made this week. From top, clockwise:
 ![Components](./media/test-00.webp)
 **All the components fabricated this week**
 
-Let's assemble and test. Since we planned to have a dedicated I/O and networking weeks, I focused only on basic connectivity.
+Let's assemble and test. Since we plan to have dedicated I/O and networking weeks, I focused only on basic connectivity.
 
 I programmed the Switchboard to supply digital signals to each TRRS socket, and programmed the Operator to read the digital signal and determine which pins have high voltage. To simulate the final project scenario, I used a real TRRS male and female connector pair.
 
 ![Assembly](./media/test-01.webp)
 **Assembly with real TRRS connectors**
 
-I was able to confirm from serial output that all the TRRS sockets are giving out distinct high/low voltage patterns.
+I was able to confirm from the serial output that all the TRRS sockets are giving out distinct high/low voltage patterns.
 
 ![Digital readings](./media/test-02.webp)
 **Digital readings from TRRS sockets**
 
-Key observation:
+Key observations:
 
-- Unplug/replug caused the reading to be high momentarily
+- Unplugging/replugging caused the reading to be high momentarily
 - It took 1-2 seconds for the reading to stabilize after plugging in
 
-I would have to keep this in mind as I design the human interaction experience.
+I will have to keep this in mind as I design the human interaction experience.
 
 ## Key lessons
 
