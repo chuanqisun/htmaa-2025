@@ -225,3 +225,4 @@ This week was a gauntlet of trial and error, but the lessons were invaluable.
 - [Operator PCB design files](./code/operator-20251013.zip)
 - [Switchboard PCB design files](./code/switchboard-20251013.zip)
 - [ICS-43434 breakout board design files](./code/ics-43434-breakout-20251013.zip)
+- [Integration test code](./code/integration-test-20251013.zip)
