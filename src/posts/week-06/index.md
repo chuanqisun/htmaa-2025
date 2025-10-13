@@ -179,3 +179,9 @@ This week was a gauntlet of trial and error, but the lessons were invaluable.
 - **Double-check orientations,** especially when two-sided PCBs are involved. Mirroring is easy to forget and fatal to a design.
 - **Homemade through-holes do not solder as easily as commercial PTH.** If possible, consider using surface-mount components for easier assembly.
 - **Don't rely on intuition.** I found myself inclined to make the same mistake over and over. A checklist or a more rigorous verification process is essential.
+
+## Appendix
+
+- [Operator PCB design files](./code/operator-20251013.zip)
+- [Switchboard PCB design files](./code/switchboard-20251013.zip)
+- [ICS-43434 breakout board design files](./code/ics-43434-breakout-20251013.zip)
