@@ -50,7 +50,7 @@ The initial milling produced some burrs, but after a bit of sanding, the results
 
 However, as I gathered components for stuffing the board, I saw my mistake: we didn't have any surface-mount pin connector sockets in the lab. I could either bend the legs of the through-hole connectors or redesign the board. This was a key lesson: **check component availability and stay flexible during the design process.**
 
-Bending the legs of the through-hole connectors was not ideal: they added extra height, and also undermined the reliability of the connection. I also took TA feedback's into account, I decided to redesign the board as a two-sided PCB with a ground plane on the back, which would also simplify routing.
+Bending the legs of the through-hole connectors was not ideal: they added extra height, and also undermined the reliability of the connection. I also took TA feedback into account, I decided to redesign the board as a two-sided PCB with a ground plane on the back, which would also simplify routing.
 
 ![Two-sided PCB design](./media/operator-04.webp)
 **Two-sided PCB design**
@@ -123,12 +123,12 @@ I didn't notice the mirroring problem until I had finished soldering all the res
 
 I needed a breakout board for the ICS-43434 microphone, similar to [this one from Adafruit](https://www.digikey.com/en/products/detail/adafruit-industries-llc/6049/25589349). I decided to try fabricating it with a laser cutter.
 
-I followed a [YouTube tutorial](https://www.youtube.com/watch?v=8peIFpolsmk) to set up the machine, but his settings UI was differeht from mine. Instead of speed (mm/s), I had dot duration (microseconds). I proceeded with a test cut with varying duration values. The results were terrible: some parts of the copper were burned away, but the surface wasn't fully removed. The laser seemed to also have reduced power towards the edges of the cutting area.
+I followed a [YouTube tutorial](https://www.youtube.com/watch?v=8peIFpolsmk) to set up the machine, but his settings UI was different from mine. Instead of speed (mm/s), I had dot duration (microseconds). I proceeded with a test cut with varying duration values. The results were terrible: some parts of the copper were burned away, but the surface wasn't fully removed. The laser seemed to also have reduced power towards the edges of the cutting area.
 
 ![Failed laser cutting](./media/audio-01.webp)
 **Failed test**
 
-I soon realized the problem was the image format. Switching to SVG files exposed the correct settings. The `gerber2img` tool doesn't export SVGs, and KiCad's native SVG export but it produced wrong shapes when opened in xTool. I ended up using the [Adobe PNG to Vector converter](https://www.adobe.com/express/feature/image/convert/png-to-svg) and then manually cleaning up the SVG in [Figma](https://www.figma.com/)
+I soon realized the problem was the image format. Switching to SVG files exposed the correct settings. The `gerber2img` tool doesn't export SVGs, and KiCad's native SVG export but it produced wrong shapes when opened in xTool. I ended up using the [Adobe PNG to Vector converter](https://www.adobe.com/express/feature/image/convert/png-to-svg) and then manually cleaned up the SVG in [Figma](https://www.figma.com/).
 
 I settled on the following workflow:
 
@@ -145,7 +145,7 @@ The xTool V1 Ultra's camera alignment was slightly off. Even with careful alignm
 ![Misalignment](./media/audio-03.webp)
 **The perfect alignment turned out to be offset by 0.3mm on both axes**
 
-I also dialed the machine settings. It took two a total of 20 passes to completely remove the copper.
+I also dialed the machine settings. It took a total of 20 passes to completely remove the copper.
 
 ![Perfect settings](./media/audio-07.webp)
 **10 passes each, process it twice**
@@ -175,5 +175,5 @@ This week was a gauntlet of trial and error, but the lessons were invaluable.
 - **Check component availability before designing.** A simple stock check can save a complete redesign.
 - **Think about the manufacturing process during design.** Constraints like non-plated through-holes fundamentally change how a board must be laid out.
 - **Double-check orientations,** especially when two-sided PCBs are involved. Mirroring is easy to forget and fatal to a design.
-- **Home-made through-holes do not solder as easily as commercial PTH.** If possible, consider using surface-mount components for easier assembly.
+- **Homemade through-holes do not solder as easily as commercial PTH.** If possible, consider using surface-mount components for easier assembly.
 - **Don't rely on intuition.** I found myself inclined to make the same mistake over and over. A checklist or a more rigorous verification process is essential.
