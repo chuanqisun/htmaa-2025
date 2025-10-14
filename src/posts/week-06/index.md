@@ -218,7 +218,7 @@ Key observations:
 - Unplugging/replugging caused the reading to be high momentarily
 - It took 1-2 seconds for the reading to stabilize after plugging in
 
-I will have to keep this in mind as I design the human interaction experience.
+I switched the digital pins to use `PULL_UP` mode, and the floating HIGH issue disappeared. I also realized that I need to reserve the `LOW LOW LOW` reading for unplugged state, therefore, I only have 7 distinct states for 8 TRRS sockets.
 
 ## Key lessons
 
