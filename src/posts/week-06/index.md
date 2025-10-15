@@ -229,6 +229,7 @@ I switched the digital pins to use `PULL_UP` mode, and the floating HIGH issue d
 
 This week was a gauntlet of trial and error, but the lessons were invaluable.
 
+- **Heeding the instructions in class.** could have prevented the burning of the ICS-43434 breakout board.
 - **Check component availability before designing.** A simple stock check can save a complete redesign.
 - **Think about the manufacturing process during design.** Constraints like non-plated through-holes fundamentally change how a board must be laid out.
 - **Double-check orientations,** especially when two-sided PCBs are involved. Mirroring is easy to forget and fatal to a design.
