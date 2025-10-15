@@ -144,6 +144,11 @@ I scaled the SVG to match the measured dimension in KiCad before applying it on 
 ![Alignment](./media/audio-02.webp)
 **Alignment**
 
+I first made the mistake that the image was outdated after I moved the stock. This caused the laser to engrave on the bed.
+
+![Engraving on the bed](./media/mistake-01.webp)
+**Engraving on the bed**
+
 The xTool V1 Ultra's camera alignment was slightly off. Even with careful alignment in the software, the first few results were shifted.
 
 ![Misalignment](./media/audio-03.webp)
@@ -170,7 +175,7 @@ Soldering the ICS-43434 was nightmarish. The component has tiny pads on its unde
 ![How to solder this?](./media/audio-05.webp)
 **How to solder this?**
 
-I used a heat gun, hoping surface tension would do the work, but the heat began to damage the microphone's plastic casing. An attempt to heat the board from the bottom burned the PCB before the solder melted. After many tries, I managed to get it positioned with no shorts between the pads, but I have yet to test if the microphone actually works.
+I used a heat gun, hoping surface tension would do the work, but the heat began to damage the microphone's plastic casing. An attempt to heat the board from the bottom nearly burned the PCB before the solder melted. There was a warning during the lecture that FR1 was a poor heat conductor so I should have avoided this in the first place. After many tries, I managed to get it positioned with no shorts between the pads, but I have yet to test if the microphone actually works.
 
 ![Damaged PCB](./media/audio-09.webp)
 **Heating up the PCB from the bottom resulted in damage**
