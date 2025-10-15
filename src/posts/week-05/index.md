@@ -37,7 +37,7 @@ I also wanted to simulate the main body device. It has two roles: lighting up an
 
 ## Designing the Operator
 
-To prepare KiCad with the symbols, footprints, and 3D models, I followed the [documentation](https://gitlab.fabcloud.org/pub/libraries/electronics/kicad) to install our course library.
+To prepare KiCad with the symbols, footprints, and 3D models, I followed the [documentation](https://gitlab.fabcloud.org/pub/libraries/electronics/kicad) to install our course library. In addition, depending on the installation method, you may need to manually add additional libraries from the [official repo](https://www.kicad.org/libraries/download/). When installing with Flatpak, the official 3D models were already included.
 
 I wanted to start the PCB design towards my final project, using KiCad. The schematic design is very simple: layout the Xiao-ESP32-C3, I2S Microphone, I2S DAC/Amp, a TRRS jack, and a couple of switches.
 
