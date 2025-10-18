@@ -25,11 +25,32 @@ keywords: ["cnc", "wood", "large-format"]
   - The goal is to cut the smallest radius that satisfies two constraints:
     - Tolerant to the mill bit diameter
     - Creates perfectly mating interfaces
-- During the cutting the machine didn't cut through the z-axis. I compared my parameter with others: I used 11.5mm as the stock height, while others used 12mm.
-  - First pass: 0 to -0.2 inch
-  - Second and third pass: -0.2 to -0.45 inch, with 0.2 step down, using the multi-pass feature
-  - Added pass: -0.45 to -0.56 inch
+- All cuts are 2D Contour.
+- During the cutting the machine didn't cut through the z-axis.
+- According to my measurement, Cut 2 should have cut through the material but it didn't
 - I added one additional pass to fully cut through the material.
+- I compared my parameter with others: I used 11.5mm as the stock height, while others used 12mm. I believe this is why the machine didn't cut through the material.
+
+| Parameter                 | Cut 1          | Cut 2          | Cut 3          |
+| ------------------------- | -------------- | -------------- | -------------- |
+| **Clearance Height**      |                |                |                |
+| From                      | Retract height | Retract height | Retract height |
+| Offset                    | 0.4 in         | 0.4 in         | 0.4 in         |
+| **Retract Height**        |                |                |                |
+| From                      | Stock top      | Stock top      | Stock top      |
+| Offset                    | 0.2 in         | 0.2 in         | 0.2 in         |
+| **Feed Height**           |                |                |                |
+| From                      | Top height     | Top height     | Top height     |
+| Offset                    | 0.2 in         | 0.2 in         | 0.2 in         |
+| **Top Height**            |                |                |                |
+| From                      | Stock top      | Stock top      | Stock top      |
+| Offset                    | 0 in           | -0.2 in        | -0.45 in       |
+| **Bottom Height**         |                |                |                |
+| From                      | Stock top      | Stock top      | Stock top      |
+| Offset                    | -0.2 in        | -0.45 in       | -0.56 in       |
+| **Multiple Depths**       |                |                |                |
+| Enabled                   | No             | **Yes**        | No             |
+| Maximum Roughing Stepdown | N/A            | **0.2 in**     | N/A            |
 
 ## Assemble and Enhance
 
