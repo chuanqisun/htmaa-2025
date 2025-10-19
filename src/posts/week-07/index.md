@@ -153,6 +153,10 @@ I learned how to use the band saw by observing and asking a classmate. Special s
 ![Cutting reinforcements](./media/enhancing-01.webp)
 **Cutting Reinforcements with Band Saw**
 
+I used a [Milwaukee Straight Die Grinder](https://www.milwaukeetool.com/products/2486-20) to smooth the corners that the band saw left rough.
+
+![Sanding](./media/enhancing-02.webp)
+
 One of the reinforcements was a bit loose, a result of a slight error in my design. This taught me that it's better to design for a tight fit and then iteratively sand or file it down until it fits perfectly. Adding the spacers and reinforcements significantly improved the structure's rigidity.
 
 ![Final Assembly](./media/enhancing-03.webp)
@@ -165,7 +169,7 @@ For the safety tether, I tied a rope using a flexible knot, anchored by a washer
 
 ## Testing
 
-With the machine fully assembled, it was time to test.
+With the machine fully assembled, it was time to test. Thank you [Quincy](https://www.quincykuang.com/) and [Yuhan](https://yuhanwang.net/) for photography, video, and physical support.
 
 - **Preparation:** Helmet and gloves on. Removing seat post for extra clearance.
 
@@ -174,7 +178,7 @@ With the machine fully assembled, it was time to test.
 ![Demo 1](./media/demo-01.webp)
 **Functional Test**
 
-- **Limit Test:** I had a friend support me while I rotated as far back as possible to test the strength of the rope tether.
+- **Limit Test:** I asked my friend to support me while I rotated as far back as possible to test the strength of the rope tether.
 
 ![Demo 2](./media/demo-02.webp)
 **Limit Test**
@@ -182,6 +186,7 @@ With the machine fully assembled, it was time to test.
 - **Full Test:** Finally, I attempted to bring the bike up from the ground into a manual without any assistance. I noticed that the device is jerking forward each time I brought the bike up. Future improvements should include rubber feet to increase friction with the ground.
 
 <video src="./media/demo-03.mp4" controls></video>
+**Final Test**
 
 The machine was a big success, but my demo needs practice. I promptly landed on my butt, learning the lesson the "hard way". Sometimes, the tools you create can be more dangerous than the tools that created them.
 
