@@ -184,11 +184,11 @@ keywords: ["cnc", "wood", "large-format"]
 
 - Finally, full test. Bring the bike up from ground.
 
-![Demo 3](./media/demo-03.webp)
+![Demo 3](./media/demo-03.mp4)
 
-- I landed on my butt during landing, and learned the lesson the "hard way" - knowledge can be dangerous.
+- The machine was a big success but my demo needs practice. I landed on my butt, and learned the lesson the "hard way" - knowledge can be dangerous.
 
-## Appendex
+## Appendix
 
 - Paper prototype files
 - Full scale CAD files
