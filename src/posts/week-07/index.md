@@ -1,5 +1,5 @@
 ---
-title: "Week 7: A Dangerous Machine"
+title: "Week 7: A Very Dangerous Machine"
 date: 2025-10-18
 keywords: ["cnc", "wood", "large-format"]
 ---
@@ -72,7 +72,7 @@ Due to limited machine time, I went with the practical decision of simply increa
 
 Thanks to Parametric Design, I could iterate quickly. This resulted in a 9 mm circle at each right corner angle of my shapes. This approach is less efficient and slightly undermines structure.
 
-![Verifying Dogbone ToolPath](./media/dogbone-v6.mp4)
+<video src="./media/dogbone-v6.mp4" controls muted></video>
 **Verifying Toolpath After Dogbone Fix**
 
 With the dogbones issue addressed, I generated the toolpaths using 2D Contour cuts:
@@ -161,11 +161,13 @@ One of the reinforcements was a bit loose, a result of a slight error in my desi
 For the safety tether, I tied a rope using a flexible knot, anchored by a washer. The rope was from an unknown source and seemed weak. A proper design would use rated cargo [tie-down straps](https://en.wikipedia.org/wiki/Tie_down_strap) with a secure buckle mechanism.
 
 ![Rope Anchor](./media/enhancing-04.webp)
-**Rope Anchor**
+**Rope Anchor, with Fraying Core**
 
 ## Testing
 
 With the machine fully assembled, it was time to test.
+
+- **Preparation:** Helmet and gloves on. Removing seat post for extra clearance.
 
 - **Static Test:** I started by placing one foot on the ground, rotating the bike backward, holding the brake, and mounting. The structure felt solid.
 
@@ -177,11 +179,11 @@ With the machine fully assembled, it was time to test.
 ![Demo 2](./media/demo-02.webp)
 **Limit Test**
 
-- **Full Test:** Finally, I attempted to bring the bike up from the ground into a manual without any assistance.
+- **Full Test:** Finally, I attempted to bring the bike up from the ground into a manual without any assistance. I noticed that the device is jerking forward each time I brought the bike up. Future improvements should include rubber feet to increase friction with the ground.
 
-![Demo 3](./media/demo-03.mp4)
+<video src="./media/demo-03.mp4" controls></video>
 
-The machine was a big success, but my demo needs practice. I promptly landed on my butt, learning the lesson the "hard way" that sometimes, knowledge can be dangerous.
+The machine was a big success, but my demo needs practice. I promptly landed on my butt, learning the lesson the "hard way". Sometimes, the tools you create can be more dangerous than the tools that created them.
 
 ## Appendix
 
