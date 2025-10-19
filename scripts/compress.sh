@@ -10,5 +10,8 @@ ffmpeg -i input.mov -c:v libx264 -preset medium -crf 23 -vf "scale=720:-1,setpts
 # mov to mp4, original speed, 720p
 ffmpeg -i input.mov -c:v libx264 -preset medium -crf 23 -vf "scale=-1:720" -movflags +faststart output_720p.mp4
 
+# mov to mp4, original seepd, 720p silent
+ffmpeg -i input.mov -c:v libx264 -preset medium -crf 23 -vf "scale=-1:720" -an -movflags +faststart output_720p.mp4
+
 # mov to mp4, original speed, 720p (portrait)
 ffmpeg -i input.mov -c:v libx264 -preset medium -crf 23 -vf "scale=720:-1" -movflags +faststart output_720p_portrait.mp4
