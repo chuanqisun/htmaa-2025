@@ -39,7 +39,7 @@ I iterated on the fastening mechanism to improve stability. In the final version
 ![Paper Prototype 2](./media/paper-02b.webp)
 **Final Paper Prototype**
 
-## Make The Big One
+## Scale Up
 
 When I started the paper prototype, I didn't know what material we would be using for the final build. I had assumed 2x4 lumber, but later found out we would be using 4x8 ft sheets of Oriented Strand Board (OSB). This change in material forced me to rethink the design to work with sheet stock.
 
