@@ -187,5 +187,6 @@ The machine was a big success, but my demo needs practice. I promptly landed on 
 
 ## Appendix
 
-- Paper prototype files
-- Full scale CAD files
+- [Paper prototype model](./model/manual-machine-mini-laser-cut.dxf)
+- [Full scale CNC model](./model/manual-machine-full-size.step)
+- [CNC Job code](./code/shopbot-job-code.sbp)
