@@ -155,7 +155,8 @@ I learned how to use the band saw by observing and asking a classmate. Special s
 
 I used a [Milwaukee Straight Die Grinder](https://www.milwaukeetool.com/products/2486-20) to smooth the corners that the band saw left rough.
 
-![Sanding](./media/enhancing-02.webp)
+![Detailing](./media/enhancing-02.webp)
+**Detailing with Die Grinder**
 
 One of the reinforcements was a bit loose, a result of a slight error in my design. This taught me that it's better to design for a tight fit and then iteratively sand or file it down until it fits perfectly. Adding the spacers and reinforcements significantly improved the structure's rigidity.
 
