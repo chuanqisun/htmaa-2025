@@ -8,7 +8,7 @@ This week's schedule was a bit special. Due to limited machine time for the larg
 
 ## Project Context
 
-I've been racing mountain bikes since 2015, but I've never quite mastered the technique of manualing. Manualing is the skill of lifting the front wheel off the ground and balancing on the rear wheel while riding, which is crucial for clearing obstacles on the trail as well as for the occasional showoff. A great reference video is [How To Manual Like A Pro – MTB Skills](https://www.youtube.com/watch?v=NkWnV4RDzkU). To help riders learn this skill in a controlled environment, people have created "[Manual Machines](https://www.google.com/search?udm=2&q=manual+machine+for+bikes)". I decided to build my own using the skills from this week.
+I've been racing mountain bikes since 2015, but I've never quite mastered the technique of manualing. Manualing is the skill of lifting the front wheel off the ground and balancing on the rear wheel while riding, which is crucial for clearing obstacles on the trail as well as for the occasional show-off. A great reference video is [How To Manual Like A Pro – MTB Skills](https://www.youtube.com/watch?v=NkWnV4RDzkU). To help riders learn this skill in a controlled environment, people have created "[Manual Machines](https://www.google.com/search?udm=2&q=manual+machine+for+bikes)". I decided to build my own using the skills from this week.
 
 ## Gathering Data
 
@@ -26,7 +26,7 @@ I started with a quick hand sketch to get a feel for the form and how the 3D par
 
 With the practice from [Week 2](../week-02/index.md), I was shocked at how quickly I could move from a sketch to a physical prototype. I used the laser cutter to make a small-scale model. After a quick test, I found that 85% power at 70 mm/s speed with a 0.12 mm kerf worked well for the cardboard.
 
-![Charcterize and cut](./media/paper-01c.webp)
+![Characterize and cut](./media/paper-01c.webp)
 **Characterize and Cut**
 
 The initial assembly felt wobbly. I realized I could tilt the joints, using gravity to create more stable connections. This small-scale model was invaluable for identifying weak points in the design.
@@ -48,7 +48,7 @@ I scaled up the model in Onshape, using a picture of my bike as an underlay to t
 ![Designing the full scale model](./media/full-scale-cad.webp)
 **Designing the Full Scale Model**
 
-Special thanks to Dan, who helped me set up the machine and run the job. I did all my CAD work in Onshape, which unfortunately does not have a free CAM solution for students. Dan generously let me use his Fusion360 license to generate the toolpaths.
+Special thanks to Dan, who helped me set up the machine and run the job. I did all my CAD work in Onshape, which unfortunately does not have a free CAM solution for students. Dan generously let me use his Fusion 360 license to generate the toolpaths.
 
 During the first CAM simulation, I realized I had misunderstood how dogbones work. I had placed the center of the dogbone circle at the corner of the part, creating a bottleneck that the drill bit couldn't navigate.
 
@@ -65,12 +65,12 @@ The correct placement of the dogbone is to make the corner coincide with the cir
 ![Dogbone Corrected](./media/dogbone-v3.webp)
 **Dogbone Corrected**
 
-Due to limited machine time, I went with the practical decision of simply increasing my circle's radius until the bottleneck is wide enough.
+Due to limited machine time, I went with the practical decision of simply increasing my circle's radius until the bottleneck was wide enough.
 
 ![Dogbone parameter](./media/dogbone-v5.webp)
-**Parameteric Design Saved my Day**
+**Parametric Design Saved My Day**
 
-Thanks to Parametric Design, I could iterate quickly. This resulted in a 9 mm circle at each right corner angle of my shapes. This approach is less efficient and slightly undermines structure.
+Thanks to Parametric Design, I could iterate quickly. This resulted in a 9 mm circle at each right corner angle of my shapes. This approach is less efficient and slightly undermines the structure.
 
 <video src="./media/dogbone-v6.mp4" controls muted></video>
 **Verifying Toolpath After Dogbone Fix**
@@ -148,7 +148,7 @@ Due to limited machine time, I designed reinforcements that I could cut manually
 ![Handle calculating the redesign](./media/testing-03.webp)
 **Handle Calculating the Redesign**
 
-I learned how to use the band saw by observing and asking a classmate. Special shout out to [Charlie](https://fab.cba.mit.edu/classes/863.25/people/CharlesLu/) who happened to be using the band saw in the shop and generously demoed his technique to me. The key is to cut from the side with loose wood chips, so the saw's downward motion holds the OSB against the table and minimizes splintering.
+I learned how to use the band saw by observing and asking a classmate. Special shout-out to [Charlie](https://fab.cba.mit.edu/classes/863.25/people/CharlesLu/) who happened to be using the band saw in the shop and generously demoed his technique to me. The key is to cut from the side with loose wood chips, so the saw's downward motion holds the OSB against the table and minimizes splintering.
 
 ![Cutting reinforcements](./media/enhancing-01.webp)
 **Cutting Reinforcements with Band Saw**
@@ -184,7 +184,7 @@ With the machine fully assembled, it was time to test. Thank you [Quincy](https:
 ![Demo 2](./media/demo-02.webp)
 **Limit Test**
 
-- **Full Test:** Finally, I attempted to bring the bike up from the ground into a manual without any assistance. I noticed that the device is jerking forward each time I brought the bike up. Future improvements should include rubber feet to increase friction with the ground.
+- **Full Test:** Finally, I attempted to bring the bike up from the ground into a manual without any assistance. I noticed that the device was jerking forward each time I brought the bike up. Future improvements should include rubber feet to increase friction with the ground.
 
 <video src="./media/demo-03.mp4" controls></video>
 **Final Test**
