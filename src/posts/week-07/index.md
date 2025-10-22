@@ -191,6 +191,16 @@ With the machine fully assembled, it was time to test. Thank you [Quincy](https:
 
 The machine was a big success, but my demo needs practice. I promptly landed on my butt, learning the lesson the "hard way". Sometimes, the tools you create can be more dangerous than the tools that created them.
 
+## Key Learnings
+
+- **Parametric Design for Joints:** Separate the parameters for material thickness and slot size. Use the thickest measurement for material thickness, but make slots slightly smaller for a tight press-fit. This accounts for material variance and ensures snug joints.
+
+- **Measure Physical Objects, Not Images:** To avoid dimensional errors, always measure the actual object rather than relying on images or specifications. My tire diameter miscalculation could have been avoided with direct measurement.
+
+- **Survey Available Materials First:** Before finalizing a design, survey what materials are actually available. My assumption of 2x4 lumber led to a redesign when OSB sheets were the actual material.
+
+- **Stay Cautious During Testing:** Even when things work well, maintain caution during physical testing. It's easy to get over-excited and take unnecessary risks—I learned this the hard way with my landing.
+
 ## Appendix
 
 - [Paper prototype model](./model/manual-machine-mini-laser-cut.dxf)
