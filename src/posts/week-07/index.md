@@ -193,13 +193,13 @@ The machine was a big success, but my demo needs practice. I promptly landed on 
 
 ## Key Learnings
 
-- **Parametric Design for Joints:** Separate the parameters for material thickness and slot size. Use the thickest measurement for material thickness, but make slots slightly smaller for a tight press-fit. This accounts for material variance and ensures snug joints.
+- **Parametric Design for Joints:** Separate parameters for material thickness and slot size. Use the thickest measurement for material, but make slots slightly smaller for press-fit joints.
 
-- **Measure Physical Objects, Not Images:** To avoid dimensional errors, always measure the actual object rather than relying on images or specifications. My tire diameter miscalculation could have been avoided with direct measurement.
+- **Measure Physical Objects:** Always measure the actual object directly rather than relying on images or specifications to avoid dimensional errors.
 
-- **Survey Available Materials First:** Before finalizing a design, survey what materials are actually available. My assumption of 2x4 lumber led to a redesign when OSB sheets were the actual material.
+- **Understand Materials Before Design:** Survey available materials before starting your design to avoid unnecessary redesigns.
 
-- **Stay Cautious During Testing:** Even when things work well, maintain caution during physical testing. It's easy to get over-excited and take unnecessary risks—I learned this the hard way with my landing.
+- **Stay Cautious During Testing:** Maintain caution during physical testing, even when things work well. Don't let excitement lead to unnecessary risks.
 
 ## Appendix
 
