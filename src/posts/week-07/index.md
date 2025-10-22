@@ -201,6 +201,8 @@ The machine was a big success, but my demo needs practice. I promptly landed on 
 
 - **Stay Cautious During Testing:** Maintain caution during physical testing, even when things work well. Don't let excitement lead to unnecessary risks.
 
+- **Use Integrated CAD/CAM Software:** Using separate software for CAD (Onshape) and CAM (Fusion 360) added significant overhead in exporting and importing files. An integrated solution would streamline the workflow and reduce potential errors in translation.
+
 ## Appendix
 
 - [Paper prototype model](./model/manual-machine-mini-laser-cut.dxf)
