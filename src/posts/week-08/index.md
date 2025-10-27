@@ -6,13 +6,11 @@ keywords: ["input", "microphone", "micro-controller"]
 
 ## Group Assignment
 
-- Joined with [Typer](https://fab.cba.mit.edu/classes/863.25/people/TylerJensenHill/) and [Jacqueline](https://fab.cba.mit.edu/classes/863.25/people/JacquelineOrr/), to probe the photo transistor.
-- Key finding is that the resting resistance is quite high, and covering the sensor with hand has only a modest effect.
-- Shining a flashlight on the sensor causes a significant drop in resistance, confirming its sensitivity to light.
-- To get more hands on experience, I probed the microphone breakout board.
-- Wiring up the probes is tricky due to small soldering joints
-- I couldn't find a clock signal generator in the lab, so I programmed the Xiao to initialize the I2S device
-- This is the minimum code to drive the I2S device:
+I joined [Typer](https://fab.cba.mit.edu/classes/863.25/people/TylerJensenHill/) and [Jacqueline](https://fab.cba.mit.edu/classes/863.25/people/JacquelineOrr/) to characterize input devices in our lab. We started by probing a photo transistor to understand its behavior. Our key finding was that the resting resistance is quite high, and covering the sensor with a hand has only a modest effect. However, shining a flashlight on the sensor causes a significant drop in resistance, confirming its sensitivity to light.
+
+To gain more hands-on experience, I decided to probe the microphone breakout board I fabricated in [Week 6](../week-06/). Wiring up the probes proved tricky due to the small soldering joints on the board. I couldn't find a clock signal generator in the lab, so I programmed the Xiao to initialize the I2S device and generate the necessary clock signals for testing.
+
+This is the minimum code to drive the I2S device:
 
 ```cpp
 // Simple I2S microphone CSV output
@@ -46,18 +44,15 @@ void loop() {
 }
 ```
 
-- Confirmed from serial plotter that the device was outputting data
-- The software supports I2S/PCM protocol, but the decoding was not very useful
+I confirmed from the serial plotter that the device was outputting data. The software supports both I2S and PCM protocols, but the decoding was not very useful for analysis purposes.
 
 ## Making a Wireless Microphone
 
-- Speech recognition is a key component of my final project. I need to leverage this topic's input device topic to deep dive into the making of a wireless microphone.
+Speech recognition is a key component of my final project. I leveraged this week's input device topic to deep dive into the making of a wireless microphone, exploring different network protocols and integration approaches.
 
 ### Networking Test with Sine Wave
 
-- I started with Phil Schatzmann's examples in the Arduino Audio Tools library.
-- First, I want to stream a basic sine wave over wifi. I took Phil's sample code as is, and confirmed that the sound working over wifi.
-- I found that the antenna seems necessary for a stable connection. I had success in previous tests without using antenna, but for some reason, antenna became necessary in this setup.
+I started with Phil Schatzmann's examples in the [Arduino Audio Tools library](https://github.com/pschatzmann/arduino-audio-tools). My first goal was to stream a basic sine wave over WiFi. I took Phil's sample code as is and confirmed that sound was working over WiFi. During testing, I found that the antenna seems necessary for a stable connection. I had success in previous tests without using an antenna, but for some reason, the antenna became necessary in this setup.
 
 ```cpp
 /**
@@ -116,8 +111,7 @@ void loop() {
 
 ### HTTP Streaming
 
-- In this setup, the Micro-controller works as the server, exposing a WAV stream
-- Computer works as the client, receiving and playing the WAV stream
+In this setup, the microcontroller works as the server, exposing a WAV stream. My computer works as the client, receiving and playing the WAV stream. I connected the I2S microphone to the ESP32 and configured it to stream audio data over HTTP.
 
 ```cpp
 #include "AudioTools.h"
@@ -184,15 +178,11 @@ void loop() {
 }
 ```
 
-Observation:
+After testing this approach, I observed several issues. The latency was inconsistent, ranging from 1 second to 5 seconds. The sound quality was also inconsistent, sometimes good, sometimes poor. My suspicion is that the network condition affected the streaming performance.
 
-- The latency is inconsistent, from 1 second to 5 seconds
-- The sound quality is also inconsistent, sometimes good, sometimes poor
-- My suspicion is that the network condition affected the streaming performance
+## Exploring MP3 Encoding
 
-## MP3 encoder
-
-- I want to test MP3 encoding so as to reduce the bandwidth usage and potentially improve robustness against network issues
+I wanted to test MP3 encoding to reduce bandwidth usage and potentially improve robustness against network issues. The theory was that compressed audio would be more resilient to network fluctuations.
 
 ```cpp
 #include "AudioTools.h"
@@ -261,22 +251,18 @@ void loop() {
 }
 ```
 
-Running it caused this memory allocation error:
+Running this code caused a memory allocation error:
 
 ```txt
 [Error] lame.c : 2792 - calloc(1,85840) -> 0x0
 available MALLOC_CAP_8BIT: 114676 / MALLOC_CAP_32BIT: 114676  / MALLOC_CAP_SPIRAM: 0
 ```
 
-It turns out MP3 encoding is quite memory intensive. While it may reduce network bandwidth usage, it does not fit the memory constraints of the ESP32.
+It turns out MP3 encoding is quite memory intensive. While it may reduce network bandwidth usage, it does not fit the memory constraints of the ESP32-C3. This was a dead end for optimization.
 
-## UDP Streaming Test with Sine Wave
+## UDP Streaming Experiment
 
-- If I can't address the audio codec, can I tackle the network issue itself?
-- Knowing the HTTP protocol has built-in error correction and guarantees delivery, relying on two-way communication, it may introduce significant overhead.
-- UDP is a connectionless protocol that does not guarantee delivery, but it has lower latency and overhead.
-- I don't worry about occasional packet loss in audio streaming, as it often goes unnoticed.
-- Let's go back to basics, can I stream a sine wave over UDP?
+If I couldn't address the audio codec limitation, could I tackle the network issue itself? I knew that the HTTP protocol has built-in error correction and guarantees delivery through two-way communication, which may introduce significant overhead. UDP is a connectionless protocol that does not guarantee delivery, but it has lower latency and overhead. I don't worry about occasional packet loss in audio streaming, as it often goes unnoticed by the human ear. I decided to go back to basics and test whether I could stream a sine wave over UDP.
 
 ```cpp
 
@@ -325,8 +311,7 @@ void loop() {
 }
 ```
 
-- The challenge with UDP is that it cannot be directly played in browser like HTTP streams.
-- I need to implement a simple UDP client. I worked with javascript a lot, so I will go with Node.js:
+The challenge with UDP is that it cannot be directly played in a browser like HTTP streams. I needed to implement a simple UDP client. Having worked with JavaScript extensively, I chose to use Node.js for the client implementation. This program receives audio data over UDP and pipes it directly into FFmpeg for playback.
 
 ```js
 const dgram = require("dgram");
@@ -468,13 +453,11 @@ process.on("SIGINT", () => {
 });
 ```
 
-- This program receives audio data over UDP, and pipes it directly into FFmpeg.
-- I confirmed the sine wave working
+I confirmed the sine wave was working with this setup. The UDP approach showed promise for reducing latency.
 
 ## UDP Microphone Streaming
 
-- Next I modified the UDP server to stream i2s data into UDP
-- UDP does not have flow control. The throttle pattern is recommended in the [AudioTools example](https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-communication/udp/communication-udp-send/communication-udp-send.ino)
+Next, I modified the microcontroller code to stream I2S data over UDP instead of generating a sine wave. UDP does not have flow control, so I needed to implement the throttle pattern recommended in the [AudioTools example](https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-communication/udp/communication-udp-send/communication-udp-send.ino) to prevent overwhelming the network.
 
 ```cpp
 #include "AudioTools.h"
@@ -553,17 +536,13 @@ void loop() {
 
 ```
 
-- The Node.js side is unchanged. It will play the audio stream as before. This allowed me to evaluate the latency and compare it with the HTTP protocol version
-- I was able to achieve much more consistent latency with 1-2 seconds delay
-- On special occasions, I was able to achieve near real-time performance, but it's unclear how to reproduce it. I suspect it still depends on network condition.
+The Node.js client remained unchanged from the sine wave test, which allowed me to evaluate the latency and compare it with the HTTP protocol version. I was able to achieve much more consistent latency with 1-2 seconds delay. On special occasions, I achieved near real-time performance, but it was unclear how to reproduce it consistently. I suspect it still depends on network conditions.
 
-## UDP packets streaming into Open AI transcription
+## Integrating OpenAI Transcription
 
-- Next, I modified the Node.js code to transcribe the audio input.
-- ffmpeg playback is for debugging only. It also provides an audible reference on where the latency is: is it before or during the transcription?
-- The key design is to use a multi-part form data so as to stream audio chunks as soon as they are available.
-- We don't have a way to delimit the audio stream. I used an arbitrary 5 seconds interval to send chunks.
-- I verified that open ai is able to respond with the transcribed text.
+Next, I modified the Node.js code to transcribe the audio input using OpenAI's Whisper API. The FFmpeg playback was kept for debugging purposes and also provided an audible reference on where the latency occurs—whether it's before or during the transcription.
+
+The key design decision was to use multi-part form data to stream audio chunks as soon as they are available. Since we don't have a way to delimit the audio stream automatically, I used an arbitrary 5-second interval to send chunks. I verified that OpenAI was able to respond with the transcribed text.
 
 ```js
 const dgram = require("dgram");
@@ -818,12 +797,9 @@ process.on("SIGINT", () => {
 });
 ```
 
-## Streaming transcription with user controlled "end of speech" delimiter
+## User-Controlled Speech Detection
 
-- The 5 seconds interval auto send is a temporary solution to test transcription.
-- I will use the one of the buttons on my Operator Board to signal the beginning and ending of speech.
-- When button is pressed: start recording audio.
-- When button is released: stop recording and send the audio for transcription.
+The 5-second interval auto-send was a temporary solution for testing transcription. For a more practical implementation, I used one of the buttons on my Operator Board to signal the beginning and ending of speech. When the button is pressed, the microcontroller starts recording audio. When the button is released, it stops recording and sends the audio for transcription. This push-to-talk approach is similar to how walkie-talkies work.
 
 ```cpp
 
@@ -952,10 +928,7 @@ void loop() {
 }
 ```
 
-- On the Node.js side, we can use the sustained silence period to stop accumulating speech and sending the data to OpenAI for transcription
-- start with silent state
-- On receiving audio packets, transition to speaking state, stream audio to OpenAI
-- On silence, transition to silent state and wrap up streaming
+On the Node.js side, I implemented a state machine to handle the audio stream more intelligently. The system starts in a silent state. Upon receiving audio packets, it transitions to a speaking state and begins streaming audio to OpenAI. After detecting sustained silence, it transitions back to the silent state and wraps up the transcription request.
 
 ```js
 const dgram = require("dgram");
@@ -1265,31 +1238,32 @@ process.on("SIGINT", () => {
 });
 ```
 
-## Realtime Voice Response
+## Real-Time Voice Response
 
-- In this final version, I jumped ahead a bit and implement the response synthesis. Instead of going through transcription, we directly prompt the model with the audio stream and manually trigger response on silence. The playback is on the computer and will be streamed to the micro-controller in next week's Output device assignment
+In this final version, I jumped ahead slightly and implemented response synthesis. Instead of going through transcription separately, I directly prompt the model with the audio stream and manually trigger a response upon detecting silence. The playback currently happens on the computer and will be streamed to the microcontroller in next week's Output Device assignment.
 
-- Minor change on the micro-controller side. We need to sample at 24kHz per OpenAI's [documentation](https://platform.openai.com/docs/guides/realtime-transcription#session-fields)
+The microcontroller side required a minor change. According to OpenAI's [documentation](https://platform.openai.com/docs/guides/realtime-transcription#session-fields), the Realtime API requires 24kHz sampling rate.
 
 ```diff
 - AudioInfo info(22000, 1, 16);  // 22kHz, mono, 16-bit
 + AudioInfo info(24000, 1, 16);  // 24kHz, mono, 16-bit
 ```
 
-- The node.js server code requires an overhaul
-- Before:
+The Node.js server code required a substantial overhaul. The architecture changed from a simple HTTP transcription flow to a WebSocket-based real-time conversation system.
+
+Before:
 
 ```txt
 UDP packet -> FFmpeg -> STT -> TTS -> Audio playback
 ```
 
-- After:
+After:
 
 ```txt
 UDP packet -> OpenAI WebSocket -> TTS -> Audio playback
 ```
 
-I engineered a [prompt](./code/final-prompt.txt) for AI to migrate my previous implementation to generate voice response. The prompt referenced a markdown file that contains the full content of [Realtime Models Prompting guide](https://platform.openai.com/docs/guides/realtime-models-prompting) and [Realtime conversations guide](https://platform.openai.com/docs/guides/realtime-conversations).
+I engineered a [prompt](./code/final-prompt.txt) for AI to migrate my previous implementation to generate voice responses. The prompt referenced a markdown file that contains the full content of the [Realtime Models Prompting guide](https://platform.openai.com/docs/guides/realtime-models-prompting) and [Realtime conversations guide](https://platform.openai.com/docs/guides/realtime-conversations).
 
 ```js
 const dgram = require("dgram");
@@ -1664,5 +1638,4 @@ function getNetworkAddresses() {
 }
 ```
 
-- The latency is very low
-- The speech synthesis sounds quite natural
+The final implementation achieved very low latency, with response times that felt nearly instantaneous. The speech synthesis sounds quite natural, creating a convincing conversational experience. This prototype successfully demonstrates the core functionality needed for my final project's speech interface.
