@@ -1,14 +1,14 @@
 ---
 title: "Week 8: Ground Control to Major Tom"
 date: 2025-10-27
-keywords: ["input", "microphone", "micro-controller"]
+keywords: ["input", "microphone", "electronics"]
 ---
 
 ## Group Assignment
 
 I joined [Typer](https://fab.cba.mit.edu/classes/863.25/people/TylerJensenHill/) and [Jacqueline](https://fab.cba.mit.edu/classes/863.25/people/JacquelineOrr/) to characterize input devices in our lab. We started by probing a photo transistor to understand its behavior. Our key finding was that the resting resistance is quite high, and covering the sensor with a hand has only a modest effect. However, shining a flashlight on the sensor causes a significant drop in resistance, confirming its sensitivity to light.
 
-To gain more hands-on experience, I decided to probe the microphone breakout board I fabricated in [Week 6](../week-06/). Wiring up the probes proved tricky due to the small soldering joints on the board. I couldn't find a clock signal generator in the lab, so I programmed the Xiao to initialize the I2S device and generate the necessary clock signals for testing.
+To gain more hands-on experience, I decided to probe the microphone breakout board I fabricated in [Week 6](../week-06/index.md). Wiring up the probes proved tricky due to the small soldering joints on the board. I couldn't find a clock signal generator in the lab, so I programmed the Xiao to initialize the I2S device and generate the necessary clock signals for testing.
 
 This is the minimum code to drive the I2S device:
 
@@ -1638,4 +1638,4 @@ function getNetworkAddresses() {
 }
 ```
 
-The final implementation achieved very low latency, with response times that felt nearly instantaneous. The speech synthesis sounds quite natural, creating a convincing conversational experience. This prototype successfully demonstrates the core functionality needed for my final project's speech interface.
+The final implementation achieved very low latency, with response times that within 3 seconds. The speech synthesis sounds quite natural, creating a convincing conversational experience. This prototype successfully demonstrates the core functionality needed for my final project's speech input.
