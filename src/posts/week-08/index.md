@@ -1048,3 +1048,7 @@ async function transitionToSilentAndProcessAudio() {
 ```
 
 The final implementation achieved very low latency, with response times that within 3 seconds. The speech synthesis sounds quite natural, creating a convincing conversational experience. This prototype successfully demonstrates the core functionality needed for my final project's speech input.
+
+## Appedix
+
+- [Final project code](./code/talkie-only.zip)
