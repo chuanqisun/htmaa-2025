@@ -15,3 +15,6 @@ ffmpeg -i input.mov -c:v libx264 -preset medium -crf 23 -vf "scale=-1:720" -an -
 
 # mov to mp4, original speed, 720p (portrait)
 ffmpeg -i input.mov -c:v libx264 -preset medium -crf 23 -vf "scale=720:-1" -movflags +faststart output_720p_portrait.mp4
+
+# bulk convert *.MOV to *.mp4
+for f in *.MOV; do ffmpeg -i "$f" -c:v libx264 -preset medium -crf 23 -vf "scale=-1:720" -movflags +faststart "${f%.MOV}.mp4"; done
