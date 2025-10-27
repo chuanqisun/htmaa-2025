@@ -1,0 +1,11 @@
+---
+IDE: VS Code
+model: claude-sonnet-4-5
+mode: Agent
+---
+
+Implement the streaming transcription based on the latest documentation in #file:openai-transcription-streaming.md. Preferences:
+1. No VAD. We still want to use manual silence detection to trigger a response.
+2. Use `gpt-realtime` model
+3. Manually stream audio to server and trigger response
+4. Do NOT use the transcription. Instead, we want `text` modality output. The result will be present in the completed event.
