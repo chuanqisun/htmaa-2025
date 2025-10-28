@@ -241,3 +241,7 @@ I designed both the hand-held device (Operator) and the main body (Switchboard) 
 ### PCB Production
 
 I milled boards for both the Operator and the Switchboard using the Carvera Desktop CNC Machine. See details in the [weekly post](./posts/week-06/index.md).
+
+### Microphone
+
+I took advantage of the [input device week](./posts/week-08/index.md) to prototype the microphone interaction. In addition to the Adafruit ICS-43434 I2S breakout board, I attempted to fabricate my own microphone PCB.
