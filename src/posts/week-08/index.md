@@ -986,7 +986,7 @@ const dgram = require("dgram");
 const { spawn } = require("child_process");
 const OpenAI = require("openai");
 
-const SAMPLE_RATE = 22000;
+const SAMPLE_RATE = 24000;
 const CHANNELS = 1;
 const BITS_PER_SAMPLE = 16;
 const UDP_PORT = 8888;
