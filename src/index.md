@@ -272,7 +272,7 @@ Upon a quick assembly test, I took these notes for the next iteration:
 1. The USB-C connector was positioned at the wrong height.
 2. It might be simpler to slide the PCB into position rather than using screws for mounting.
 3. I discovered that for anything using screws, M3 is a much easier size to work with.
-4. The lid is desirably tight, but I need to create a small lip of a gap on the bottom to make it easier to open.
+4. The lid is desirably tight, but I need to create a small lip of a gap on the case to make it easier to open.
 
 ![Assembled case](./posts/week-08/media/case-01.webp)
 **Assembled case**
