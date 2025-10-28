@@ -1326,3 +1326,4 @@ The final implementation cuts down response latency to about 3 seconds. The spee
 ## Appedix
 
 - [Final project code](./code/talkie-only.zip)
+- [GitHub Copilot instructions](./code/openai-transcription-streaming.md)
