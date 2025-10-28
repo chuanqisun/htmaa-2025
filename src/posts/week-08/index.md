@@ -190,7 +190,7 @@ void loop() {
 
 After testing this approach, I observed several issues. The latency was inconsistent, ranging from 1 second to 5 seconds. The sound quality was also inconsistent, sometimes good, sometimes poor. My suspicion is that the network condition affected the streaming performance.
 
-## Exploring MP3 Encoding
+### Exploring MP3 Encoding
 
 I wanted to test MP3 encoding to reduce bandwidth usage and potentially improve robustness against network issues. The theory was that compressed audio would be more resilient to network fluctuations.
 
@@ -270,7 +270,7 @@ available MALLOC_CAP_8BIT: 114676 / MALLOC_CAP_32BIT: 114676  / MALLOC_CAP_SPIRA
 
 It turns out MP3 encoding is quite memory intensive. While it may reduce network bandwidth usage, it does not fit the memory constraints of the ESP32-C3. This was a dead end for optimization.
 
-## UDP Streaming Experiment
+### UDP Streaming Experiment
 
 If I couldn't address the audio codec limitation, could I tackle the network issue itself? I knew that the HTTP protocol has built-in error correction and guarantees delivery through two-way communication, which may introduce significant overhead. UDP is a connectionless protocol that does not guarantee delivery, but it has lower latency and overhead. I don't worry about occasional packet loss in audio streaming, as it often goes unnoticed by the human ear. I decided to go back to basics and test whether I could stream a sine wave over UDP.
 
@@ -465,7 +465,7 @@ process.on("SIGINT", () => {
 
 I confirmed the sine wave was working with this setup. The UDP approach showed promise for reducing latency.
 
-## UDP Microphone Streaming
+### UDP Microphone Streaming
 
 Next, I modified the microcontroller code to stream I2S data over UDP instead of generating a sine wave. UDP does not have flow control, so I needed to implement the throttle pattern recommended in the [AudioTools example](https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-communication/udp/communication-udp-send/communication-udp-send.ino) to prevent overwhelming the network.
 
@@ -551,7 +551,7 @@ The Node.js client remained unchanged from the sine wave test, which allowed me 
 <video controls src="./media/latency.mp4"></video>
 **Latency test with UDP**
 
-## Integrating OpenAI Transcription
+### OpenAI Transcription
 
 Next, I modified the Node.js code to transcribe the audio input using OpenAI's Whisper API. The FFmpeg playback was kept for debugging purposes and also provided an audible reference on where the latency occurs—whether it's before or during the transcription.
 
@@ -810,7 +810,7 @@ process.on("SIGINT", () => {
 });
 ```
 
-## User-Controlled Speech Detection
+### Push to Talk
 
 The 5-second interval auto-send was a temporary solution for testing transcription. For a more practical implementation, I used one of the buttons on my Operator Board to signal the beginning and ending of speech. When the button is pressed, the microcontroller starts recording audio. When the button is released, it stops recording and sends the audio for transcription. This push-to-talk approach is similar to how walkie-talkies work.
 
@@ -954,7 +954,7 @@ server.on("listening", () => {
 // ...
 ```
 
-## Real-Time Voice Response
+### Realtime Voice Synthesis
 
 In this final version, I jumped ahead slightly and implemented response synthesis. Instead of going through transcription separately, I directly prompt the model with the audio stream and manually trigger a response upon detecting silence. The playback currently happens on the computer and will be streamed to the microcontroller in next week's Output Device assignment.
 
