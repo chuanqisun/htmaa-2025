@@ -814,6 +814,9 @@ process.on("SIGINT", () => {
 
 The 5-second interval auto-send was a temporary solution for testing transcription. For a more practical implementation, I used one of the buttons on my Operator Board to signal the beginning and ending of speech. When the button is pressed, the microcontroller starts recording audio. When the button is released, it stops recording and sends the audio for transcription. This push-to-talk approach is similar to how walkie-talkies work.
 
+![Push button](./media/device-01.webp)
+**I found this button in my lab**
+
 Here are the key sections in the code related to the push-to-talk functionality.
 
 ```cpp
