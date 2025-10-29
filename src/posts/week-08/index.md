@@ -60,6 +60,8 @@ I confirmed from the serial plotter that the device was outputting data. The sof
 
 This week is built on top of boards made in [week 6](../week-06/index.md). I planned to add speech recognition to the hand-held device with wireless data streaming to my computer for generative AI interaction.
 
+There is [a similar project](https://fab.cba.mit.edu/classes/863.15/section.Harvard/people/Garber/finalproject.html) for a wireless microphone from a previous year. The project documentation seemed incomplete but it confirmed my intuition that separating the microphone PCB from the main board would give me the freedom to design the case more ergonomically.
+
 ### Networking Test with Sine Wave
 
 I started with Phil Schatzmann's examples in the [Arduino Audio Tools library](https://github.com/pschatzmann/arduino-audio-tools). My first goal was to stream a basic sine wave over WiFi. I took Phil's sample code as is and confirmed that sound was working over WiFi. During testing, I found that the antenna seems necessary for a stable connection. I had success in previous tests without using an antenna, but for some reason, the antenna became necessary in this setup.
