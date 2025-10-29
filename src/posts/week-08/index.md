@@ -1352,3 +1352,4 @@ Unfortunately, the vacuum system on the laser cutter was broken. I had to postpo
 
 - [Final project code](./code/talkie-only.zip)
 - [GitHub Copilot instructions](./code/openai-transcription-streaming.md)
+- [Audio PCB design files](./code/audio-breakout-mk2.zip)
