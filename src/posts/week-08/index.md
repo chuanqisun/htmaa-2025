@@ -58,7 +58,7 @@ I confirmed from the serial plotter that the device was outputting data. The sof
 
 ## Making a Wireless Microphone
 
-Speech recognition is a key component of my final project. I leveraged this week's input device topic to deep dive into the making of a wireless microphone, exploring different network protocols and integration approaches.
+This week is built on top of boards made in [week 6](../week-06/index.md). I planned to add speech recognition to the hand-held device with wireless data streaming to my computer for generative AI interaction.
 
 ### Networking Test with Sine Wave
 
