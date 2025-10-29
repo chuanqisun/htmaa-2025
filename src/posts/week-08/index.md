@@ -64,7 +64,7 @@ There is [a similar project](https://fab.cba.mit.edu/classes/863.15/section.Harv
 
 ### Networking Test with Sine Wave
 
-I started with Phil Schatzmann's examples in the [Arduino Audio Tools library](https://github.com/pschatzmann/arduino-audio-tools). My first goal was to stream a basic sine wave over WiFi. I took Phil's sample code as is and confirmed that sound was working over WiFi. During testing, I found that the antenna seems necessary for a stable connection. I had success in previous tests without using an antenna, but for some reason, the antenna became necessary in this setup.
+I started with an off-the-shelf [Adafruit ICS-43434](https://www.adafruit.com/product/6049) microphone and Phil Schatzmann's examples in the [Arduino Audio Tools library](https://github.com/pschatzmann/arduino-audio-tools). My first goal was to stream a basic sine wave over WiFi. I took Phil's sample code as is and confirmed that sound was working over WiFi. During testing, I found that the antenna seems necessary for a stable connection. I had success in previous tests without using an antenna, but for some reason, the antenna became necessary in this setup.
 
 ```cpp
 /**
