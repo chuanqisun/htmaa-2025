@@ -1323,6 +1323,31 @@ The final implementation cuts down response latency to about 3 seconds. The spee
 <video controls src="./media/final-demo.mp4"></video>
 **Wrap up with an immersive demo. USB-C is only for power-supply.**
 
+### Revisit PCB Fabrication
+
+In addition to the Adafruit ICS-43434 I2S breakout board, I reattempted fabricating my own microphone PCB after burning my first one in [week 6](./../week-06/index.md#bonus-laser-cutting-my-own-ics-43434-breakout-board).
+
+I redesigned the PCB with several improvements. I rerouted the traces to match the pintout of the [Adafruit ICS-43434 breakout board](https://www.adafruit.com/product/6049) so it can be a drop-in replacement. I switched from Through-Hole to SMD components for easier soldering, planning to bend the legs of the TH pins to make them SMD-like. I also added rounded edges and mounting holes to make the board consistent with other components in my system.
+
+![Microphone PCB design](./media/cad-01.webp)
+**Redesigned microphone PCB**
+
+![Microphone PCB 3D](./media/cad-02.webp)
+**3D view of the redesigned microphone PCB**
+
+I decided to try a simpler process for laser cutting the PCB:
+
+1. First mill the holes and edge cut, with tabs to hold the PCB in place.
+2. Laser cut the traces. Then remove the tabs.
+
+![Milled PCB](./media/milling-01.webp)
+**Milling was successful**
+
+Unfortunately, the vacuum system on the laser cutter was broken. I had to postpone the cutting. I realized my board needs another iteration anyway:
+
+1. I increased the dimension of the board to fit the M3 mounting holes, but this caused the board to extend beyond the footprint of the main Switchboard. I need to shrink it back.
+2. I found rivets for making vias. I can switch to real PTH mounted headers instead of bending the legs to make them surface mount.
+
 ## Appedix
 
 - [Final project code](./code/talkie-only.zip)

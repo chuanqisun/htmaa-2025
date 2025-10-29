@@ -291,29 +291,6 @@ I took advantage of the [input device week](./posts/week-08/index.md) to prototy
 3. Laptop streams audio to OpenAI Realtime API for text response.
 4. Laptop uses text-to-speech to generate audio response and plays it immediately.
 
-In addition to the Adafruit ICS-43434 I2S breakout board, I reattempted fabricating my own microphone PCB after burning my first one in [week 6](./posts/week-06/index.md#bonus-laser-cutting-my-own-ics-43434-breakout-board).
-
-I redesigned the PCB with several improvements. I rerouted the traces to match the pintout of the [Adafruit ICS-43434 breakout board](https://www.adafruit.com/product/6049) so it can be a drop-in replacement. I switched from Through-Hole to SMD components for easier soldering, planning to bend the legs of the TH pins to make them SMD-like. I also added rounded edges and mounting holes to make the board consistent with other components in my system.
-
-![Microphone PCB design](./posts/week-08/media/cad-01.webp)
-**Redesigned microphone PCB**
-
-![Microphone PCB 3D](./posts/week-08/media/cad-02.webp)
-**3D view of the redesigned microphone PCB**
-
-I decided to try a simpler process for laser cutting the PCB:
-
-1. First mill the holes and edge cut, with tabs to hold the PCB in place.
-2. Laser cut the traces. Then remove the tabs.
-
-![Milled PCB](./posts/week-08/media/milling-01.webp)
-**Milling was successful**
-
-Unfortunately, the vacuum system on the laser cutter was broken. I had to postpone the cutting. I realized my board needs another iteration anyway:
-
-1. I increased the dimension of the board to fit the M3 mounting holes, but this caused the board to extend beyond the footprint of the main Switchboard. I need to shrink it back.
-2. I found rivets for making vias. I can switch to real PTH mounted headers instead of bending the legs to make them surface mount.
-
 ### The TRRS Connector
 
 I found a dozen TRRS male and female connectors in my lab. They look nicer than the SMD version I originally planned to use. But without the datasheet, I need to reverse engineer the schematic. So I probed them with a multimeter and confirmed the internal connections.
