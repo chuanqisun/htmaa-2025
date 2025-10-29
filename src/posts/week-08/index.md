@@ -1323,7 +1323,7 @@ The final implementation cuts down response latency to about 3 seconds. The spee
 <video controls src="./media/final-demo.mp4"></video>
 **Wrap up with an immersive demo. USB-C is only for power-supply.**
 
-### Revisit PCB Fabrication
+### PCB Fabrication Revisited
 
 In addition to the Adafruit ICS-43434 I2S breakout board, I reattempted fabricating my own microphone PCB after burning my first one in [week 6](./../week-06/index.md#bonus-laser-cutting-my-own-ics-43434-breakout-board).
 
@@ -1343,7 +1343,7 @@ I decided to try a simpler process for laser cutting the PCB:
 ![Milled PCB](./media/milling-01.webp)
 **Milling was successful**
 
-Unfortunately, the vacuum system on the laser cutter was broken. I had to postpone the cutting. I realized my board needs another iteration anyway:
+Unfortunately, the vacuum system for all the laser cutters in the shop was broken. I had to postpone the cutting. I realized my board needs another iteration anyway:
 
 1. I increased the dimension of the board to fit the M3 mounting holes, but this caused the board to extend beyond the footprint of the main Switchboard. I need to shrink it back.
 2. I found rivets for making vias. I can switch to real PTH mounted headers instead of bending the legs to make them surface mount.
