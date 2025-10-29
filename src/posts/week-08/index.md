@@ -1350,6 +1350,6 @@ Unfortunately, the vacuum system for all the laser cutters in the shop was broke
 
 ## Appedix
 
-- [Final project code](./code/talkie-only.zip)
+- [Project code](./code/talkie-only.zip)
 - [GitHub Copilot instructions](./code/openai-transcription-streaming.md)
 - [Audio PCB design files](./code/audio-breakout-mk2.zip)
