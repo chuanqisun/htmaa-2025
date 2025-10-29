@@ -478,7 +478,7 @@ Next, I modified the microcontroller code to stream I2S data over UDP instead of
 const char *ssid = "";
 const char *password = "";
 
-AudioInfo info(22000, 1, 16);  // 32kHz, mono, 16-bit
+AudioInfo info(22000, 1, 16);  // 22kHz, mono, 16-bit
 I2SStream i2sStream;           // Access I2S as stream
 ConverterFillLeftAndRight<int16_t> filler(LeftIsEmpty); // fill both channels
 UDPStream udp(ssid, password);
