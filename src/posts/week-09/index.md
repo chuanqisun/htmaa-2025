@@ -6,21 +6,15 @@ keywords: ["input", "output", "speaker"]
 
 ## Group Assignment
 
-- This week's theme is Output device.
-- My final project involves a speaker.
-- For the group assignment, we measured the power consumption of the speaker.
-
-- See [group notes](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week9/)
+This week's theme is output devices. Since my final project involves a speaker, I invited our group to measure the power consumption of a speaker. We characterized the speaker to understand its how power consumption might be influenced. The detailed findings are documented in our [group notes](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week9/).
 
 ## Give AI A Voice
 
-- Previous week, I used a microphone to stream audio input from ESP32 to my laptop where I used OpenAI for speech response generation. However, the generated voice was playing on my laptop.
-- This week, I want to stream the voice back to ESP32, completing the loop of voice interaction.
+In the previous week, I built a wireless microphone system that streams audio from an ESP32 to my laptop, where OpenAI generates speech responses. However, the generated voice was only playing on my laptop. This week, I wanted to complete the loop by streaming the synthesized voice back to the ESP32, creating a true wireless voice interaction system.
 
-### Playing sine wave
+### Playing Sine Wave
 
-- I started with the Arduino Audio Tools [example code](https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-generator-i2s/streams-generator-i2s.ino) to play sine wave on the I2S DAC.
-- A basic program to play sine wave tone.
+I started by testing basic audio output using the Arduino Audio Tools [example code](https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-generator-i2s/streams-generator-i2s.ino) to play a sine wave through the I2S DAC. This simple test would verify that my speaker hardware and connections were working correctly. The following program generates and plays a simple sine wave tone:
 
 ```cpp
 #include "AudioTools.h"
@@ -61,40 +55,35 @@ void loop() {
 }
 ```
 
-- I heard loud clicking sound
-- I experimented with sampling rate until sound artifacts were gone
+When I ran this code, I heard loud clicking sounds instead of a clean tone. I systematically experimented with different sampling rates to identify the source of the artifacts:
 
-Table of experiments
+| Sample Rate | Result                 |
+| ----------- | ---------------------- |
+| 44.1 kHz    | Pulsing sound artifact |
+| 44 kHz      | Same artifact          |
+| 40 kHz      | Reduced artifact       |
+| 32 kHz      | No artifact            |
+| 22 kHz      | No artifact            |
 
-- 44.1 kHz, pulsing sound artifact
-- 44 kHz, same artifact
-- 40 kHz, reduced artifact
-- 32 kHz, no artifact
-- 22kHz sample rate, no artifact
+I made several key observations during testing. Opening the serial port seemed to correlate positively with noise artifacts. Higher sampling frequencies also correlated with more artifacts, though this could be confounded by the fact that higher sampling rates mean higher data transmission rates.
 
-Key observations:
+To identify the root cause, I conducted follow-up experiments:
 
-- Opening serial port positively correlates with noise artifacts
-- Higher sampling frequency positively correlates with noise artifacts
-- Confounding: higher sampling frequency means higher data rate
+- **Hypothesis 1:** The microphone on the device was causing interference since it shares BCLK and LRC lines with the speaker.
+  - **Experiment:** Unplugging the microphone should reduce or remove noise.
+  - **Result:** No effect observed.
 
-Follow up experiments:
+- **Hypothesis 2:** Serial port communication was causing interference.
+  - **Experiment:** Switching from a data-passing USB-C cable to a power-only cable, and removing all serial communication in the code.
+  - **Result:** Noise reduced but not eliminated.
 
-- Hypothesis 1: The microphone on the device is causing interference. Since it shares BCLK and LRC lines.
-- Experiment: unplugging the microphone should reduce/remove noise
-- Result: no effect
-- Hypothesis 2: Serial Port and its data transmission is causing interference
-- Experiment: switching from a data passing usb c cable to a power only cable reduces artifacts, and removing all serial communication in code
-- Result: noise reduced but not eliminated
+**Conclusion:** Over-sampling could cause noise artifacts, and serial communication could exacerbate the issue. For clean audio output, I needed to use lower sampling rates and minimize serial communication during playback.
 
-Conclusion: over-sampling could cause noise artifacts, and serial communication could exacerbate the issue.
+### Stream Sine Wave from Computer to Device
 
-### Stream sine wave from computer to device
+With local audio playback working, the next step was to stream audio from my computer to the ESP32. I started with the [sample code](https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-communication/udp/communication-udp-receive/communication-udp-receive.ino) for receiving audio over UDP. On the server side, I wrote Node.js code to generate and stream a sine wave. This setup would help me verify the network streaming pipeline before adding the complexity of OpenAI voice synthesis.
 
-- I started with the [sample code](https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-communication/udp/communication-udp-receive/communication-udp-receive.ino) for receiving audio from UDP
-- Added server code to generate the sine wave
-
-Client (other logic omitted for brevity)
+**Client** (other logic omitted for brevity)
 
 ```cpp
 #include "AudioTools.h"
@@ -136,7 +125,7 @@ void loop() {
 }
 ```
 
-Server (other logic omitted for brevity)
+**Server** (other logic omitted for brevity)
 
 ```js
 const SAMPLE_RATE = 22000;
@@ -175,34 +164,29 @@ function generateSineWaveBuffer(phase, samplesPerPacket, phaseIncrement) {
 }
 ```
 
-- I noticed clicking sound artifacts again.
-- We already eliminated serial communication as a source of noise
-- Networking was the suspect.
-- I experimented with UDP packet size until the noise was gone.
+When I tested this setup, I noticed clicking sound artifacts again. Since we had already eliminated serial communication as a significant source of noise, networking became the prime suspect. I experimented with different UDP packet sizes to find the sweet spot:
 
-Table of experiments
+| Packet Size | Result                                                                                   |
+| ----------- | ---------------------------------------------------------------------------------------- |
+| 128 bytes   | Continuous clicking, almost like a Geiger counter. Might be useful for a future project! |
+| 256 bytes   | Continuous clicking, slightly less frequent                                              |
+| 512 bytes   | A few clicks every second                                                                |
+| 1024 bytes  | No clicks                                                                                |
 
-- 128 bytes: continous clicking, almost like geiger counter, maybe I can use it for a future project.
-- 256 bytes: continous clicking, a little less frequent
-- 512 bytes: a few clicks every second
-- 1024 bytes: no clicks
+**Conclusion:** UDP buffer size directly affects noise artifacts. Larger buffer sizes reduce artifacts significantly.
 
-Conclusion: UDP buffer size affects noise artifacts. Larger buffer size reduces artifacts.
+Upon reflection, I realized I only adjusted the UDP buffer size. There are additional parameters I could experiment with in future iterations:
 
-After thought: I only adjusted UDP buffer size. There are additional parameters I can experiment with:
+- I2S buffer size (defaults to 6)
+- I2S buffer count (defaults to 512)
 
-- I2S buffer size (default to 6)
-- I2S buffer count (default to 512)
+The default parameters are defined in [AudioToolsConfig.h](https://github.com/pschatzmann/arduino-audio-tools/blob/c8e8eb74495521ed9402655cbc2e2ec3ce26fbe5/src/AudioToolsConfig.h). It's interesting that noise occurs when the UDP packet size is smaller than or equal to the I2S buffer size. This relationship warrants further investigation given more time.
 
-The default parameters are in [AudioToolsConfig.h](https://github.com/pschatzmann/arduino-audio-tools/blob/c8e8eb74495521ed9402655cbc2e2ec3ce26fbe5/src/AudioToolsConfig.h)
+### Transcribing Audio and Streaming Voice from Computer to Device
 
-It's interesting that noise occurs when the UDP packet size is smaller or equal to the I2S buffer size. It's something I should investigate further given more time.
+With the basic UDP streaming working, I moved on to integrating the complete voice interaction loop. I updated the client firmware to handle push-to-talk button functionality. This logic is similar to what I implemented in the previous week for audio input, but now it also handles audio output for playback.
 
-### Transcribing audio and stream voice from computer to device
-
-- I updated the client to handle push-to-talk button. This is the same logic from previous week except I added the sound playing logic.
-
-Client (other logic omitted for brevity)
+**Client** (other logic omitted for brevity)
 
 ```cpp
 I2SStream i2sMic;
@@ -239,9 +223,9 @@ void loop() {
 }
 ```
 
-- server code to stream the AI generated response
+On the server side, I implemented the logic to handle OpenAI's real-time API for transcription and response generation, then stream the synthesized speech back to the ESP32.
 
-Server (other logic omitted for brevity):
+**Server** (other logic omitted for brevity):
 
 ```js
 const STATE = {
@@ -314,17 +298,17 @@ async function streamAudioToUDP(pcmBuffer) {
 }
 ```
 
+This completes the full voice interaction loop. The system can now receive spoken input from the ESP32, process it with OpenAI's API, and stream the synthesized voice response back to play through the speaker.
+
 ## Sonic Fidget Spinner
 
-- [Music Road](https://en.wikipedia.org/wiki/Musical_road) lets drivers play music by driving over specially designed rumble strips. There are many demos like [this one](https://www.youtube.com/watch?v=beGiU1EpGKI) on the internet.
-- I want to build a miniature version controlled by rotary encoder, which offers a similar tactile experience. This would be something I can figet with when a zoom call get too boring.
+I've always been fascinated by [Musical Roads](https://en.wikipedia.org/wiki/Musical_road) that let drivers play music by driving over specially designed rumble strips. There are many demos like [this one](https://www.youtube.com/watch?v=beGiU1EpGKI) on the internet showing how the vibrations create melodies. I wanted to build a miniature version controlled by a rotary encoder, offering a similar tactile experience. This would be something I could fidget with during boring Zoom calls.
 
 ### Rotary Encoder
 
-- I got the feedback that I did too much networking work in the Input Device week, so let's add more input device work here.
-- First, I picked up a rotary encoder from my lab's spare parts bin.
-- I studied the mechanism by watching a [YouTube tutorial](https://www.youtube.com/watch?v=fgOfSHTYeio).
-- I implemented a basic test program using the Rotary Encoder library. My version is simplified from the [full example code](https://github.com/mo-thunderz/RotaryEncoder/blob/main/Arduino/ArduinoRotaryEncoder/ArduinoRotaryEncoder.ino).
+I received feedback that I did too much networking work during Input Device week, so this was an opportunity to add more input device exploration. I picked up a rotary encoder from my lab's spare parts bin and started studying its mechanism by watching a [YouTube tutorial](https://www.youtube.com/watch?v=fgOfSHTYeio).
+
+The rotary encoder works by generating quadrature signals as you rotate the shaft. By detecting the phase relationship between the two output signals, you can determine both the direction and speed of rotation. I implemented a basic test program using the Rotary Encoder library. My version is simplified from the [full example code](https://github.com/mo-thunderz/RotaryEncoder/blob/main/Arduino/ArduinoRotaryEncoder/ArduinoRotaryEncoder.ino):
 
 ```cpp
 #include "RotaryEncoder.h"
@@ -363,18 +347,18 @@ void loop() {
 }
 ```
 
+This simple program confirmed that the encoder was working correctly and gave me real-time position feedback through the serial monitor.
+
 ### Trigger Mechanism
 
-- I considered a few designs, table:
+With the encoder working, I needed to decide how to map rotation to musical notes. I considered two approaches:
 
-- Note per click
-  - Pro: simple, precise
-  - Con: no control over note duration
-- Consecutive clicks to start and stop a note
-  - Pro: more control over note duration
-  - Con: more complex, especially timing logic
+| Approach                                    | Pros                                      | Cons                                  |
+| ------------------------------------------- | ----------------------------------------- | ------------------------------------- |
+| Note per click                              | Simple implementation, precise triggering | No control over note duration         |
+| Consecutive clicks to start and stop a note | More control over note duration           | More complex, especially timing logic |
 
-I went with the second approach. With debouncing logic, I can track when a group of consecutive clicks start and stop.
+I chose the second approach because it would allow for more expressive playing—fast spins would create staccato notes while slow rotations would sustain them longer. With debouncing logic, I could track when a group of consecutive clicks starts and stops:
 
 ```cpp
 // ... setup and encoder initialization ...
@@ -410,10 +394,11 @@ void loop() {
 }
 ```
 
+The 100ms timeout worked well for detecting when the user paused between rotation gestures. Each continuous rotation motion was now being counted as a single unit.
+
 ### Audio Synthesis
 
-- I started with playing the same tone for each note
-- I merged the previous code
+With the rotation detection working, it was time to add sound. I started with the simple approach of playing the same tone for each note, merging the audio playback code from earlier with the encoder logic:
 
 ```cpp
 #include "AudioTools.h"
@@ -464,10 +449,11 @@ void loop() {
 }
 ```
 
+This worked well as a proof of concept. The speaker would play a tone when I started rotating and stop when I paused. Now it was time to make it musical.
+
 ### Soundtrack
 
-- I mapped out Ode To Joy melody to the musical notes and their frequencies
-- Added a counter to track the current note index
+To create an actual melody, I mapped out "Ode to Joy" to musical notes and their frequencies. I chose this piece because it's simple, recognizable, and works well with discrete note triggers. I added a counter to track the current position in the melody:
 
 ```cpp
 // Note-to-frequency mapping
@@ -513,13 +499,13 @@ void loop() {
 }
 ```
 
+Now each rotation gesture would play the next note in "Ode to Joy", creating a tactile musical experience. The device was starting to feel like a real instrument.
+
 ### A Very Mary B-side
 
-- What if rotating backwards would play the B-side?
-- I want to add an equally joyful melody on the B-side: Mary Had A Little Lamb
-- I noticed that the encoder would occasionally bounce with an unexpected direction change, and immediately flip back to the original direction
-- I had to add additional debouncing logic to ignore the sudden flip of directions
-- I also implemented reset. If user switching direction, we alwasy reset the counter
+As I tested the device, an idea struck me: what if rotating backwards would play a different melody, like the B-side of a vinyl record? I decided to add "Mary Had a Little Lamb" as the B-side melody—an equally joyful tune that would complement "Ode to Joy".
+
+However, implementing bidirectional melodies revealed a problem. The encoder would occasionally bounce with an unexpected direction change and immediately flip back to the original direction. This mechanical bounce caused the counter to reset prematurely. I had to add additional debouncing logic to ignore these spurious direction changes. I also implemented a deliberate reset: when the user intentionally switches direction, the counter resets to the beginning of the appropriate melody:
 
 ```cpp
 // Two melodies for bidirectional playback
@@ -589,13 +575,13 @@ void loop() {
 }
 ```
 
+The final implementation worked beautifully. Rotating clockwise plays "Ode to Joy" while rotating counterclockwise plays "Mary Had a Little Lamb". The bidirectional playback creates a satisfying fidget toy that's also musical. The device successfully captures the essence of a musical road in miniature form.
+
 ## After Thought
 
-My development board for XIAO ESP32 was an unsung hero for this week. I was able to explore both ideas without fabrication new PCB.
-
-I was especially glad that I mapped out all the pins to the female sockets. This would be a good example of upfront investment that pays off later.
+My development board for the XIAO ESP32 was the unsung hero of this week. The breakout board I created in earlier weeks allowed me to explore both the wireless voice interaction system and the sonic fidget spinner without fabricating new PCBs. I was especially glad that I had mapped out all the pins to female headers during the initial design. This was a perfect example of upfront investment in modular design paying dividends later.
 
 ## Appendix
 
-- [Walkie Talkie Code](...)
-- [Sonic Fidget Spinner Code](...)
+- [Walkie Talkie Code](./code/walkie-talkie.zip)
+- [Sonic Fidget Spinner Code](./code/sonic-fidget-spinner.zip)
