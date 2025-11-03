@@ -308,3 +308,32 @@ Next steps:
 - Design connectors and cables
 - Design battery for the Operator
 - Design multi-agent simulation
+
+### Speaker
+
+During the [Output Device week](./posts/week-09/index.md), I completed the full voice interaction loop, with voice-in, voice-out, and AI processing in between.
+
+<video controls src="./posts/week-09/media/knock-knock.mp4"></video>
+**Full voice interaction loop demo**
+
+### Hanlde Unit Form Study
+
+I used a piece of paper to sketch out the form factor, just so I can hold it in my hand and feel the size.
+
+![Low-fidelity hand unit](./posts/week-09/media/paper-proto-01.webp)
+**Extremely-low-fidelity hand unit prototype**
+
+Using this prototyp, I laid out the components and realized I might have to increase the dimension to make everything fit.
+
+![Component layout](./posts/week-09/media/paper-proto-02.webp)
+**Layout option 1**
+
+![Component layout](./posts/week-09/media/paper-proto-03.webp)
+**Layout option 2**
+
+### Battery
+
+The ESP32 board has a [well documented charging circuit](https://wiki.seeedstudio.com/XIAO_ESP32C3_Getting_Started/#battery-usage) for 3.7V LiPo batteries. Knowing that working with battery is a bit risky, I decided to start with a simpler USB-C power bank. This is the smallest option I found on [Amazon](https://www.amazon.com/Attom-Tech-Portable-External-Emergency/dp/B07JZCZSH9/ref=sr_1_3):
+
+![USB-C power bank](./posts/week-09/media/battery-01.webp)
+**USB-C power bank for hand unit**
