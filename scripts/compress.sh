@@ -18,3 +18,9 @@ ffmpeg -i input.mov -c:v libx264 -preset medium -crf 23 -vf "scale=720:-1" -movf
 
 # bulk convert *.MOV to *.mp4
 for f in *.MOV; do ffmpeg -i "$f" -c:v libx264 -preset medium -crf 23 -vf "scale=-1:720" -movflags +faststart "${f%.MOV}.mp4"; done
+
+# bulk convert *.MOV to *.mp4, original size
+for f in *.MOV; do ffmpeg -i "$f" -c:v libx264 -preset medium -crf 23 -movflags +faststart "${f%.MOV}.mp4"; done
+
+# bulk convert *.MOV to *.mp4, original size, higher compression
+for f in *.MOV; do ffmpeg -i "$f" -c:v libx264 -preset slow -crf 28 -movflags +faststart "${f%.MOV}.mp4"; done
