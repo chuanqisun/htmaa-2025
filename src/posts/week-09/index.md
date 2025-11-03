@@ -8,9 +8,12 @@ keywords: ["input", "output", "speaker"]
 
 This week's theme is output devices. Since my final project involves a speaker, I invited our group to measure the power consumption of a speaker. We characterized the speaker to understand its how power consumption might be influenced. The detailed findings are documented in our [group notes](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week9/).
 
+![Group activity](./media/group-01.webp)
+**Ceci explaining multimeter setup**
+
 ## Give AI A Voice
 
-In the previous week, I built a wireless microphone system that streams audio from an ESP32 to my laptop, where OpenAI generates speech responses. However, the generated voice was only playing on my laptop. This week, I wanted to complete the loop by streaming the synthesized voice back to the ESP32, creating a true wireless voice interaction system.
+In the [previous week](../week-08/index.md), I built a wireless microphone system that streams audio from an ESP32 to my laptop, where OpenAI generates speech responses. However, the generated voice was only playing on my laptop. This week, I wanted to complete the loop by streaming the synthesized voice back to the ESP32, creating a true wireless voice interaction system.
 
 ### Playing Sine Wave
 
@@ -584,4 +587,4 @@ My development board for the XIAO ESP32 was the unsung hero of this week. The br
 ## Appendix
 
 - [Walkie Talkie Code](./code/walkie-talkie.zip)
-- [Sonic Fidget Spinner Code](./code/sonic-fidget-spinner.zip)
+- [Sonic Fidget Spinner Code](./code/sonic-fidget.zip)
