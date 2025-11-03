@@ -187,7 +187,10 @@ The default parameters are defined in [AudioToolsConfig.h](https://github.com/ps
 
 ### Transcribing Audio and Streaming Voice from Computer to Device
 
-With the basic UDP streaming working, I moved on to integrating the complete voice interaction loop. I updated the client firmware to handle push-to-talk button functionality. This logic is similar to what I implemented in the previous week for audio input, but now it also handles audio output for playback.
+With the basic UDP streaming working, I moved on to integrating the complete voice interaction loop. I updated the client to handle push-to-talk button functionality. This logic is similar to what I implemented in the previous week for audio input, but now it also handles audio output for playback.
+
+<video src="./media/knock-knock.mp4" controls></video>
+**Voice interaction demo**
 
 **Client** (other logic omitted for brevity)
 
@@ -311,7 +314,7 @@ I've always been fascinated by [Musical Roads](https://en.wikipedia.org/wiki/Mus
 
 I received feedback that I did too much networking work during Input Device week, so this was an opportunity to add more input device exploration. I picked up a rotary encoder from my lab's spare parts bin and started studying its mechanism by watching a [YouTube tutorial](https://www.youtube.com/watch?v=fgOfSHTYeio).
 
-The rotary encoder works by generating quadrature signals as you rotate the shaft. By detecting the phase relationship between the two output signals, you can determine both the direction and speed of rotation. I implemented a basic test program using the Rotary Encoder library. My version is simplified from the [full example code](https://github.com/mo-thunderz/RotaryEncoder/blob/main/Arduino/ArduinoRotaryEncoder/ArduinoRotaryEncoder.ino):
+The rotary encoder works by generating signals as you rotate the shaft. You can determine both the direction and speed of rotation. I implemented a basic test program using the Rotary Encoder library. My version is simplified from the [full example code](https://github.com/mo-thunderz/RotaryEncoder/blob/main/Arduino/ArduinoRotaryEncoder/ArduinoRotaryEncoder.ino):
 
 ```cpp
 #include "RotaryEncoder.h"
@@ -361,7 +364,7 @@ With the encoder working, I needed to decide how to map rotation to musical note
 | Note per click                              | Simple implementation, precise triggering | No control over note duration         |
 | Consecutive clicks to start and stop a note | More control over note duration           | More complex, especially timing logic |
 
-I chose the second approach because it would allow for more expressive playing—fast spins would create staccato notes while slow rotations would sustain them longer. With debouncing logic, I could track when a group of consecutive clicks starts and stops:
+I chose the second approach because it would allow for more expressive playing. With debouncing logic, I could track when a group of consecutive clicks starts and stops:
 
 ```cpp
 // ... setup and encoder initialization ...
@@ -397,11 +400,11 @@ void loop() {
 }
 ```
 
-The 100ms timeout worked well for detecting when the user paused between rotation gestures. Each continuous rotation motion was now being counted as a single unit.
+The 100ms timeout worked well for detecting when the user paused between rotation gestures. Each continuous rotation motion was now being counted as a single unit. Increasing the timeout would cause a lingering effect and makes the device feel lagging.
 
 ### Audio Synthesis
 
-With the rotation detection working, it was time to add sound. I started with the simple approach of playing the same tone for each note, merging the audio playback code from earlier with the encoder logic:
+With the rotation detection working, it was time to add sound. I started with the simple approach of playing the same tone for each note, merging the audio playback code from the walkie-talkie with the encoder logic:
 
 ```cpp
 #include "AudioTools.h"
@@ -456,7 +459,7 @@ This worked well as a proof of concept. The speaker would play a tone when I sta
 
 ### Soundtrack
 
-To create an actual melody, I mapped out "Ode to Joy" to musical notes and their frequencies. I chose this piece because it's simple, recognizable, and works well with discrete note triggers. I added a counter to track the current position in the melody:
+To create an actual melody, I mapped out "Ode to Joy" to musical notes and their frequencies. I chose this piece because it's simple, recognizable, and works well with discrete note triggers. I added a pointer to track the current position in the melody:
 
 ```cpp
 // Note-to-frequency mapping
@@ -504,11 +507,11 @@ void loop() {
 
 Now each rotation gesture would play the next note in "Ode to Joy", creating a tactile musical experience. The device was starting to feel like a real instrument.
 
-### A Very Mary B-side
+### A Not-So-Mary B-side
 
-As I tested the device, an idea struck me: what if rotating backwards would play a different melody, like the B-side of a vinyl record? I decided to add "Mary Had a Little Lamb" as the B-side melody—an equally joyful tune that would complement "Ode to Joy".
+As I tested the device, an idea struck me: what if rotating backwards would play a different melody, like the B-side of a vinyl record? I decided to add "Mary Had a Little Lamb" as the B-side melody. It's an equally joyful tune that would complement "Ode to Joy".
 
-However, implementing bidirectional melodies revealed a problem. The encoder would occasionally bounce with an unexpected direction change and immediately flip back to the original direction. This mechanical bounce caused the counter to reset prematurely. I had to add additional debouncing logic to ignore these spurious direction changes. I also implemented a deliberate reset: when the user intentionally switches direction, the counter resets to the beginning of the appropriate melody:
+However, implementing bidirectional melodies revealed a problem. The encoder would occasionally bounce with an unexpected double flip: it changes direction for one click, and immediately changes back for the next click. I had to defer the direction detection after debouncing so as to ignore these spurious direction changes.
 
 ```cpp
 // Two melodies for bidirectional playback
@@ -578,7 +581,12 @@ void loop() {
 }
 ```
 
-The final implementation worked beautifully. Rotating clockwise plays "Ode to Joy" while rotating counterclockwise plays "Mary Had a Little Lamb". The bidirectional playback creates a satisfying fidget toy that's also musical. The device successfully captures the essence of a musical road in miniature form.
+I was able to play both melodies. There were still occasional misfires of direction change, but it was good enough for a one-off performance.
+
+<video src="./media/mary-had-a-little-lamb.mp4" controls></video>
+**Playing Mary Had A Little Lamb on the B-side**
+
+If I had more time, I would focus on single soundtrack but use the change of rotation direction to delimit tones. This would allow user to quickly play two notes without waiting for the debounce timeout.
 
 ## After Thought
 
