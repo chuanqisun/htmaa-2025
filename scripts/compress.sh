@@ -24,3 +24,7 @@ for f in *.MOV; do ffmpeg -i "$f" -c:v libx264 -preset medium -crf 23 -movflags 
 
 # bulk convert *.MOV to *.mp4, original size, higher compression
 for f in *.MOV; do ffmpeg -i "$f" -c:v libx264 -preset slow -crf 28 -movflags +faststart "${f%.MOV}.mp4"; done
+
+# bulk convert *.m4a to *.mp3
+for f in *.m4a; do ffmpeg -i "$f" -c:a libmp3lame -b:a 192k "${f%.m4a}.mp3"; done
+

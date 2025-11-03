@@ -60,13 +60,13 @@ void loop() {
 
 When I ran this code, I heard loud clicking sounds instead of a clean tone. I systematically experimented with different sampling rates to identify the source of the artifacts:
 
-| Sample Rate | Result                 |
-| ----------- | ---------------------- |
-| 44.1 kHz    | Pulsing sound artifact |
-| 44 kHz      | Same artifact          |
-| 40 kHz      | Reduced artifact       |
-| 32 kHz      | No artifact            |
-| 22 kHz      | No artifact            |
+| Sample Rate (kHz) | Result                                              |
+| ----------------- | --------------------------------------------------- |
+| 44.1              | [Pulsing sound artifact](./media/audio-44_1kHz.mp3) |
+| 44                | Same artifact                                       |
+| 40                | Reduced artifact                                    |
+| 32                | No artifact                                         |
+| 22                | [No artifact](./media/audio-22kHz.mp3)              |
 
 I made several key observations during testing. Opening the serial port seemed to correlate positively with noise artifacts. Higher sampling frequencies also correlated with more artifacts, though this could be confounded by the fact that higher sampling rates mean higher data transmission rates.
 
@@ -169,14 +169,16 @@ function generateSineWaveBuffer(phase, samplesPerPacket, phaseIncrement) {
 
 When I tested this setup, I noticed clicking sound artifacts again. Since we had already eliminated serial communication as a significant source of noise, networking became the prime suspect. I experimented with different UDP packet sizes to find the sweet spot:
 
-| Packet Size | Result                                                                                   |
-| ----------- | ---------------------------------------------------------------------------------------- |
-| 128 bytes   | Continuous clicking, almost like a Geiger counter. Might be useful for a future project! |
-| 256 bytes   | Continuous clicking, slightly less frequent                                              |
-| 512 bytes   | A few clicks every second                                                                |
-| 1024 bytes  | No clicks                                                                                |
+| Packet Size (bytes) | Result                                                                   |
+| ------------------- | ------------------------------------------------------------------------ |
+| 128                 | [Continuous clicking](./media/audio-22kHz-128-packet.mp3)                |
+| 256                 | [Continuous clicking, less frequent](./media/audio-22kHz-256-packet.mp3) |
+| 512                 | [A few clicks every second](./media/audio-22kHz-512-packet.mp3)          |
+| 1024                | [No clicks](./media/audio-22kHz-1024-packet.mp3)                         |
 
 **Conclusion:** UDP buffer size directly affects noise artifacts. Larger buffer sizes reduce artifacts significantly.
+
+As a side note, the continous clicking reminds me of a Geiger counter. Idea for a future project!
 
 Upon reflection, I realized I only adjusted the UDP buffer size. There are additional parameters I could experiment with in future iterations:
 
