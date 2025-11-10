@@ -36,7 +36,7 @@ I studied two reference tutorials to understand the CAM capabilities:
 
 **Attempt 1: Onshape Modeling → FreeCAD CAM**
 
-I started by measuring stock size so I can size the parts accordingly.
+I started by measuring the stock size so I could size the parts accordingly.
 
 ![Stock measurement](./media/wax-01.webp)
 **Stock measurement**
@@ -45,7 +45,7 @@ I started by measuring stock size so I can size the parts accordingly.
 - Length: 87.45mm
 - Height: 38.21mm
 
-I modelled the parts in Onshape and importing them into FreeCAD for toolpath generation. I found an effective workflow that uses boolean operation to simulate the casting.
+I modeled the parts in Onshape and imported them into FreeCAD for toolpath generation. I found an effective workflow that uses a boolean operation to simulate the casting.
 
 ![Simulate casting](./media/simulate-casting.webp)
 **Simulated casting using the subtract boolean operation**
@@ -99,7 +99,7 @@ Frustrated with FreeCAD's CAM limitations, I switched to [Mods](https://modsproj
 **Excessive horizontal movement in Onshape model**
 
 ![Toolpath issue with Mods](./media/mods-path-issue.webp)
-**Imcomplete paths in FreeCAD model**
+**Incomplete paths in FreeCAD model**
 
 Mods failed to generate proper toolpaths with issues similar to what I experienced in FreeCAD. At this point, I suspected fundamental problems with my modeling approach rather than toolpath algorithms.
 
@@ -125,7 +125,7 @@ Before diving into the technical details, I want to show you the physical manife
 
 **First Iteration: PLA Mother Mold**
 
-I slightly modified the CNC model to be the mother mold, sliced it with PrusaSlicer and printed it in PLA.
+I slightly modified the CNC model to be the mother mold, sliced it with PrusaSlicer, and printed it in PLA.
 
 ![v1 mold](./media/v1-mold.webp)
 **Modeling the mold**
@@ -233,12 +233,12 @@ In summary, everything we need to know to improve 3D printing is already capture
 >
 > -- Texas BBQ pitmasters
 
-Low layer height and slow ironing did the trick. I observed much better interior layers thaks to concentric infill:
+Low layer height and slow ironing did the trick. I observed much better interior layers thanks to concentric infill:
 
 ![Ironing and concentric infill](./media/v4-01.webp)
 **Ironing and concentric infill in action**
 
-Here is the full mold using the ironing and concentric infill settings. Unfortunately, the 3D printer had some issue extruding consistently despite my tuning of temperature. It was not as good as my characterization test from another printer.
+Here is the full mold using the ironing and concentric infill settings. Unfortunately, the 3D printer had some issues extruding consistently despite my tuning of the temperature. It was not as good as my characterization test from another printer.
 
 ![Ironed mold](./media/v5-01.webp)
 **Ironed mold, sub-optimal surface and rough wall texture**
@@ -250,7 +250,7 @@ When casting the silicone mold from the new PLA mother mold, I used a glass plat
 
 This made a perfectly flat rubber surface, but it also created a vacuum suction that made it very difficult to remove it from the glass. I would not recommend this technique to others.
 
-Due to the rough wall texture, the silicone mold adhered strongly to the PLA mother mold. During demolding, I torn the wall apart from the rubber base.
+Due to the rough wall texture, the silicone mold adhered strongly to the PLA mother mold. During demolding, I tore the wall apart from the rubber base.
 
 ![Damaged mold](./media/v5-04.webp)
 **Damaged silicone mold after demolding**
@@ -291,14 +291,14 @@ For fun, I hand-painted some graphic details with a sharpie. It was clear that v
 ![Side with bubbles](./media/v5-09.webp)
 **Rough side due to vacuum processing**
 
-The two sides didn't fit very well due to inconsistent interface. I had to belt-sand edges and deburr the grove to make them fit. I also repeatedly coupled and decoupled the two parts until they finally fit smoothly.
+The two sides didn't fit very well due to an inconsistent interface. I had to belt-sand the edges and deburr the groove to make them fit. I also repeatedly coupled and decoupled the two parts until they finally fit smoothly.
 
 ![In context](./media/v5-12.webp)
-**How hard should I shaking to reach 99% speed of light?**
+**How hard should I shake to reach 99% the speed of light?**
 
 ### V6-V7: Details
 
-During these final iterations, I made the following improvements based everything observed in previous versions:
+During these final iterations, I made the following improvements based on everything observed in previous versions:
 
 - Add chamfer to mother mold for easier demolding
 - Increase silicone base thickness to prevent tearing
@@ -314,7 +314,7 @@ Using the highest level setting, it took 5 hours to print the mold. It was the h
 ![Final mold](./media/v7-02.webp)
 **Incredible surface finish**
 
-Demolding and casting was smooth-sailing thanks to all the mistakes and lessons learned in previous iterations. The only issue is that due to the improved print quality, the fit between the two parts became a bit loose. I would have to adjust the model for the future versions.
+Demolding and casting was smooth-sailing thanks to all the mistakes and lessons learned in previous iterations. The only issue is that due to the improved print quality, the fit between the two parts became a bit loose. I would have to adjust the model for future versions.
 
 ![Final assembly](./media/v7-01.webp)
 **Mother mold, silicone mold, and final cast assembly**
@@ -325,7 +325,7 @@ I deeply enjoyed this project. It could even become a final project if I add a d
 
 **Sequential Workflows Demand Pipelining**
 
-The mother mold → silicone mold → plastic cast workflow is inherently sequential, where any failure causes significant rework. However, by staggering multiple iterations in parallel, I could manage the long iteration cycles effectively and continuously integrate feedback into next iterations. If I had worked in a strictly single-threaded manner, this project would have taken more than 60 hours.
+The mother mold → silicone mold → plastic cast workflow is inherently sequential, where any failure causes significant rework. However, by staggering multiple iterations in parallel, I could manage the long iteration cycles effectively and continuously integrate feedback into the next iterations. If I had worked in a strictly single-threaded manner, this project would have taken more than 60 hours.
 
 **Emotional Factors in Decision Making**
 
