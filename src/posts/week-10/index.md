@@ -36,7 +36,16 @@ I studied two reference tutorials to understand the CAM capabilities:
 
 **Attempt 1: Onshape Modeling → FreeCAD CAM**
 
-I started by modeling the parts in Onshape and importing them into FreeCAD for toolpath generation. I found an effective workflow that uses boolean operation to simulate the casting.
+I started by measuring stock size so I can size the parts accordingly.
+
+![Stock measurement](./media/wax-01.webp)
+**Stock measurement**
+
+- Width: 76.45mm
+- Length: 87.45mm
+- Height: 38.21mm
+
+I modelled the parts in Onshape and importing them into FreeCAD for toolpath generation. I found an effective workflow that uses boolean operation to simulate the casting.
 
 ![Simulate casting](./media/simulate-casting.webp)
 **Simulated casting using the subtract boolean operation**

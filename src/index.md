@@ -337,3 +337,43 @@ The ESP32 board has a [well documented charging circuit](https://wiki.seeedstudi
 
 ![USB-C power bank](./posts/week-09/media/battery-01.webp)
 **USB-C power bank for hand unit**
+
+### Mounting mechanism
+
+There are several mounting challanges. I have investigated the mounting strategy for PCB and TRRS jack this week.
+
+- **The PCBs**
+- **The TRRS jack**
+- The buttons
+- The speaker
+
+I produced difference sizes of mounting bracket ([download STEP file](./posts/week-10/model/pcb-bracket-test.step)) to find the right size.
+
+![Bracket model](./posts/week-10/media/bracket-02.webp)
+**Modeling the brackets with offsets from the measured board size**
+
+![PCB mounting bracket test](./posts/week-10/media/bracket-01.webp)
+**PCB mounting brackets**
+
+![PCB mounting test](./posts/week-10/media/bracket-03.webp)
+**PCB mounting test**
+
+I observed that for the 28mm board, a +1mm offset (28.1mm bracket) would make a good fit. I need at least 2mm height to clear the solder joints.
+
+- Board measured size: 28mm
+- Tested sizes: 27.8mm, 27.9mm, 28mm, **28.1mm (optimal)**, 28.2mm
+
+I also 3D printed [a model](./posts/week-10/model/trrs-hole-test.step) to test the TRRS jack mounting.
+
+![TRRS test model](./posts/week-10/media/trrs-03.webp)
+**TRRS jack test model**
+
+![TRRS mounting test](./posts/week-10/media/trrs-02.webp)
+**TRRS jack mounting test**
+
+Testing revealed that 7mm diameter is the best fit, and max thickness can be 2.5mm. This means I can use 2mm thick walls for the case.
+
+- TRRS jack diameter: Unavailable
+- Tested sizes: 6mm, 6.25mm, 6.5mm, 6.75mm, **7mm (optimal)**, 7.25mm
+- TRRS jack max thickness: Unavailable
+- Tested sizes: 2.1mm, 2.2mm, 2.3mm, 2.4mm, **2.5mm (max)**
