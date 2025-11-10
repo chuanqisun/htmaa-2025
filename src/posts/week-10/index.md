@@ -1,12 +1,12 @@
 ---
-title: "Week 10: Hofstadter's Law"
+title: "Week 10: Neal's Law"
 date: 2025-11-10
 keywords: ["molding", "casting", "3d printing"]
 ---
 
 > Hofstadter's law: It always takes longer than you expect, even when you take into account Hofstadter's law.
 
-> Neal's law: You will cast the opposite of what you expect, even after Neal warned you about Neal's law.
+> Neal's law: You will cast the opposite of what you expect, even after learning about Neal's law.
 
 ## Group Assignment
 
@@ -18,11 +18,16 @@ See additional documentation in the [group notes](https://fab.cba.mit.edu/classe
 
 Who doesn't like particle physics? Smashing particles together at near light speed could make cool pictures and win you a [Nobel prize](https://en.wikipedia.org/wiki/Higgs_boson). In this project, let's accelerate a particle by hand!
 
-After sketching out the positive/negative and hard/soft material relationships, I was ready to start fabrication. The design called for two clam shell circular components that would allow manual rotation, mimicking the concept of particles traveling through an accelerator ring.
+It hurts my brain to imagine the positive/negative relationships involved in casting. I found sketching an effective way to develop the concept.
+
+![Concept sketch](./media/concept.webp)
+**Concept sketch**
+
+After sketching out the positive/negative and hard/soft material relationships, I was ready to start fabrication. The design called for two shell components that, when closed like a clam, would accelerate a metal ball when shaken by hand. Similar to how [self-winding watch](https://en.wikipedia.org/wiki/Automatic_watch) feels.
 
 ### The CAM Debacle
 
-My initial plan was straightforward: CNC wax mold → rubber mold → plastic part. I've been using Onshape for its Linux compatibility, but learning from [Week 7](../week-07/index.md) that using separate CAD and CAM software adds significant overhead, I decided to learn FreeCAD this week to have an integrated workflow.
+My initial plan was simple and naive: CNC wax mold → plastic part. I've been using Onshape for its Linux compatibility, but learning from [Week 7](../week-07/index.md) that using other people's Fusion 360 for CAM adds significant overhead, I decided to learn FreeCAD CAM this week to have a personalized workflow.
 
 I studied two reference tutorials to understand the CAM capabilities:
 
@@ -31,102 +36,171 @@ I studied two reference tutorials to understand the CAM capabilities:
 
 **Attempt 1: Onshape Modeling → FreeCAD CAM**
 
-I started by modeling the parts in Onshape and importing them into FreeCAD for toolpath generation. A quick boolean operation against stock geometry immediately revealed a design flaw: I had edges without thickness, which would be impossible to mill.
+I started by modeling the parts in Onshape and importing them into FreeCAD for toolpath generation. I found an effective workflow that uses boolean operation to simulate the casting.
 
-![TODO: show image of boolean operation failure](...)
+![Simulate casting](./media/simulate-casting.webp)
+**Simulated casting using the subtract boolean operation**
 
-After fixing the geometry, I managed to set up the machine job by creating tool bits based on example endmill shapes and modifying the JSON configuration:
+A quick boolean operation against stock geometry immediately revealed a design flaw: I had edges without thickness, which would be impossible to mill.
+
+![Poor modeling](./media/simulated-casting-issue.webp)
+**Boolean operation reveals design flaw**
+
+After fixing the geometry, I managed to set up the machine job by creating tool bits based on example endmill shapes and modifying the JSON configuration, following this [YouTube tutorial](https://www.youtube.com/watch?v=ER1wUvfIswk).
 
 ```json
-// TODO embed json file
+{
+  "version": 2,
+  "name": "1/8 inch Endmill",
+  "shape": "endmill.fcstd",
+  "parameter": {
+    "CuttingEdgeHeight": "30.0000 mm",
+    "Diameter": "3.1750 mm",
+    "Length": "50.0000 mm",
+    "ShankDiameter": "3.0000 mm"
+  },
+  "attribute": {}
+}
 ```
 
-However, a new problem emerged. The toolpath algorithm couldn't detect the narrow, ring-like pocket geometry. The gutter between features was too narrow relative to the tool diameter.
+However, a new problem emerged. The toolpath algorithm couldn't fit the bit in the narrow, ring-like pocket geometry.
 
-![TODO: show image of FreeCAD toolpath failure](...)
+![Toolpath issue](./media/tool-path-issue-01-mods.webp)
+**Toolpath with excessive vertical movement**
 
-Increasing the ring width to be significantly greater than the tool diameter would solve the problem, but I didn't want to compromise the design. Additionally, FreeCAD's multiple toolpath feature proved very buggy. After generating the first toolpath, producing paths for the remaining material simply didn't work.
+Increasing the ring width to be significantly greater than the tool diameter would solve the problem, but I didn't want to compromise the design. Additionally, FreeCAD's multiple toolpath feature proved very buggy. After generating the first toolpath, producing paths for the remaining material simply had no effect: subsequent toolpaths would start over from the surface of the stock.
 
 **Attempt 2: FreeCAD Modeling → FreeCAD CAM**
 
-Thinking the import process might be causing issues, I decided to model directly in FreeCAD. The transition from Onshape to FreeCAD was rough—FreeCAD feels more rigid and less forgiving of design changes. I finished the mold design and tested it in CAM, but the multiple toolpath issues persisted.
+Thinking the import process might be causing issues, I decided to model directly in FreeCAD.
 
-![TODO: show FreeCAD toolpath failure](...)
+![Modeling in freecad](./media/cnc-mold-freecad.webp)
+**Modeling in FreeCAD**
+
+The transition from Onshape to FreeCAD was rough but manageable given that they share a similar mental model. I finished the mold design and tested it in CAM, but the multiple toolpath issues persisted.
+
+![Toolpath issue with FreeCAD](./media/tool-path-issue-01-freecad.webp)
+**Toolpath missing half of the geometry**
 
 **Attempt 3: Switching to Mods**
 
-Frustrated with FreeCAD's CAM limitations, I switched to Mods for toolpath generation. Unfortunately, Mods also couldn't generate sequential toolpaths that build on each other. Worse, I realized that my U-pipe geometry would require a ball endmill, and adding custom bit geometry would take too long to implement.
+Frustrated with FreeCAD's CAM limitations, I switched to [Mods](https://modsproject.org/) for toolpath generation, using the `G-code/mill 2.5D stl` program. Unfortunately, Mods couldn't generate sequential toolpaths that build on each other. Worse, I realized that my U-pipe geometry would require a ball endmill, and adding custom bit geometry would take too long to implement.
 
-Mods failed to generate proper toolpaths with issues similar to what I experienced in FreeCAD. At this point, I suspected fundamental problems with my modeling approach rather than just software limitations.
+![Toolpath issue with Mods](./media/tool-path-issue-03-resolved-3_4-gap.webp)
+**Excessive horizontal movement in Onshape model**
+
+![Toolpath issue with Mods](./media/mods-path-issue.webp)
+**Imcomplete paths in FreeCAD model**
+
+Mods failed to generate proper toolpaths with issues similar to what I experienced in FreeCAD. At this point, I suspected fundamental problems with my modeling approach rather than toolpath algorithms.
 
 **Summary of Failed Attempts**
 
-| CAD Software | CAM Software | Issue Encountered                             |
-| ------------ | ------------ | --------------------------------------------- |
-| Onshape      | FreeCAD      | Unnecessary vertical travels                  |
-| FreeCAD      | FreeCAD      | Missing toolpaths on half of the ring         |
-| Onshape      | Mods         | Unnecessary horizontal back-and-forth travels |
-| FreeCAD      | Mods         | Missing toolpaths on half of the ring         |
+| CAD Software | CAM Software | Issues Encountered                              |
+| ------------ | ------------ | ----------------------------------------------- |
+| Onshape      | FreeCAD      | Unnecessary vertical travels                    |
+| FreeCAD      | FreeCAD      | Ibid, and missing toolpaths on half of the ring |
+| Onshape      | Mods         | Unnecessary horizontal back-and-forth travels   |
+| FreeCAD      | Mods         | Ibid, and missing toolpaths on half of the ring |
 
 After spending considerable time troubleshooting, I needed to embrace pragmatism. In the spirit of supply-driven project management, I decided to move forward with something I could make real progress on: 3D printing the mother mold instead of CNC milling wax.
 
 ### Table of Contents, Literally
 
-Before diving into the technical details, I want to show you the physical manifestation of this week's iterative process. I laid out all my artifacts on a table—each row represents a complete iteration cycle from mother mold to final cast.
+Before diving into the technical details, I want to show you the physical manifestation of this week's iterative process. I laid out all my artifacts on a table. Each row visualizes an iteration cycle from mother mold to a point where I encountered an error.
 
-![TODO: show a physical gantt chart of artifacts](...)
+![Table of contents](./media/toc-01.webp)
+**v1 through v7 of molding and casting using 3D printing**
 
-Reading from left to right: the mother mold, the silicone mold, and the plastic cast. Reading from top to bottom: the progression through multiple iterations as I refined the process. This physical Gantt chart visualizes the staggered development timeline and shows how parallel work streams helped me maintain momentum despite individual failures.
-
-### Perfectly Making The Wrong Thing
+### V1: Perfectly Making The Wrong Thing
 
 **First Iteration: PLA Mother Mold**
 
-I designed the mother mold in Onshape, sliced it, and printed it in PLA. The print came out clean and the geometry looked promising.
+I slightly modified the CNC model to be the mother mold, sliced it with PrusaSlicer and printed it in PLA.
 
-![TODO: show CAD model](...)
-![TODO: printing result](...)
+![v1 mold](./media/v1-mold.webp)
+**Modeling the mold**
 
-However, I immediately faced a surface finish problem. The layer lines would transfer to the silicone mold and ultimately to the final cast. I needed to smooth the surface, so I considered two options:
+The print came out clean despite pronounced layer lines. I wanted to cast it first to see how bad the surface finish would be. Let's try Smooth-On Oomoo 30 silicone rubber.
 
-| Surface Treatment   | Challenge                                      |
-| ------------------- | ---------------------------------------------- |
-| Apply resin coating | Kat warned that resin inhibits silicone curing |
-| Apply wax coating   | Wax melts PLA, requiring a switch to PETG      |
+![v1 cast](./media/v1-01.webp)
+**Gather material for casting**
 
-**Second Iteration: PETG with Wax Coating**
+![v1 cast](./media/v1-02.webp)
+**Estimate the amount of silicone rubber needed using water**
 
-Following Kat's advice, I switched to PETG and applied a wax coating. The process involved melting the wax, brushing it on, using a heat gun to level the surface, and draining the excess. Unfortunately, I warped the PETG during the drain process when the material was still hot and pliable.
+I noticed that part B has much higher density than part A. It makes sense to add A first so part B and sink and improve the mixing.
 
-Despite the warping, I proceeded to cast the silicone mold. The results were disappointing—the wax coating couldn't eliminate the layer lines, and worse, it destroyed the sharp edges that were critical to my design.
+![v1 cast](./media/v1-03.webp)
+**Before mixing, clear separation between part A and B**
 
-![TODO: show waxing process](...)
+![v1 cast](./media/v1-04.webp)
+**After mixing, the color is uniform**
 
-**Material Comparison**
+Using a small cup was a mistake. Larger cup would make mixing easier.
 
-| Material | Print Quality                           | Surface Finish                               | Notes                                   |
-| -------- | --------------------------------------- | -------------------------------------------- | --------------------------------------- |
-| PLA      | Easy to print, smooth if calibrated     | Layer lines still visible                    | Best for rapid iteration                |
-| PETG     | More difficult, filament quality issues | Wax treatment smooths edges but leaves lines | Prone to warping during post-processing |
+Pouring is a battle against bubbles and require perfect balance: too fast, you could spill or introduce bubbles. Too slow, it could drip and also cause bubbles. Too high, it could splash and make bubbles. Too low, the bubles would not be able to stretch and pop before it enters the mold.
 
-**The Big Mistake**
+![v1 cast](./media/v1-05.webp)
+**Pouring in action**
 
-When I demolded the cast, I had a sinking realization: I had inverted the positive/negative relationship. Even after being fully aware of Neal's law from the lecture, I still managed to make this classic mistake.
+Curing: keep the mold undisturbed for 6 hours.
 
-![TODO: casting process](...)
+![v1 cast](./media/v1-06.webp)
+**Curing**
 
-**Third Iteration: PLA with Ironing**
+The result looks great, except... I casted the opposite of what I wanted. I knew Neal warned us in the lecture about making such mistake. How on earth did I still manage to do it? In retrospect, I was
 
-I switched back to PLA and recalled a feature from the 3D printing assignment: ironing. This could potentially smooth the top surface without requiring post-processing. I also made several other optimizations:
+![v1 cast](./media/v1-07.webp)
+**Result**
 
+The result also confirmed the surface finish issue. The layer lines would transfer to the silicone mold and ultimately to the final cast. I needed to smooth the surface, so I considered a few options:
+
+1. **Resin coating**: Kat warned that resin inhibits silicone curing
+2. **Wax coating**: Wax melts PLA, requiring a switch to PETG
+3. **Acetone vapor smoothing**: Only works for ABS, not PLA or PETG
+4. **Sanding and polishing**: Labor intensive and inconsistent results
+
+By elimination, I decided to try wax coating with PETG for the next iteration.
+
+**V2: PETG with Wax Coating**
+
+I started V2 before realizing the positive/negative issue. Since the goal is to characterize surface treatment methods, I proceeded with the PETG print with the wrong geometry. At least I would be able to compare identical geometries across different surface treatments.
+
+![v2 print](./media/v2-01.webp)
+**3D printed PETG mold**
+
+I used a heat gun to melt wax pellets and brushed it onto the PETG mold.
+
+![Wax](./media/v2-wax.webp)
+**Wax pellets**
+
+![Brushing](./media/v2-02.webp)
+**Brushing wax onto the PETG mold**
+
+The last step is applying heat to re-melt the wax in the mold and drain the excess. Unfortunately, I warped the PETG during the drain process when the material was still hot and pliable.
+
+![Warped mold](./media/v2-03.webp)
+**Warped PETG mold**
+
+Despite the warping, I proceeded to cast the silicone mold. The results were disappointing. The wax coating couldn't eliminate the layer lines, and worse, it destroyed the sharp edges that were critical to my design.
+
+![Wax result comparison](./media/v2-04.webp)
+**Left: PLA without surface treatment. Right: PETG with wax coating.**
+
+**V3-V5: Pushing The Limit of PLA**
+
+I switched back to PLA and recalled a feature from the 3D printing assignment: ironing. This could potentially smooth the top surface without requiring post-processing. These are the tweaks I explored:
+
+- Added ironing for surface smoothing
 - Reduced layer height to 0.05mm
 - Switched to concentric infill
 
-The concentric infill change had an unexpected benefit—it significantly sped up the print. My geometry is circular, so concentric infill minimizes travel moves compared to the default rectilinear pattern.
+The concentric infill change had an unexpected benefit of significantly speeding up the print. My geometry is circular, so concentric infill minimizes travel moves compared to the default rectilinear pattern.
 
 I tested various ironing parameters to find the optimal settings:
 
-![TODO: show comparison photos](...)
+![Characterizing ironing and infill](./media/infill-iron-test.webp)
 
 | Position     | Setting                           | Result              |
 | ------------ | --------------------------------- | ------------------- |
@@ -137,7 +211,8 @@ I tested various ironing parameters to find the optimal settings:
 
 As the Texas BBQ pitmasters say: "Low and slow." Low layer height and slow ironing did the trick.
 
-**Silicone Mold Challenges**
+![Ironing and concentric infill](./media/v4-01.webp)
+**Ironing and concentric infill in action**
 
 Casting the silicone mold from the improved PLA mother mold revealed new challenges. I used a glass plate to press down the backside of the rubber as it cured, creating a flat surface. However, this created two demolding problems:
 
