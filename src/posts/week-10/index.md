@@ -16,14 +16,14 @@ See additional documentation in the [group notes](https://fab.cba.mit.edu/classe
 
 ## Manual Particle Accelerator
 
-Who doesn't like particle physics? Smashing particles together at near light speed could make cool [images](https://news.mit.edu/2010/lhc-results-0205) and win you a [Nobel prize](https://en.wikipedia.org/wiki/Higgs_boson). In this project, let's accelerate a particle by hand!
+Who doesn't like particle physics? Smashing particles together at near light speed could make cool [images](https://home.cern/news/series/lhc-physics-ten/recreating-big-bang-matter-earth) and win you a [Nobel prize](https://en.wikipedia.org/wiki/Higgs_boson). Worried about creating a black hole? That's been [debunked](https://home.cern/resources/faqs/will-cern-generate-black-hole). In this project, you can safely accelerate a particle by hand!
 
-It hurts my brain to imagine the positive/negative relationships involved in casting. I found sketching an effective way to develop the concept.
+I imagined a torus shaped device. It hurts my brain to imagine the positive/negative relationships involved in casting. I found sketching an effective way to develop the concept.
 
 ![Concept sketch](./media/concept.webp)
 **Concept sketch**
 
-After sketching out the positive/negative and hard/soft material relationships, I was ready to start fabrication. The design called for two shell components that, when closed like a clam, would accelerate a metal ball when shaken by hand. Similar to how [self-winding watch](https://en.wikipedia.org/wiki/Automatic_watch) feels.
+After sketching out the positive/negative and hard/soft material relationships, I was ready to start fabrication. The design called for two shell components that, when closed like a clam, would form a torus in which you could accelerate a metal ball by shaking it. Similar to how [self-winding watch](https://en.wikipedia.org/wiki/Automatic_watch) feels.
 
 ### The CAM Debacle
 
@@ -116,7 +116,7 @@ After spending considerable time troubleshooting, I needed to embrace pragmatism
 
 ### Table of Contents, Literally
 
-Before diving into the technical details, I want to show you the physical manifestation of this week's iterative process. I laid out all my artifacts on a table. Each row visualizes an iteration cycle from mother mold to a point where I encountered an error.
+Before diving into the technical details, I want to show the physical manifestation of this week's iterative process. I laid out all my artifacts on a table. Each row visualizes an iteration cycle from mother mold to a point where I either reached a milestone or learned from a mistake.
 
 ![Table of contents](./media/toc-01.webp)
 **v1 through v7 of molding and casting using 3D printing**
