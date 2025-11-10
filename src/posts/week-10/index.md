@@ -10,13 +10,15 @@ keywords: ["molding", "casting", "3d printing"]
 
 ## Group Assignment
 
-This week, I joined [Kat](https://fabacademy.org/2023/labs/kamakura/students/ekaterina-kormilitsyna/)'s training session to learn about molding and casting safety. We reviewed the Safety Data Sheets (SDS) for two materials by Smooth-On: Oomoo 30 silicone rubber and Smooth-Cast 300 plastic. Understanding material properties and safety protocols is essential when working with these chemicals. Our detailed findings are documented in the [group notes](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week10/).
+This week, I joined [Kat](https://fabacademy.org/2023/labs/kamakura/students/ekaterina-kormilitsyna/)'s training session to learn about molding and casting. She showed us several examples covering molding, casting techniques, and materials. I also reviewed Safety Data Sheets (SDS) for two materials by Smooth-On: Oomoo 30 silicone rubber and Smooth-Cast 300 plastic. Understanding material properties and safety protocols is essential when working with these chemicals. ## Project: Manual Particle Accelerator
 
-## Project: Manual Particle Accelerator
+See additional documentation in the [group notes](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week10/).
+
+## Manual Particle Accelerator
 
 Who doesn't like particle physics? Smashing particles together at near light speed makes cool pictures and wins you [Nobel prizes](https://en.wikipedia.org/wiki/Higgs_boson). While we can't quite achieve relativistic speeds at home, we can certainly build something that captures the spirit of particle acceleration.
 
-After sketching out the positive/negative and hard/soft material relationships, I was ready to start fabrication. The design called for interlocking circular components that would allow manual rotation, mimicking the concept of particles traveling through an accelerator ring.
+After sketching out the positive/negative and hard/soft material relationships, I was ready to start fabrication. The design called for two clam shell circular components that would allow manual rotation, mimicking the concept of particles traveling through an accelerator ring.
 
 ### The CAM Debacle
 
