@@ -16,7 +16,7 @@ See additional documentation in the [group notes](https://fab.cba.mit.edu/classe
 
 ## Manual Particle Accelerator
 
-Who doesn't like particle physics? Smashing particles together at near light speed could make cool pictures and win you a [Nobel prize](https://en.wikipedia.org/wiki/Higgs_boson). In this project, let's accelerate a particle by hand!
+Who doesn't like particle physics? Smashing particles together at near light speed could make cool [images](https://news.mit.edu/2010/lhc-results-0205) and win you a [Nobel prize](https://en.wikipedia.org/wiki/Higgs_boson). In this project, let's accelerate a particle by hand!
 
 It hurts my brain to imagine the positive/negative relationships involved in casting. I found sketching an effective way to develop the concept.
 
@@ -158,12 +158,10 @@ The curing process requires keeping the mold undisturbed for 6 hours.
 ![v1 cast](./media/v1-06.webp)
 **Curing**
 
-The result looks great, except... I cast the opposite of what I wanted. I knew Neal warned us in the lecture about making such a mistake. How on earth did I still manage to do it?
+The result looks great, except... I cast the opposite of what I wanted. I knew Neal warned us in the lecture about making such a mistake. How on earth did I still manage to do it? In retrospect, I subconsciously believed that I could cast directly from the 3D printed mold. If I were able to cast hard material from the 3D printed mold, the outcome would be correct.
 
 ![v1 cast](./media/v1-07.webp)
 **Good but wrong result**
-
-In retrospect, I was thinking about directly casting from the 3D printed mold. If I were able to cast hard material from the 3D printed mold, the outcome would be correct.
 
 The result also confirmed the surface finish issue. The layer lines transferred to the silicone mold and would ultimately transfer to the final cast. I needed to smooth the surface, so I considered a few options:
 
