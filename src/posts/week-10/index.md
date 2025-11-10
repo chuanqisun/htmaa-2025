@@ -204,6 +204,10 @@ The concentric infill change had an unexpected benefit of significantly speeding
 I tested various ironing parameters to find the optimal settings:
 
 ![Characterizing ironing and infill](./media/infill-iron-test.webp)
+**Setting up different processes in one job**
+
+![Print result](./media/infill-iron-02.webp)
+**2 by 2 grid of results**
 
 | Position     | Setting                           | Result              |
 | ------------ | --------------------------------- | ------------------- |
@@ -218,7 +222,7 @@ In summary, everything we need to know to improve 3D printing is already capture
 >
 > -- Texas BBQ pitmasters
 
-Low layer height and slow ironing did the trick.
+Low layer height and slow ironing did the trick. I observed much better interior layers thaks to concentric infill:
 
 ![Ironing and concentric infill](./media/v4-01.webp)
 **Ironing and concentric infill in action**
@@ -239,6 +243,9 @@ Due to the rough wall texture, the silicone mold adhered strongly to the PLA mot
 
 ![Damaged mold](./media/v5-04.webp)
 **Damaged silicone mold after demolding**
+
+![Wall visualized in model](./media/v5-wall-issue.webp)
+**The right-most gutter made demolding very difficult**
 
 I wanted to proceed with the final casting to gain more experience and reveal other potential issues.
 
@@ -273,56 +280,52 @@ For fun, I hand-painted some graphic details with a sharpie. It was clear that v
 ![Side with bubbles](./media/v5-09.webp)
 **Rough side due to vacuum processing**
 
+The two sides didn't fit very well due to inconsistent interface. I had to belt-sand edges and deburr the grove to make them fit. I also repeatedly coupled and decoupled the two parts until they finally fit smoothly.
+
+![In context](./media/v5-12.webp)
+**How hard should I shaking to reach 99% speed of light?**
+
 ### V6-V7: Details
 
-**Final Cast and Lessons Learned**
+During these final iterations, I made the following improvements based everything observed in previous versions:
 
-During the final casting process, I learned several important techniques:
-
-1. **Mixing Method:** Shaking the bottle causes too many bubbles. The "shearing" motion mentioned in the lecture—pouring and stirring in a smooth, continuous motion—produces much better results.
-
-2. **Vacuum Chamber:** Pulling bubbles with a vacuum is counterproductive for molds with a bottom surface that will be visible in the final part. The vacuum causes surface roughness.
-
-![TODO: show comparison photos](...)
-
-These observations prompted design improvements for the next iteration:
-
-- Add chamfer to edges for easier demolding
-- Increase silicone base thickness for better structural integrity
+- Add chamfer to mother mold for easier demolding
+- Increase silicone base thickness to prevent tearing
+- Add fillets to interface for easier assembly
+- Reduced coupling surface for easier assembly
 - Use the highest quality PLA printer available in the lab
 
-**Post-Processing**
+![Final model](./media/v7-00.webp)
+**Simplified model with chamfers and fillets**
 
-The casted parts required cleanup. I used a belt sander and deburring tools to remove rough edges and excess material.
+Using the highest level setting, it took 5 hours to print the mold. It was the highest quality print I've ever made in this class.
 
-![TODO: show post-processing photo](...)
+![Final mold](./media/v7-02.webp)
+**Incredible surface finish**
 
-One final issue emerged during assembly: the interface between parts was too tight. The positive and negative halves wouldn't mate initially. This is because 3D printing kerf makes male features slightly wider and female features slightly narrower than modeled. I should have accounted for this in the design phase.
+Demolding and casting was smooth-sailing thanks to all the mistakes and lessons learned in previous iterations. The only issue is that due to the improved print quality, the fit between the two parts became a bit loose. I would have to adjust the model for the future versions.
 
-However, after enough repeated mating cycles, the plastic material wore down slightly and the two parts finally achieved a proper fit. Not the most elegant solution, but it worked.
+![Final assembly](./media/v7-01.webp)
+**Mother mold, silicone mold, and final cast assembly**
 
-![TODO: show the result](...)
+I deeply enjoyed this project. It could even become a final project if I add a digital frequency analyzer and laser-cut graphic masks.
 
-## Key Learnings
+### Reflections
 
-**Linear Processes Carry Compounded Risk**
+**Sequential Workflows Demand Pipelining**
 
-The mother mold → silicone mold → plastic cast workflow is inherently sequential. Any failure in the chain causes significant rework. This is fundamentally different from parallel processes where failures can be isolated. It's worth being much more cautious and validating designs at each stage before proceeding.
+The mother mold → silicone mold → plastic cast workflow is inherently sequential, where any failure causes significant rework. However, by staggering multiple iterations in parallel, I could manage the long iteration cycles effectively and continuously integrate feedback into next iterations. If I had worked in a strictly single-threaded manner, this project would have taken more than 60 hours.
 
 **Emotional Factors in Decision Making**
 
-During one 3D print that was near completion, I realized I should have added fillets to the interface geometry. But I couldn't bring myself to stop the job—I had fallen victim to the sunk cost fallacy. Sometimes the rational decision is to waste a partially completed print to save the time you'd waste on rework later.
+During one 3D print that was near completion, I realized I should have added fillets to the interface geometry. But I couldn't bring myself to stop the job. It felt as if I was terminating a life. I had fallen victim to the sunk cost fallacy as well as anthropomorphizing objects.
 
-**Trust, But Verify**
+**Don't Trust Yourself**
 
-I mistakenly flipped the positive/negative relationship, even after being fully aware of Neal's law from the lecture. This taught me that sometimes it's better to have others check your work than to trust your own brain, especially when you've been staring at the same design for hours.
-
-**Pipelining Is Essential**
-
-The physical "table of contents" demonstrates how important pipelining is for managing long iteration cycles. Each complete cycle from mother mold to cast takes several hours for printing, curing, and demolding. By staggering multiple iterations in parallel, I could start a new print while previous molds were curing. If I had worked in a strictly single-threaded manner, this project would have taken 40+ hours instead of being completable in a week.
+I mistakenly flipped the positive/negative relationship, even after being fully aware of Neal's warning from the lecture. This taught me that sometimes it's better to have others check your work than to trust your own brain, especially when you've been staring at the same design for hours.
 
 ## Appendix
 
-- TODO, attach: Infill and ironing testing print
-- TODO, attach: Final model for CNC mother-mold
-- TODO, attach: Final model for 3D printable mother-mold
+- [Infill and ironing testing print](./model/infill-ironing-test.3mf)
+- [Printable model and slicer files](./model/model-for-printing.zip)
+- [CNC model](./model/model-for-milling.FCStd)
