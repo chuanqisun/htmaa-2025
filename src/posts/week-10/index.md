@@ -6,7 +6,7 @@ keywords: ["molding", "casting", "3d printing"]
 
 > Hofstadter's law: It always takes longer than you expect, even when you take into account Hofstadter's law.
 
-> Neal's law: You will cast the opposite of what you expect, even after Neal told you about Neal's law.
+> Neal's law: You will cast the opposite of what you expect, even after Neal warned you about Neal's law.
 
 ## Group Assignment
 
