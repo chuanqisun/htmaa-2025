@@ -124,12 +124,12 @@ I slightly modified the CNC model to be the mother mold, sliced it with PrusaSli
 The print came out clean despite pronounced layer lines. I wanted to cast it first to see how bad the surface finish would be. Let's try Smooth-On Oomoo 30 silicone rubber.
 
 ![v1 cast](./media/v1-01.webp)
-**Gather material for casting**
+**Gathering materials for casting**
 
 ![v1 cast](./media/v1-02.webp)
-**Estimate the amount of silicone rubber needed using water**
+**Estimating the amount of silicone rubber needed using water**
 
-I noticed that part B has much higher density than part A. It makes sense to add A first so part B and sink and improve the mixing.
+I noticed that part B has much higher density than part A. It makes sense to add A first so part B can sink and improve the mixing.
 
 ![v1 cast](./media/v1-03.webp)
 **Before mixing, clear separation between part A and B**
@@ -137,24 +137,24 @@ I noticed that part B has much higher density than part A. It makes sense to add
 ![v1 cast](./media/v1-04.webp)
 **After mixing, the color is uniform**
 
-Using a small cup was a mistake. Larger cup would make mixing easier.
+Using a small cup was a mistake. A larger cup would make mixing much easier.
 
-Pouring is a battle against bubbles and require perfect balance: too fast, you could spill or introduce bubbles. Too slow, it could drip and also cause bubbles. Too high, it could splash and make bubbles. Too low, the bubles would not be able to stretch and pop before it enters the mold.
+Pouring is a battle against bubbles and requires perfect balance: too fast, you could spill or introduce bubbles. Too slow, it could drip and also cause bubbles. Too high, it could splash and make bubbles. Too low, the bubbles wouldn't be able to stretch and pop before entering the mold.
 
 ![v1 cast](./media/v1-05.webp)
 **Pouring in action**
 
-Curing: keep the mold undisturbed for 6 hours.
+The curing process requires keeping the mold undisturbed for 6 hours.
 
 ![v1 cast](./media/v1-06.webp)
 **Curing**
 
-The result looks great, except... I casted the opposite of what I wanted. I knew Neal warned us in the lecture about making such mistake. How on earth did I still manage to do it? In retrospect, I was
+The result looks great, except... I cast the opposite of what I wanted. I knew Neal warned us in the lecture about making such a mistake. How on earth did I still manage to do it?
 
 ![v1 cast](./media/v1-07.webp)
 **Result**
 
-The result also confirmed the surface finish issue. The layer lines would transfer to the silicone mold and ultimately to the final cast. I needed to smooth the surface, so I considered a few options:
+The result also confirmed the surface finish issue. The layer lines transferred to the silicone mold and would ultimately transfer to the final cast. I needed to smooth the surface, so I considered a few options:
 
 1. **Resin coating**: Kat warned that resin inhibits silicone curing
 2. **Wax coating**: Wax melts PLA, requiring a switch to PETG
@@ -165,12 +165,12 @@ By elimination, I decided to try wax coating with PETG for the next iteration.
 
 **V2: PETG with Wax Coating**
 
-I started V2 before realizing the positive/negative issue. Since the goal is to characterize surface treatment methods, I proceeded with the PETG print with the wrong geometry. At least I would be able to compare identical geometries across different surface treatments.
+I started V2 before realizing the positive/negative issue. Since the goal was to characterize surface treatment methods, I proceeded with the PETG print with the wrong geometry. At least I would be able to compare identical geometries across different surface treatments.
 
 ![v2 print](./media/v2-01.webp)
 **3D printed PETG mold**
 
-I used a heat gun to melt wax pellets and brushed it onto the PETG mold.
+I used a heat gun to melt wax pellets and brushed them onto the PETG mold.
 
 ![Wax](./media/v2-wax.webp)
 **Wax pellets**
@@ -178,7 +178,7 @@ I used a heat gun to melt wax pellets and brushed it onto the PETG mold.
 ![Brushing](./media/v2-02.webp)
 **Brushing wax onto the PETG mold**
 
-The last step is applying heat to re-melt the wax in the mold and drain the excess. Unfortunately, I warped the PETG during the drain process when the material was still hot and pliable.
+The final step involved applying heat to re-melt the wax in the mold and drain the excess. Unfortunately, I warped the PETG during the drain process when the material was still hot and pliable.
 
 ![Warped mold](./media/v2-03.webp)
 **Warped PETG mold**
@@ -188,13 +188,16 @@ Despite the warping, I proceeded to cast the silicone mold. The results were dis
 ![Wax result comparison](./media/v2-04.webp)
 **Left: PLA without surface treatment. Right: PETG with wax coating.**
 
-**V3-V5: Pushing The Limit of PLA**
+### V3-V5: Pushing The Limit of PLA
 
-I switched back to PLA and recalled a feature from the 3D printing assignment: ironing. This could potentially smooth the top surface without requiring post-processing. These are the tweaks I explored:
+I switched back to PLA and recalled a feature from the 3D printing assignment: ironing. This could potentially smooth the top surface without requiring post-processing. I explored several tweaks to optimize the print quality:
 
-- Added ironing for surface smoothing
+- Added ironing at 10% flow and 0.1mm gap for surface smoothing
 - Reduced layer height to 0.05mm
 - Switched to concentric infill
+
+![Prusa Ironing](./media/prusa-setup.webp)
+**Setup for ironing in PrusaSlicer**
 
 The concentric infill change had an unexpected benefit of significantly speeding up the print. My geometry is circular, so concentric infill minimizes travel moves compared to the default rectilinear pattern.
 
@@ -209,28 +212,68 @@ I tested various ironing parameters to find the optimal settings:
 | Bottom left  | Ironing: 0.15mm spacing, 15% flow | Good improvement    |
 | Bottom right | Ironing: 0.1mm spacing, 10% flow  | Best surface finish |
 
-As the Texas BBQ pitmasters say: "Low and slow." Low layer height and slow ironing did the trick.
+In summary, everything we need to know to improve 3D printing is already captured in the culinary wisdom:
+
+> Low and slow.
+>
+> -- Texas BBQ pitmasters
+
+Low layer height and slow ironing did the trick.
 
 ![Ironing and concentric infill](./media/v4-01.webp)
 **Ironing and concentric infill in action**
 
-Casting the silicone mold from the improved PLA mother mold revealed new challenges. I used a glass plate to press down the backside of the rubber as it cured, creating a flat surface. However, this created two demolding problems:
+Here is the full mold using the ironing and concentric infill settings. Unfortunately, the 3D printer had some issue extruding consistently despite my tuning of temperature. It was not as good as my characterization test from another printer.
 
-1. The silicone was extremely difficult to release from the glass plate.
+![Ironed mold](./media/v5-01.webp)
+**Ironed mold, sub-optimal surface and rough wall texture**
 
-![TODO: show glass release photo](...)
+When casting the silicone mold from the new PLA mother mold, I used a glass plate to press down the backside of the rubber as it cured, creating a flat surface to make the final casting easier to level.
 
-2. The rubber was also extremely difficult to release from the plastic mold.
+![Leveling the surface](./media/v5-03.webp)
+**Leveling the surface**
 
-The second issue was particularly problematic. As they say, "poor worker blaming his tools," but in this case, the tool choice genuinely mattered. I had tried nearly all the 3D printers in the shop and identified three machines that consistently produce quality prints. Due to printing congestion, I had used one of the least performant printers. The resulting surface had not only visible layer lines but also a very rough texture that grabbed onto the rubber during demolding.
+This made a perfectly flat rubber surface, but it also created a vacuum suction that made it very difficult to remove it from the glass. I would not recommend this technique to others.
 
-The consequence was severe—I tore the wall of the rubber mold during removal.
+Due to the rough wall texture, the silicone mold adhered strongly to the PLA mother mold. During demolding, I torn the wall apart from the rubber base.
 
-![TODO: show torn rubber photo](...)
+![Damaged mold](./media/v5-04.webp)
+**Damaged silicone mold after demolding**
 
-For future iterations, I should add more draft angle to facilitate demolding. As a temporary workaround, I 3D printed a support ring to hold the damaged mold in shape.
+I wanted to proceed with the final casting to gain more experience and reveal other potential issues.
 
-![TODO: show image of adhoc support ring](...)
+![3D printed support](./media/v5-05.webp)
+**3D printed support ring to hold the damaged mold in shape**
+
+With the support ring, I was able to cast the final parts. The Smooth-On Smooth-Cast 300 plastic came with the instruction that you should stir or shake the bottles before mixing. That was a very bad idea. After shaking, the mixture was full of bubbles that would not go away. I had to switch to another bottle while letting those bubbles dissipate over time.
+
+![Casting](./media/v5-06.webp)
+**Casting the final parts despite the damaged mold (left)**
+
+I attempted to remove bubbles using a vacuum chamber, but it backfired. The vacuum caused surface roughness on the bottom side of the mold that would be visible in the final part.
+
+![Vacuum chamber](./media/v5-02.webp)
+**Using vacuum chamber to remove bubbles**
+
+This marks the first production of the final parts. Good news is that the geometry is correct this time.
+
+![Validating](./media/v5-07.webp)
+**Design validated**
+
+To make the molds ready for assembly, I deburred the edges and sanded down rough surfaces.
+
+![Deburring](./media/v5-11.webp)
+**Deburring the casted parts**
+
+For fun, I hand-painted some graphic details with a sharpie. It was clear that vacuum processing was not only unnecessary but also detrimental to surface quality.
+
+![Side without bubbles](./media/v5-10.webp)
+**Smooth side without vacuum processing**
+
+![Side with bubbles](./media/v5-09.webp)
+**Rough side due to vacuum processing**
+
+### V6-V7: Details
 
 **Final Cast and Lessons Learned**
 
