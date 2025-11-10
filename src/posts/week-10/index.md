@@ -161,7 +161,9 @@ The curing process requires keeping the mold undisturbed for 6 hours.
 The result looks great, except... I cast the opposite of what I wanted. I knew Neal warned us in the lecture about making such a mistake. How on earth did I still manage to do it?
 
 ![v1 cast](./media/v1-07.webp)
-**Result**
+**Good but wrong result**
+
+In retrospect, I was thinking about directly casting from the 3D printed mold. If I were able to cast hard material from the 3D printed mold, the outcome would be correct.
 
 The result also confirmed the surface finish issue. The layer lines transferred to the silicone mold and would ultimately transfer to the final cast. I needed to smooth the surface, so I considered a few options:
 
@@ -335,6 +337,6 @@ I mistakenly flipped the positive/negative relationship, even after being fully 
 
 ## Appendix
 
-- [Infill and ironing testing print](./model/infill-ironing-test.3mf)
-- [Printable model and slicer files](./model/model-for-printing.zip)
-- [CNC model](./model/model-for-milling.FCStd)
+- [Infill and ironing slicer file](./model/infill-ironing-test.3mf)
+- [Printable model and slicer file](./model/model-for-printing.zip)
+- [CNC model (failed to CAM)](./model/model-for-milling.FCStd)
