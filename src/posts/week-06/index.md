@@ -38,7 +38,7 @@ Upload both files at the same time to Quentin's [gerber2img](https://quentinbols
 - For the exterior cut, I used the "Black and white" setting and checked "Fill edge cut" to create a solid outline including the drill holes.
 - For the traces, I unchecked this option.
 
-Use Neal's [modsproject](https://modsproject.org/) with the Carvera mill 2D PCB program to generate the final G-code for the milling machine. The tool is self-explanatory. Just follow the pipeline to proceed.
+Use Neil's [modsproject](https://modsproject.org/) with the Carvera mill 2D PCB program to generate the final G-code for the milling machine. The tool is self-explanatory. Just follow the pipeline to proceed.
 
 The initial milling produced some burrs, but after a bit of sanding, the results were very good.
 

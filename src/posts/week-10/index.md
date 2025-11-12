@@ -1,12 +1,12 @@
 ---
-title: "Week 10: Neal's Law"
+title: "Week 10: Neil's Law"
 date: 2025-11-10
 keywords: ["molding", "casting", "3d printing"]
 ---
 
 > Hofstadter's law: It always takes longer than you expect, even when you take into account Hofstadter's law.
 
-> Neal's law: You will cast the opposite of what you expect, even after learning about Neal's law.
+> Neil's law: You will cast the opposite of what you expect, even after learning about Neil's law.
 
 ## Group Assignment
 
@@ -158,7 +158,7 @@ The curing process requires keeping the mold undisturbed for 6 hours.
 ![v1 cast](./media/v1-06.webp)
 **Curing**
 
-The result looks great, except... I cast the opposite of what I wanted. I knew Neal warned us in the lecture about making such a mistake. How on earth did I still manage to do it? In retrospect, I subconsciously believed that I could cast directly from the 3D printed mold. If I were able to cast hard material from the 3D printed mold, the outcome would be correct.
+The result looks great, except... I cast the opposite of what I wanted. I knew Neil warned us in the lecture about making such a mistake. How on earth did I still manage to do it? In retrospect, I subconsciously believed that I could cast directly from the 3D printed mold. If I were able to cast hard material from the 3D printed mold, the outcome would be correct.
 
 ![v1 cast](./media/v1-07.webp)
 **Good but wrong result**
@@ -331,7 +331,7 @@ During one 3D print that was near completion, I realized I should have added fil
 
 **Don't Trust Yourself**
 
-I mistakenly flipped the positive/negative relationship, even after being fully aware of Neal's warning from the lecture. This taught me that sometimes it's better to have others check your work than to trust your own brain, especially when you've been staring at the same design for hours.
+I mistakenly flipped the positive/negative relationship, even after being fully aware of Neil's warning from the lecture. This taught me that sometimes it's better to have others check your work than to trust your own brain, especially when you've been staring at the same design for hours.
 
 ## Appendix
 
