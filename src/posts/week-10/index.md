@@ -338,3 +338,27 @@ I mistakenly flipped the positive/negative relationship, even after being fully 
 - [Infill and ironing slicer file](./model/infill-ironing-test.3mf)
 - [Printable model and slicer file](./model/model-for-printing.zip)
 - [CNC model (failed to CAM)](./model/model-for-milling.FCStd)
+
+### Steps to Reproduce FreeCAM CAM Toolpath Issue
+
+1. Download [model.FCStd](./model/model-for-milling.FCStd), open it in FreeCAD (v1.0.2)
+2. Switch to the CAM workbench
+3. Create a CAM Job for the `female-part` solid, with the following changes from the default
+   - stock: **Create Box**
+   - tool: **1/8 inch Endmill** (download [toolbit.zip](./model/toolbit.zip) and add 1/8" endmill to job)
+4. Select `Model-female-part.Face1` (the top facing surface of the outer-most gutter ring on the solid) and create 3D pocket toolpath, with the following changes from default
+   - Operation/Pattern: **Offset**
+   - Min Travel: **checked**
+   - Use Rest Machining: **checked**
+5. Apply and visualize the toolpath
+
+**Expected**: progressively deepening circular motion along the outer-most ring
+
+**Actual**:
+
+1. Missing toolpaths on half of the ring
+2. Excessive vertical movements
+3. Unwanted toolpaths for inner rings
+
+![Bug screenshot](./media/bug-report-screenshot.webp)
+**FreeCAD screenshot of the 3 issues**
