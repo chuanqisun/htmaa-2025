@@ -357,3 +357,54 @@ Testing revealed that 7mm diameter is the best fit, and max thickness can be 2.5
 - Tested sizes: 6mm, 6.25mm, 6.5mm, 6.75mm, **7mm (optimal)**, 7.25mm
 - TRRS jack max thickness: Unavailable
 - Tested sizes: 2.1mm, 2.2mm, 2.3mm, 2.4mm, **2.5mm (max)**
+
+## Mid-term review
+
+Remaining tasks
+
+1. Fabricate Operator
+   - Design button mounting mechanism (2 buttons)
+   - Design speaker mounting mechanism
+   - Model updated case and enclosure
+   - Solder TRRS connector
+   - 3D print and assemble
+   - 3D print button caps
+2. Fabricate Switchboard
+   - Order vintage LEDs
+   - Design LED mounting mechanism
+   - Solder TRRS connectors
+   - Model updated case and lid
+   - 3D print and assemble
+3. Software
+   - Implement multi-agent simulation
+   - Implement automatic server IP discovery
+   - Implement diagnostic UI
+
+Stretch goals:
+
+- Replace USB-C power bank with LiPo battery and custom power switch
+- Custom make TRRS cables
+- Custom solder ICS-43434 microphone
+- Add a mode switch slide button
+
+Delivery plan:
+
+- Networking week (11/19-25)
+  - Fabric Switchboard: full assembly
+  - Implement automatic server IP discovery
+  - Implement multi-agent simulation
+- Interface and app programming (11/26-12/02)
+  - Fabricate Operator: except button caps
+  - Implement LED signaling
+- Wildcard week (12/03-09)
+  - Fabricate button caps (3D print)
+  - Improve case quality
+  - Improve software quality
+- Final week (12/10-15)
+  - Buffer time
+
+Questions for TA:
+
+1. Button, speaker, LED mounting mechanism?
+2. Battery + Power: what kind of switch should I use? How to mount?
+3. Slider switch: what options do I have? How complex?
