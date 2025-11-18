@@ -1,5 +1,5 @@
 ---
-title: "Week 11: Mob Programming in Practice"
+title: "Week 11: Mob-making A Machine"
 date: 2025-11-18
 keywords: ["machine-building", "collaboration"]
 ---
@@ -595,6 +595,10 @@ With the scheduler in place, I was able to dispatch the command at the high spee
 
 > The bearing of a child takes nine months, no matter how many women are assigned.
 > — Fred Brooks, _The Mythical Man-Month_
+
+It's tempting to add more process and throw more people at the problems. In this project, I found it most effective when two-people micro-teams pair program to solve on problem. I saw it working very well between Matti and Miranda, and Saetbeyol and me. This means it is even more important to decompose the problem into smaller chunks that can be solved by small teams in parallel.
+
+This project also challenged my conventional wisdom about formal software development. Version control, testing, code review, CI/CD, TypeScript, ES6 modules, linting, formatting, design patterns were all thrown out the window, maybe for the better. I'm always fascinated by emerging practices under extreme constraints. In this project, I'm convinced that less is more when the timeline is short and the skill levels are diverse.
 
 ## Appendix
 
