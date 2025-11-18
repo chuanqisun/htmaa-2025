@@ -153,6 +153,8 @@ server.on("listening", () => {
 server.bind(41234); // Bind to port 41234
 ```
 
+On the ESP32 side, I sent UDP packets in bursts and measure latency during peak load.
+
 ```cpp
 #include <WiFi.h>
 #include <AsyncUDP.h>
@@ -232,7 +234,7 @@ I realized the problem that each person's laptop has a different IP address. So 
 - People can announce their IP address on a server.
 - ESP32 will poll the server to get the latest IP address of the laptop.
 
-![IP Discovery Tool](./media/ip-discovery.png)
+![IP Discovery Tool](./media/ip-discovery.webp)
 **IP Discovery Tool**
 
 This tool was eventually taken offline due to switching from Wifi to Bluetooth.
@@ -469,6 +471,8 @@ sendInterval = setInterval(async () => {
   }
 }, interval);
 ```
+
+Error code from the Web Bluetooth API:
 
 ```txt
 SEND ERROR: GATT operation already in progress.
