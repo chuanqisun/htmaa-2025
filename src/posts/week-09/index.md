@@ -1,7 +1,7 @@
 ---
 title: "Week 9: Machine Melody"
 date: 2025-11-03
-keywords: ["input", "output", "speaker"]
+keywords: ["output", "speaker"]
 ---
 
 ## Group Assignment
