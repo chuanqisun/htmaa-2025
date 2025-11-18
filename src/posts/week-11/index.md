@@ -4,18 +4,26 @@ date: 2025-11-18
 keywords: ["machine-building", "collaboration"]
 ---
 
-> The bearing of a child takes nine months, no matter how many women are assigned.
-> — Fred Brooks, _The Mythical Man-Month_
+This is a group project week. This document captures the tasks I was involved in. See the group project page for the full context.
 
 ## Labubu
 
-This is a group project week. This document captures the tasks I was involved in. See the group project page for the full context.
-
-Miranda pitched the idea of building an icosahedron robot that can move around based on IMU data. Each face would be a Labubu to punches out and propels the icosahedron in the desired direction. I don't understand the significance of Labubu, but the idea sounds cool. Towards the end of the project, we have replaced the Labubu with our professor's Neil's face. That makes the project much more relatable but also much higher stakes.
+Miranda pitched the idea of building an icosahedron robot that can move around based on IMU data. Each face would be a Labubu to punches out and propels the icosahedron in the desired direction. I'm too old to understand the cultural significance of Labubu, but the idea sounds cool. Towards the end of the project, we have replaced the Labubu with our professor's Neil's face. That makes the project much more relatable but also much higher stakes.
 
 ## Project organization
 
-- During the initial project planning, we discussed how to organize the codebase. I proposed a controversial idea of organizing code by people and duplicate code to surface full history at all times.
+The group devided themselves into four sub-teams: MechE, Electronics, Software, Creative. I focused on Software.
+
+- During the initial project planning, we discussed how to organize the codebase.
+- People originally proposed formal PR process and branch-based workflow
+- I want to emphasize on people over technology and advised that sub-team leaders should be responsible for:
+  - Anticipate dependency and conflicts with other teams. Communicate early for those
+  - Adapt their version control strategy based on their team members' skills and preferences
+
+> Don't communicate by sharing memory; share memory by communicating.
+> — Go Language Design Principle
+
+- I proposed a controversial idea of organizing code by people and duplicate code to surface full history at all times.
 
 Consider this folder structure
 
@@ -29,10 +37,15 @@ Consider this folder structure
 ...
 ```
 
-I advocated for this style because we need to consistantly branch and fork each other's ideas, 90% of the code in the beginning will be self-contained experiments that can be thrown away later. Exposing everyone's work in the same branch at the same time means:
+Fundamentally, this is a "copy-paste" version control system most professional developers would cringe at.
+I advocated for this style because we need to quickly branch and fork each other's ideas, 90% of the code in the beginning will be self-contained one-off experiments that won't evole later. Exposing everyone's work in the same branch at the same time means:
 
 - We can easily re-mix each other's code
-- People using AI can reference multiple components from different people
+- People using AI can reference multiple components from different people and use AI to help with integration
+- People's work becomes a natural source of documentation on what they have done. History not buried in git logs.
+- No merge conflicts because everyone works in their own folder
+
+As a caveat, the person sharing their code to others is responsible for discussing what breaking changes are incoming; the person consuming other's code is responsible for stating assumptions and expectations.
 
 This organization worked well in the beginning, but towards the second half of the project, we came to the conclusion that we need a point of integration. So our final folder structure is:
 
@@ -46,11 +59,9 @@ This organization worked well in the beginning, but towards the second half of t
   ...
 ```
 
-I would still advocate for the same strategy for future projects.
+I fully understand this is not how git workflow is suppose to be. But for a mob-like student projects, this organization did its magic in helping us ssee each other's code without the branching overhead. I would still advocate for the same strategy for future projects.
 
 ## Division of labor
-
-The group decided to divide the project into three teams: MechE, Electronics, and Software. I decided to focus on Software.
 
 On the first night, Matti and I discussed task division. We want to:
 
@@ -79,21 +90,7 @@ This is what we came up with:
 
 At the end of the project, a similar structure was reflected in our code, redminding me of Conway's Law. As a reflection, we can use Conway's Law to our advantage by asking what kind of teams and collaborations do we desire, and thus we would modularize our project to maximize the organizational structure we want.
 
-## Networking note
-
-We started with UDP over Wifi because I had a similar system already working from the Input/Output week for streaming voice. I implemented a few diagnostic programs to test UDP
-
-(See 300-udp-test-burst)
-
-- Xiao UDP can send over 1k hz to a PC
-- But it will crash, presumable due to buffer overflow, when PC sends it too much data
-- characteristics
-  - typical latency: 30-50ms
-  - worst latency: 100-200ms
-  - best latency: 4-6ms
-- xiao needs to sleep 1ms between send. Otherwise, it will be blocked from reading packet
-
-## Decision record
+## Software Architecture
 
 We also agreed on the high level architecture: shift as much computation to the PC as possible because it's much easier to iterate and debug on the PC than on the xiao.
 
@@ -108,6 +105,137 @@ This concept was reflected in every subsequent decision we made. Xiao's logic is
 - Xiao takes a servo motor number and fully extend, then retracts it based on predefined PWM sequence
 
 The PC takes heavy lifting in interpreting the IMU data, solving the gemoetric puzzle, calibrating, and solving the correct servos to move based on user commands.
+
+## Networking Proof of Concept
+
+We started with UDP over Wifi because I had a similar system already working from the Input/Output week for streaming voice. I implemented a few diagnostic programs to test UDP
+
+First, we want to understand the performance characteristics of Xiao ESP32 UDP over Wifi.
+
+An simple node.js server echos that any UDP message back to the sender
+
+```js
+const dgram = require("dgram");
+const os = require("os");
+
+const server = dgram.createSocket("udp4");
+
+server.on("message", (msg, rinfo) => {
+  console.log(`Received ${msg.length} bytes from ${rinfo.address}:${rinfo.port}`);
+  try {
+    const data = JSON.parse(msg.toString());
+    console.log(`currentTime: ${data.currentTime}, latency: ${data.latency}`);
+  } catch (e) {
+    console.log(`Invalid JSON: ${msg.toString()}`);
+  }
+  // Send back the same message
+  server.send(msg, 0, msg.length, rinfo.port, rinfo.address, (err) => {
+    if (err) console.error("Error sending response:", err);
+  });
+});
+
+server.on("listening", () => {
+  const address = server.address();
+  const interfaces = os.networkInterfaces();
+  let localIP = "127.0.0.1"; // fallback
+  for (let iface in interfaces) {
+    for (let addr of interfaces[iface]) {
+      if (addr.family === "IPv4" && !addr.internal) {
+        localIP = addr.address;
+        break;
+      }
+    }
+    if (localIP !== "127.0.0.1") break;
+  }
+  console.log(`UDP server listening on ${localIP}:${address.port}`);
+});
+
+server.bind(41234); // Bind to port 41234
+```
+
+```cpp
+#include <WiFi.h>
+#include <AsyncUDP.h>
+
+const char* WIFI_SSID = "MLDEV";
+const char* WIFI_PASSWORD = "";
+
+AsyncUDP udp;
+IPAddress targetIP(192, 168, 41, 229);
+const unsigned int targetPort = 41234;
+int packetNum = 0;
+unsigned long lastLatency = 0;
+int burstCount = 0;
+const int BURST_SIZE = 1;
+
+void setup() {
+  Serial.begin(115200);
+
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  unsigned long startTime = millis();
+  while (WiFi.status() != WL_CONNECTED && millis() - startTime < 300000) {
+    delay(500);
+    Serial.print(".");
+  }
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("WiFi Failed");
+  }
+  Serial.println("Connected to WiFi");
+  Serial.print("IP Address: ");
+  Serial.println(WiFi.localIP());
+
+  if (udp.connect(targetIP, targetPort)) {
+    Serial.println("UDP connected");
+    udp.onPacket([](AsyncUDPPacket packet) {
+      String msg = String((char*)packet.data(), packet.length());
+      int colonPos = msg.indexOf("currentTime\":");
+      if (colonPos != -1) {
+        colonPos += 13;
+        int commaPos = msg.indexOf(",", colonPos);
+        if (commaPos != -1) {
+          String timeStr = msg.substring(colonPos, commaPos);
+          unsigned long sentTime = strtoul(timeStr.c_str(), NULL, 10);
+          lastLatency = millis() - sentTime;
+        }
+      }
+      packet.printf("Got %u bytes of data", packet.length());
+    });
+  }
+}
+
+void loop() {
+  if (burstCount < BURST_SIZE) {
+    packetNum++;
+    burstCount++;
+    String json = "{\"currentTime\":" + String(millis()) + ",\"packetNum\":" + String(packetNum) + ",\"latency\":" + String(lastLatency) + "}";
+    udp.print(json);
+    Serial.println("Sent: " + json);
+  } else {
+    Serial.println("Sleeping for 1 second...");
+    delay(10);
+    burstCount = 0;
+  }
+}
+```
+
+- Xiao UDP can send over 1k hz to a PC
+- But it will crash, presumable due to buffer overflow, when PC sends it too much data
+- characteristics
+  - typical latency: 30-50ms
+  - worst latency: 100-200ms
+  - best latency: 4-6ms
+- xiao needs to sleep 1ms between send. Otherwise, it will be blocked from reading packet
+
+I realized the problem that each person's laptop has a different IP address. So I implemented a simple IP discovery protocol:
+
+- People can announce their IP address on a server.
+- ESP32 will poll the server to get the latest IP address of the laptop.
+
+![IP Discovery Tool](./media/ip-discovery.png)
+**IP Discovery Tool**
+
+This tool was eventually taken offline due to switching from Wifi to Bluetooth.
 
 ## Interface first
 
@@ -149,10 +277,46 @@ Reset device command
 
 We disucssed custom bit packing to reduce bandwidth consumption but I advocated for JSON for simplicity and agreed that we can optimize later if needed.
 
+The JSON protocol was eventually superseded by a custom op-code based binary protocol in order to conserve BLE bandwidth.
+
+In retrospect, I would still advocate for JSON protocol with more concise names. The bit packing optimization has marginal gain and made serialization/deserialization much more error prone.
+
 ## Server implementation
 
-- Yufeng ran the demo code for Adafruit IMU board
-- In parallel, I mocked the IMU data in a separate Xiao, communicate with a node.js server over UDP, and made user the node.js server can send commands back to Xiao.
+- Yufeng ran the demo code for Adafruit IMU board and started developing sensor data processing.
+- Thanks for the data format contract, I was able to in parallel mock the IMU data in a separate Xiao, communicate with a node.js server over UDP
+
+This is the module that mocks the sensor data.
+
+```cpp
+// Mock IMU sensor data
+float gx = 0.0, gy = 0.0, gz = 0.0;  // Gyroscope in degrees
+float mx = 0.0, my = 0.0, mz = 0.0;  // Compass/Magnetometer in degrees
+
+void updateMockSensorData() {
+  // Update mock IMU data with random changes
+  gx += random(-10, 11) * 0.1;  // Change by -1.0 to +1.0 degrees
+  gy += random(-10, 11) * 0.1;
+  gz += random(-10, 11) * 0.1;
+  mx += random(-10, 11) * 0.1;
+  my += random(-10, 11) * 0.1;
+  mz += random(-10, 11) * 0.1;
+
+  // Keep values in reasonable ranges
+  gx = constrain(gx, -180, 180);
+  gy = constrain(gy, -180, 180);
+  gz = constrain(gz, -180, 180);
+  mx = constrain(mx, 0, 360);
+  my = constrain(my, 0, 360);
+  mz = constrain(mz, 0, 360);
+}
+
+String getSensorDataJSON() {
+  // Create JSON array format: [gx,gy,gz,mx,my,mz]
+  return "[" + String(gx, 2) + "," + String(gy, 2) + "," + String(gz, 2) + ","
+             + String(mx, 2) + "," + String(my, 2) + "," + String(mz, 2) + "]";
+}
+```
 
 ## Determine high level logic
 
@@ -179,11 +343,15 @@ loop() {
 
 I discussed the high level design with the group to make sure everyone shares the understanding. In theory the design allows future I/O to plug into the main program without needing to change other modules' code.
 
-## Testing (during Friday Studcom Social Tea hour)
+## Sensor Integration Test (during Friday Studcom Social Tea hour)
 
 The EE team provided the electronics. We uploaded our sketch and started testing.
 
-(see photo 1, photo 2)
+![Testing UI](./media/test-02.webp)
+**Dumping IMU data to the web UI over UDP**
+
+![Testing in Tea Party](./media/test-01.webp)
+**Testing against inteference in the crowded StudCom Tea Party**
 
 - In Media Lab tea party with about 40 people, the device can experience 3 seconds+ latency
 - The WXYZ quaternion takes 12+ seconds to stablize
@@ -191,7 +359,7 @@ The EE team provided the electronics. We uploaded our sketch and started testing
 Bad news: UDP + Wifi clearly won't work.
 Good news: we discovered early enough. There is still time to pivot. Also, our communication isn't that coupled to sensor logic.
 
-## Migration
+## The Big Migration
 
 After the testing I tool Miranda's Bluetooth 2-way communication code, and used Claude 4.5 Sonnet to migrate the Wifi+UDP code with Bluetooth
 
@@ -211,7 +379,7 @@ Keep the ESP32 organized by files, similar to existing structure lib-xx-name.ino
 Make sure to carefully map out the migration and execute it with a checklist.
 ```
 
-Miraculously, the migration worked on the first try.
+Miraculously, the migration worked on the first try. AI is such a game changer.
 
 ## Integrating servo
 
@@ -219,16 +387,16 @@ Saetbeyol implemented the servo motor control. When I integrated her work, the s
 
 After investigation, we realized that the communication loop is blocking.
 
-```
+```cpp
   if (isBLEConnected()) {
     String sensorData = getSensorJSON();
-    sendBLEMessage(sensorData); <-- need to disable this line in order to send any command to the ESP32, why?
+    sendBLEMessage(sensorData); // <-- need to disable this line in order to send any command to the ESP32, why?
   }
 ```
 
 Solution, instead of blocking the main loop, we use a timer to send sensor data every 20ms.
 
-The `20ms` interval is empirically determined. I don't feel confident about the solution but we proceeded and decided to revisit.
+The `20ms` interval is empirically determined. I don't feel happy about the solution but we proceeded and decided to revisit.
 
 ```cpp
 static unsigned long lastSendTime = 0;
@@ -255,7 +423,10 @@ void sendSensorDataIfReady() {
 
 ```
 
-(Show initial servo dance video)
+With this fix, we got the first full integration where sensors and servos are both working. Here is the celebratory dance:
+
+<video src="./media/servo-01.mp4" controls></video>
+**Servos dancing while sensors streaming IMU data over BLE**
 
 ## Debugging MUX issue
 
@@ -271,7 +442,10 @@ We solved the issue by using Adadruit official library example code as starting 
 
 Matti also found out how to serial connect two MUX board by soldering the address pin to set one board at 0x41 instead of 0x40.
 
-(Add a photo of the MUX board)
+![PCA9685 MUX Board](./media/mux.webp)
+**Pads for changing the address of PCA9685 MUX Board**
+
+The base address is 0x40. The EE team would later solder A3 (0x08) for 0x48 and A5 (0x20) for 0x60. Had we known sooner, we could have soldered the same address as they would do.
 
 ## Stress testing the BLE communication
 
@@ -333,7 +507,8 @@ Based on this idea, I implemented a comprehensive diagnostic tool to profile the
 
 The tool allows user to measure latency, throughput for varying message sizes.
 
-(show screen recording)
+<video src="./media/ble-test.mp4" controls></video>
+**BLE benchmarking in action**
 
 ### Best case, side by side same room
 
@@ -411,3 +586,14 @@ Core implementation:
 ```
 
 With the scheduler in place, I was able to dispatch the command at the high speed without causing BLE transmission errors.
+
+## Reflection
+
+> The bearing of a child takes nine months, no matter how many women are assigned.
+> — Fred Brooks, _The Mythical Man-Month_
+
+## Appendix
+
+- [IP Discovery code](./code/ip-discovery.zip)
+- [Bluetooth Benchmark tool](./code/bluetooth-benchmark.zip)
+- [BLE Transmission Scheduler](./code/scheduler.js)
