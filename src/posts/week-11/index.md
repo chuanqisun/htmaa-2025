@@ -4,11 +4,11 @@ date: 2025-11-18
 keywords: ["machine-building", "collaboration"]
 ---
 
-This is a group project week. This document captures the tasks I was involved in. See the group project page for the full context.
+This is a group project week. This document captures the tasks I was involved in. See the [group project page](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week11/) for the full context.
 
 ## Labubu
 
-Miranda pitched the idea of building an icosahedron robot that can move around based on IMU data. Each face would be a Labubu to punches out and propels the icosahedron in the desired direction. I'm too old to understand the cultural significance of Labubu, but the idea sounds cool. Towards the end of the project, we have replaced the Labubu with our professor's Neil's face. That makes the project much more relatable but also much higher stakes.
+[Miranda](https://fab.cba.mit.edu/classes/863.25/people/MirandaLi/) pitched the idea of building an icosahedron robot that can move around based on IMU data. Each face would be a [Labubu](https://en.wikipedia.org/wiki/Labubu) to punches out and propels the icosahedron in the desired direction. I'm too old to understand the cultural significance of Labubu, but the idea sounds cool. Towards the end of the project, we have replaced the Labubu with our professor's Neil's face. That makes the project much more relatable but also much higher stakes.
 
 ## Project organization
 
