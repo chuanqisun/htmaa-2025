@@ -457,3 +457,76 @@ I quickly revised the design so the components sat in the correct positions. Tha
 
 ![Unboxed view](../week-12/media/unboxed.webp)
 **Unboxed view of the system**
+
+## Validating LED
+
+I validated the LED connection and voltage design with a simple program that blinks all the LEDs. To make it interesting, I added the PWM-like brightness fading effect by rapidly toggling the LEDs on and off with varying on-time to simulate different brightness levels.
+
+```cpp
+/*
+ESP32 LED Pulse using PWM simulation by rapidly
+toggling LEDs on and off with varying on-time to control brightness.
+
+Pinout:
+LED1: D0
+LED2: D1
+LED3: D2
+LED4: D3
+LED5: D7
+LED6: D8
+LED7: D9
+LED8: D10
+*/
+
+
+const int ledPins[] = {D0, D1, D2, D3, D7, D8, D9, D10};
+const int numLeds = 8;
+
+const int PERIOD_US = 5000;
+
+void setup() {
+  for (int i = 0; i < numLeds; i++) {
+    pinMode(ledPins[i], OUTPUT);
+    digitalWrite(ledPins[i], LOW);
+  }
+}
+
+void loop() {
+  for(int brightness = 0; brightness <= 255; brightness++) {
+    int on_us = map(brightness, 0, 255, 0, 500);
+    int off_us = PERIOD_US - on_us;
+    for(int i = 0; i < numLeds; i++) {
+      digitalWrite(ledPins[i], HIGH);
+    }
+    delayMicroseconds(on_us);
+    for(int i = 0; i < numLeds; i++) {
+      digitalWrite(ledPins[i], LOW);
+    }
+    delayMicroseconds(off_us);
+    delay(1);
+  }
+
+  for(int brightness = 255; brightness >= 0; brightness--) {
+    int on_us = map(brightness, 0, 255, 0, 500);
+    int off_us = PERIOD_US - on_us;
+    for(int i = 0; i < numLeds; i++) {
+      digitalWrite(ledPins[i], HIGH);
+    }
+    delayMicroseconds(on_us);
+    for(int i = 0; i < numLeds; i++) {
+      digitalWrite(ledPins[i], LOW);
+    }
+    delayMicroseconds(off_us);
+    delay(1);
+  }
+}
+```
+
+![LED test](../week-12/media/led-on.webp)
+**LED test successful**
+
+In my circuit, I used a 100-ohm resistor in series with each LED rated at 1.9V forward voltage and 20mA forward current. Assuming a 3.3V supply from the ESP32, the current through the LED would be approximately (3.3V - 1.9V) / 100 ohms = 14mA, which is bit low.
+
+Double checking the math using DigiKey's [LED Resistor Calculator](https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-led-series-resistor), the desired resistor should be 70 ohms. So choosing 100 ohms safe.
+
+Knowing that the TRRS addressing works from [Week 6](../week-06//index.md#integration-test) and the LED output works from this test, we are ready to connect the Switchboard components!
