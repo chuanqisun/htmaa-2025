@@ -408,3 +408,52 @@ Questions for TA:
 1. Button, speaker, LED mounting mechanism?
 2. Battery + Power: what kind of switch should I use? How to mount?
 3. Slider switch: what options do I have? How complex?
+
+## Physical Assembly Test
+
+During the mid-term review, [Alan Han](https://fab.cba.mit.edu/classes/863.23/CBA/people/Alan/) suggested mounting options and power solutions.
+
+Because Thanksgiving travel was approaching, I wanted to use lab time to test the mounting as soon as possible.
+
+I updated the 3D models to account for the speaker, audio jacks, and buttons. My CAD speed was improving. In half a day, the updated models for both the Operator and the Switchboard were ready for printing.
+
+![Updated Switchboard](../week-12/media/cad-02.webp)
+**Updated Switchboard model**
+
+![Updated Operator](../week-12/media/cad-01.webp)
+**Updated Operator model**
+
+These were test prints intended only to reveal design issues, so I used a 0.15 mm layer height and 15% infill for a quick turnaround. Production prints would be much finer.
+
+![3D printed parts](../week-12/media/print-01.webp)
+**Slicing for speed**
+
+For assembly I skipped soldering so components could be moved and adjusted — a deliberately "wireless" assembly.
+
+![Wireless assembly](../week-12/media/test-assembly-01.webp)
+**Assembly without soldering**
+
+The physical prototype immediately revealed several problems:
+
+- Lid and PCB fit: I hadn't tuned for kerf yet. Surprisingly, the fit was loose instead of tight.
+- Button and jack fit: holes needed slightly larger diameters; as a rule of thumb, adding about 0.1 mm to the measured diameter worked well.
+- Component collisions: I hadn't modeled the barrel behind buttons and jacks, and those parts interfered with other components.
+
+![Button collision issue](../week-12/media/test-assembly-02.webp)
+**Buttons colliding with speaker**
+
+![TRRS collision issue](../week-12/media/test-assembly-03.webp)
+**TRRS barrel colliding with PCB header**
+
+- Ergonomics: the case was wider than expected and felt uncomfortable to hold.
+
+I quickly revised the design so the components sat in the correct positions. That update produced the first successful physical assembly of the system.
+
+![Case](../week-12/media/case.webp)
+**Updated case to address the issues found in the assembly test**
+
+![In context](../week-12/media/in-context.webp)
+**Mounting all the components (except for wiring)**
+
+![Unboxed view](../week-12/media/unboxed.webp)
+**Unboxed view of the system**
