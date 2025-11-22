@@ -527,6 +527,6 @@ void loop() {
 
 In my circuit, I used a 100-ohm resistor in series with each LED rated at 1.9V forward voltage and 20mA forward current. Assuming a 3.3V supply from the ESP32, the current through the LED would be approximately (3.3V - 1.9V) / 100 ohms = 14mA, which is bit low.
 
-Double checking the math using DigiKey's [LED Resistor Calculator](https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-led-series-resistor), the desired resistor should be 70 ohms. So choosing 100 ohms safe.
+Double checking the math using DigiKey's [LED Resistor Calculator](https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-led-series-resistor), the desired resistor should be 70 ohms. So choosing 100 was ohms safe.
 
 Knowing that the TRRS addressing works from [Week 6](../week-06//index.md#integration-test) and the LED output works from this test, we are ready to connect the Switchboard components!
