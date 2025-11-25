@@ -137,7 +137,7 @@ I added LED lights to the Switchboard (see the [Group assignment page](https://f
 I needed to associate the address of the phone jacks with the specific LED next to them. The wiring had changed over time, so the only guarantee was that they were distinct. I approached this empirically by probing them to determine the final addresses.
 
 ![Probing for address](./media/weekly-assembly-02.webp)
-**Probing for address**
+**Probing for address, with the help from [Adafruit TRRS Terminal Block](https://www.adafruit.com/product/2914)**
 
 I placed a cheatsheet on the Switchboard case for easy reference:
 
@@ -219,9 +219,9 @@ void loop() {
 }
 ```
 
-I noticed that one of the Bluetooth devices did not appear in the browser's device list. I discovered that `Switchboard` became `Switchbo`. The Bluetooth library appears to shorten the name to 8 characters. There is a [related issue](https://stackoverflow.com/questions/58772005/why-is-the-web-bluetooth-device-name-limited-to-8-bytes) reported by Arduino developers, though it is unclear if the issue lies with the ESP32 Bluetooth library or the Web Bluetooth API.
+I noticed that one of the Bluetooth devices did not appear in the browser's device list. I discovered that the device name `Switchboard` became `Switchbo`. The Bluetooth library appears to shorten the name to 8 characters. There is a [related issue](https://stackoverflow.com/questions/58772005/why-is-the-web-bluetooth-device-name-limited-to-8-bytes) reported by Android developers, though it is unclear if a similar issue lies with the ESP32 Bluetooth library or the Web Bluetooth API.
 
-I fixed the device name overflow by shortening the filter:
+I fixed the device name overflow by shortening it:
 
 ```diff
 deviceSw = await navigator.bluetooth.requestDevice({
