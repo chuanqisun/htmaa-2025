@@ -29,20 +29,23 @@ keywords: ["networking", "communication"]
 - But as soon as I finished soldering, I recalled that Neil said those connetors are "nasty" because when you plug in, the different terminals would touch all the conductive parts along the way in.
 - Here is my initial wiring that took more than 4 hours to solder:
 
-- Switchboard
+```txt
+Switchboard
   - Tip: Address bit 0 (digital write high or ground)
   - Ring1: Ground
   - Ring2: Address bit 1
   - Sleeve: Address bit 2
-- Operator
+
+Operator
   - Tip: Address bit 0 (digital read)
   - Ring1: Ground
   - Ring2: Address bit 1
   - Sleeve: Address bit 2
+```
 
 Visualize in the 4 by 4 table, where each cell represents a potential contact due to the sliding motion:
 
-```
+```txt
 TRRS
    TRRS 👈
 
