@@ -543,3 +543,16 @@ With several hours of non-stop soldering, all the LEDs were finally blinking!
 
 ![Testing all lights](../week-12/media/pulse.mp4)
 **Testing all lights in sequence**
+
+## Wiring up the Operator
+
+Aftering wiring up the Switchboard with 2 days of non-stop soldering, I gained significant experience and had all the equipment dialed in. I also switched to single-core 22 AWG wire for stronger joints. The wire-up was a breeze.
+
+![Wiring up the Operator](../week-12/media/final-operator-01.webp)
+**Operator, fully wired up**
+
+Remaining tasks:
+
+- Programming the voice interaction
+- Add a LiPo battery with a power switch
+- Improve the case quality
