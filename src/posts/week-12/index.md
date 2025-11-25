@@ -137,6 +137,17 @@ void loop() {
   - Operator sends the address to the browser app
   - The browser app sends a new address to the Switchboard
   - Switchboard lights up the LED corresponding to the address
+- I need to connect the address of the phone jacks with the specific LED next to it.
+- The wiring has changed overtime and the only guarantee is that they are disctinct from each other.
+- So I approached it empirically. Determine address by probing them.
+
+![Probing for address](./media/weekly-assembly-02.webp)
+**Probing for address**
+
+In the end, I put a cheatsheet on the case of the Switchboard for easy reference:
+
+![Cheatsheet for Switchboard addresses](./media/weekly-assembly-02.webp)
+**Cheatsheet for Switchboard addresses**
 
 Here is the key logic for lighting up LED based on BLE command on Switchboard:
 
