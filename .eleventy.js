@@ -1,5 +1,6 @@
 import { HtmlBasePlugin, IdAttributePlugin, InputPathToUrlTransformPlugin } from "@11ty/eleventy";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
+import path from "path"; // Import path module to check extensions easily
 import { createHighlighter } from "shiki";
 
 /**
@@ -49,8 +50,8 @@ export default async function (eleventyConfig) {
     langs: ["js", "jsx", "ts", "tsx", "html", "css", "diff", "yaml", "json", "cpp", "sh"],
   });
 
-  // Custom markdown-it plugin to add lazy loading attributes to images
-  function lazyImagesPlugin(md) {
+  // Custom markdown-it plugin to handle images and mp4 videos
+  function customMediaPlugin(md) {
     const defaultRender =
       md.renderer.rules.image ||
       function (tokens, idx, options, env, renderer) {
@@ -59,6 +60,17 @@ export default async function (eleventyConfig) {
 
     md.renderer.rules.image = function (tokens, idx, options, env, renderer) {
       const token = tokens[idx];
+      const src = token.attrGet("src");
+      const alt = token.content;
+
+      // Check if the source is an MP4 file
+      if (src && path.extname(src).toLowerCase() === ".mp4") {
+        // Return a video tag
+        // You can add class names or other attributes here if needed
+        return `<video src="${src}" controls title="${alt}"></video>`;
+      }
+
+      // --- Standard Image Handling ---
 
       // Add loading="lazy" if not already present
       if (!token.attrGet("loading")) {
@@ -80,8 +92,8 @@ export default async function (eleventyConfig) {
       highlight: (code, lang) => highlighter.codeToHtml(code, { lang, theme: "dark-plus" }),
     });
 
-    // Add the lazy images plugin
-    md.use(lazyImagesPlugin);
+    // Add the custom media plugin (renamed from lazyImagesPlugin)
+    md.use(customMediaPlugin);
   });
 
   return {
