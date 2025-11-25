@@ -530,3 +530,6 @@ In my circuit, I used a 100-ohm resistor in series with each LED rated at 1.9V f
 Double checking the math using DigiKey's [LED Resistor Calculator](https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-led-series-resistor), the desired resistor should be 70 ohms. So choosing 100 ohms was ohms safe.
 
 Knowing that the TRRS addressing works from [Week 6](../week-06//index.md#integration-test) and the LED output works from this test, we are ready to connect all the components in Switchboard!
+
+![Testing all lights](../week-12/media/pulse.mp4)
+**Testing all lights in sequence**
