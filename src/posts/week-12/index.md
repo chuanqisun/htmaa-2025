@@ -104,22 +104,16 @@ Operator:
   - The browser app sends a new address to the Switchboard
   - Switchboard lights up the LED corresponding to the address
 - Bluetooth name length truncated by ESP32
+  - I noticed that one of the bluetooth device does not show up in the device list in the browser
   - I found `Switchboard` became `Switchbo` in the device list. I believe the bluetooth library is shortening the name to 8 characters.
+  - There is a [related issue](https://stackoverflow.com/questions/58772005/why-is-the-web-bluetooth-device-name-limited-to-8-bytes) reported from Arduino developer, but it's unclear if it was an issue with ESP32's bluetooth library or the Web Bluetooth API.
 
-Device name overflow:
+Fixing the device name overflow:
 
-```js
+```diff
 deviceSw = await navigator.bluetooth.requestDevice({
-  filters: [{ name: "Switchboard" }],
-  optionalServices: [SERVICE_UUID],
-});
-```
-
-into
-
-```js
-deviceSw = await navigator.bluetooth.requestDevice({
-  filters: [{ name: "sw" }],
+-  filters: [{ name: "Switchboard" }],
++  filters: [{ name: "sw" }],
   optionalServices: [SERVICE_UUID],
 });
 ```
