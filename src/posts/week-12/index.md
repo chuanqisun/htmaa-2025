@@ -4,16 +4,25 @@ date: 2025-11-25
 keywords: ["networking", "communication"]
 ---
 
-- I accidentally satisfied the networking requirement twice during the Input device and Machine building week
-- I want to make more progress towards the final project but also build something fun under the theme of the week
+- As Neil mentioned, I accidentally satisfied the networking requirement twice during the Input device and Machine building week
+- I made [more progress](../final-project/index.md#physical-assembly-test) towards the final project but also build something fun under the theme of the week
 - I decided to temporarily turn my final project's hardware in whack-a-mole game: switchboard lights up LEDs, user plugs phone jack to "whack" it off, and another LED lights up...
-- In the end, I realized that I had build 3 layers of the networking in one project. Kind of neat.
+- In the end, I realized that I had build 3 layers of the networking in one project. Kind of neat. And here is the story:
 
 ## Network 1: Voltage as physical address
 
-- In my final project, I have a walkie talkie (aka **Operator**) that can plug in a panel of phone jacks (aka **Switchboard**). In the Electronics week, I prototyped the TRRS connection. - This week, I fabricated all the phone jacks, with wiring, solder, and mounting
+- In my final project, I have a walkie talkie (aka **Operator**) that can plug in a panel of phone jacks (aka **Switchboard**). In the [Electronics fabrication week](../week-06/index.md), I prototyped using TRRS connector as a 3-bit addressable interface.
+- This week, I fabricated all the phone jacks, with wiring, solder, and mounting
 
-[show photo of frabriation](...)
+![Soldering TRRS connector](./media/weekly-trrs-01.webp)
+**Soldering TRRS connector to ribbon wires**
+
+- I used heat shrink tubes to reinforce the solder joints as well as to prevent accidental shorts between adjacent pins
+- I kept making the same mistake where I soldered the wire before adding the heat shrink tube. Due to size of the tube, I must add the tube first, then solder, then slide the tube over the joint and shrink it with heat gun.
+- In the end, I developed the muscle memory of "tube first, solder second"
+
+![Add heat shrink tube first](./media/weekly-trrs-02.webp)
+**Tube first, solder second, repeat after me...**
 
 - I fell victim of the information denial trap as observed in behavioral economics. An example of information denial is when patient could scan for potential desease but they worry about the consequence of such knowledge and therefore choose to not know.
 - I was on a happy streak soldering all the TRRS jack wires and thought as long as I solder all of the them the same way, it would be fine.
