@@ -383,7 +383,7 @@ apiKeyInput.addEventListener("input", () => localStorage.setItem("htmaa-matti-ke
 
 ## Network 3: URL as web address
 
-To satisfy the group assignment requirement of networking with another project, I added logic for the browser to HTTP POST the current score to Matti's server. This, in turn, displays the score on his e-ink display.
+To satisfy the group assignment requirement of networking with another project, I added logic for the browser to HTTP POST the current score to [Matti](https://fab.cba.mit.edu/classes/863.25/people/MattiGruener/)'s server. This, in turn, displays the score on his e-ink display.
 
 ```diff
 +scoreSubject.subscribe((score) => {
