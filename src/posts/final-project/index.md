@@ -531,5 +531,15 @@ Double checking the math using DigiKey's [LED Resistor Calculator](https://www.d
 
 Knowing that the TRRS addressing works from [Week 6](../week-06//index.md#integration-test) and the LED output works from this test, we are ready to connect all the components in Switchboard!
 
+![Soldering LED](../week-12/media/weekly-led-02.webp)
+**Soldering LED, one by one**
+
+During the testing, several LED legs were snapping. I had to apply hot glue as reinforcement.
+
+![Reinforcing LED legs](../week-12/media/weekly-assembly-04.webp)
+**Reinforcing LED legs with hot glue**
+
+With several hours of non-stop soldering, all the LEDs were finally blinking!
+
 ![Testing all lights](../week-12/media/pulse.mp4)
 **Testing all lights in sequence**
