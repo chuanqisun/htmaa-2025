@@ -4,30 +4,23 @@ date: 2025-11-25
 keywords: ["networking", "communication"]
 ---
 
-- As Neil mentioned, I accidentally satisfied the networking requirement twice during the Input device and Machine building week
-- I made [more progress](../final-project/index.md#physical-assembly-test) towards the final project but also build something fun under the theme of the week
-- I decided to temporarily turn my final project's hardware in whack-a-mole game: switchboard lights up LEDs, user plugs phone jack to "whack" it off, and another LED lights up...
-- In the end, I realized that I had build 3 layers of the networking in one project. Kind of neat. And here is the story:
+Neil noted that I had already satisfied the networking requirement during the [Input Device](../week-08/index.md) and [Machine Building](../week-11/index.md) weeks. For this week, I made [more progress](../final-project/index.md#physical-assembly-test) on my final project without missing the opportunity in building something fun under the networking theme. I temporarily converted the hardware for my final project into a "whack-a-mole" game. In this setup, the switchboard lights up an LED, the user plugs in a phone jack to "whack" it, and then another LED lights up. By the end, I realized I had built three networks into a single project.
 
 ## Network 1: Voltage as physical address
 
-- In my final project, I have a walkie talkie (aka **Operator**) that can plug in a panel of phone jacks (aka **Switchboard**). In the [Electronics fabrication week](../week-06/index.md), I prototyped using TRRS connector as a 3-bit addressable interface.
-- This week, I fabricated all the phone jacks, with wiring, solder, and mounting
+For my final project, I am building a walkie-talkie (the **Operator**) that plugs into a panel of phone jacks (the **Switchboard**). During [Electronics fabrication week](../week-06/index.md), I prototyped a 3-bit addressable interface using a TRRS connector. This week, I fabricated the phone jacks, complete with wiring, soldering, and mounting.
 
 ![Soldering TRRS connector](./media/weekly-trrs-01.webp)
 **Soldering TRRS connector to ribbon wires**
 
-- I used heat shrink tubes to reinforce the solder joints as well as to prevent accidental shorts between adjacent pins
-- I kept making the same mistake where I soldered the wire before adding the heat shrink tube. Due to size of the tube, I must add the tube first, then solder, then slide the tube over the joint and shrink it with heat gun.
-- In the end, I developed the muscle memory of "tube first, solder second"
+I used heat shrink tubes to reinforce the solder joints and prevent accidental shorts between adjacent pins. I repeatedly made the mistake of soldering the wire before adding the heat shrink tube. Because of the tube's size, I must add the tube first, solder the connection, slide the tube over the joint, and then shrink it with a heat gun. Eventually, I developed the muscle memory of "tube first, solder second."
 
 ![Add heat shrink tube first](./media/weekly-trrs-02.webp)
 **Tube first, solder second, repeat after me...**
 
-- I fell victim of the information denial trap as observed in behavioral economics. An example of information denial is when patient could scan for potential desease but they worry about the consequence of such knowledge and therefore choose to not know.
-- I was on a happy streak soldering all the TRRS jack wires and thought as long as I solder all of the them the same way, it would be fine.
-- But as soon as I finished soldering, I recalled that Neil said those connetors are "nasty" because when you plug in, the different terminals would touch all the conductive parts along the way in.
-- Here is my initial wiring that took more than 4 hours to solder:
+I fell victim to the information denial trap observed in behavioral economics. This occurs when someone avoids learning information because they fear the consequences. I was on a happy streak soldering the TRRS jack wires and assumed that consistent soldering would suffice. As soon as I finished, I recalled Neil's warning that these connectors are "nasty" because the different terminals touch all conductive parts during insertion.
+
+Here is my initial wiring configuration, which took over four hours to solder:
 
 ```txt
 Switchboard
@@ -43,7 +36,7 @@ Operator
   - Sleeve: Address bit 2
 ```
 
-Visualize in the 4 by 4 table, where each cell represents a potential contact due to the sliding motion:
+The following 4-by-4 table visualizes the potential contacts caused by the sliding motion:
 
 ```txt
 TRRS
@@ -60,7 +53,7 @@ TRRS
 TRRS
 ```
 
-Visualize this in grid, when any digital write high (R2, S) touches the ground (R1), a short happens:
+When visualized in a grid, any digital write high (Ring2, Sleeve) touching the ground (Ring1) causes a short:
 
 |                   | Tip (write) | Ring1 (GRD) | Ring2 (write) | Sleeve (write) |
 | ----------------- | ----------- | ----------- | ------------- | -------------- |
@@ -69,7 +62,7 @@ Visualize this in grid, when any digital write high (R2, S) touches the ground (
 | **Ring2 (read)**  |             |             | ✅            | ✅             |
 | **Sleeve (read)** |             |             |               | ✅             |
 
-Realizing my mistake, I moved the ground to the tip so no other pins can touch it
+Realizing my mistake, I moved the ground to the tip so no other pins can touch it.
 
 |                   | Tip (GRD) | Ring1 (write) | Ring2 (write) | Sleeve (write) |
 | ----------------- | --------- | ------------- | ------------- | -------------- |
@@ -78,9 +71,9 @@ Realizing my mistake, I moved the ground to the tip so no other pins can touch i
 | **Ring2 (read)**  |           |               | ✅            | ✅             |
 | **Sleeve (read)** |           |               |               | ✅             |
 
-- Since I already used heat shrink tubes to reinforce the ribbon wires' pin headers, making this changes means removing the heat shrink tube and rearrange the wires. Luckily, the ribbon wires can be re-aranged. That was another 2 hour job.
-- In programming, the Switchboard is hard wired to have digital write high or ground on each of the address bits.
-- Originally, I thought I could have 8 addresses (3 bits) but because of the shorting issue I need to reserve an address to represent "Unplugged" state, I ended up having 7 usable addresses (`000` to `110`) and `111` represents "Unplugged".
+Since I had already used heat shrink tubes to reinforce the pin headers, making these changes required removing the tubes and rearranging the wires. Fortunately, the ribbon wires allowed for rearrangement, though it took another two hours.
+
+In the programming, the Switchboard is hard-wired to have a digital write high or ground on each address bit. I originally planned for 8 addresses using 3 bits, but the shorting issue required me to reserve an address for the "Unplugged" state. I ended up with 7 usable addresses (`000` to `110`), with `111` representing "Unplugged".
 
 Switchboard, digital write high on the address bits:
 
@@ -92,12 +85,12 @@ void setup() {
 
 ```
 
-As seen on the PCB, each connector has 6 pins, 2 for LED, 4 for TRRS. Among the 4 TRRS pins, one is ground (second from left for left column, and second from right for right column).
+As seen on the PCB, each connector has six pins: two for the LED and four for the TRRS. Among the four TRRS pins, one is ground (second from the left for the left column, and second from the right for the right column).
 
 ![Switchboard circuit](./media/final-switchboard-01.webp)
 **The address bits are baked into the hardware**
 
-Operator reads the address bits:
+The Operator reads the address bits:
 
 ```cpp
 const int inputPins[] = { D3, D4, D5 };
@@ -132,26 +125,24 @@ void loop() {
 
 ## Network 2: Mac and name as BLE address
 
-- I added the LED lights on the Switchboard. (See details in Final project page)
-- Since the TRRS connection is a one-way communication from Switchboard to Operator, I need a way for the Operator to send information back to the Switchboard to change the state of LED lights
-- Here is the full data flow:
-  - Operator reads an 3-bit address from Switchboard
-  - Operator sends the address to the browser app
-  - The browser app sends a new address to the Switchboard
-  - Switchboard lights up the LED corresponding to the address
-- I need to connect the address of the phone jacks with the specific LED next to it.
-- The wiring has changed overtime and the only guarantee is that they are disctinct from each other.
-- So I approached it empirically. Determine address by probing them.
+I added LED lights to the Switchboard (see the Final Project page for details). Since the TRRS connection provides only one-way communication from the Switchboard to the Operator, I needed a method for the Operator to send information back to change the LED states. The full data flow operates as follows:
+
+1.  The Operator reads a 3-bit address from the Switchboard.
+2.  The Operator sends the address to the browser app.
+3.  The browser app sends a new address to the Switchboard.
+4.  The Switchboard lights up the LED corresponding to that address.
+
+I needed to associate the address of the phone jacks with the specific LED next to them. The wiring had changed over time, so the only guarantee was that they were distinct. I approached this empirically by probing them to determine the addresses.
 
 ![Probing for address](./media/weekly-assembly-02.webp)
 **Probing for address**
 
-In the end, I put a cheatsheet on the case of the Switchboard for easy reference:
+I placed a cheatsheet on the Switchboard case for easy reference:
 
 ![Cheatsheet for Switchboard addresses](./media/weekly-assembly-02.webp)
 **Cheatsheet for Switchboard addresses**
 
-Here is the key logic for lighting up LED based on BLE command on Switchboard:
+Here is the key logic for lighting up an LED based on a BLE command received by the Switchboard:
 
 ```cpp
 #include <BLEDevice.h>
@@ -226,12 +217,9 @@ void loop() {
 }
 ```
 
-- Bluetooth name length truncated by ESP32
-  - I noticed that one of the bluetooth device does not show up in the device list in the browser
-  - I found `Switchboard` became `Switchbo` in the device list. I believe the bluetooth library is shortening the name to 8 characters.
-  - There is a [related issue](https://stackoverflow.com/questions/58772005/why-is-the-web-bluetooth-device-name-limited-to-8-bytes) reported from Arduino developer, but it's unclear if it was an issue with ESP32's bluetooth library or the Web Bluetooth API.
+I noticed that one of the Bluetooth devices did not appear in the browser's device list. I discovered that `Switchboard` became `Switchbo`. The Bluetooth library appears to shorten the name to 8 characters. There is a [related issue](https://stackoverflow.com/questions/58772005/why-is-the-web-bluetooth-device-name-limited-to-8-bytes) reported by Arduino developers, though it is unclear if the issue lies with the ESP32 Bluetooth library or the Web Bluetooth API.
 
-Fixing the device name overflow:
+I fixed the device name overflow by shortening the filter:
 
 ```diff
 deviceSw = await navigator.bluetooth.requestDevice({
@@ -241,7 +229,7 @@ deviceSw = await navigator.bluetooth.requestDevice({
 });
 ```
 
-Operator reads TRRS address and sends to browser via BLE:
+The Operator reads the TRRS address and sends it to the browser via BLE:
 
 ```cpp
 #include <BLEDevice.h>
@@ -326,9 +314,7 @@ void loop() {
 }
 ```
 
-In the web app, we need to account for bounce in the connection due to sliding motion. I picked my favorite RxJS library to handle the debounce.
-
-The Web app serves as a brain. It tracks the current LED, checks if user probes the correct address, and sends command to Switchboard to turn off the LED and light up another one.
+In the web app, I needed to account for connection bounce caused by the sliding motion. I used the RxJS library to handle the debounce. The web app serves as the brain. It tracks the current LED, checks if the user probes the correct address, and sends a command to the Switchboard to turn off that LED and light up another.
 
 ```js
 import { Subject, debounceTime, distinctUntilChanged, BehaviorSubject } from "https://esm.sh/rxjs";
@@ -395,7 +381,7 @@ apiKeyInput.addEventListener("input", () => localStorage.setItem("htmaa-matti-ke
 
 ## Network 3: URL as web address
 
-- To satisfy the group assignment requirement of networking with other's project. I added the logic for the browser to HTTP POST the current score to Matti's server, which will in turn display the score on his e-ink display.
+To satisfy the group assignment requirement of networking with another project, I added logic for the browser to HTTP POST the current score to Matti's server. This, in turn, displays the score on his e-ink display.
 
 ```diff
 +scoreSubject.subscribe((score) => {
@@ -410,7 +396,7 @@ apiKeyInput.addEventListener("input", () => localStorage.setItem("htmaa-matti-ke
 +});
 ```
 
-With this add-on, the browser will POST to the server whenever score updates. Can you group page for details.
+With this add-on, the browser posts to the server whenever the score updates. Please see the group page for details.
 
 ![Web app notifying remote server](./media/networking-sender-recorder.mp4)
 **Web app notifying remote server**
