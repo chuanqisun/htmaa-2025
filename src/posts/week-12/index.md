@@ -82,16 +82,50 @@ Realizing my mistake, I moved the ground to the tip so no other pins can touch i
 - In programming, the Switchboard is hard wired to have digital write high or ground on each of the address bits.
 - Originally, I thought I could have 8 addresses (3 bits) but because of the shorting issue I need to reserve an address to represent "Unplugged" state, I ended up having 7 usable addresses (`000` to `110`) and `111` represents "Unplugged".
 
-Switchboard:
+Switchboard, digital write high on the address bits:
 
 ```cpp
-//...
+void setup() {
+  pinMode(D6, OUTPUT);
+  digitalWrite(D6, HIGH);
+}
+
 ```
 
-Operator:
+![Show latest Switchboard circuit](./media/final-switchboard-01.webp)
+**The address bits are hard wired to either Ground, or a digital output pin**
+
+Operator reads the address bits:
 
 ```cpp
-//...
+const int inputPins[] = { D3, D4, D5 };
+const char* inputNames[] = { "D3", "D4", "D5" };
+const int numInputs = 3;
+
+void setup() {
+  Serial.begin(115200);
+  delay(50);
+
+  for (int i = 0; i < numInputs; ++i) {
+    pinMode(inputPins[i], INPUT_PULLUP);
+    digitalWrite(inputPins[i], HIGH); // HIGH HIGH HIGH means unplugged
+  }
+}
+
+void loop() {
+  for (int i = 0; i < numInputs; ++i) {
+    int v = digitalRead(inputPins[i]);
+    Serial.print(inputNames[i]);
+    Serial.print(": ");
+    if (v == HIGH) {
+      Serial.println("HIGH");
+    } else {
+      Serial.println("LOW");
+    }
+  }
+  Serial.println();
+  delay(50);
+}
 ```
 
 ## Network 2: Mac and name as BLE address
@@ -103,6 +137,82 @@ Operator:
   - Operator sends the address to the browser app
   - The browser app sends a new address to the Switchboard
   - Switchboard lights up the LED corresponding to the address
+
+Here is the key logic for lighting up LED based on BLE command on Switchboard:
+
+```cpp
+#include <BLEDevice.h>
+#include <BLEServer.h>
+#include <BLEUtils.h>
+#include <BLE2902.h>
+
+#define UART_SERVICE_UUID "6e400001-b5a3-f393-e0a9-e50e24dcca9e"
+#define UART_RX_UUID      "6e400002-b5a3-f393-e0a9-e50e24dcca9e"
+
+BLEServer* pServer = NULL;
+BLECharacteristic* pRxCharacteristic = NULL;
+bool deviceConnected = false;
+
+const int ledPins[] = {D0, D1, D2, D3, D7, D8, D9, D10};
+const int numLeds = 8;
+
+class MyServerCallbacks: public BLEServerCallbacks {
+    void onConnect(BLEServer* pServer) {
+        deviceConnected = true;
+    }
+
+    void onDisconnect(BLEServer* pServer) {
+        deviceConnected = false;
+    }
+};
+
+class MyRxCallbacks: public BLECharacteristicCallbacks {
+    void onWrite(BLECharacteristic* pCharacteristic) {
+        String rxValue = pCharacteristic->getValue();
+        if (rxValue.length() > 0 && rxValue.startsWith("blink:")) {
+            int ledIndex = rxValue.substring(6).toInt();
+            if (ledIndex >= 0 && ledIndex < numLeds) {
+                digitalWrite(ledPins[ledIndex], HIGH);
+                delay(500);
+                digitalWrite(ledPins[ledIndex], LOW);
+            }
+        }
+    }
+};
+
+void setup() {
+    for (int i = 0; i < numLeds; i++) {
+        pinMode(ledPins[i], OUTPUT);
+        digitalWrite(ledPins[i], LOW);
+    }
+
+    BLEDevice::init("Switchboard");
+
+    pServer = BLEDevice::createServer();
+    pServer->setCallbacks(new MyServerCallbacks());
+
+    BLEService* pService = pServer->createService(UART_SERVICE_UUID);
+
+    pRxCharacteristic = pService->createCharacteristic(
+        UART_RX_UUID,
+        BLECharacteristic::PROPERTY_WRITE
+    );
+    pRxCharacteristic->setCallbacks(new MyRxCallbacks());
+
+    pService->start();
+
+    BLEAdvertising* pAdvertising = BLEDevice::getAdvertising();
+    pAdvertising->addServiceUUID(UART_SERVICE_UUID);
+    pAdvertising->setScanResponse(false);
+    pAdvertising->setMinPreferred(0x0);
+    BLEDevice::startAdvertising();
+}
+
+void loop() {
+    delay(10);
+}
+```
+
 - Bluetooth name length truncated by ESP32
   - I noticed that one of the bluetooth device does not show up in the device list in the browser
   - I found `Switchboard` became `Switchbo` in the device list. I believe the bluetooth library is shortening the name to 8 characters.
@@ -118,16 +228,11 @@ deviceSw = await navigator.bluetooth.requestDevice({
 });
 ```
 
-Switchboard:
-
-```cpp
-// show added code that lights up LED based on BLE command
-```
-
 Operator:
 
 ```cpp
 // show added code that reads TRRS address and sends via BLE
+
 ```
 
 In the web app, we need to account for bounce in the connection due to sliding motion. I picked my favorite RxJS library to handle the debounce.
