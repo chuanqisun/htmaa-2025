@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ESP32 LED Control</title>
+    <style>
+      body {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 1em;
+        font-family: system-ui, sans-serif;
+      }
+      .controls {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5em;
+        margin: 1em 0;
+      }
+      .status {
+        margin: 1em 0;
+        padding: 0.5em;
+      }
+      .log {
+        margin-top: 1em;
+        padding: 0.5em;
+        border: 1px solid #ccc;
+        font-family: monospace;
+        font-size: 0.8em;
+        max-height: 200px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+      }
+      #apiKey {
+        width: 100%;
+        margin: 0.5em 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ESP32 LED Control & Probe Display</h1>
+
+    <h2>Operator (Probe Display)</h2>
+    <div class="status">Status: <span id="statusOp">Not connected</span></div>
+
+    <button id="connectBtnOp">Connect Operator BLE</button>
+    <button id="disconnectBtnOp" disabled>Disconnect</button>
+
+    <div id="probeDisplay">Probe: <span id="rawProbe">---</span> Debounce: <span id="debouncedProbe">---</span> LED: <span id="ledNumber">---</span></div>
+
+    <div>Target LED: <span id="targetLed">3</span></div>
+
+    <div>Score: <span id="score">0</span></div>
+
+    <input type="password" id="apiKey" placeholder="Enter API Key for HTMAA" />
+
+    <h2>Switchboard (LED Control)</h2>
+    <div class="status">Status: <span id="statusSw">Not connected</span></div>
+
+    <button id="connectBtnSw">Connect Switchboard BLE</button>
+    <button id="disconnectBtnSw" disabled>Disconnect</button>
+
+    <div class="controls">
+      <button id="led0" disabled>Blink LED 0</button>
+      <button id="led1" disabled>Blink LED 1</button>
+      <button id="led2" disabled>Blink LED 2</button>
+      <button id="led3" disabled>Blink LED 3</button>
+      <button id="led4" disabled>Blink LED 4</button>
+      <button id="led5" disabled>Blink LED 5</button>
+      <button id="led6" disabled>Blink LED 6</button>
+    </div>
+
+    <div class="log" id="log"></div>
+
+    <script type="module">
+      import { Subject, debounceTime, distinctUntilChanged, BehaviorSubject } from "https://esm.sh/rxjs";
+
+      const SERVICE_UUID = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
+      const TX_CHAR_UUID = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
+      const RX_CHAR_UUID = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
+
+      // Switchboard variables
+      let deviceSw = null;
+      let charTxSw = null;
+      let charRxSw = null;
+
+      // Operator variables
+      let deviceOp = null;
+      let charTxOp = null;
+      let charRxOp = null;
+      let probeSubject = new Subject();
+      let currentTarget = 3;
+      let scoreSubject = new BehaviorSubject(0);
+
+      const connectBtnSw = document.getElementById("connectBtnSw");
+      const disconnectBtnSw = document.getElementById("disconnectBtnSw");
+      const statusSpanSw = document.getElementById("statusSw");
+
+      const connectBtnOp = document.getElementById("connectBtnOp");
+      const disconnectBtnOp = document.getElementById("disconnectBtnOp");
+      const statusSpanOp = document.getElementById("statusOp");
+
+      const logDiv = document.getElementById("log");
+
+      function log(msg) {
+        const timestamp = new Date().toISOString().substring(11, 23);
+        logDiv.textContent += `[${timestamp}] ${msg}\n`;
+        logDiv.scrollTop = logDiv.scrollHeight;
+      }
+
+      // Connect Switchboard
+      connectBtnSw.addEventListener("click", async () => {
+        try {
+          if (!navigator.bluetooth) {
+            throw new Error("Web Bluetooth not supported");
+          }
+
+          log("Requesting Switchboard BLE device...");
+          deviceSw = await navigator.bluetooth.requestDevice({
+            filters: [{ name: "sw" }],
+            optionalServices: [SERVICE_UUID],
+          });
+
+          log(`Connecting to ${deviceSw.name || "device"}...`);
+          const server = await deviceSw.gatt.connect();
+          const service = await server.getPrimaryService(SERVICE_UUID);
+
+          charRxSw = await service.getCharacteristic(TX_CHAR_UUID);
+          charTxSw = await service.getCharacteristic(RX_CHAR_UUID);
+
+          await charRxSw.startNotifications();
+          charRxSw.addEventListener("characteristicvaluechanged", (e) => {
+            const text = new TextDecoder().decode(e.target.value.buffer);
+            log(`Switchboard RX: ${text}`);
+          });
+
+          deviceSw.addEventListener("gattserverdisconnected", () => {
+            log("Switchboard disconnected");
+            statusSpanSw.textContent = "Disconnected";
+            connectBtnSw.disabled = false;
+            disconnectBtnSw.disabled = true;
+            disableLedButtons();
+          });
+
+          log("Switchboard connected");
+          statusSpanSw.textContent = "Connected";
+          connectBtnSw.disabled = true;
+          disconnectBtnSw.disabled = false;
+          enableLedButtons();
+
+          // Start game: turn off all LEDs first, then turn on LED3
+          const encoder = new TextEncoder();
+          const offAllCommand = "off:all";
+          const offAllData = encoder.encode(offAllCommand);
+          await charTxSw.writeValue(offAllData);
+          log(`Switchboard TX: ${offAllCommand}`);
+          const command = "on:3";
+          const data = encoder.encode(command);
+          await charTxSw.writeValue(data);
+          log(`Switchboard TX: ${command}`);
+          document.getElementById("targetLed").textContent = currentTarget;
+        } catch (error) {
+          log(`ERROR: ${error.message}`);
+          console.error(error);
+        }
+      });
+
+      // Disconnect Switchboard
+      disconnectBtnSw.addEventListener("click", () => {
+        if (deviceSw && deviceSw.gatt.connected) {
+          deviceSw.gatt.disconnect();
+          log("Switchboard disconnected by user");
+          statusSpanSw.textContent = "Disconnected";
+          connectBtnSw.disabled = false;
+          disconnectBtnSw.disabled = true;
+          disableLedButtons();
+        }
+      });
+
+      // Connect Operator
+      connectBtnOp.addEventListener("click", async () => {
+        try {
+          if (!navigator.bluetooth) {
+            throw new Error("Web Bluetooth not supported");
+          }
+
+          probeSubject = new Subject();
+          scoreSubject = new BehaviorSubject(0);
+
+          log("Requesting Operator BLE device...");
+          deviceOp = await navigator.bluetooth.requestDevice({
+            filters: [{ name: "op" }],
+            optionalServices: [SERVICE_UUID],
+          });
+
+          log(`Connecting to ${deviceOp.name || "device"}...`);
+          const server = await deviceOp.gatt.connect();
+          const service = await server.getPrimaryService(SERVICE_UUID);
+
+          charRxOp = await service.getCharacteristic(TX_CHAR_UUID);
+
+          await charRxOp.startNotifications();
+          charRxOp.addEventListener("characteristicvaluechanged", (e) => {
+            const text = new TextDecoder().decode(e.target.value.buffer);
+            // log(`Operator RX: ${text}`);
+            probeSubject.next(text.trim());
+            document.getElementById("rawProbe").textContent = text.trim();
+          });
+
+          probeSubject.pipe(distinctUntilChanged(), debounceTime(500)).subscribe((value) => {
+            document.getElementById("debouncedProbe").textContent = value;
+            const num = parseInt(value, 2);
+            document.getElementById("ledNumber").textContent = num === 7 ? "None" : num;
+
+            // Game logic: when probing the current target LED, turn it off and turn on a random other LED
+            if (num === currentTarget && deviceSw && deviceSw.gatt.connected) {
+              const encoder = new TextEncoder();
+              const offCommand = "off:" + currentTarget;
+              const offData = encoder.encode(offCommand);
+              let randomLed;
+              let onCommand;
+              charTxSw
+                .writeValue(offData)
+                .then(() => {
+                  log(`Switchboard TX: ${offCommand}`);
+                  randomLed = Math.floor(Math.random() * 7);
+                  while (randomLed === currentTarget) {
+                    randomLed = Math.floor(Math.random() * 7);
+                  }
+                  onCommand = `on:${randomLed}`;
+                  const onData = encoder.encode(onCommand);
+                  return charTxSw.writeValue(onData);
+                })
+                .then(() => {
+                  log(`Switchboard TX: ${onCommand}`);
+                  currentTarget = randomLed;
+                  document.getElementById("targetLed").textContent = currentTarget;
+                  scoreSubject.next(scoreSubject.value + 1);
+                })
+                .catch((error) => {
+                  log(`ERROR: ${error.message}`);
+                });
+            }
+          });
+
+          scoreSubject.subscribe((score) => {
+            document.getElementById("score").textContent = score;
+            const apiKey = document.getElementById("apiKey").value;
+            if (apiKey) {
+              fetch("https://api.mistermatti.com/htmaa-final/text", {
+                method: "POST",
+                headers: {
+                  "X-API-Key": apiKey,
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ text: score.toString() }),
+              }).catch(() => {});
+            }
+          });
+
+          deviceOp.addEventListener("gattserverdisconnected", () => {
+            log("Operator disconnected");
+            statusSpanOp.textContent = "Disconnected";
+            connectBtnOp.disabled = false;
+            disconnectBtnOp.disabled = true;
+            probeSubject.complete();
+          });
+
+          log("Operator connected");
+          statusSpanOp.textContent = "Connected";
+          connectBtnOp.disabled = true;
+          disconnectBtnOp.disabled = false;
+        } catch (error) {
+          log(`ERROR: ${error.message}`);
+          console.error(error);
+        }
+      });
+
+      // Disconnect Operator
+      disconnectBtnOp.addEventListener("click", () => {
+        if (deviceOp && deviceOp.gatt.connected) {
+          deviceOp.gatt.disconnect();
+          log("Operator disconnected by user");
+          statusSpanOp.textContent = "Disconnected";
+          connectBtnOp.disabled = false;
+          disconnectBtnOp.disabled = true;
+          probeSubject.complete();
+        }
+      });
+
+      function enableLedButtons() {
+        for (let i = 0; i < 7; i++) {
+          document.getElementById(`led${i}`).disabled = false;
+        }
+      }
+
+      function disableLedButtons() {
+        for (let i = 0; i < 7; i++) {
+          document.getElementById(`led${i}`).disabled = true;
+        }
+      }
+
+      for (let i = 0; i < 7; i++) {
+        document.getElementById(`led${i}`).addEventListener("click", async () => {
+          try {
+            const command = `blink:${i}`;
+            const encoder = new TextEncoder();
+            const data = encoder.encode(command);
+            await charTxSw.writeValue(data);
+            log(`Switchboard TX: ${command}`);
+          } catch (error) {
+            log(`ERROR: ${error.message}`);
+          }
+        });
+      }
+
+      // Load API key from localStorage
+      const apiKeyInput = document.getElementById("apiKey");
+      const storedKey = localStorage.getItem("htmaa-matti-key");
+      if (storedKey) {
+        apiKeyInput.value = storedKey;
+      }
+
+      // Save API key to localStorage on change
+      apiKeyInput.addEventListener("input", () => {
+        localStorage.setItem("htmaa-matti-key", apiKeyInput.value);
+      });
+    </script>
+  </body>
+</html>

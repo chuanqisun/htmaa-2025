@@ -228,19 +228,154 @@ deviceSw = await navigator.bluetooth.requestDevice({
 });
 ```
 
-Operator:
+Operator reads TRRS address and sends to browser via BLE:
 
 ```cpp
-// show added code that reads TRRS address and sends via BLE
+#include <BLEDevice.h>
+#include <BLEServer.h>
+#include <BLEUtils.h>
+#include <BLE2902.h>
 
+#define UART_SERVICE_UUID "6e400001-b5a3-f393-e0a9-e50e24dcca9e"
+#define UART_TX_UUID      "6e400003-b5a3-f393-e0a9-e50e24dcca9e"
+
+BLEServer* pServer = NULL;
+BLECharacteristic* pTxCharacteristic = NULL;
+bool deviceConnected = false;
+bool oldDeviceConnected = false;
+
+const int inputPins[] = { D3, D4, D5 };
+const int numInputs = 3;
+
+class MyServerCallbacks: public BLEServerCallbacks {
+    void onConnect(BLEServer* pServer) {
+        deviceConnected = true;
+    }
+
+    void onDisconnect(BLEServer* pServer) {
+        deviceConnected = false;
+    }
+};
+
+void setup() {
+  Serial.begin(115200);
+  delay(50);
+
+  for (int i = 0; i < numInputs; ++i) {
+    pinMode(inputPins[i], INPUT_PULLUP);
+  }
+
+  BLEDevice::init("op");
+
+  pServer = BLEDevice::createServer();
+  pServer->setCallbacks(new MyServerCallbacks());
+
+  BLEService* pService = pServer->createService(UART_SERVICE_UUID);
+
+  pTxCharacteristic = pService->createCharacteristic(
+      UART_TX_UUID,
+      BLECharacteristic::PROPERTY_NOTIFY
+  );
+  pTxCharacteristic->addDescriptor(new BLE2902());
+
+  pService->start();
+
+  BLEAdvertising* pAdvertising = BLEDevice::getAdvertising();
+  pAdvertising->addServiceUUID(UART_SERVICE_UUID);
+  pAdvertising->setScanResponse(false);
+  pAdvertising->setMinPreferred(0x0);
+  BLEDevice::startAdvertising();
+}
+
+void loop() {
+  if (!deviceConnected && oldDeviceConnected) {
+    delay(500);
+    pServer->startAdvertising();
+    oldDeviceConnected = deviceConnected;
+  }
+
+  if (deviceConnected && !oldDeviceConnected) {
+    oldDeviceConnected = deviceConnected;
+  }
+
+  String probe = "";
+  for (int i = 0; i < numInputs; ++i) {
+    int v = digitalRead(inputPins[i]);
+    probe += (v == HIGH) ? "1" : "0";
+  }
+
+  if (deviceConnected) {
+    pTxCharacteristic->setValue((uint8_t*)probe.c_str(), probe.length());
+    pTxCharacteristic->notify();
+  }
+
+  delay(100);
+}
 ```
 
 In the web app, we need to account for bounce in the connection due to sliding motion. I picked my favorite RxJS library to handle the debounce.
 
-Web app:
+The Web app serves as a brain. It tracks the current LED, checks if user probes the correct address, and sends command to Switchboard to turn off the LED and light up another one.
 
 ```js
-// show debounce and state management code
+import { Subject, debounceTime, distinctUntilChanged, BehaviorSubject } from "https://esm.sh/rxjs";
+
+const SERVICE_UUID = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
+const TX_CHAR_UUID = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
+const RX_CHAR_UUID = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
+
+let charTxSw = null;
+let charRxOp = null;
+let probeSubject = new Subject();
+let currentTarget = 3;
+let scoreSubject = new BehaviorSubject(0);
+
+document.getElementById("connectBtnSw").addEventListener("click", async () => {
+  const deviceSw = await navigator.bluetooth.requestDevice({
+    filters: [{ name: "sw" }],
+    optionalServices: [SERVICE_UUID],
+  });
+  const server = await deviceSw.gatt.connect();
+  const service = await server.getPrimaryService(SERVICE_UUID);
+  charTxSw = await service.getCharacteristic(RX_CHAR_UUID);
+  const encoder = new TextEncoder();
+  await charTxSw.writeValue(encoder.encode("off:all"));
+  await charTxSw.writeValue(encoder.encode("on:3"));
+});
+
+document.getElementById("connectBtnOp").addEventListener("click", async () => {
+  probeSubject = new Subject();
+  scoreSubject = new BehaviorSubject(0);
+  const deviceOp = await navigator.bluetooth.requestDevice({
+    filters: [{ name: "op" }],
+    optionalServices: [SERVICE_UUID],
+  });
+  const server = await deviceOp.gatt.connect();
+  const service = await server.getPrimaryService(SERVICE_UUID);
+  charRxOp = await service.getCharacteristic(TX_CHAR_UUID);
+  await charRxOp.startNotifications();
+  charRxOp.addEventListener("characteristicvaluechanged", (e) => {
+    probeSubject.next(new TextDecoder().decode(e.target.value.buffer).trim());
+  });
+  probeSubject.pipe(distinctUntilChanged(), debounceTime(500)).subscribe((value) => {
+    const num = parseInt(value, 2);
+    if (num === currentTarget) {
+      const encoder = new TextEncoder();
+      charTxSw.writeValue(encoder.encode("off:" + currentTarget)).then(() => {
+        let randomLed = Math.floor(Math.random() * 7);
+        while (randomLed === currentTarget) randomLed = Math.floor(Math.random() * 7);
+        charTxSw.writeValue(encoder.encode(`on:${randomLed}`)).then(() => {
+          currentTarget = randomLed;
+          scoreSubject.next(scoreSubject.value + 1);
+        });
+      });
+    }
+  });
+});
+
+const apiKeyInput = document.getElementById("apiKey");
+apiKeyInput.value = localStorage.getItem("htmaa-matti-key") || "";
+apiKeyInput.addEventListener("input", () => localStorage.setItem("htmaa-matti-key", apiKeyInput.value));
 ```
 
 ![Whack-a-mole demo](./media/whack-a-mole.mp4)
@@ -249,23 +384,19 @@ Web app:
 
 - To satisfy the group assignment requirement of networking with other's project. I added the logic for the browser to HTTP POST the current score to Matti's server, which will in turn display the score on his e-ink display.
 
-# Preparation
-
-- 3D print
-- Solder
-
-# LED connection
-
-See sketches/led-test
-
-# Web -> ESP32: turn one light on with Bluetooth
-
-See sketches/blue-light
-
-# ESP32 -> Web: Stream probe value to browser
-
-Stream raw probe
-Debug bit address circuit (add image)
-See archive/streaming-probe
+```diff
++scoreSubject.subscribe((score) => {
++  const apiKey = document.getElementById("apiKey").value;
++  if (apiKey) {
++    fetch("https://api.mistermatti.com/htmaa-final/text", {
++      method: "POST",
++      headers: { "X-API-Key": apiKey, "Content-Type": "application/json" },
++      body: JSON.stringify({ text: score.toString() }),
++    });
++  }
++});
+```
 
 ## Appendix
+
+-
