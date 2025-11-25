@@ -50,21 +50,21 @@ TRRS
 
 Visualize this in grid, when any digital write high (R2, S) touches the ground (R1), a short happens:
 
-|               | Tip (write) | Ring1 (GRD) | Ring2 (write) | Sleeve (write) |
-| ------------- | ----------- | ----------- | ------------- | -------------- |
-| Tip (read)    | OK          | OK          | OK            | OK             |
-| Ring1 (GRD)   |             | OK          | Short         | Short          |
-| Ring2 (read)  |             |             | OK            | OK             |
-| Sleeve (read) |             |             |               | OK             |
+|                   | Tip (write) | Ring1 (GRD) | Ring2 (write) | Sleeve (write) |
+| ----------------- | ----------- | ----------- | ------------- | -------------- |
+| **Tip (read)**    | ✅          | ✅          | ✅            | ✅             |
+| **Ring1 (GRD)**   |             | ✅          | ⚠️            | ⚠️             |
+| **Ring2 (read)**  |             |             | ✅            | ✅             |
+| **Sleeve (read)** |             |             |               | ✅             |
 
 Realizing my mistake, I moved the ground to the tip so no other pins can touch it
 
-|               | Tip (GRD) | Ring1 (write) | Ring2 (write) | Sleeve (write) |
-| ------------- | --------- | ------------- | ------------- | -------------- |
-| Tip (GRD)     | OK        | OK            | OK            | OK             |
-| Ring1 (read)  |           | OK            | OK            | OK             |
-| Ring2 (read)  |           |               | OK            | OK             |
-| Sleeve (read) |           |               |               | OK             |
+|                   | Tip (GRD) | Ring1 (write) | Ring2 (write) | Sleeve (write) |
+| ----------------- | --------- | ------------- | ------------- | -------------- |
+| **Tip (GRD)**     | ✅        | ✅            | ✅            | ✅             |
+| **Ring1 (read)**  |           | ✅            | ✅            | ✅             |
+| **Ring2 (read)**  |           |               | ✅            | ✅             |
+| **Sleeve (read)** |           |               |               | ✅             |
 
 - Since I already used heat shrink tubes to reinforce the ribbon wires' pin headers, making this changes means removing the heat shrink tube and rearrange the wires. Luckily, the ribbon wires can be re-aranged. That was another 2 hour job.
 - In programming, the Switchboard is hard wired to have digital write high or ground on each of the address bits.
