@@ -92,7 +92,31 @@ Operator:
   - The browser app sends a new address to the Switchboard
   - Switchboard lights up the LED corresponding to the address
 
+Switchboard:
+
+```cpp
+// show added code that lights up LED based on BLE command
+```
+
+Operator:
+
+```cpp
+// show added code that reads TRRS address and sends via BLE
+```
+
+In the web app, we need to account for bounce in the connection due to sliding motion. I picked my favorite RxJS library to handle the debounce.
+
+Web app:
+
+```js
+// show debounce and state management code
+```
+
+![Whack-a-mole demo](./media/whack-a-mole.mp4)
+
 ## Network 3: URL as web address
+
+- To satisfy the group assignment requirement of networking with other's project. I added the logic for the browser to HTTP POST the current score to Matti's server, which will in turn display the score on his e-ink display.
 
 # Preparation
 
