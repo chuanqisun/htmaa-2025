@@ -417,6 +417,6 @@ With this add-on, the browser will POST to the server whenever score updates. Ca
 
 ## Appendix
 
--
-
--
+- [Operator code](./code/operator/operator.ino)
+- [Switchboard code](./code/switchboard/switchboard.ino)
+- [Web app](./code/web/index.html)
