@@ -36,7 +36,7 @@ Operator
   - Sleeve: Address bit 2
 ```
 
-The following 4-by-4 table visualizes the potential contacts caused by the sliding motion:
+Let's visualize the different contact possibilities caused by the sliding motion:
 
 ```txt
 TRRS
@@ -53,7 +53,7 @@ TRRS
 TRRS
 ```
 
-When visualized in a grid, any digital write high (Ring2, Sleeve) touching the ground (Ring1) causes a short:
+When visualized in a grid, I saw the digital writes (Ring2, Sleeve) touching the ground (Ring1) causes a short:
 
 |                   | Tip (write) | Ring1 (GRD) | Ring2 (write) | Sleeve (write) |
 | ----------------- | ----------- | ----------- | ------------- | -------------- |
@@ -73,9 +73,9 @@ Realizing my mistake, I moved the ground to the tip so no other pins can touch i
 
 Since I had already used heat shrink tubes to reinforce the pin headers, making these changes required removing the tubes and rearranging the wires. Fortunately, the ribbon wires allowed for rearrangement, though it took another two hours.
 
-In the programming, the Switchboard is hard-wired to have a digital write high or ground on each address bit. I originally planned for 8 addresses using 3 bits, but the shorting issue required me to reserve an address for the "Unplugged" state. I ended up with 7 usable addresses (`000` to `110`), with `111` representing "Unplugged".
+In the programming, the Switchboard is hard-wired to have a digital write high or ground on each address bit. I originally planned for 8 addresses using 3 bits, but I need to reserve an address for the "Unplugged" state. I ended up with 7 usable addresses (`000` to `110`), with `111` representing "Unplugged".
 
-Switchboard, digital write high on the address bits:
+Here is the Switchboard code with digital write high on D6 pin, which supplies 3.3V to all the `1` address bits:
 
 ```cpp
 void setup() {
@@ -85,12 +85,12 @@ void setup() {
 
 ```
 
-As seen on the PCB, each connector has six pins: two for the LED and four for the TRRS. Among the four TRRS pins, one is ground (second from the left for the left column, and second from the right for the right column).
+As seen on the PCB, each connector has six pins: two for the LED and four for the TRRS. Among the four TRRS pins, one is ground (second from the left in the left column, and second from the right in the right column).
 
 ![Switchboard circuit](./media/final-switchboard-01.webp)
 **The address bits are baked into the hardware**
 
-The Operator reads the address bits:
+The Operator would read the address bits in a loop:
 
 ```cpp
 const int inputPins[] = { D3, D4, D5 };
@@ -123,16 +123,18 @@ void loop() {
 }
 ```
 
+This was confirmed working in [Electronics fabrication week](../week-06/index.md#integration-test).
+
 ## Network 2: Mac and name as BLE address
 
-I added LED lights to the Switchboard (see the Final Project page for details). Since the TRRS connection provides only one-way communication from the Switchboard to the Operator, I needed a method for the Operator to send information back to change the LED states. The full data flow operates as follows:
+I added LED lights to the Switchboard (see the [Group assignment page](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week12/) for details). Since the TRRS connection provides only one-way communication from the Switchboard to the Operator, I needed a method for the Operator to send information back to change the LED states. A browser app was introduced to be the hub. The full data flow operates as follows:
 
 1.  The Operator reads a 3-bit address from the Switchboard.
 2.  The Operator sends the address to the browser app.
 3.  The browser app sends a new address to the Switchboard.
 4.  The Switchboard lights up the LED corresponding to that address.
 
-I needed to associate the address of the phone jacks with the specific LED next to them. The wiring had changed over time, so the only guarantee was that they were distinct. I approached this empirically by probing them to determine the addresses.
+I needed to associate the address of the phone jacks with the specific LED next to them. The wiring had changed over time, so the only guarantee was that they were distinct. I approached this empirically by probing them to determine the final addresses.
 
 ![Probing for address](./media/weekly-assembly-02.webp)
 **Probing for address**
