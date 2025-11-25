@@ -35,14 +35,14 @@ Visualize in the 4 by 4 table, where each cell represents a potential contact du
 
 ```
 TRRS
-   TRRS
+   TRRS 👈
 
 TRRS
-  TRRS
+  TRRS 👈
 
 
 TRRS
- TRRS
+ TRRS 👈
 
 TRRS
 TRRS
@@ -91,6 +91,26 @@ Operator:
   - Operator sends the address to the browser app
   - The browser app sends a new address to the Switchboard
   - Switchboard lights up the LED corresponding to the address
+- Bluetooth name length truncated by ESP32
+  - I found `Switchboard` became `Switchbo` in the device list. I believe the bluetooth library is shortening the name to 8 characters.
+
+Device name overflow:
+
+```js
+deviceSw = await navigator.bluetooth.requestDevice({
+  filters: [{ name: "Switchboard" }],
+  optionalServices: [SERVICE_UUID],
+});
+```
+
+into
+
+```js
+deviceSw = await navigator.bluetooth.requestDevice({
+  filters: [{ name: "sw" }],
+  optionalServices: [SERVICE_UUID],
+});
+```
 
 Switchboard:
 
@@ -137,24 +157,4 @@ Stream raw probe
 Debug bit address circuit (add image)
 See archive/streaming-probe
 
-# ESP32 -> Web -> ESP32: Whack-a-mole game
-
-I found `Switchboard` became `Switchbo` in the device list. I believe the bluetooth library is shortening the name to 8 characters.
-
-Device name overflow:
-
-```js
-deviceSw = await navigator.bluetooth.requestDevice({
-  filters: [{ name: "Switchboard" }],
-  optionalServices: [SERVICE_UUID],
-});
-```
-
-into
-
-```js
-deviceSw = await navigator.bluetooth.requestDevice({
-  filters: [{ name: "sw" }],
-  optionalServices: [SERVICE_UUID],
-});
-```
+## Appendix
