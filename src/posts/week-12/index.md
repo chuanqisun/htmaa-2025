@@ -420,3 +420,4 @@ With this add-on, the browser will POST to the server whenever score updates. Ca
 - [Operator code](./code/operator/operator.ino)
 - [Switchboard code](./code/switchboard/switchboard.ino)
 - [Web app](./code/web/index.html)
+- [LED address map](./code/led-mapping.json)
