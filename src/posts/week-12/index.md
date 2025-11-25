@@ -92,8 +92,10 @@ void setup() {
 
 ```
 
-![Show latest Switchboard circuit](./media/final-switchboard-01.webp)
-**The address bits are hard wired to either Ground, or a digital output pin**
+As seen on the PCB, each connector has 6 pins, 2 for LED, 4 for TRRS. Among the 4 TRRS pins, one is ground (second from left for left column, and second from right for right column).
+
+![Switchboard circuit](./media/final-switchboard-01.webp)
+**The address bits are baked into the hardware**
 
 Operator reads the address bits:
 
@@ -408,6 +410,13 @@ apiKeyInput.addEventListener("input", () => localStorage.setItem("htmaa-matti-ke
 +});
 ```
 
+With this add-on, the browser will POST to the server whenever score updates. Can you group page for details.
+
+![Web app notifying remote server](./media/networking-sender-recorder.mp4)
+**Web app notifying remote server**
+
 ## Appendix
+
+-
 
 -
