@@ -398,7 +398,7 @@ To satisfy the group assignment requirement of networking with another project, 
 +});
 ```
 
-With this add-on, the browser posts to the server whenever the score updates. Please see the group page for details.
+With this add-on, the browser posts to the server whenever the score updates. See [Group assignment page](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week12/) for details.
 
 ![Web app notifying remote server](./media/networking-sender-recorder.mp4)
 **Web app notifying remote server**
