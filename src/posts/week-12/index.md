@@ -141,8 +141,8 @@ I needed to associate the address of the phone jacks with the specific LED next 
 
 I placed a cheatsheet on the Switchboard case for easy reference:
 
-![Cheatsheet for Switchboard addresses](./media/weekly-assembly-02.webp)
-**Cheatsheet for Switchboard addresses**
+![Cheatsheet for Switchboard addresses](./media/weekly-assembly-05.webp)
+**Cheatsheet for LED number, LED digital pin, and TRRS bit address**
 
 Here is the key logic for lighting up an LED based on a BLE command received by the Switchboard:
 
