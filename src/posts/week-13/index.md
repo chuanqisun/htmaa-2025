@@ -4,9 +4,9 @@ date: 2025-12-03
 keywords: ["application", "interface"]
 ---
 
-This week, I set out to bring my walkie-talkie device closer to an interactive demo. The goal was to write an application that interfaces a user with the input and output devices I made throughout the semester: the Operator (ESP32 with probe and buttons) and the Switchboard (ESP32 with LEDs). The application would orchestrate state management while providing a web UI for device management and debugging.
+This week, I set out to bring my [walkie-talkie device](../final-project/index.md) closer to an interactive demo. The goal was to write an application that interfaces a user with the input and output devices I made throughout the semester: the Operator (ESP32 with probe and buttons) and the Switchboard (ESP32 with TRRS sockets and LEDs). The application would orchestrate state management while providing a web UI for device management and debugging.
 
-I grew tired of AI-generated frontend code with its Tailwind classes, React boilerplate, blue-purple gradients, oversized typography, and distracting animations. I decided to build as close to the web platform as possible: vanilla TypeScript, RxJS for reactive state, and lit-html for templating.
+I grew tired of AI-generated frontend code with its [Tailwind](https://tailwindcss.com/) classes, [React](https://react.dev/) boilerplate, blue-purple gradients, oversized typography, and distracting animations. I decided to build as close to the web platform as possible: vanilla [TypeScript](https://www.typescriptlang.org/), [RxJS](https://rxjs.dev/) for reactive state, and [lit-html](https://lit.dev/docs/libraries/standalone-templates/) for templating.
 
 ## Reviving the Foundation
 
@@ -35,7 +35,7 @@ udpReceiver.on("message", (msg, rinfo) => {
 
 ### Discovering Laptop Address
 
-The reverse problem was harder. The ESP32 needed to know the laptop's IP address. I used the Node.js `os.networkInterfaces()` API to expose the laptop's address through an HTTP endpoint:
+The reverse problem was harder. The ESP32 needed to know the laptop's IP address. I used the Node.js [`os.networkInterfaces()`](https://nodejs.org/api/os.html#osnetworkinterfaces) API to expose the laptop's address through an HTTP endpoint:
 
 Server
 
@@ -82,7 +82,7 @@ The web UI allowed users to fetch the laptop IP. We still need to push it to the
 
 ## Automated Handshake Protocol
 
-I borrowed the BLE networking code from the [Networking week](../week-12/index.md#network-2-mac-and-name-as-ble-address) and enhanced it with an automated handshake protocol for the laptop and the ESP32 to exchange IP addresses that can be used for full duplex UDP streaming. As soon as ESP32 is paired over BLE, the following sequence occurs:
+I borrowed the [BLE](https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API) networking code from the [Networking week](../week-12/index.md#network-2-mac-and-name-as-ble-address) and enhanced it with an automated handshake protocol for the laptop and the ESP32 to exchange IP addresses that can be used for full duplex UDP streaming. As soon as ESP32 is paired over BLE, the following sequence occurs:
 
 1. Web requests server address from Node.js
 2. Server responds with its own IP
@@ -146,7 +146,7 @@ I added a Switchboard UI for connection testing, again, reusing the BLE communic
 
 ### Real-time Server Push with SSE
 
-I wanted the web UI to receive live updates from the server without polling. I added a Server-Sent Events (SSE) endpoint to push data to the browser with minimal latency:
+I wanted the web UI to receive live updates from the server without polling. I added a [Server-Sent Events (SSE)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) endpoint to push data to the browser with minimal latency:
 
 ```js
 // Server: SSE endpoint for pushing events to web
@@ -523,10 +523,10 @@ Let's go on an adventure!
 The final system uses:
 
 - Node.js as HTTP and UDP server
-- node-ble for BLE communication with ESP32 devices
-- RxJS for functional reactive programming
-- lit-html for HTML templating
-- OpenAI and Gemini SDKs for text and speech generation
+- [node-ble](https://github.com/chrvadala/node-ble) for BLE communication with ESP32 devices
+- [RxJS](https://rxjs.dev/) for functional reactive programming
+- [lit-html](https://lit.dev/docs/libraries/standalone-templates/) for HTML templating
+- [OpenAI SDK](https://github.com/openai/openai-node) and [Google Gen AI SDK](https://github.com/googleapis/js-genai) for text and speech generation
 
 The pivot in the middle of the project put the modular design to the test. I was able to modify the main logic without touching any communication code. What began as a voice communication tool transformed into an AI Dungeon. The architecture enabled rapid adaptation when hardware failed.
 
