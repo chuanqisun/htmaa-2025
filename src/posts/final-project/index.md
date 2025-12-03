@@ -556,3 +556,22 @@ Remaining tasks:
 - Programming the voice interaction
 - Add a LiPo battery with a power switch
 - Improve the case quality
+
+## Application and Interface
+
+During [Week 13](../week-13/index.md), I built a modular Node.js application to orchestrate all devices and AI services.
+
+- **Automated handshake protocol**: ESP32 devices and the laptop exchange IP addresses over BLE, enabling seamless UDP audio streaming
+- **Reactive architecture**: Used RxJS for functional reactive programming, making the system easy to extend and modify
+- **Hardware issue**: The integration revealed reliability problems in both speaker and microphone. I pivoted last minute to a text adventure game that uses the probe to preview story options and buttons to commit choices
+
+The demo uses Gemini for story generation, OpenAI TTS for speech synthesis, LEDs to signal available options, and the probe/buttons for physical interaction.
+
+<video controls src="../week-13/media/audio-adventures.mp4"></video>
+**Text adventure game in action**
+
+Thanks to the hardware issue, I got inspired by the game experience and saw a creative use case for my device.
+
+I want to add voice input to allow player interact with NPCs, environment, and express action. Potentially upgrade with multi-player mode. In this new concept, each audio jack represents an interactive element in a story.
+
+But first, I need to debug the hardware issue and recover voice input/output as soon as possible.
