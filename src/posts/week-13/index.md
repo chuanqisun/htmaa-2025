@@ -534,4 +534,5 @@ As a future improvement, I want to render each story decision point with a gener
 
 ## Appendix
 
-- [Full Project Code](...)
+- [Full Project Code](./code/text-adventure.zip)
+- [Protocols and events](./code/protocol.md)
