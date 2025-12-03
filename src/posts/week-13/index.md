@@ -4,6 +4,12 @@ date: 2025-12-03
 keywords: ["application", "interface"]
 ---
 
+This week, I want to bring my walkie-talkie device closer to an interactive demo. I set out to create an app that simulates single-user multi-ai conversation. The main application is the invisble orchestration of state management of the simulation. The UI is mainly for device management and debugging purposes.
+
+I felt jaded by the AI generated frontend code. They usually feature Tailwind, React, and styled in blue-purple gradients, rounded buttons, oversized typography, wasteful spacing, and distracting animations. So I decided to ditch all UI libraries and build my app as close to the web platform as possible.
+
+## IP Fetching
+
 - Revived walkie-talkie code from week 9. Without any UI
 - Problem 1: IP discovery.
   - Laptop has hard coded IP address for ESP32
@@ -68,6 +74,10 @@ fetchButton.addEventListener("click", async () => {
 });
 ```
 
+![App v0](./media//app-v0.webp)
+
+##
+
 - Updated solution, an automatd protocol to exchange ip between server and operator
   - A single round of handshake
     - Web -> Server: request server address
@@ -75,7 +85,7 @@ fetchButton.addEventListener("click", async () => {
     - Web -> Operator: send server address
     - Operator -> Web: send self address
     - Web -> Server: send operator address
-- See screenshot v2
+- See screenshot v1
 
 web
 
@@ -119,13 +129,18 @@ void sendOperatorAddress() {
 }
 ```
 
+![App screen](./media/app-v1.webp)
+
+## Switchboard UI
+
 - Added Switchboard UI
   - Basic connection testing features from Networking week
-  - See screenshot v3
+
+![App screen](./media/app-v3.webp)
 
 - Trigger speak from web UI
   - We want the web UI to have the latest speech content
-  - Added SSE endpoint on node.js server, so we can push speech content to web with minimum latency
+  - Added SSE endpoint on node.js server, so we can push any serializable data to web with minimum latency
   - Added new endpoints to hande speech content from the web UI
 
 ```js
@@ -161,7 +176,9 @@ speakBtn.addEventListener("click", async () => {
 });
 ```
 
-- See screenshot v4
+![App screen](./media/app-v4.webp)
+
+## The Pivot
 
 - Dealing with complexity, refactored the BLE communication to live within server code, rather than web UI
 - The full server code becomes modular and easier to manage
@@ -276,7 +293,9 @@ sseEvents$.subscribe({
 });
 ```
 
-- See screenshot v5
+Now the UI embodies the idea that view is pure function applied to state. I literally rendered the JSON state of the server on the web UI. The rest of the UI are all derived from the state.
+
+![App screen](./media/app-v5.webp)
 
 - Final version
   - Audio input and output devices both start to behave erratically
@@ -463,8 +482,24 @@ function random(set: Set<number>): number | null {
 }
 ```
 
+![App screen](./media/app-v6.webp)
+
 ![audio-adventures](./media/audio-adventures.mp4)
 **Game experience**
+
+## Reflection
+
+Here is everything I've used:
+
+- node.js as http, udp server
+- node-ble for BLE communication
+- rxjs for functional reactive programming
+- lit-html for html templating
+- openai and gemini's official SDKs for text and speech generation
+
+The pivot in the middle of the project puts the modular design to test. I felt good that the I could modify the main logic without touching any communication logic. Modularity wins.
+
+As a future improvement, I want to render each story decision point with a generated image, bringing more immersion to the game
 
 ## Appendix
 
