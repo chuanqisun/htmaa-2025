@@ -95,10 +95,10 @@ I uploaded both reconstructions to my custom [spectrogram player](https://code.c
 **Original**
 
 <audio src="./media/quote-after-human.mp3" controls></audio>
-**Manually reconstructed from photo of engraving**
+**Manual reconstruction from photo of engraving**
 
 <audio src="./media/quote-after-ai.mp3" controls></audio>
-**AI reconstructed from photo of engraving**
+**AI reconstruction from photo of engraving**
 
 ## Nameplate for Final Project
 
