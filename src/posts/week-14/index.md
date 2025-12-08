@@ -1,5 +1,5 @@
 ---
-title: "Week 14: Time"
+title: "Week 14: Wildcard for Wildcut"
 date: 2025-12-07
 keywords: ["wildcard", "laser-cutting", "laser-engraving"]
 ---
@@ -9,6 +9,7 @@ keywords: ["wildcard", "laser-cutting", "laser-engraving"]
 >
 > — Pink Floyd, "Time"
 
+- In this wild card week, we get to choose from a wide selection of topics to dive deep with one of our TAs.
 - This week, I want to celebrate everything we learned about time management from this class by engraving the cover of The Dark Side of The Moon, the album that included "Time".
 
 ## Asset preparation
@@ -74,7 +75,7 @@ Steps:
 
 1. Desaturate
 2. Invert
-3. Color burn (#666666)
+3. Color burn (HEX `#666666`)
 4. Reduce exposure
 
 ![Manual restoration process](./media/restore-human.webp)
@@ -89,11 +90,14 @@ The AI restoration is similar to the manual process except I prompted AI to also
 
 Upload both reconstructions to my custom [spectrogram players](https://code.chuanqisun.com/spectrogram-recorder/) and hear the results:
 
+<audio src="./media/quote-before.mp3" controls></audio>
+**Original**
+
 <audio src="./media/quote-after-human.mp3" controls></audio>
-**Manual reconstruction**
+**Manually reconstructed from photo of engraving**
 
 <audio src="./media/quote-after-ai.mp3" controls></audio>
-**AI reconstruction**
+**AI reconstructed from photo of engraving**
 
 ## Nameplate for Final Project
 
@@ -114,7 +118,7 @@ Upload both reconstructions to my custom [spectrogram players](https://code.chua
 ## Post-processing
 
 - Jiaming showed me how to cut the metal with MetalFab laser cutter.
-- It was the same process as [Link to week 1](../week-02/index.md)
+- It was the same process we practiced in [Machine Cutting Week](../week-02/index.md)
 
 ![Cutting metal with laser](./media/laser-cut-metal.mp4)
 **The violent process of cutting metal with laser**
@@ -127,13 +131,19 @@ Upload both reconstructions to my custom [spectrogram players](https://code.chua
 **Before and after sanding**
 
 - I practiced the sanding to remove the corners
-- The final results look great! Once again, shout out to [Jiaming](https://fab.cba.mit.edu/classes/863.24/people/JiamingLiu/About%20me.html) for hands-on coaching, and [Edward](https://fab.cba.mit.edu/classes/863.25/people/EdwardChen/) for sharing his characterization results.
+- The final results look great!
+
+![Final results](./media/final-results.webp)
+**Final results of all 3 designs**
+
+- Once again, shout out to [Jiaming](https://fab.cba.mit.edu/classes/863.24/people/JiamingLiu/About%20me.html) for hands-on coaching, and [Edward](https://fab.cba.mit.edu/classes/863.25/people/EdwardChen/) for sharing his characterization results.
 
 ## Reflection
 
-- Color engraving is very empirical. The parameters must be determined for the specific material and machine and results may still vary
+- Color engraving is very trial-and-error based. It takes 2 hours just to map out few possible color options.
+- The parameters must be determined for the specific material and machine and results may still vary
 
 ## Appendix
 
 - [All graphic design assets](./code/design.zip)
-- [Spectrogram app HTML](./code/spectrogram-recorder.html)
+- [Spectrogram app](./code/spectrogram-app.zip)
