@@ -615,7 +615,7 @@ Throughout my final project, I used 2.54mm female headers to decouple PCB design
 As an insurance policy, I reinforced all header joints with hot glue. I have a hunch Neil won't like this because headers are fundamentally less reliable than soldered joints. But for me, the trade-off was worth it. The electronic components supply became increasingly scarce towards the end of the semester. I needed to conserve and protect the parts I had.
 
 ![Reinforcing headers](../week-14/media/final-glue.webp)
-**Reinforcing header joints with hot glue**
+**"Solidifying" my design**
 
 I also noticed an improvement in my soldering skills over the course of the project. I developed a habit of wetting the soldering tip with solder before touching the joint. This practice significantly improved heat transfer and resulted in cleaner, shinier joints. Anyone wants Hershey's kisses?
 
