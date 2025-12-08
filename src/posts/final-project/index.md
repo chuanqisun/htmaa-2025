@@ -567,7 +567,7 @@ During [Week 13](../week-13/index.md), I built a modular Node.js application to 
 
 The demo uses Gemini for story generation, OpenAI TTS for speech synthesis, LEDs to signal available options, and the probe/buttons for physical interaction.
 
-<video controls src="../week-13/media/audio-adventures.mp4"></video>
+<video controls src="../week-13/media/audio-adventures.mp4" poster="../week-13/media/video-poster.webp"></video>
 **Text adventure game in action**
 
 Thanks to the hardware issue, I got inspired by the game experience and saw a creative use case for my device.
