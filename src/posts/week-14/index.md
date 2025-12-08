@@ -126,7 +126,7 @@ Had we had more time, I would play with different SVG font options until the mac
 ![Nameplate result](./media/engraving-03.webp)
 **Engraved nameplate**
 
-Zooming in, I saw crisp texts. But the MIT logo could be smoother.
+Zooming in, I saw crisp texts. But the MIT logo suffered the same aliasing issue as before.
 
 ![Macro lens close-up of nameplate](./media/macro-lens-03.webp)
 **MIT logo was aliased**
