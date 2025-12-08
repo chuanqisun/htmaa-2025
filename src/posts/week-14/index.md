@@ -133,7 +133,7 @@ Zooming in, I saw crisp texts. But the MIT logo suffered the same aliasing issue
 
 ## Post-processing
 
-Jiaming showed me how to cut the metal with the MetalFab laser cutter. It was the same process we practiced in [Machine Cutting Week](../week-02/index.md).
+Jiaming showed me how to cut the metal with the MetalFab laser cutter. It was the same process we practiced in [Machine Cutting Week](../week-02/index.md) except for the more powerful laser.
 
 ![Cutting metal with laser](./media/laser-cut-metal.mp4)
 **The violent process of cutting metal with laser**
