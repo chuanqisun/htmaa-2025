@@ -1,7 +1,7 @@
 ---
 title: "Week 14: Wildcard for Wildcut"
 date: 2025-12-07
-keywords: ["wildcard", "laser-cutting", "laser-engraving"]
+keywords: ["wildcard", "cutting", "engraving"]
 ---
 
 In the wild card week, we get to choose from a selection of topics to dive deep with one of our TAs.
