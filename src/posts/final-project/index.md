@@ -643,6 +643,9 @@ The case bodies needed matching cutouts to receive the snap fit tabs. I added sm
 
 The snap fit design improved the user experience significantly. The lids now close with a satisfying click and stay securely in place. Opening is still easy thanks to a thumb notch I reserved on one side.
 
+![Thumb notches](../week-14/media/final-thumb-gap.webp)
+**Thumb notches for ergonomic opening**
+
 Next steps:
 
 - Fabricate a 2nd Operator for multi-player demo
