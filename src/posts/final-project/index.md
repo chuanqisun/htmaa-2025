@@ -622,6 +622,8 @@ I also noticed an improvement in my soldering skills over the course of the proj
 ![Compare solder joints](../week-14/media/final-compare-solder.webp)
 **Operator mk1 (left) vs mk3 (right) solder joints**
 
+One thing still on my wish list is to align all the through holes on the 2.54mm grid. This would allow me to put all the headers in on a breadboard and solder them in one go.
+
 ## Better Enclosure
 
 The early case prototypes used friction fit to hold the lid in place. This worked but required careful tuning of tolerances. Even a nicely fit lid could eventually loosen due to wear and tear. I wanted a more reliable closure mechanism.
