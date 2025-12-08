@@ -105,6 +105,7 @@ Upload both reconstructions to my custom [spectrogram players](https://code.chua
 
 - We were able to create very small texts using the SVG exported from Figma. The program is trying to trace the outline of the text instead of engraving the internal strokes
 - We switched to XTool's built-in font and the same issue persisted.
+- The [Direct Current Symbol](https://www.compart.com/en/unicode/U+2393) was too small for our process.
 - Had we have more time, I would use an image with think storkes instead of vector graphics.
 
 ![Nameplate result](./media/engraving-03.webp)
@@ -134,4 +135,5 @@ Upload both reconstructions to my custom [spectrogram players](https://code.chua
 
 ## Appendix
 
-- [Graphic design assets](...)
+- [All graphic design assets](./code/design.zip)
+- [Spectrogram app HTML](./code/spectrogram-recorder.html)
