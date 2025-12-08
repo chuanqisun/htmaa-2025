@@ -576,6 +576,13 @@ I want to add voice input to allow player interact with NPCs, environment, and e
 
 But first, I need to debug the hardware issue and recover voice input/output as soon as possible.
 
+## Almost made a nameplate
+
+During the [wildcard week](../week-14/index.md#nameplate-for-final-project), I made a nameplate for the Switchboard. Sadly the plate was 3mm thick. Mounting it onto the 2mm 3D printed shell would require too much design change.
+
+![Nameplate](../week-14/media/final-nameplate.webp)
+**Nameplate, too thick to mount**
+
 ## Quality Assurance
 
 The hardware issues from the previous week forced me to take a systematic debugging approach. I needed to diagnose why the microphone and speaker stopped working on my latest PCB.
@@ -653,4 +660,4 @@ Next steps:
 - Fabricate a 2nd Operator for multi-player demo
 - Finish programming
 
-As a stretch goal, I can attempt adding a battery and power switch. It does change the case design. I want to achieve a minimum viable demo first.
+As a stretch goal, I can attempt adding a battery and power switch. It does change the case design. I want to achieve a minimum viable demo first with external power.
