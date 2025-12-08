@@ -575,3 +575,71 @@ Thanks to the hardware issue, I got inspired by the game experience and saw a cr
 I want to add voice input to allow player interact with NPCs, environment, and express action. Potentially upgrade with multi-player mode. In this new concept, each audio jack represents an interactive element in a story.
 
 But first, I need to debug the hardware issue and recover voice input/output as soon as possible.
+
+## Quality Assurance
+
+- To diagnose the microphone and speaker issues, I hooked up the logic analyzer and compared my current PCB with a previous design that is known working.
+
+![Debugging with logic analyzer](../week-14/media/final-debugging.webp)
+**Using logic analyzer to debug I2S signals**
+
+In the working version, I observed signals on all I2S pins. The WS pin has an unexpected pulse every once in a while but I think that is a separate issue.
+
+![Working version](../week-14/media/final-amp-trace-good.webp)
+**I2S pins all working in the good version**
+
+In the broken version, I observed broken signals on two pins:
+
+![Broken version](../week-14/media/final-amp-trace-bad.webp)
+**I2S pins not working in the bad version**
+
+- Thanks to the logic analyzer, I pin-pointed the issue at the rivet via. The rivet had lost contact with the PCB
+
+![Testing via](../week-14/media/final-via-test.webp)
+**Testing via continuity**
+
+- I manually soldered rivet onto the PCB and the problem is resolved
+
+![Fixed via](../week-14/media/final-via-solder.webp)
+**Soldering rivet to its nearest trace fixed the issue**
+
+- Knowing the rivet issue, I reverted the trace to use the header pin and a through-hole via instead of rivet.
+
+![Milling PCB](../week-14/media/final-pcb-fabrication.mp4)
+**Re-milling the PCB with through-hole via**
+
+- Throughout my final project, I used 2.54mm female headers to decouble PCB design from electronic components. As a down-side, the headers have gone through many cycles of plugging and unplugging.
+
+- As an insurance policy, I reinforced all header joints with hot glue. I have a hunch Neil won't like this because headers are fundamentally less reliable than soldered joints. But for me, the trade-off is worth it as the electronic components supply became increasingly scarce towards the end of the semester. I need to try my best conserving the parts.
+
+![Reinforcing headers](../week-14/media/final-glue.webp)
+**Reinforcing header joints with hot glue**
+
+- I also noticed an improvement in my soldering skills. I developed a habit of wetting the soldering tip with solder before touching the joint. This practice significantly improved heat transfer and resulted in cleaner joints.
+
+![Compare solder joints](../week-14/media/final-compare-solder.webp)
+**Operator mk1 (left) vs mk3 (right) solder joints**
+
+## Better Enclosure
+
+- I improved enclosure quality by introducing snap fit joints.
+
+![Snap fit on the lid](../week-14/media/final-adding-lock-tab.webp)
+**Adding snap fit tabs to the lid**
+
+- After adjusting parameters, I applied the same design to all the lids
+
+![Snap fit on all lids](../week-14/media/final-lids.webp)
+**All lids with snap fit tabs**
+
+- The case accommodates the snap fit tabs with small cutouts
+
+![Case cutouts](../week-14/media/final-case-detail.webp)
+**Case cutouts for snap fit tabs**
+
+Next steps:
+
+- Fabricate a 2nd Operator for multi-player demo
+- Finish programming
+
+As a stretch goal, I can attempt adding a battery and power switch. It does change the case design. I want to achieve a minimum viable demo first.
