@@ -2,7 +2,8 @@
 model: nano-banana-pro
 ---
 
-User: (with original image)
+User: (uploaded photo of engraved metal)
+
 User: 
   Restore spectrogram:
   - the very light color peaks should be light gray
