@@ -19,7 +19,6 @@ Model: (updated image)
 
 User: Pure white background
 
-
 Model: (updated image)
 
 User: (Manually invert the color, no AI) 

@@ -61,6 +61,8 @@ I wanted to test if we can store sound as an image engraved on metal.
 
 I had separately vibe-coded [a program](https://code.chuanqisun.com/spectrogram-recorder/) for conversion between audio and spectrogram. The program was all AI generated with 50+ rounds of revision. Since I don't have the full history of the AI coding session, I won't claim credit for the code. For this project, I'm only using the tool to generate a spectrogram from sound and to verify the sound from the engraved spectrogram.
 
+Luckily, we had gathered lots of [quotes from Neil](https://gitlab.cba.mit.edu/classes/863.25/CBA/cba-machine/-/tree/main/software/media/neil_audio) during the [Machine Building Week](../week-11/index.md). Let's pick a hot take!
+
 <audio src="./media/quote-before.mp3" controls></audio>
 **Original quote from Neil**
 
@@ -82,7 +84,7 @@ I took a photo of the engraved metal, processed it in Figma, and decoded it into
 ![Manual restoration process](./media/restore-human.webp)
 **Manual restoration process**
 
-To make this project more interesting, I also used a large-language model with vision skills to restore the spectrogram. The AI restoration is similar to the manual process except I prompted AI to also restore the [formants](https://en.wikipedia.org/wiki/Formant) stripes that were lost in the engraving.
+To make this project more interesting, I also used a large-language model with vision skills to restore the spectrogram. The AI restoration is similar to the manual process except I prompted AI to make most edits. AI was able to visually restore the [formants](https://en.wikipedia.org/wiki/Formant) lines, which in theory, contribute to a more natural utterance.
 
 ![AI restoration](./media/restore-ai.webp)
 **AI restoration process ([chat log](./code/reconstruction-trace.txt))**
