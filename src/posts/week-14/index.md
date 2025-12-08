@@ -55,6 +55,11 @@ After the first cut, the line stroke was not coming out. We updated the paramete
 
 My design file messed up the gradient part inside the prism. It came out as a black triangle, losing the original gradient effect. The colors were limited but at least we had a rainbow-like pattern.
 
+![Macro](./media/macro-lens-01.webp)
+**Macro lens close-up of the engraving**
+
+Under the macro lens, I saw strong aliasing patterns in the rainbow beams. I wonder if there is a way to avoid quantized laser movement.
+
 ## Spectrogram of Neil's Saying
 
 I wanted to test if we can store sound as an image engraved on metal.
@@ -73,6 +78,11 @@ Engraving didn't go well. All the gray levels were lost, and worse still, some o
 
 ![Engraved spectrogram](./media/engraving-02.webp)
 **Engraved spectrogram with unwanted artifacts**
+
+Upon a closer look, the engraving cut too deep. We should have used color marking process instead.
+
+![Close-up of engraving](./media/macro-lens-02.webp)
+**Close-up inspection revealed surface damage**
 
 I took a photo of the engraved metal, processed it in Figma, and decoded it into sound. The restoration steps:
 
@@ -113,6 +123,11 @@ Had we had more time, I would play with different SVG font options until the mac
 
 ![Nameplate result](./media/engraving-03.webp)
 **Engraved nameplate**
+
+Zooming in, I saw crisp texts. But the MIT logo could be smoother.
+
+![Macro lens close-up of nameplate](./media/macro-lens-03.webp)
+**MIT logo was aliased**
 
 ## Post-processing
 
