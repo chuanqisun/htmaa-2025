@@ -25,6 +25,7 @@ blockquote {
   border-left: 1px solid ButtonBorder;
 }
 
+audio,
 video,
 iframe,
 img {
@@ -44,7 +45,7 @@ iframe {
   height: 27rem;
 }
 
-:where(img, video, iframe) + strong {
+:where(audio, img, video, iframe) + strong {
   display: block;
   margin: auto;
   text-align: center;

@@ -1,0 +1,37 @@
+---
+model: nano-banana-pro
+---
+
+User: (with original image)
+User: 
+  Restore spectrogram:
+  - the very light color peaks should be light gray
+  - In nearly black blobs should be medium gray
+  - The dark brown colors should be dark gray
+  - The light brown colors should be black
+
+Model: (updated image)
+
+User: Near the bottom, we the gray fill should be black fill.
+
+Model: (updated image)
+
+User: Pure white background
+
+
+Model: (updated image)
+
+User: (Manually invert the color, no AI) 
+
+User:
+  The image is a damaged spectrogram. 
+  The continuous white and gray areas originally had distinct stripes for formants.
+  Restore the formants within the gray scale area.
+  Do NOT change blackarea.
+
+Model: (updated image)
+
+User:
+  Continue restoration, fix the over exposure and enhance details to reveal all the formants lines
+
+User: (manually adjust contrast, exposure, scale, no AI)

@@ -58,45 +58,79 @@ keywords: ["wildcard", "laser-cutting", "laser-engraving"]
 - I want to test if we can store sound as image engraved on metal.
 - I had separatly vibe-coded a program for convertion between audio and spectrogram. The program was all AI generated with 50+ rounds of the revision. Since I don't have the full history of the AI coding session, I won't claim credit for the code. For this project, I'm only using the tool to generate a spectrogram from sound and to verify the sound from the engraved spectrogram.
 
-![Image of input spectrogram](...)
+<audio src="./media/quote-before.mp3" controls></audio>
+**Original quote from Neil**
+
+![Original spectrogram](./media/restore-original.webp)
 
 - Engraving didn't go well. All the gray levels were lost, and worse still, some the darkest areas were inverted to light color.
+
+![Engraved spectrogram](./media/engraving-02.webp)
+**Engraved spectrogram with unwanted artifacts**
+
 - I took a photo of the engraved metal, processed in Figma, and decoded into the sound.
 
-![Image of image processing](...)
+Steps:
 
-![Sound before]
-![Sound after]
+1. Desaturate
+2. Invert
+3. Color burn (#666666)
+4. Reduce exposure
+
+![Manual restoration process](./media/restore-human.webp)
+**Manual restoration process**
+
+- To make this project more interesting, I also used large-language model with vision skills to restore the spectrogram.
+
+The AI restoration is similar to the manual process except I prompted AI to also restore the [formants](https://en.wikipedia.org/wiki/Formant) stripes that lost in the engraving.
+
+![AI restoration](./media/restore-ai.webp)
+**AI restoration process ([chat log](./code/reconstruction-trace.txt))**
+
+Upload both reconstructions to my custom [spectrogram players](https://code.chuanqisun.com/spectrogram-recorder/) and hear the results:
+
+<audio src="./media/quote-after-human.mp3" controls></audio>
+**Manual reconstruction**
+
+<audio src="./media/quote-after-ai.mp3" controls></audio>
+**AI reconstruction**
 
 ## Nameplate for Final Project
 
-- I want to design a nameplat for my final project.
+- I want to design a [nameplate](https://en.wikipedia.org/wiki/Rating_plate) for my [final project](../final-project/index.md).
 - The 3mm thickness of the stainless steel was too thick this purpose but I proceeded anyway just to test how much detail we can get with typography.
+
+![Nameplate design](./media/nameplate-design.webp)
+**Nameplate design with layers separated by process**
+
 - We were able to create very small texts using the SVG exported from Figma. The program is trying to trace the outline of the text instead of engraving the internal strokes
 - We switched to XTool's built-in font and the same issue persisted.
 - Had we have more time, I would use an image with think storkes instead of vector graphics.
 
-![Image of nameplate design](...)
-
-![Image of result](...)
+![Nameplate result](./media/engraving-03.webp)
+**Engraved nameplate**
 
 ## Post-processing
 
 - Jiaming showed me how to cut the metal with MetalFab laser cutter.
-- It was the same process as [Link to week 1](...)
+- It was the same process as [Link to week 1](../week-02/index.md)
 
-![Video of cutting](...)
+![Cutting metal with laser](./media/laser-cut-metal.mp4)
+**The violent process of cutting metal with laser**
 
 - After cutting, the molten metal edges need to be sanded/filed down for safety.
-- Jiaming showed me how to use belt sander to remove the edges.
-- I practiced the sanding to remove the corners
 
-![Image of final result]
+- Jiaming showed me how to use belt sander to remove the edges.
+
+![Before and after sanding](./media/engraving-04.webp)
+**Before and after sanding**
+
+- I practiced the sanding to remove the corners
+- The final results look great! Once again, shout out to [Jiaming](https://fab.cba.mit.edu/classes/863.24/people/JiamingLiu/About%20me.html) for hands-on coaching, and [Edward](https://fab.cba.mit.edu/classes/863.25/people/EdwardChen/) for sharing his characterization results.
 
 ## Reflection
 
 - Color engraving is very empirical. The parameters must be determined for the specific material and machine and results may still vary
--
 
 ## Appendix
 
