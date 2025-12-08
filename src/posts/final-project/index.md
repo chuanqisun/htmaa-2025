@@ -578,64 +578,70 @@ But first, I need to debug the hardware issue and recover voice input/output as 
 
 ## Quality Assurance
 
-- To diagnose the microphone and speaker issues, I hooked up the logic analyzer and compared my current PCB with a previous design that is known working.
+The hardware issues from the previous week forced me to take a systematic debugging approach. I needed to diagnose why the microphone and speaker stopped working on my latest PCB.
+
+I hooked up the logic analyzer and compared my current PCB with a previous design that was known to work. This side-by-side comparison would reveal any signal differences.
 
 ![Debugging with logic analyzer](../week-14/media/final-debugging.webp)
 **Using logic analyzer to debug I2S signals**
 
-In the working version, I observed signals on all I2S pins. The WS pin has an unexpected pulse every once in a while but I think that is a separate issue.
+In the working version, I observed signals on all I2S pins. The WS pin had an unexpected pulse every once in a while, but I suspected that was a separate issue unrelated to the current failure.
 
 ![Working version](../week-14/media/final-amp-trace-good.webp)
 **I2S pins all working in the good version**
 
-In the broken version, I observed broken signals on two pins:
+In the broken version, I observed broken signals on two pins. The BCLK and DATA lines were completely flat instead of showing the expected clock and data patterns.
 
 ![Broken version](../week-14/media/final-amp-trace-bad.webp)
 **I2S pins not working in the bad version**
 
-- Thanks to the logic analyzer, I pin-pointed the issue at the rivet via. The rivet had lost contact with the PCB
+The logic analyzer helped me narrow down the problem. I traced the signal path and discovered a break at the rivet via. The rivet had lost contact with the PCB, likely from mechanical stress during assembly.
 
 ![Testing via](../week-14/media/final-via-test.webp)
 **Testing via continuity**
 
-- I manually soldered rivet onto the PCB and the problem is resolved
+I manually soldered the rivet directly onto the PCB trace. This bridged the broken connection and restored the signals.
 
 ![Fixed via](../week-14/media/final-via-solder.webp)
 **Soldering rivet to its nearest trace fixed the issue**
 
-- Knowing the rivet issue, I reverted the trace to use the header pin and a through-hole via instead of rivet.
+Knowing that rivet vias could be unreliable, I updated my PCB design. I reverted the trace routing to use header pins and through-hole vias instead of rivets. This would be more robust for future builds.
 
 ![Milling PCB](../week-14/media/final-pcb-fabrication.mp4)
 **Re-milling the PCB with through-hole via**
 
-- Throughout my final project, I used 2.54mm female headers to decouble PCB design from electronic components. As a down-side, the headers have gone through many cycles of plugging and unplugging.
+Throughout my final project, I used 2.54mm female headers to decouple PCB design from electronic components. This modularity allowed me to swap parts easily during development. However, the headers went through many cycles of plugging and unplugging. The repeated mechanical stress made me nervous.
 
-- As an insurance policy, I reinforced all header joints with hot glue. I have a hunch Neil won't like this because headers are fundamentally less reliable than soldered joints. But for me, the trade-off is worth it as the electronic components supply became increasingly scarce towards the end of the semester. I need to try my best conserving the parts.
+As an insurance policy, I reinforced all header joints with hot glue. I have a hunch Neil won't like this because headers are fundamentally less reliable than soldered joints. But for me, the trade-off was worth it. The electronic components supply became increasingly scarce towards the end of the semester. I needed to conserve and protect the parts I had.
 
 ![Reinforcing headers](../week-14/media/final-glue.webp)
 **Reinforcing header joints with hot glue**
 
-- I also noticed an improvement in my soldering skills. I developed a habit of wetting the soldering tip with solder before touching the joint. This practice significantly improved heat transfer and resulted in cleaner joints.
+I also noticed an improvement in my soldering skills over the course of the project. I developed a habit of wetting the soldering tip with solder before touching the joint. This practice significantly improved heat transfer and resulted in cleaner, shinier joints. Anyone wants Hershey's kisses?
 
 ![Compare solder joints](../week-14/media/final-compare-solder.webp)
 **Operator mk1 (left) vs mk3 (right) solder joints**
 
 ## Better Enclosure
 
-- I improved enclosure quality by introducing snap fit joints.
+The early case prototypes used friction fit to hold the lid in place. This worked but required careful tuning of tolerances. Even a nicely fit lid could eventually loosen due to wear and tear. I wanted a more reliable closure mechanism.
+
+I improved enclosure quality by introducing snap fit joints. Snap fits use a small flexible tab that clicks into a matching cutout.
 
 ![Snap fit on the lid](../week-14/media/final-adding-lock-tab.webp)
 **Adding snap fit tabs to the lid**
 
-- After adjusting parameters, I applied the same design to all the lids
+After adjusting parameters, I applied the same design to all the lids. Both the Operator and Switchboard now use matching snap fit mechanisms.
 
 ![Snap fit on all lids](../week-14/media/final-lids.webp)
 **All lids with snap fit tabs**
 
-- The case accommodates the snap fit tabs with small cutouts
+The case bodies needed matching cutouts to receive the snap fit tabs. I added small rectangular cutout on the case walls. The tabs click into these openings when the lid is pressed down.
 
 ![Case cutouts](../week-14/media/final-case-detail.webp)
 **Case cutouts for snap fit tabs**
+
+The snap fit design improved the user experience significantly. The lids now close with a satisfying click and stay securely in place. Opening is still easy thanks to a thumb notch I reserved on one side.
 
 Next steps:
 
