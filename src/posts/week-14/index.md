@@ -110,6 +110,8 @@ I uploaded both reconstructions to my custom [spectrogram player](https://code.c
 <audio src="./media/quote-after-ai.mp3" controls></audio>
 **AI reconstruction from photo of engraving**
 
+Neither reconstruction is very good. Given more time, I would attempt 2.5D engraving to capture the spectrogram in 3D and use computer vision to restore the depth. But, wait, did I just re-invent CDs?
+
 ## Nameplate for Final Project
 
 I wanted to design a [nameplate](https://en.wikipedia.org/wiki/Rating_plate) for my [final project](../final-project/index.md). The 3mm thickness of the stainless steel was too thick for this purpose, but I proceeded anyway just to test how much detail we can get with typography.
