@@ -163,4 +163,5 @@ AI was able to reconstruct somewhat intelligible spectrogram from a photo. This 
 ## Appendix
 
 - [All graphic design assets](./code/design.zip)
+- [Album cover xTool project file](./code/dark-side-of-the-moon.xcs)
 - [Spectrogram app](./code/spectrogram-app.zip)
