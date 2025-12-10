@@ -78,3 +78,27 @@ pre:has(code) {
 .shiki {
   padding: 1ch;
 }
+
+.post-nav {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid ButtonBorder;
+}
+
+.post-nav nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.post-nav nav > * {
+  flex: 1;
+}
+
+.post-nav nav > :nth-child(2) {
+  text-align: center;
+}
+
+.post-nav nav > :last-child {
+  text-align: right;
+}
