@@ -544,6 +544,11 @@ With several hours of non-stop soldering, all the LEDs were finally blinking!
 ![Testing all lights](../week-12/media/pulse.mp4)
 **Testing all lights in sequence**
 
+Transferring the components into the final housing was tedious. Marking the position of each connector with a sharpie helped prevent mistakes.
+
+![Assembly time-lapse](../final-project/media/assembly.mp4)
+**Assembly time-lapse**
+
 ## Wiring up the Operator
 
 Aftering wiring up the Switchboard with 2 days of non-stop soldering, I gained significant experience and had all the equipment dialed in. I also switched to single-core 22 AWG wire for stronger joints. The wire-up was a breeze.

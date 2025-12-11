@@ -25,6 +25,9 @@ for f in *.MOV; do ffmpeg -i "$f" -c:v libx264 -preset medium -crf 23 -movflags 
 # bulk convert *.MOV to *.mp4, original size, higher compression
 for f in *.MOV; do ffmpeg -i "$f" -c:v libx264 -preset slow -crf 28 -movflags +faststart "${f%.MOV}.mp4"; done
 
+# bulk mov to mp4, original speed, 720p, higher compression, 2x speed
+for f in *.mov; do ffmpeg -i "$f" -c:v libx264 -preset slow -crf 28 -vf "scale=-1:720,setpts=0.5*PTS" -af "atempo=2.0" -movflags +faststart "${f%.mov}_720p_2x.mp4"; done
+
 # bulk mov to mp4, original speed, 720p, silent
 for f in *.mov; do ffmpeg -i "$f" -c:v libx264 -preset medium -crf 23 -vf "scale=-1:720" -an -movflags +faststart "${f%.mov}_720p.mp4"; done
 
