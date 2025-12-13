@@ -694,7 +694,7 @@ For engraving, I also used 50 lines/cm resolution.
 
 ### Engraving the Operator
 
-I engraved "UNIT-01" and "UNIT-02" labels on the two Operator cases. The first unit received only engraving while the second unit received both engraving and scoring to compare the visual outcomes.
+I engraved "Operator" in letters, and "UNIT-01" and "UNIT-02" in knockout patterns on the two Operator cases. The first unit received only engraving while the second unit received both engraving and scoring due to color differences.
 
 ![Operator Unit-01 Engraved](./media/operator-unit-01.webp)
 **Operator Unit-01 Engraved**
