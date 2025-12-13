@@ -666,3 +666,65 @@ Next steps:
 - Finish programming
 
 As a stretch goal, I can attempt adding a battery and power switch. It does change the case design. I want to achieve a minimum viable demo first with external power.
+
+## Better Packing
+
+During the final recitation, I learned that we need to demonstrate a subtractive process. I decided to engrave graphics on both the Operator and the Switchboard using the CO2 laser cutter.
+
+### Characterization
+
+I applied the characterization methodology from [Week 2](../week-02/index.md) to find the optimal engraving parameters for PLA plastic. I tested a matrix of power and speed settings.
+
+| Parameter | Values Tested          |
+| --------- | ---------------------- |
+| Power     | 10%, 15%, 20%          |
+| Speed     | 700mm/s, 775/s, 850/s  |
+
+![Characterization matrix](./media/engraving-01.webp)
+**Characterization matrix**
+
+Based on the test results, I identified the optimal settings:
+
+| Process   | Speed    | Power |
+| --------- | -------- | ----- |
+| Engraving | 700mm/s  | 15%   |
+| Scoring   | 200mm/s  | 40%   |
+
+For engraving, I also used 50 lines/cm resolution.
+
+### Engraving the Operator
+
+I engraved "UNIT-01" and "UNIT-02" labels on the two Operator cases. The first unit received only engraving while the second unit received both engraving and scoring to compare the visual outcomes.
+
+![Operator Unit-01 Engraved](./media/operator-unit-01.webp)
+**Operator Unit-01 Engraved**
+
+![Operator Unit-02 Engraved and Scored](./media/operator-unit-02.webp)
+**Operator Unit-02 Engraved and Scored**
+
+I discovered that over-powering causes white smoky residue on the surface. Alan mentioned that a fiber laser would create much better surface contrast on black plastic. I should try that in the future.
+
+The color of the PLA plastic significantly affected the engraving and scoring outcomes:
+
+| Color | Engraving | Scoring |
+| ----- | --------- | ------- |
+| Red   | Great     | Great   |
+| White | Invisible | Great   |
+| Black | OK        | OK      |
+
+### Engraving the Switchboard
+
+When I engraved the Switchboard, the rapid back and forth motion shifted the material on the laser bed. I attempted to overlay with multiple passes of engraving and scoring, only to make matters worse.
+
+![Switchboard](./media/switchboard.webp)
+**After multiple passes, the Switchboard looks terrible**
+
+For letter scoring, straight lines were much more pronounced than curves:
+
+- I, T, W look great
+- S, C, O does not have enough contrast
+
+I have two hypotheses that we can test in the future:
+
+1. The curved lines prevent the laser from building up heat
+2. The FDM process creates directional surfaces that interact differently with the laser beam
