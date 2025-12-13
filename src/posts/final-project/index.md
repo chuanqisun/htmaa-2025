@@ -702,7 +702,7 @@ I engraved "UNIT-01" and "UNIT-02" labels on the two Operator cases. The first u
 ![Operator Unit-02 Engraved and Scored](./media/operator-unit-02.webp)
 **Operator Unit-02 Engraved and Scored**
 
-I discovered that over-powering causes white smoky residue on the surface. Alan mentioned that a fiber laser would create much better surface contrast on black plastic. I should try that in the future.
+I discovered that over-powering causes white smoky residue on the surface. [Alan](https://fab.cba.mit.edu/classes/863.23/CBA/people/Alan/) mentioned that a fiber laser would create much better surface contrast on black plastic. I should try that in the future.
 
 The color of the PLA plastic significantly affected the engraving and scoring outcomes:
 
