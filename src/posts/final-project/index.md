@@ -675,20 +675,20 @@ During the final recitation, I learned that we need to demonstrate a subtractive
 
 I applied the characterization methodology from [Week 2](../week-02/index.md) to find the optimal engraving parameters for PLA plastic. I tested a matrix of power and speed settings.
 
-| Parameter | Values Tested          |
-| --------- | ---------------------- |
-| Power     | 10%, 15%, 20%          |
-| Speed     | 700mm/s, 775/s, 850/s  |
+| Parameter | Values Tested         |
+| --------- | --------------------- |
+| Power     | 10%, 15%, 20%         |
+| Speed     | 700mm/s, 775/s, 850/s |
 
 ![Characterization matrix](./media/engraving-01.webp)
 **Characterization matrix**
 
 Based on the test results, I identified the optimal settings:
 
-| Process   | Speed    | Power |
-| --------- | -------- | ----- |
-| Engraving | 700mm/s  | 15%   |
-| Scoring   | 200mm/s  | 40%   |
+| Process   | Speed   | Power |
+| --------- | ------- | ----- |
+| Engraving | 700mm/s | 15%   |
+| Scoring   | 200mm/s | 40%   |
 
 For engraving, I also used 50 lines/cm resolution.
 
