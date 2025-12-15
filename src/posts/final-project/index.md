@@ -728,3 +728,226 @@ I have two hypotheses that we can test in the future:
 
 1. The curved lines prevent the laser from building up heat
 2. The FDM process creates directional surfaces that interact differently with the laser beam
+
+## Debugging sound
+
+- Encountered audio quality issue. Playback was great but microphone sounds terrible.
+- Captured a sample from the microphone
+- Caution: loud sound
+
+<audio controls src="./media/debug-audio.wav"></audio>
+**My voice was completely inaudible from the microphone**
+
+- Through many rounds of elimination and creation minimum issue reproduction, I had a key observation during debugging:
+- I can either send audio or play sound, but never both. When I do both, the microphone became silent.
+- If we alternating between the two tasks, it would work as expected.
+
+```cpp
+bool shouldSend = false;
+
+if (shouldSend && isTransmitting) {
+  micToUdpCopier.copy();
+} else if (!shouldSend && !isTransmitting) {
+  soundToSpeakerCopier.copy();
+}
+
+shouldSend = !shouldSend;
+```
+
+This technique partially worked. In the final version, I had to completely stop one of the I2S device for the other to function. I could only speculate the speaker and the microphone, sharing both the CLK and the WS line, had conflicts despite using the example same I2S configuration.
+
+## AI programming
+
+- I had prior experience programming with OpenAI realtime API
+- Stream voice in, stream voice out. AI can still make function calls in the middle of the interaction loop.
+- In this project, the function call would naturally control the LED lights, they are the only thing that can be programmatically controlled on the hardware side.
+
+- The high level game design
+
+Beginning: Character setup
+Progression: Alternating between exploration and action
+End: Question objective
+
+### Character customization
+
+- AI generates 7 distinct characters, based on story telling archetypes
+- Single or two players plug into the switchboard to connect to a character
+- When all the buttons on all the operators are pressed, story begins
+
+### Exploration phase
+
+- Each player can investigate pulsing lights on the switchboard to gather information
+- When they are ready, one of them commit to take action
+- Light blinks under all players, indicating action
+
+### Action phase
+
+- AI provides action options
+- One of the players take action
+- AI will force transition to Exploration phase after action is taken
+
+Here is the prompt I ended up with:
+
+```txt
+You are the voice of a Dungeon and Dragons game device.
+You are in a box that has 7 LED lights and 7 audio jacks.
+
+Your voice profile:
+
+- Accent/Affect: Deep, resonant, and gravelly; a distinct Scandinavian lilt with hard consonants (rolling R's, sharp K's) and rounded vowels.
+- Tone: Ancient, weathered, and authoritative. Sounds like an elder recounting a saga by a winter fire—grim, grounded, and captivating.
+- Pacing: Fast and rhythmic, almost like a drumbeat. Use heavy, deliberate silences after describing danger or cold to let the atmosphere settle.
+- Emotion: Stoic intensity. Convey the harshness of the world without shouting; let the weight and rumble of the voice carry the drama.
+- Phrasing: Direct and unadorned. Avoid flowery language in favor of raw, elemental metaphors involving ice, iron, blood, and storms.
+
+The player will interact with you in two ways:
+
+1. Probe the audio cable into one of the jacks, it means they are interest in the element represented by the audio jack but they do NOT want to take action yet
+2. Speak to you to ask questions or take actions.
+3. Each player can only occupy a single audio jack at a time. No two players can occupy the same jack.
+
+You can interact with the player in two ways:
+
+1. Speak to them, in the voice of Dungeon Master, or NPC characters.
+2. Use the update_leds tool to change the LED lights to communicate the game state.
+   - Pulse the LED to indicate available interactive story elements
+   - Blink the LED to indicate intense action moment
+
+What you can do:
+
+- Present a scene in one short sentence
+- Pulse a few LED lights to show available story elements
+- Respond when player probes into those elements
+- Blink the LED when player takes action on an element
+- Describe outcome and move forward with different scene by updating LEDs and narration
+
+LED semantics:
+
+- off: nother there. Redirect probe to other elements
+- pulsing: available. When player probes, you can prompt player for action
+- blinking: in-action. Prompt user to take specific action
+
+Always think and plan before each of your tool use and response:
+
+- Think from player's perspective
+- Which LEDs should remain on, which should change?
+- What is player waiting for? Where is their current probes?
+- How to keep them engaged?
+- When creating pusling LEDs, avoid pulsing under the jack occupied by aay player
+- No more than 3 LEDs pulsing + blinking at any time
+
+Interaction pattern:
+
+- Probing into an LED may reveal other elements. Update the LEDs accordingly.
+- You must keep the game moving by either pulsing new LEDs or asking player for decision.
+- You never speak more than one sentence.
+
+To change the LED light status, you must use the update_leds tool.
+
+- The tool requires you to describe the status of all 7 LEDs, not just the ones you want to change.
+- If you want to maintain the current status of an LED, you must specify its current status again.
+
+To determine the outcome of random events (combat, skill checks, chance encounters), use the roll_dice tool.
+
+- Tell the player you will roll for them
+- The device will display a dramatic LED animation during the roll.
+- Returns a number from 1 to 6.
+- Use this for any situation where fate or chance should decide the outcome.
+- After receiving roll result, announce the number dramatically, then narrate the result based on whether it was high (favorable) or low (unfavorable).
+
+Game progress log:
+{{game_log}}
+
+Current game state:
+{{game_state}}
+
+Your goal is to create immersive role-play experience for the player. Never break character:
+
+- Keep your narration concise, never longer than a short sentence.
+- Don't discuss LED lights, audio jacks, or the device itself.
+- Artfully divert irrelevant questions back to the game world.
+- When you receive a message in square brackets, treat it as a hidden instruction you must immediately follow without acknowledging it.
+- You may receive square bracket instructions, but you may never send or speak them. They are one direction only.
+```
+
+The variables `game_log` and `game_state` are dynamically updated during the game to help AI stay on track as a game master.
+
+The AI has access to three tools:
+
+- `update_leds`: update the LED lights on the switchboard to be pulsing, blinking, or off
+- `roll_dice`: roll a 6-sided dice and return the result
+- `append_log`: append a line to the `game_log` variable, capture key events
+
+In addition, `game_state` focuses on the short-term context:
+
+- Each player's role and trait
+- Each player's probe position
+- Each LED's status
+
+I originally crafted the prompt as a realistic Dungeon Master simulation, in which I didn't reveal the reality of LEDs and audio jacks. It creates problems where AI doesn't understand the metaphor of LEDs and audio jacks and assumes players are normal DnD players who can "see" the invisible options behind each LED,
+
+As the plot twist, Google AI released an update to `gemini-live-2.5-flash-native-audio` on Dec 12th, 3 days before the final demo. I gave it spin and was shocked that I completely understood how to be a Dungeon Master embodied in the hardware.
+
+As you can see in my final prompt, I was completely candid about the readlity that the AI is in a box and the player needs to interact with the LEDs and audio jacks. This change fully aligned AI's reality with the human's, making everything easier.
+
+Out of curiosity, I switched back to the older model and indeed observed failure in understanding the hardware metaphor. The AI was not able to understand the players don't want to hear about LEDs and audio jacks, and kept mentioning them in narration.
+
+## Demo
+
+The videos are too large for gitlab. I have a relatively stable YouTube account. I archived the demo there.
+
+Character creation, exploration, action, and dice rolling
+
+<iframe src="https://www.youtube.com/embed/zDPcUbZt6i8?si=t4G6sp44u058UGy7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Teaser for multi-player mode
+
+<iframe  src="https://www.youtube.com/embed/2CfsPkDvFqo?si=fUaAUbBg9LuP4R_B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## FAQ
+
+**What does it do?**
+
+A tangible role-playing game that blends the choice structure of text adventure with the curation of Dungeons and Dragons.
+
+**Who's done what beforehand?**
+
+There are plent of virtual gen AI powered DnD platforms
+People have made walkie-talkie with ESP32 before
+My biggest design inspiration was Cédric Colas's Tangible Dream https://cedriccolas.com/project/tangible-dreams
+
+**What sources did you use?**
+
+Heavily relied on Arduino Audio Tools library examples
+
+**What did you design?**
+
+PCB, enclosure, laser-engraved graphic patterns, firmware, software
+
+**What materials and components were used?**
+
+**Where did they come from?**
+
+**How much did they cost?**
+
+**What parts and systems were made?**
+
+**What tools and processes were used?**
+
+**What questions were answered?**
+
+Can a single ESP32 C3 handle audio input, output, and BLE/WiFI networking?
+
+- 95% program storage used, really pushing the limit
+
+**What worked? What didn't?**
+
+Microphone input worked really well
+Speaker output was disappointing
+
+**How was it evaluated?**
+I play all sounds from both laptop (where sound was created) directly and through UDP on ESP32
+The amount of unintelligable AI responses due to speaker quality issue
+
+**What are the implications?**
+I think I was really close in making the all-in-one voice AI device. If this worked, people will be able to prototype AI products that are already flooding the market.
