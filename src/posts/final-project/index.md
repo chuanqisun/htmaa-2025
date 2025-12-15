@@ -909,6 +909,11 @@ Teaser for multi-player mode
 
 <iframe  src="https://www.youtube.com/embed/2CfsPkDvFqo?si=fUaAUbBg9LuP4R_B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
+## Future work
+
+- Switch to a more reliable networking protocol for audio streaming between the ESP32 and the laptop
+- Improve packaging, with better mechanism for fastening the lid
+
 ## Appendix
 
 ### Assets
@@ -980,10 +985,12 @@ Can a single ESP32 C3 handle audio input, output, and BLE/WiFi networking simult
 **What worked? What didn't?**
 
 The microphone input worked really well. The speaker output was disappointing.
+Multiple player plugging into the Switchboard didn't work
+One player would pull down the signal voltage of another player, causing false positive changes on their side
 
 **How was it evaluated?**
 
-I played all sounds from both the laptop (where sound was created) directly and through UDP on the ESP32. I evaluated performance based on the number of unintelligible AI responses caused by speaker quality issues.
+By ear. I played all sounds from both the laptop (where sound was created) directly and through UDP on the ESP32. I evaluated performance based on the number of unintelligible AI responses caused by speaker quality issues.
 
 **What are the implications?**
 
