@@ -913,6 +913,9 @@ Teaser for multi-player mode
 
 - Switch to a more reliable networking protocol for audio streaming between the ESP32 and the laptop
 - Improve packaging, with better mechanism for fastening the lid
+- Replace breakout boards with custom soldered components
+- Replace 2.54mm headers with SMD components to reduce size
+- Add a power switch and LiPo battery
 
 ## Appendix
 
@@ -987,6 +990,7 @@ Can a single ESP32 C3 handle audio input, output, and BLE/WiFi networking simult
 The microphone input worked really well. The speaker output was disappointing.
 Multiple player plugging into the Switchboard didn't work
 One player would pull down the signal voltage of another player, causing false positive changes on their side
+Both devices are sensitive to power supply. Dropping voltage causes device to reboot or disconnect from BLE .
 
 **How was it evaluated?**
 
