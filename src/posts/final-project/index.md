@@ -756,6 +756,9 @@ shouldSend = !shouldSend;
 
 This technique partially worked. In the final version, I had to completely stop one of the I2S device for the other to function. I could only speculate the speaker and the microphone, sharing both the CLK and the WS line, had conflicts despite using the example same I2S configuration.
 
+<audio controls src="./media/fixed-audio.wav"></audio>
+**Audio captured in the final version, much better!**
+
 ## AI programming
 
 - I had prior experience programming with OpenAI realtime API
@@ -923,16 +926,66 @@ Heavily relied on Arduino Audio Tools library examples
 **What did you design?**
 
 PCB, enclosure, laser-engraved graphic patterns, firmware, software
+Metal nameplate
 
 **What materials and components were used?**
-
 **Where did they come from?**
-
 **How much did they cost?**
+
+(need to tabulate: part, quantity, total cost, source)
+
+- ESP32 C3
+  - 3
+  - Lab stock
+- ICS-43434 microphone breakout
+  - 2
+  - Adafruit
+- MAX98357A amplifier breakout
+  - 2
+  - Adafruit
+- TRRS connectors
+  - 9
+  - Digikey
+- Buttons
+  - 4
+  - Digikey
+- PCB FR1
+  - 3
+- 5ohm 4W Speaker
+  - 2
+  - Adafruit
+- Single core 22 AWG wire
+  - Amazon
+- Ribbon cable
+  - Amazon
+- LEDs
+  - Digikey
+  - 7
+- Hot glue stick
+  - Lab stock
+- Alcohol
+  - Lab stock
+- PLA filament
+  - Lab stock
+- Solder, flux, wick, etc.
+  - Lab stock
 
 **What parts and systems were made?**
 
+- PCB boards
+- 3D printed enclosure with engraved graphic patterns
+- Failed to integrate: metal nameplate
+
 **What tools and processes were used?**
+
+- Prusa MK4S
+- Carvera
+- xTool P3
+- Soldering iron
+- Hot glue gun
+- Hot air rework station
+- Logic analyzer
+- Gluegun
 
 **What questions were answered?**
 
