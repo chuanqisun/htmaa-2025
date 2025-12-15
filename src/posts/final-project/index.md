@@ -946,7 +946,7 @@ I designed the PCB, enclosure, laser-engraved graphic patterns, firmware, softwa
 
 | Part                          | Quantity | Source    | Total Cost |
 | ----------------------------- | -------- | --------- | ---------- |
-| ESP32 C3                      | 3        | Lab stock |            |
+| Xiao ESP32 C3                 | 3        | Lab stock |            |
 | ICS-43434 microphone breakout | 2        | Adafruit  |            |
 | MAX98357A amplifier breakout  | 2        | Adafruit  |            |
 | TRRS connectors               | 9        | Digikey   |            |
