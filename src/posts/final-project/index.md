@@ -911,9 +911,11 @@ Teaser for multi-player mode
 
 ### Assets
 
-- 3D model
-- PCB design files
-- Code (Software + Firmware)
+- 3D model: [step file](...), [onshape file](...)
+- 3D printing: [PrusaSlicer project](...)
+- Engraving: [xTool project file](./code/operator-engraving.xcs)
+- PCB design files: [KiCAD project files](...)
+- Code: [Web + Server](...), [Operator firmware](...), [Switchboard firmware](...)
 
 ### FAQ
 
