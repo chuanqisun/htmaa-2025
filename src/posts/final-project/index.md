@@ -731,16 +731,14 @@ I have two hypotheses that we can test in the future:
 
 ## Debugging sound
 
-- Encountered audio quality issue. Playback was great but microphone sounds terrible.
-- Captured a sample from the microphone
-- Caution: loud sound
+I encountered an audio quality issue during integration testing. Playback sounded great, but the microphone output was terrible. I captured a sample from the microphone for analysis.
+
+Caution: loud sound ahead.
 
 <audio controls src="./media/debug-audio.wav"></audio>
 **My voice was completely inaudible from the microphone**
 
-- Through many rounds of elimination and creation minimum issue reproduction, I had a key observation during debugging:
-- I can either send audio or play sound, but never both. When I do both, the microphone became silent.
-- If we alternating between the two tasks, it would work as expected.
+Through many rounds of elimination and minimum reproduction, I discovered a key observation: I could either send audio or play sound, but never both. When I attempted both operations simultaneously, the microphone became silent. Alternating between the two tasks worked as expected.
 
 ```cpp
 bool shouldSend = false;
@@ -754,40 +752,38 @@ if (shouldSend && isTransmitting) {
 shouldSend = !shouldSend;
 ```
 
-This technique partially worked. In the final version, I had to completely stop one of the I2S device for the other to function. I could only speculate the speaker and the microphone, sharing both the CLK and the WS line, had conflicts despite using the example same I2S configuration.
+This technique partially worked. In the final version, I had to completely stop one of the I2S devices for the other to function. I could only speculate that the speaker and the microphone, sharing both the CLK and the WS lines, had conflicts despite using the same I2S configuration from the library examples.
 
 <audio controls src="./media/fixed-audio.wav"></audio>
 **Audio captured in the final version, much better!**
 
 ## AI programming
 
-- I had prior experience programming with OpenAI realtime API
-- Stream voice in, stream voice out. AI can still make function calls in the middle of the interaction loop.
-- In this project, the function call would naturally control the LED lights, they are the only thing that can be programmatically controlled on the hardware side.
+I had prior experience programming with the OpenAI Realtime API. The pattern is straightforward: stream voice in, stream voice out. The AI can still make function calls in the middle of the interaction loop. In this project, the function calls would naturally control the LED lights, which are the only elements that can be programmatically controlled on the hardware side.
 
-- The high level game design
+### Game design
 
-Beginning: Character setup
-Progression: Alternating between exploration and action
-End: Question objective
+I designed the game flow around three phases:
+
+| Phase       | Description                                |
+| ----------- | ------------------------------------------ |
+| Beginning   | Character setup                            |
+| Progression | Alternating between exploration and action |
+| End         | Quest objective                            |
 
 ### Character customization
 
-- AI generates 7 distinct characters, based on story telling archetypes
-- Single or two players plug into the switchboard to connect to a character
-- When all the buttons on all the operators are pressed, story begins
+At the start of the game, the AI generates 7 distinct characters based on storytelling archetypes. One or two players plug into the switchboard to connect to a character. When all the buttons on all the operators are pressed, the story begins.
 
 ### Exploration phase
 
-- Each player can investigate pulsing lights on the switchboard to gather information
-- When they are ready, one of them commit to take action
-- Light blinks under all players, indicating action
+During exploration, each player can investigate pulsing lights on the switchboard to gather information. The LEDs indicate available story elements. When players are ready, one of them commits to take action. At that moment, the light blinks under all players, indicating the transition to action.
 
 ### Action phase
 
-- AI provides action options
-- One of the players take action
-- AI will force transition to Exploration phase after action is taken
+During action, the AI provides action options for the players. One of the players takes action by speaking or probing. After the action is resolved, the AI forces a transition back to the exploration phase.
+
+### Prompt engineering
 
 Here is the prompt I ended up with:
 
@@ -873,31 +869,35 @@ Your goal is to create immersive role-play experience for the player. Never brea
 - You may receive square bracket instructions, but you may never send or speak them. They are one direction only.
 ```
 
-The variables `game_log` and `game_state` are dynamically updated during the game to help AI stay on track as a game master.
+The variables `game_log` and `game_state` are dynamically updated during the game to help the AI stay on track as a game master.
 
 The AI has access to three tools:
 
-- `update_leds`: update the LED lights on the switchboard to be pulsing, blinking, or off
-- `roll_dice`: roll a 6-sided dice and return the result
-- `append_log`: append a line to the `game_log` variable, capture key events
+| Tool          | Description                                                              |
+| ------------- | ------------------------------------------------------------------------ |
+| `update_leds` | Update the LED lights on the switchboard to be pulsing, blinking, or off |
+| `roll_dice`   | Roll a 6-sided dice and return the result                                |
+| `append_log`  | Append a line to the `game_log` variable to capture key events           |
 
-In addition, `game_state` focuses on the short-term context:
+In addition, `game_state` focuses on short-term context:
 
 - Each player's role and trait
 - Each player's probe position
 - Each LED's status
 
-I originally crafted the prompt as a realistic Dungeon Master simulation, in which I didn't reveal the reality of LEDs and audio jacks. It creates problems where AI doesn't understand the metaphor of LEDs and audio jacks and assumes players are normal DnD players who can "see" the invisible options behind each LED,
+### The Gemini model update
 
-As the plot twist, Google AI released an update to `gemini-live-2.5-flash-native-audio` on Dec 12th, 3 days before the final demo. I gave it spin and was shocked that I completely understood how to be a Dungeon Master embodied in the hardware.
+I originally crafted the prompt as a realistic Dungeon Master simulation. I did not reveal the reality of LEDs and audio jacks to the AI. This created problems where the AI did not understand the metaphor and assumed players were normal D&D players who could "see" the invisible options behind each LED.
 
-As you can see in my final prompt, I was completely candid about the readlity that the AI is in a box and the player needs to interact with the LEDs and audio jacks. This change fully aligned AI's reality with the human's, making everything easier.
+As a plot twist, Google AI released an update to `gemini-live-2.5-flash-native-audio` on Dec 12th, just 3 days before the final demo. I gave it a spin and was shocked. The new model completely understood how to be a Dungeon Master embodied in the hardware.
 
-Out of curiosity, I switched back to the older model and indeed observed failure in understanding the hardware metaphor. The AI was not able to understand the players don't want to hear about LEDs and audio jacks, and kept mentioning them in narration.
+As you can see in my final prompt, I was completely candid about the reality that the AI is in a box and the player needs to interact with the LEDs and audio jacks. This change fully aligned the AI's reality with the human's, making everything easier.
+
+Out of curiosity, I switched back to the older model and indeed observed failure in understanding the hardware metaphor. The older AI could not understand that players don't want to hear about LEDs and audio jacks. It kept mentioning them in narration.
 
 ## Demo
 
-The videos are too large for gitlab. I have a relatively stable YouTube account. I archived the demo there.
+The videos are too large for GitLab. I have a relatively stable YouTube account, so I archived the demos there.
 
 Character creation, exploration, action, and dice rolling
 
@@ -911,10 +911,10 @@ Teaser for multi-player mode
 
 ### Assets
 
-- 3D model: [step file](...), [onshape file](...)
+- 3D model: [step file](...), [Onshape file](...)
 - 3D printing: [PrusaSlicer project](...)
 - Engraving: [xTool project file](./code/operator-engraving.xcs)
-- PCB design files: [KiCAD project files](...)
+- PCB design files: [KiCad project files](...)
 - Code: [Web + Server](...), [Operator firmware](...), [Switchboard firmware](...)
 
 ### FAQ
@@ -925,63 +925,35 @@ A tangible role-playing game that blends the choice structure of text adventure 
 
 **Who's done what beforehand?**
 
-There are plent of virtual gen AI powered DnD platforms
-People have made walkie-talkie with ESP32 before
-My biggest design inspiration was Cédric Colas's Tangible Dream https://cedriccolas.com/project/tangible-dreams
+There are plenty of virtual gen AI powered D&D platforms available. People have made walkie-talkies with ESP32 before. My biggest design inspiration was Cédric Colas's [Tangible Dream](https://cedriccolas.com/project/tangible-dreams).
 
 **What sources did you use?**
 
-Heavily relied on Arduino Audio Tools library examples
+I heavily relied on the Arduino Audio Tools library examples.
 
 **What did you design?**
 
-PCB, enclosure, laser-engraved graphic patterns, firmware, software
-Metal nameplate
+I designed the PCB, enclosure, laser-engraved graphic patterns, firmware, software, and metal nameplate.
 
-**What materials and components were used?**
-**Where did they come from?**
-**How much did they cost?**
+**What materials and components were used? Where did they come from? How much did they cost?**
 
-(need to tabulate: part, quantity, total cost, source)
-
-- ESP32 C3
-  - 3
-  - Lab stock
-- ICS-43434 microphone breakout
-  - 2
-  - Adafruit
-- MAX98357A amplifier breakout
-  - 2
-  - Adafruit
-- TRRS connectors
-  - 9
-  - Digikey
-- Buttons
-  - 4
-  - Digikey
-- PCB FR1
-  - 3
-- 5ohm 4W Speaker
-  - 2
-  - Adafruit
-- TRRS cable
-  - 2
-  - Amazon
-- Single core 22 AWG wire
-  - Amazon
-- Ribbon cable
-  - Amazon
-- LEDs
-  - Digikey
-  - 7
-- Hot glue stick
-  - Lab stock
-- Alcohol
-  - Lab stock
-- PLA filament
-  - Lab stock
-- Solder, flux, wick, etc.
-  - Lab stock
+| Part                          | Quantity | Source    |
+| ----------------------------- | -------- | --------- |
+| ESP32 C3                      | 3        | Lab stock |
+| ICS-43434 microphone breakout | 2        | Adafruit  |
+| MAX98357A amplifier breakout  | 2        | Adafruit  |
+| TRRS connectors               | 9        | Digikey   |
+| Buttons                       | 4        | Digikey   |
+| PCB FR1                       | 3        | Lab stock |
+| 5 ohm 4W Speaker              | 2        | Adafruit  |
+| TRRS cable                    | 2        | Amazon    |
+| Single core 22 AWG wire       | 1 roll   | Amazon    |
+| Ribbon cable                  | 1 roll   | Amazon    |
+| LEDs                          | 7        | Digikey   |
+| Hot glue stick                | Multiple | Lab stock |
+| Alcohol                       | Bottle   | Lab stock |
+| PLA filament                  | Spool    | Lab stock |
+| Solder, flux, wick, etc.      | Various  | Lab stock |
 
 **What parts and systems were made?**
 
@@ -991,29 +963,26 @@ Metal nameplate
 
 **What tools and processes were used?**
 
-- Prusa MK4S
-- Carvera
-- xTool P3
+- Prusa MK4S for 3D printing
+- Carvera for PCB milling
+- xTool P3 for laser engraving
 - Soldering iron
 - Hot glue gun
 - Hot air rework station
 - Logic analyzer
-- Gluegun
 
 **What questions were answered?**
 
-Can a single ESP32 C3 handle audio input, output, and BLE/WiFI networking?
-
-- 95% program storage used, really pushing the limit
+Can a single ESP32 C3 handle audio input, output, and BLE/WiFi networking simultaneously? The answer is yes, but barely. The final firmware used 95% of program storage, really pushing the limit.
 
 **What worked? What didn't?**
 
-Microphone input worked really well
-Speaker output was disappointing
+The microphone input worked really well. The speaker output was disappointing.
 
 **How was it evaluated?**
-I play all sounds from both laptop (where sound was created) directly and through UDP on ESP32
-The amount of unintelligable AI responses due to speaker quality issue
+
+I played all sounds from both the laptop (where sound was created) directly and through UDP on the ESP32. I evaluated performance based on the number of unintelligible AI responses caused by speaker quality issues.
 
 **What are the implications?**
-I think I was really close in making the all-in-one voice AI device. If this worked, people will be able to prototype AI products that are already flooding the market.
+
+I think I was really close to making the all-in-one voice AI device. If the speaker had worked better, people would be able to prototype AI products that are already flooding the market using this approach.
