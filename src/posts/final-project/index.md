@@ -5,6 +5,8 @@ date: 2025-09-01
 
 I want to combine my background in AI application development with TMG's focus in Tangible Interface to build a voice-driven AI programming system inspired by telephone switchboard operators.
 
+[Jump to demo](#demo)
+
 ## The inspiration
 
 I’m motivated by how AI-routed phone systems have eroded the empathy and connection once provided by human operators. I want to revive that craft by building a switchboard that puts a person back in the loop as a thoughtful listener and connector.
