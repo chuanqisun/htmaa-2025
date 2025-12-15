@@ -761,7 +761,7 @@ This technique partially worked. In the final version, I had to completely stop 
 
 ## AI programming
 
-I had prior experience programming with the OpenAI Realtime API. The pattern is straightforward: stream voice in, stream voice out. The AI can still make function calls in the middle of the interaction loop. In this project, the function calls would naturally control the LED lights, which are the only elements that can be programmatically controlled on the hardware side.
+I had prior experience programming with the [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime). The pattern is straightforward: stream voice in, stream voice out. The AI can still make function calls in the middle of the interaction loop. In this project, the function calls would naturally control the LED lights, which are the only elements that can be programmatically controlled on the hardware side.
 
 ### Game design
 
@@ -927,11 +927,11 @@ A tangible role-playing game that blends the choice structure of text adventure 
 
 **Who's done what beforehand?**
 
-There are plenty of virtual gen AI powered D&D platforms available. People have made walkie-talkies with ESP32 before. My biggest design inspiration was Cédric Colas's [Tangible Dream](https://cedriccolas.com/project/tangible-dreams).
+There are plenty of virtual gen AI powered D&D platforms available. People have made [walkie-talkies with ESP32](https://github.com/atomic14/esp32-walkie-talkie) before. My biggest design inspiration was Cédric Colas's [Tangible Dream](https://cedriccolas.com/project/tangible-dreams).
 
 **What sources did you use?**
 
-I heavily relied on the Arduino Audio Tools library examples.
+I heavily relied on the [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools) library examples.
 
 **What did you design?**
 
@@ -939,23 +939,23 @@ I designed the PCB, enclosure, laser-engraved graphic patterns, firmware, softwa
 
 **What materials and components were used? Where did they come from? How much did they cost?**
 
-| Part                          | Quantity | Source    |
-| ----------------------------- | -------- | --------- |
-| ESP32 C3                      | 3        | Lab stock |
-| ICS-43434 microphone breakout | 2        | Adafruit  |
-| MAX98357A amplifier breakout  | 2        | Adafruit  |
-| TRRS connectors               | 9        | Digikey   |
-| Buttons                       | 4        | Digikey   |
-| PCB FR1                       | 3        | Lab stock |
-| 5 ohm 4W Speaker              | 2        | Adafruit  |
-| TRRS cable                    | 2        | Amazon    |
-| Single core 22 AWG wire       | 1 roll   | Amazon    |
-| Ribbon cable                  | 1 roll   | Amazon    |
-| LEDs                          | 7        | Digikey   |
-| Hot glue stick                | Multiple | Lab stock |
-| Alcohol                       | Bottle   | Lab stock |
-| PLA filament                  | Spool    | Lab stock |
-| Solder, flux, wick, etc.      | Various  | Lab stock |
+| Part                          | Quantity | Source    | Total Cost |
+| ----------------------------- | -------- | --------- | ---------- |
+| ESP32 C3                      | 3        | Lab stock |            |
+| ICS-43434 microphone breakout | 2        | Adafruit  |            |
+| MAX98357A amplifier breakout  | 2        | Adafruit  |            |
+| TRRS connectors               | 9        | Digikey   |            |
+| Buttons                       | 4        | Digikey   |            |
+| PCB FR1                       | 3        | Lab stock |            |
+| 5 ohm 4W Speaker              | 2        | Adafruit  |            |
+| TRRS cable                    | 2        | Amazon    |            |
+| Single core 22 AWG wire       | 1 roll   | Amazon    |            |
+| Ribbon cable                  | 1 roll   | Amazon    |            |
+| LEDs                          | 7        | Digikey   |            |
+| Hot glue stick                | Multiple | Lab stock |            |
+| Alcohol                       | Bottle   | Lab stock |            |
+| PLA filament                  | Spool    | Lab stock |            |
+| Solder, flux, wick, etc.      | Various  | Lab stock |            |
 
 **What parts and systems were made?**
 
