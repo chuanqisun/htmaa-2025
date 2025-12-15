@@ -907,7 +907,15 @@ Teaser for multi-player mode
 
 <iframe  src="https://www.youtube.com/embed/2CfsPkDvFqo?si=fUaAUbBg9LuP4R_B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-## FAQ
+## Appendix
+
+### Assets
+
+- 3D model
+- PCB design files
+- Code (Software + Firmware)
+
+### FAQ
 
 **What does it do?**
 
@@ -954,6 +962,9 @@ Metal nameplate
 - 5ohm 4W Speaker
   - 2
   - Adafruit
+- TRRS cable
+  - 2
+  - Amazon
 - Single core 22 AWG wire
   - Amazon
 - Ribbon cable
