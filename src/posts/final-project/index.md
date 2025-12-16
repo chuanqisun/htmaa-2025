@@ -669,7 +669,7 @@ Next steps:
 
 As a stretch goal, I can attempt adding a battery and power switch. It does change the case design. I want to achieve a minimum viable demo first with external power.
 
-## Better Packing
+## Packaging
 
 During the final recitation, I learned that we need to demonstrate a subtractive process. I decided to engrave graphics on both the Operator and the Switchboard using the CO2 laser cutter.
 
@@ -951,23 +951,27 @@ I designed the PCB, enclosure, laser-engraved graphic patterns, firmware, softwa
 
 **What materials and components were used? Where did they come from? How much did they cost?**
 
-| Part                          | Quantity | Source    | Total Cost |
-| ----------------------------- | -------- | --------- | ---------- |
-| Xiao ESP32 C3                 | 3        | Lab stock |            |
-| ICS-43434 microphone breakout | 2        | Adafruit  |            |
-| MAX98357A amplifier breakout  | 2        | Adafruit  |            |
-| TRRS connectors               | 9        | Digikey   |            |
-| Buttons                       | 4        | Digikey   |            |
-| PCB FR1                       | 3        | Lab stock |            |
-| 5 ohm 4W Speaker              | 2        | Adafruit  |            |
-| TRRS cable                    | 2        | Amazon    |            |
-| Single core 22 AWG wire       | 1 roll   | Amazon    |            |
-| Ribbon cable                  | 1 roll   | Amazon    |            |
-| LEDs                          | 7        | Digikey   |            |
-| Hot glue stick                | Multiple | Lab stock |            |
-| Alcohol                       | Bottle   | Lab stock |            |
-| PLA filament                  | Spool    | Lab stock |            |
-| Solder, flux, wick, etc.      | Various  | Lab stock |            |
+| Part                                                                                                               | Quantity | Source    | Total Cost |
+| ------------------------------------------------------------------------------------------------------------------ | -------- | --------- | ---------- |
+| [Seeed Studio Xiao ESP32C3](https://www.digikey.com/en/products/detail/seeed-technology-co-ltd/113991054/16652880) | 3        | Lab stock | 14.97      |
+| [ICS-43434 microphone breakout](https://www.adafruit.com/product/6049)                                             | 2        | Adafruit  | 4.95       |
+| [MAX98357A amplifier breakout](https://www.digikey.com/en/products/detail/adafruit-industries-llc/3006/6058477)    | 2        | DigiKey   | 5.95       |
+| [TRRS connectors](https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/SJ5-43502PM/1956558)    | 9        | Digikey   | 20.68      |
+| [Buttons](https://www.digikey.com/en/products/detail/e-switch/RP3502MARED/280456)                                  | 4        | Digikey   | 15.08      |
+| [Speaker](https://www.digikey.com/en/products/detail/adafruit-industries-llc/3968/9745251)                         | 2        | DigiKey   | 9.90       |
+| [TRRS cable](https://www.amazon.com/dp/B01AUKJVMW)                                                                 | 2        | Amazon    | 17.18      |
+| [Solid core 22 AWG wire](https://www.amazon.com/dp/B07TX6BX47)                                                     | Multiple | Amazon    | 15.49      |
+| [Jumper wires](https://www.amazon.com/dp/B07GD2RP9C)                                                               | Multiple | Amazon    | 8.99       |
+| [LEDs](https://www.digikey.com/en/products/detail/visual-communications-company-vcc/L65DR2L/6166297)               | 7        | Digikey   | 24.71      |
+| [100ohm SMD resistor](https://www.digikey.com/en/products/detail/yageo/RC1206FR-07100RL/728491)                    | 8        | Lab stock | ≈1.00      |
+| [2.54mm Female Headers](https://www.amazon.com/Single-Headers-Machine-Female-2-54mm/dp/B0187LTEX2)                 | Multiple | Amazon    | ≈5.00      |
+| [Hot glue stick](https://www.digikey.com/en/products/detail/steinel-america/110049634/11560293)                    | Multiple | Lab stock | ≈2.00      |
+| [PCB FR1 double-sided](https://bantamtools.com/products/pcb?variant=585249129)                                     | 2        | Lab stock | ≈2.00      |
+| [PCB FR1 single-sided](https://bantamtools.com/products/pcb?variant=574277429)                                     | 1        | Lab stock | ≈1.00      |
+| [PLA filament](https://www.amazon.com/ELEGOO-Filament-Dimensional-Accuracy-Cardboard/dp/B0BM739JRF)                | Multiple | Lab stock | ≈14.00     |
+| Solder, flux, wick, alcohol etc.                                                                                   | Various  | Lab stock | ≈2.00      |
+| AI usage                                                                                                           | Various  | Various   | ≈30.00     |
+| **Total**                                                                                                          |          |           | **204.90** |
 
 **What parts and systems were made?**
 
