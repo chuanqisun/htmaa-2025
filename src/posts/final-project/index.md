@@ -685,6 +685,8 @@ I applied the characterization methodology from [Week 2](../week-02/index.md) to
 ![Characterization matrix](./media/engraving-01.webp)
 **Characterization matrix**
 
+I discovered that over-powering causes white smoky residue on the surface. [Alan](https://fab.cba.mit.edu/classes/863.23/CBA/people/Alan/) mentioned that a fiber laser would create much better surface contrast on black plastic. I should try that in the future.
+
 Based on the test results, I identified the optimal settings:
 
 | Process   | Speed   | Power |
@@ -692,11 +694,11 @@ Based on the test results, I identified the optimal settings:
 | Engraving | 700mm/s | 15%   |
 | Scoring   | 200mm/s | 40%   |
 
-For engraving, I also used 50 lines/cm resolution.
+For engraving, I preferred the aesthetics of the 50 lines/cm resolution.
 
 ### Engraving the Operator
 
-I engraved "Operator" in letters, and "UNIT-01" and "UNIT-02" in knockout patterns on the two Operator cases. The first unit received only engraving while the second unit received both engraving and scoring due to color differences.
+I engraved "OPERATOR" in letters, and "UNIT-01" and "UNIT-02" in knockout patterns on the two Operator cases. Both using my favorite type [IBM Plex Mono](https://www.ibm.com/plex/), in bold. The first unit received only engraving while the second unit received both engraving and scoring due to the contrast issue with the white finish.
 
 ![Operator Unit-01 Engraved](./media/operator-unit-01.webp)
 **Operator Unit-01 Engraved**
@@ -704,19 +706,17 @@ I engraved "Operator" in letters, and "UNIT-01" and "UNIT-02" in knockout patter
 ![Operator Unit-02 Engraved and Scored](./media/operator-unit-02.webp)
 **Operator Unit-02 Engraved and Scored**
 
-I discovered that over-powering causes white smoky residue on the surface. [Alan](https://fab.cba.mit.edu/classes/863.23/CBA/people/Alan/) mentioned that a fiber laser would create much better surface contrast on black plastic. I should try that in the future.
-
 The color of the PLA plastic significantly affected the engraving and scoring outcomes:
 
-| Color | Engraving | Scoring |
-| ----- | --------- | ------- |
-| Red   | Great     | Great   |
-| White | Invisible | Great   |
-| Black | OK        | OK      |
+| Color | Engraving | Scoring       |
+| ----- | --------- | ------------- |
+| Red   | Great     | White residue |
+| White | Invisible | Great         |
+| Black | Great     | Great         |
 
 ### Engraving the Switchboard
 
-When I engraved the Switchboard, the rapid back and forth motion shifted the material on the laser bed. I attempted to overlay with multiple passes of engraving and scoring, only to make matters worse.
+When I engraved the Switchboard, the vibration of the machine shifted the material on the laser bed. I attempted to overlay with multiple passes of engraving and scoring, only to make matters worse.
 
 ![Switchboard](./media/switchboard.webp)
 **After multiple passes, the Switchboard looks terrible**
@@ -729,7 +729,7 @@ For letter scoring, straight lines were much more pronounced than curves:
 I have two hypotheses that we can test in the future:
 
 1. The curved lines prevent the laser from building up heat
-2. The FDM process creates directional surfaces that interact differently with the laser beam
+2. The FDM process creates a directional substrate that is sensitive to laser movement direction
 
 ## Debugging sound
 
@@ -740,24 +740,48 @@ Caution: loud sound ahead.
 <audio controls src="./media/debug-audio.wav"></audio>
 **My voice was completely inaudible from the microphone**
 
-Through many rounds of elimination and minimum reproduction, I discovered a key observation: I could either send audio or play sound, but never both. When I attempted both operations simultaneously, the microphone became silent. Alternating between the two tasks worked as expected.
+Through many rounds of elimination and minimum reproduction, I discovered a key observation: I could either send audio or play sound, but never both. When I attempted both operations simultaneously, the microphone became either silent or extremely noisy. Alternating between the two tasks worked as expected.
 
 ```cpp
 bool shouldSend = false;
 
-if (shouldSend && isTransmitting) {
-  micToUdpCopier.copy();
-} else if (!shouldSend && !isTransmitting) {
-  soundToSpeakerCopier.copy();
-}
+void loop() {
+  if (shouldSend && isTransmitting) {
+    micToUdpCopier.copy();
+  } else if (!shouldSend && !isTransmitting) {
+    soundToSpeakerCopier.copy();
+  }
 
-shouldSend = !shouldSend;
+  shouldSend = !shouldSend;
+}
 ```
 
 This technique partially worked. In the final version, I had to completely stop one of the I2S devices for the other to function. I could only speculate that the speaker and the microphone, sharing both the CLK and the WS lines, had conflicts despite using the same I2S configuration from the library examples.
 
 <audio controls src="./media/fixed-audio.wav"></audio>
 **Audio captured in the final version, much better!**
+
+Pseudocode showing mutually exclusive I2S operation:
+
+```cpp
+void loop() {
+  if (isTransmitting) {
+    if (wasReceiving) {
+      stopSoundPlayback();
+      startMicCapture();
+    }
+    micToUdpCopier.copy();
+  } else {
+    if (wasTransmitting) {
+      stopMicCapture();
+      startSoundPlayback();
+    }
+    soundToSpeakerCopier.copy();
+  }
+}
+```
+
+This, however, was not a compromise considering the interaction design: the user is not supposed to talk while the device is speaking and vice versa. Making input/output mutually exclusive is acceptable. In the future, I should try ESP32S3 which comes with two cores for parallel processing both input and output.
 
 ## AI programming
 
@@ -897,6 +921,21 @@ As you can see in my final prompt, I was completely candid about the reality tha
 
 Out of curiosity, I switched back to the older model and indeed observed failure in understanding the hardware metaphor. The older AI could not understand that players don't want to hear about LEDs and audio jacks. It kept mentioning them in narration.
 
+### Rewriting pipeline
+
+I had a fully working pipeline with voice-in voice-out, but the Gemini Live API would randomly disconnect with an internal server error. Switcing to OpenAI Realtime API didn't help either: despite crystal clear audio input, OpenAI Realtime API kept miss-understanding my words. After switching back and forth between Gemini Live and OpenAI Realtime, the deadline became imminent. I needed a more predictable pipeline for the demo.
+
+| Voice-in, voice-out API | Issue                            |
+| ----------------------- | -------------------------------- |
+| Gemini Live 2025/09 API | Difficult to control AI behavior |
+| Gemini Live 2025/12 API | Sporadic Internal server error   |
+| OpenAI Realtime API     | Poor speech recognition          |
+
+I switched to a text-in, voice-out pipeline, with a separate voice-to-text transcription. Here is the final working pipeline.
+
+![Pipeline](./media/pipeline.svg)
+**Final pipeline**
+
 ## Demo
 
 The videos are too large for GitLab. I have a relatively stable YouTube account, so I archived the demos there.
@@ -911,11 +950,12 @@ Teaser for multi-player mode
 
 ## Future work
 
-- Switch to a more reliable networking protocol for audio streaming between the ESP32 and the laptop
-- Improve packaging, with better mechanism for fastening the lid
+- More reliable audio streaming between the ESP32 and the laptop
+- Improve ergonomics, make it more comfortable to hold
 - Replace breakout boards with custom soldered components
 - Replace 2.54mm headers with SMD components to reduce size
 - Add a power switch and LiPo battery
+- Switch to ESP32S3 Sense for onboard mic and dual-core processing
 
 ## Appendix
 
