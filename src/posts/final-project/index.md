@@ -921,10 +921,14 @@ Teaser for multi-player mode
 
 ### Assets
 
-- 3D model: [step file](...), [Onshape file](...)
-- 3D printing: [PrusaSlicer project](...)
+- 3D model
+  - Operator: [step](./code/Operator.step), [onshape](https://cad.onshape.com/documents/9048a4b7eaa84ee19386d61c/w/9716966cf93590d8db08a422/e/2e3e49d4f8f988e9deef9cbf)
+  - Switchboard: [step](./code/Switchboard.step), [onshape](https://cad.onshape.com/documents/0cd06e66c4b3bc91a4a21e42/w/3bba24c274e4aa0be48319ec/e/7d0c89c5f75b8016a2838288)
+- 3D printing: [PrusaSlicer config](./code/prusa-config.ini)
 - Engraving: [xTool project file](./code/operator-engraving.xcs)
-- PCB design files: [KiCad project files](...)
+- PCB design and fabrication:
+  - Operator: [KiCad](./code/operator.zip)
+  - Switchboard: [KiCad](./code/switchboard.zip)
 - Code: [Web + Server](...), [Operator firmware](...), [Switchboard firmware](...)
 
 ### FAQ
