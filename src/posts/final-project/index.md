@@ -970,7 +970,9 @@ I designed the PCB, enclosure, laser-engraved graphic patterns, firmware, softwa
 | [PCB FR1 single-sided](https://bantamtools.com/products/pcb?variant=574277429)                                     | 1        | Lab stock | ≈1.00      |
 | [PLA filament](https://www.amazon.com/ELEGOO-Filament-Dimensional-Accuracy-Cardboard/dp/B0BM739JRF)                | Multiple | Lab stock | ≈14.00     |
 | Solder, flux, wick, alcohol etc.                                                                                   | Various  | Lab stock | ≈2.00      |
-| AI usage                                                                                                           | Various  | Various   | ≈30.00     |
+| Coding AI                                                                                                          | Various  | Copilot   | ≈20.00     |
+| Speech and text AI                                                                                                 | Various  | Various   | ≈10.00     |
+| Music AI                                                                                                           | Various  | Suno      | free       |
 | **Total**                                                                                                          |          |           | **204.90** |
 
 **What parts and systems were made?**
