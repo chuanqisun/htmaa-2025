@@ -929,7 +929,7 @@ Teaser for multi-player mode
 - PCB design and fabrication:
   - Operator: [KiCad](./code/operator.zip)
   - Switchboard: [KiCad](./code/switchboard.zip)
-- Code: [Web + Server](...), [Operator firmware](...), [Switchboard firmware](...)
+- Code: [Web + Server + Firmware](./code/app.zip)
 
 ### FAQ
 
