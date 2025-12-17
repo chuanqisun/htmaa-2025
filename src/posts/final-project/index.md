@@ -1088,7 +1088,7 @@ I designed the PCB, packaging (3D printing case and laser-engraved graphic patte
 
 **What questions were answered?**
 
-- Technical: can a single ESP32 C3 handle audio input, output, and BLE/WiFi networking simultaneously? The answer is yes, but barely. The final firmware used 95% of program storage, really pushing the limit.
+- Technical: can a single Xiao ESP32 C3 handle audio input, output, and BLE/WiFi networking simultaneously? Probably not. Audio input and ouput were mutually exclusive due to scheduling issues. The final firmware used 95% of program storage, really pushing the limit. Xiao ESP32 S3 Sense would be a better choice.
 - Aesthetic: does retro interface speak to today's users? I believe so. Several people left positive comments about the overall look and feel.
 - Business: is it viable to sell a device like this on Kickstarter? No. The marginal production cost of the prototype is more than 150 USD. I doubt it can be priced competitively against generic voice AI devices that are already capable of simulating D&D games.
 - Philosophical: what is embodiment for AI? How would humans relate? A box with phone jacks and LED lights seem to have evoked imagination and curiosity in players. What else can be the body for AI?
