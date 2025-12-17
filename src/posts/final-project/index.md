@@ -982,7 +982,7 @@ I had a fully working pipeline with voice-in voice-out, but the [Gemini Live API
 I switched to a text-in, voice-out pipeline, with a separate voice-to-text transcription. Here is the final working pipeline.
 
 ![Pipeline](./media/pipeline.svg)
-**Final pipeline**
+**Final pipeline ([full size](./media/pipeline.svg))**
 
 ## Demo
 
@@ -994,8 +994,8 @@ I made a separate teaser video for the multi-player mode, which brought the devi
 
 <iframe  src="https://www.youtube.com/embed/2CfsPkDvFqo?si=fUaAUbBg9LuP4R_B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-The videos are too large for GitLab. I have a relatively stable YouTube account, so I archived the demos there.
-Both videos were edited with [Clipchamp](https://clipchamp.com/) with music generated in [Suno](https://suno.com/) from a [tavern music prompt](./code/music-prompt-01.txt) for the 1st video, and a [folk instrumental prompt](./code/music-prompt-02.txt) for the 2nd.
+The videos were too large for GitLab, so I archived the demos in my relatively stable YouTube account.
+Both videos were edited with [Clipchamp](https://clipchamp.com/), using music generated in [Suno](https://suno.com/) from a [tavern music prompt](./code/music-prompt-01.txt) for the 1st video, and a [folk instrumental prompt](./code/music-prompt-02.txt) for the 2nd.
 
 ## Future work
 
