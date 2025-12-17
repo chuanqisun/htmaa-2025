@@ -1,6 +1,7 @@
 ---
 title: Final Project
 date: 2025-09-01
+libraries: ["image-comparison-slider"]
 ---
 
 I want to combine my background in AI application development with TMG's focus in Tangible Interface to build a voice-driven AI programming system inspired by telephone switchboard operators.
@@ -560,6 +561,13 @@ Aftering wiring up the Switchboard with 2 days of non-stop soldering, I gained s
 
 ![Wiring up the Operator](../week-12/media/final-operator-01.webp)
 **Operator UNIT-01, fully wired up**
+
+Wiring up a second hand unit was just rinse and repeat. Here is the before and after:
+
+<img-comparison-slider>
+  <img slot="first" src="./media/operator-interior.webp" />
+  <img slot="second" src="./media/operator-exterior.webp" />
+</img-comparison-slider>
 
 Remaining tasks:
 
