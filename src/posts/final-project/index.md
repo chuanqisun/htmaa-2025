@@ -565,7 +565,7 @@ After wiring up the Switchboard with 2 days of non-stop soldering, I gained sign
 ![Wiring up the Operator](../week-12/media/final-operator-01.webp)
 **Operator UNIT-01, fully wired up**
 
-Wiring up a second hand unit was just rinse and repeat. Here is the before and after:
+Wiring up a second hand unit was just rinse and repeat. The interactive slider below shows interior vs exterior views.
 
 <img-comparison-slider>
   <img slot="first" src="./media/operator-interior.webp" />
