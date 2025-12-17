@@ -1,0 +1,5 @@
+---
+Model: Suno v4.5-all
+---
+ancient folk music inspired by lord of the rings and skyrim, with light percussion and string, good for fantasy games
+

@@ -74,7 +74,7 @@ While it's still too early to fully specify the project, I have the following hi
 
 After the conceptual exploration from week 1, I switched focus to the electronics. I hope the electronics design can help inform the exterior of the system.
 
-I started off with off-the-shelf components and iterated the idea to build more from sractch.
+I started off with off-the-shelf components and iterated the idea to build more from scratch.
 
 ## Proof of concept with off-the-shelf components
 
@@ -174,7 +174,7 @@ This design enables all necessary communication between the PC, hand unit, and m
 
 With this design update, it became clear that the main unit is essentially a "dumb" device that encodes the TRRS socket and displays which AI agent is speaker and doesn't care about audio processing at all.
 
-I have also gained insights how the physical contraints for the housing. The hand unit needs to mainly account for battery and speaker size. The PCB size and shape can be more flexible. The main unit needs to account for the 4 TRRS jacks.
+I have also gained insights how the physical contraints for the housing. The hand unit needs to mainly account for battery and speaker size. The PCB size and shape could be more flexible. The main unit needs to account for the 4 TRRS jacks.
 
 Here are new and remaining questions which I plan to resolve by going to TAs as well as attending future lectures.
 
@@ -209,7 +209,7 @@ I used the official example code to play a square wave tone, with a few lines of
 
 I found a powerful library for audio processing by Phil Schatzmann, called [Arduino Audio Toolkit](https://github.com/pschatzmann/arduino-audio-tools). After studying his examples, I was able to get my computer to send live microphone audio to the ESP32 over WiFi, and play it back immediately. The latency is about 1 second, which concerns me but isn't a deal breaker.
 
-This POC validated the idea that we can shift all the computation to a PC nearby and let ESP32 handle audio input/output.
+This POC validated the idea that we could shift all the computation to a PC nearby and let the ESP32 handle audio input/output.
 
 - [Server code (PC)](./code/streaming-test-server.js)
 - [Client code (ESP32)](./code/streaming-test-client.ino)
@@ -223,7 +223,7 @@ I designed both the hand-held device (Operator) and the main body (Switchboard) 
 
 ## PCB Production
 
-I milled boards for both the Operator and the Switchboard using the Carvera Desktop CNC Machine. See details in the [weekly post](../week-06/index.md).
+I milled boards for both the Operator and the Switchboard using the Carvera Desktop CNC machine. See details in the [weekly post](../week-06/index.md).
 
 ## Case Prototype
 
@@ -299,7 +299,7 @@ During the [Output Device week](../week-09/index.md), I completed the full voice
 <video controls src="../week-09/media/knock-knock.mp4"></video>
 **Full voice interaction loop demo**
 
-## Hanlde Unit Form Study
+## Handle Unit Form Study
 
 I used a piece of paper to sketch out the form factor, just so I can hold it in my hand and feel the size.
 
@@ -323,14 +323,14 @@ The ESP32 board has a [well documented charging circuit](https://wiki.seeedstudi
 
 ## Mounting mechanism
 
-There are several mounting challanges. I have investigated the mounting strategy for PCB and TRRS jack this week.
+There are several mounting challenges. I investigated the mounting strategy for PCB and TRRS jack this week.
 
 - **The PCBs**
 - **The TRRS jack**
 - The buttons
 - The speaker
 
-I produced difference sizes of mounting bracket ([download STEP file](../week-10/model/pcb-bracket-test.step)) to find the right size.
+I produced different sizes of mounting bracket ([download STEP file](../week-10/model/pcb-bracket-test.step)) to find the right size.
 
 ![Bracket model](../week-10/media/bracket-02.webp)
 **Modeling the brackets with offsets from the measured board size**
@@ -542,7 +542,7 @@ During the testing, several LED legs were snapping. I had to apply hot glue as r
 ![Reinforcing LED legs](../week-12/media/weekly-assembly-04.webp)
 **Reinforcing LED legs with hot glue**
 
-With several hours of non-stop soldering, all the LEDs were finally blinking!
+With several hours of non-stop soldering, all the LEDs were finally blinking! I used heat shrink tubing to bundle the male jumper wire pins into groups of fours (TRRS) and twos (LEDs), color coded and labeled with a sharpie for easy identification.
 
 ![Testing all lights](../week-12/media/pulse.mp4)
 **Testing all lights in sequence**
@@ -554,7 +554,7 @@ Transferring the components into the final housing was tedious. Marking the posi
 
 ## Wiring up the Operator
 
-Aftering wiring up the Switchboard with 2 days of non-stop soldering, I gained significant experience and had all the equipment dialed in. I also switched to single-core 22 AWG wire for stronger joints. The wire-up was a breeze.
+After wiring up the Switchboard with 2 days of non-stop soldering, I gained significant experience and had all the equipment dialed in. I also switched to single-core 22 AWG wire for stronger joints. The wire-up was a breeze.
 
 ![Assembly time-lapse2](../final-project/media/assembly-02.mp4)
 **Operator UNIT-02 assembly time-lapse**
@@ -678,7 +678,7 @@ Next steps:
 - Fabricate a 2nd Operator for multi-player demo
 - Finish programming
 
-As a stretch goal, I can attempt adding a battery and power switch. It does change the case design. I want to achieve a minimum viable demo first with external power.
+As a stretch goal, I can attempt adding a battery and power switch. It would change the case design. I wanted to achieve a minimum viable demo first with external power.
 
 ## Packaging
 
@@ -812,6 +812,19 @@ I designed the game flow around three phases:
 
 At the start of the game, the AI generates 7 distinct characters based on storytelling archetypes. One or two players plug into the switchboard to connect to a character. When all the buttons on all the operators are pressed, the story begins.
 
+To create uniqueness in each game, all the characters are dynamically and randomly generated by AI with this prompt:
+
+```txt
+Generate exactly seven (7) distinct Japanese Samurai period fantasy game characters for a quest. For each character provide:
+- archetype: Choose from hero, magician, lover, jester, explorer, sage, innocent, creator, caregiver, outlaw, orphan, or seducer
+- trait: A single adjective describing the character's personality or demeanor (e.g., "cunning", "brave", "mysterious")
+- profession: A single noun describing the character's role or occupation (e.g., "blacksmith", "oracle", "hunter")
+- intro: A compelling one short sentence intro, starting with "I am..." that captures their essence using the trait and profession. ONLY a few words. The sound will be played when player previews this character.
+- voiceActor: A vivid description of their voice quality (e.g., "deep and gravelly", "soft and melodic", "crackling with energy"), grounded in their archetype and intro.
+
+Make sure the characters have synergy with each other and cover diverse archetypes.
+```
+
 ### Exploration phase
 
 During exploration, each player can investigate pulsing lights on the switchboard to gather information. The LEDs indicate available story elements. When players are ready, one of them commits to take action. At that moment, the light blinks under all players, indicating the transition to action.
@@ -820,9 +833,9 @@ During exploration, each player can investigate pulsing lights on the switchboar
 
 During action, the AI provides action options for the players. One of the players takes action by speaking or probing. After the action is resolved, the AI forces a transition back to the exploration phase.
 
-### Prompt engineering
+### Main game prompt
 
-Here is the prompt I ended up with:
+The main game alternates between player's exploration and action. I let the AI handle all the LED light control with a more elaborate prompt, refined after countless trials and errors.
 
 ```txt
 You are the voice of a Dungeon and Dragons game device.
@@ -859,7 +872,7 @@ What you can do:
 
 LED semantics:
 
-- off: nother there. Redirect probe to other elements
+- off: nothing there. Redirect probe to other elements
 - pulsing: available. When player probes, you can prompt player for action
 - blinking: in-action. Prompt user to take specific action
 
@@ -869,7 +882,7 @@ Always think and plan before each of your tool use and response:
 - Which LEDs should remain on, which should change?
 - What is player waiting for? Where is their current probes?
 - How to keep them engaged?
-- When creating pusling LEDs, avoid pulsing under the jack occupied by aay player
+- When creating pulsing LEDs, avoid pulsing under the jack occupied by any player
 - No more than 3 LEDs pulsing + blinking at any time
 
 Interaction pattern:
@@ -892,10 +905,10 @@ To determine the outcome of random events (combat, skill checks, chance encounte
 - After receiving roll result, announce the number dramatically, then narrate the result based on whether it was high (favorable) or low (unfavorable).
 
 Game progress log:
-{{game_log}}
+${game_log}
 
 Current game state:
-{{game_state}}
+${game_state}
 
 Your goal is to create immersive role-play experience for the player. Never break character:
 
@@ -922,6 +935,22 @@ In addition, `game_state` focuses on short-term context:
 - Each player's probe position
 - Each LED's status
 
+The trick that made AI react to tangible input was preparing it to handle special instructions in square brackets:
+
+```txt
+- When you receive a message in square brackets, treat it as a hidden instruction you must immediately follow without acknowledging it.
+- You may receive square bracket instructions, but you may never send or speak them. They are one direction only.
+```
+
+During the game, AI may receive hidden instructions like this, triggered by microcontroller events:
+
+```txt
+[Players have selected their characters. Present the opening scene and use update_leds to pulse the LEDs for available story elements]
+...
+["valorous knight" is probing LED 3.]
+...
+```
+
 ### The Gemini model update
 
 I originally crafted the prompt as a realistic Dungeon Master simulation. I did not reveal the reality of LEDs and audio jacks to the AI. This created problems where the AI did not understand the metaphor and assumed players were normal D&D players who could "see" the invisible options behind each LED.
@@ -934,7 +963,7 @@ Out of curiosity, I switched back to the older model and indeed observed failure
 
 ### Rewriting pipeline
 
-I had a fully working pipeline with voice-in voice-out, but the Gemini Live API would randomly disconnect with an internal server error. Switcing to OpenAI Realtime API didn't help either: despite crystal clear audio input, OpenAI Realtime API kept miss-understanding my words. After switching back and forth between Gemini Live and OpenAI Realtime, the deadline became imminent. I needed a more predictable pipeline for the demo.
+I had a fully working pipeline with voice-in voice-out, but the Gemini Live API would randomly disconnect with an internal server error. Switching to OpenAI Realtime API didn't help either: despite crystal clear audio input, OpenAI Realtime API kept misunderstanding my words. After switching back and forth between Gemini Live and OpenAI Realtime, the deadline became imminent. I needed a more predictable pipeline for the demo.
 
 | Voice-in, voice-out API | Issue                            |
 | ----------------------- | -------------------------------- |
@@ -949,15 +978,16 @@ I switched to a text-in, voice-out pipeline, with a separate voice-to-text trans
 
 ## Demo
 
-The videos are too large for GitLab. I have a relatively stable YouTube account, so I archived the demos there.
-
-Character creation, exploration, action, and dice rolling
+This is the full game play, including character creation, exploration, action, and dice rolling.
 
 <iframe src="https://www.youtube.com/embed/zDPcUbZt6i8?si=t4G6sp44u058UGy7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-Teaser for multi-player mode
+I made a separate teaser video for the multi-player mode, which brought the device closer to what I originally envisioned: a physical interface that challenges us to become better listeners and connection makers.
 
 <iframe  src="https://www.youtube.com/embed/2CfsPkDvFqo?si=fUaAUbBg9LuP4R_B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+The videos are too large for GitLab. I have a relatively stable YouTube account, so I archived the demos there.
+Both videos were edited with [Clipchamp](https://clipchamp.com/) with music generated in [Suno](https://suno.com/) from a [tavern music prompt](./code/music-prompt-01.txt) for the 1st video, and a [folk instrumental prompt](./code/music-prompt-02.txt) for the 2nd.
 
 ## Future work
 
@@ -990,7 +1020,11 @@ A tangible role-playing game that blends the choice structure of text adventure 
 
 **Who's done what beforehand?**
 
-There are plenty of virtual gen AI powered D&D platforms available. People have made [walkie-talkies with ESP32](https://github.com/atomic14/esp32-walkie-talkie) before. My biggest design inspiration was Cédric Colas's [Tangible Dream](https://cedriccolas.com/project/tangible-dreams).
+- [dndGPT](https://chatgpt.com/g/g-wIndOtOwd-dndgpt) by community builder, runs inside ChatGPT.
+- [Friends & Fables](https://fables.gg/), AI-powered text RPG.
+- [walkie-talkies with ESP32](https://github.com/atomic14/esp32-walkie-talkie) by atomic14. A solid proof of concept.
+- [Tangible Dream](https://cedriccolas.com/project/tangible-dreams) by Cédric Colas. Packaging design inspiration.
+- [AI Security Guard](https://x.com/gvy_dvpont/status/1866217836537848144) by Guy Dupont. Interaction design inspiration.
 
 **What sources did you use?**
 
@@ -998,7 +1032,7 @@ I heavily relied on the [Arduino Audio Tools](https://github.com/pschatzmann/ard
 
 **What did you design?**
 
-I designed the PCB, enclosure, laser-engraved graphic patterns, firmware, software, and metal nameplate.
+I designed the PCB, packaging (3D printing case and laser-engraved graphic patterns), firmware, software, and a laser-marked metal nameplate that I wasn't able to integrate.
 
 **What materials and components were used? Where did they come from? How much did they cost?**
 
@@ -1030,33 +1064,54 @@ I designed the PCB, enclosure, laser-engraved graphic patterns, firmware, softwa
 
 - PCB boards
 - 3D printed enclosure with engraved graphic patterns
-- Failed to integrate: metal nameplate
+- 4-pin male connectors for the TRRS sockets
+- 2-pin male connectors for the LED lights
+- A metal nameplate that I couldn't integrate
 
 **What tools and processes were used?**
 
-- Prusa MK4S for 3D printing
+- Prusa MK4S for FDM 3D printing
 - Carvera for PCB milling
 - xTool P3 for laser engraving
-- Soldering iron
-- Hot glue gun
-- Hot air rework station
-- Logic analyzer
+- Miscellaneous:
+  - Soldering iron and hot air rework station
+  - Hot glue gun
+  - Multimeter and Logic analyzer
 
 **What questions were answered?**
 
-Can a single ESP32 C3 handle audio input, output, and BLE/WiFi networking simultaneously? The answer is yes, but barely. The final firmware used 95% of program storage, really pushing the limit.
+- Technical: can a single ESP32 C3 handle audio input, output, and BLE/WiFi networking simultaneously? The answer is yes, but barely. The final firmware used 95% of program storage, really pushing the limit.
+- Aesthetic: does retro interface speak to today's users? I believe so. Several people left positive comments about the overall look and feel.
+- Business: is it viable to sell a device like this on Kickstarter? No. The marginal production cost of the prototype is more than 150 USD. I doubt it can be priced competitively against generic voice AI devices that are already capable of simulating D&D games.
+- Philosophical: what is embodiment for AI? How would humans relate? A box with phone jacks and LED lights seem to have evoked imagination and curiosity in players. What else can be the body for AI?
 
 **What worked? What didn't?**
 
-The microphone input worked really well. The speaker output was disappointing.
-Multiple player plugging into the Switchboard didn't work
-One player would pull down the signal voltage of another player, causing false positive changes on their side
-Both devices are sensitive to power supply. Dropping voltage causes device to reboot or disconnect from BLE .
+- The microphone input worked really well. The speaker output was disappointing. There were still audio jitter issues that I would need more time to debug.
+- Multiple players plugging into the Switchboard didn't work. One player would pull down the signal voltage of another player, causing false positive changes on their side.
+- Both devices were sensitive to the type of USB-C ports they were connected to. I observed that only data-capable ports worked reliably. The BLE module does not function when connected to power-only cables.
 
 **How was it evaluated?**
 
-By ear. I played all sounds from both the laptop (where sound was created) directly and through UDP on the ESP32. I evaluated performance based on the number of unintelligible AI responses caused by speaker quality issues.
+- Audio input quality: I captured all the audio input as `.wav` files to evaluate microphone quality.
+- Audio output quality: I piped audio through both laptop speaker and controller speaker so as to compare.
+- Network performance:
+  - I measured UDP latency during the [Input device week](../week-08/index.md#udp-microphone-streaming)
+  - I measured UDP and BLE throughput and latency during the [Machine building week](../week-11/index.md)
+- Game experience: I assessed qualitative feedback from playtesters.
 
 **What are the implications?**
 
-I think I was really close to making the all-in-one voice AI device. If the speaker had worked better, people would be able to prototype AI products that are already flooding the market using this approach.
+The device is generalizable as a human-AI communication interface. In this project:
+
+- Audio jacks represent elements in a story
+- LED lights represent options offered by AI
+
+But it could be reprogrammed for a different metaphor:
+
+- Audio jacks represent AI agents
+- LED lights represent agent status
+
+We also have the gesture of plugging and unplugging, buttons on the hand units, and voice input/output. Combining these modalities, the device can support a wide range of interaction patterns.
+
+From a business perspective, this project demonstrated that we can prototype physical AI products with off-of-the-shelf microcontrollers and peripherals. It gave me the confidence to design and build more Generative AI hardware going forward.
