@@ -549,14 +549,17 @@ With several hours of non-stop soldering, all the LEDs were finally blinking!
 Transferring the components into the final housing was tedious. Marking the position of each connector with a sharpie helped prevent mistakes.
 
 ![Assembly time-lapse](../final-project/media/assembly.mp4)
-**Assembly time-lapse**
+**Switchboard assembly time-lapse**
 
 ## Wiring up the Operator
 
 Aftering wiring up the Switchboard with 2 days of non-stop soldering, I gained significant experience and had all the equipment dialed in. I also switched to single-core 22 AWG wire for stronger joints. The wire-up was a breeze.
 
+![Assembly time-lapse2](../final-project/media/assembly-02.mp4)
+**Operator UNIT-02 assembly time-lapse**
+
 ![Wiring up the Operator](../week-12/media/final-operator-01.webp)
-**Operator, fully wired up**
+**Operator UNIT-01, fully wired up**
 
 Remaining tasks:
 
