@@ -971,7 +971,7 @@ Out of curiosity, I switched back to the older model and indeed observed failure
 
 ### Rewriting pipeline
 
-I had a fully working pipeline with voice-in voice-out, but the Gemini Live API would randomly disconnect with an internal server error. Switching to OpenAI Realtime API didn't help either: despite crystal clear audio input, OpenAI Realtime API kept misunderstanding my words. After switching back and forth between Gemini Live and OpenAI Realtime, the deadline became imminent. I needed a more predictable pipeline for the demo.
+I had a fully working pipeline with voice-in voice-out, but the [Gemini Live API](https://ai.google.dev/gemini-api/docs/live) would randomly disconnect with an internal server error. Switching to OpenAI Realtime API didn't help either: despite crystal clear audio input, OpenAI Realtime API kept misunderstanding my words. After switching back and forth between Gemini Live and OpenAI Realtime, the deadline became imminent. I needed a more predictable pipeline for the demo.
 
 | Voice-in, voice-out API | Issue                            |
 | ----------------------- | -------------------------------- |
