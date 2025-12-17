@@ -24,7 +24,7 @@ A physical AI agent network implemented as a hardware grid with voice-based inte
 
 Next, I want to visualize the idea with gen AI. I'm entirely new to 3D modeling and rendering, so the fastest route to gain intuition on the form of the design is naturally using AI.
 
-I crafted the prompt based on what I was imagining. The latest gemini model got this for me in one shot.
+I crafted the prompt based on what I was imagining. The latest Gemini model got this for me in one shot.
 
 ![Base](../week-01/media/ai-rendered-base.webp)
 **Device base ([prompt](../week-01/media/ai-rendered-base.txt))**
@@ -87,11 +87,11 @@ I can prototype almost the entire experience with cheap off-the-shelf products:
 ![Prototype 1](../week-02/media/proto-01.webp)
 **Prototype using consumer electronics**
 
-What's missing:
+What was missing:
 
-1. No effort involved. This will result in a failing grade. It's only good for prototyping
-2. Can't guarantee the compatibility of the hand unit with the 3.5mm TRRS jack
-3. Can't prototype the visual feedback feature, where the 3.5mm jack shows "ready" state to the user via an LED
+1. No effort involved. This would result in a failing grade. It was only good for prototyping
+2. Couldn't guarantee the compatibility of the hand unit with the 3.5mm TRRS jack
+3. Couldn't prototype the visual feedback feature, where the 3.5mm jack shows "ready" state to the user via an LED
 
 ## Bring intelligence to the main body
 
@@ -100,7 +100,7 @@ Iterating on the idea, I could use a Raspberry Pi with a primitive USB hub as th
 ![Prototype 2](../week-02/media/proto-02.webp)
 **Moving compute to Raspberry Pi**
 
-I still need to figure out how the Pi can use the LEDs to display system state. Besides, I need to program some microcontroller to meet the requirements of this class. Can we go one level deeper?
+I still needed to figure out how the Pi could use the LEDs to display system state. Besides, I needed to program some microcontroller to meet the requirements of this class. Could we go one level deeper?
 
 ## Move audio processing to hand unit
 
@@ -114,7 +114,7 @@ The main body still needs a controller to send the following information to the 
 ![Prototype 3](../week-02/media/proto-03.webp)
 **Audio processing in hand unit**
 
-The audio cable in this design does not really pass audio. It is solely used for detecting the state of plugged/unplugged. I need to figure out how to rig the 3.5mm jack to achieve this.
+The audio cable in this design did not really pass audio. It was solely used for detecting the state of plugged/unplugged. I needed to figure out how to rig the 3.5mm jack to achieve this.
 
 ## Build my own speaker/microphone
 
@@ -174,9 +174,9 @@ This design enables all necessary communication between the PC, hand unit, and m
 
 With this design update, it became clear that the main unit is essentially a "dumb" device that encodes the TRRS socket and displays which AI agent is speaker and doesn't care about audio processing at all.
 
-I have also gained insights how the physical contraints for the housing. The hand unit needs to mainly account for battery and speaker size. The PCB size and shape could be more flexible. The main unit needs to account for the 4 TRRS jacks.
+I had also gained insights into how the physical constraints for the housing. The hand unit needs to mainly account for battery and speaker size. The PCB size and shape could be more flexible. The main unit needs to account for the 4 TRRS jacks.
 
-Here are new and remaining questions which I plan to resolve by going to TAs as well as attending future lectures.
+Here were new and remaining questions which I planned to resolve by going to TAs as well as attending future lectures.
 
 1. PCB design. [atomic14's design](https://www.youtube.com/watch?v=d_h38X4_eQQ) is a good reference but I don't know how I can design my own.
 2. Packaging design. How do I hold the components in place? especially the 3.5mm TRRS jacks which will receive physical stress.
@@ -184,7 +184,7 @@ Here are new and remaining questions which I plan to resolve by going to TAs as 
 4. LED lighting. How do make a ring that lights up around the TRRS socket?
 5. The CBA electronics shop inventory doesn't match what the website says. For example, the ESP32s are out of stock but the website didn't reflect that.
 
-And here are the things I can prototype now:
+And here were the things I could prototype next:
 
 1. Play voice from ESP32 over WiFi
 2. Capture sound from ESP32 over WiFi
@@ -207,7 +207,7 @@ I used the official example code to play a square wave tone, with a few lines of
 <video controls src="./media/sound-out.mp4"></video>
 **Sound output from ESP32 using MAX98357A amplifier**
 
-I found a powerful library for audio processing by Phil Schatzmann, called [Arduino Audio Toolkit](https://github.com/pschatzmann/arduino-audio-tools). After studying his examples, I was able to get my computer to send live microphone audio to the ESP32 over WiFi, and play it back immediately. The latency is about 1 second, which concerns me but isn't a deal breaker.
+I found a powerful library for audio processing by Phil Schatzmann, called [Arduino Audio Toolkit](https://github.com/pschatzmann/arduino-audio-tools). After studying his examples, I was able to get my computer to send live microphone audio to the ESP32 over WiFi, and play it back immediately. The latency was about 1 second, which concerned me but wasn't a deal breaker.
 
 This POC validated the idea that we could shift all the computation to a PC nearby and let the ESP32 handle audio input/output.
 
@@ -341,7 +341,7 @@ I produced different sizes of mounting bracket ([download STEP file](../week-10/
 ![PCB mounting test](../week-10/media/bracket-03.webp)
 **PCB mounting test**
 
-I observed that for the 28mm board, a +1mm offset (28.1mm bracket) would make a good fit. I need at least 2mm height to clear the solder joints.
+I observed that for the 28mm board, a +1mm offset (28.1mm bracket) would make a good fit. I needed at least 2mm height to clear the solder joints.
 
 - Board measured size: 28mm
 - Tested sizes: 27.8mm, 27.9mm, 28mm, **28.1mm (optimal)**, 28.2mm
@@ -354,7 +354,7 @@ I also 3D printed [a model](../week-10/model/trrs-hole-test.step) to test the TR
 ![TRRS mounting test](../week-10/media/trrs-02.webp)
 **TRRS jack mounting test**
 
-Testing revealed that 7mm diameter is the best fit, and max thickness can be 2.5mm. This means I can use 2mm thick walls for the case.
+Testing revealed that 7mm diameter was the best fit, and max thickness could be 2.5mm. This meant I could use 2mm thick walls for the case.
 
 - TRRS jack diameter: Unavailable
 - Tested sizes: 6mm, 6.25mm, 6.5mm, 6.75mm, **7mm (optimal)**, 7.25mm
@@ -393,7 +393,7 @@ Stretch goals:
 Delivery plan:
 
 - Networking week (11/19-25)
-  - Fabric Switchboard: full assembly
+  - Fabricate Switchboard: full assembly
   - Implement automatic server IP discovery
   - Implement multi-agent simulation
 - Interface and app programming (11/26-12/02)
@@ -530,7 +530,7 @@ void loop() {
 
 In my circuit, I used a 100-ohm resistor in series with each LED rated at 1.9V forward voltage and 20mA forward current. Assuming a 3.3V supply from the ESP32, the current through the LED would be approximately (3.3V - 1.9V) / 100 ohms = 14mA, which is bit low.
 
-Double checking the math using DigiKey's [LED Resistor Calculator](https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-led-series-resistor), the desired resistor should be 70 ohms. So choosing 100 ohms was ohms safe.
+Double-checking the math using DigiKey's [LED Resistor Calculator](https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-led-series-resistor), the desired resistor should be 70 ohms. So choosing 100 ohms was safe.
 
 Knowing that the TRRS addressing works from [Week 6](../week-06//index.md#integration-test) and the LED output works from this test, we are ready to connect all the components in Switchboard!
 
@@ -1114,4 +1114,4 @@ But it could be reprogrammed for a different metaphor:
 
 We also have the gesture of plugging and unplugging, buttons on the hand units, and voice input/output. Combining these modalities, the device can support a wide range of interaction patterns.
 
-From a business perspective, this project demonstrated that we can prototype physical AI products with off-of-the-shelf microcontrollers and peripherals. It gave me the confidence to design and build more Generative AI hardware going forward.
+From a business perspective, this project demonstrated that we can prototype physical AI products with off-the-shelf microcontrollers and peripherals. It gave me the confidence to design and build more Generative AI hardware going forward.
