@@ -1,12 +1,15 @@
 ---
-title: Final Project
+title: "Final Project: Tangible Adventure"
 date: 2025-09-01
 libraries: ["image-comparison-slider"]
 ---
 
-I want to combine my background in AI application development with TMG's focus in Tangible Interface to build a voice-driven AI programming system inspired by telephone switchboard operators.
+I want to combine my background in AI application development with [my research group](https://tangible.media.mit.edu/)'s focus in Tangible Interface to build a voice-driven AI programming system inspired by telephone switchboard operators. After 2 months of hacking, the idea morphed into an AI powered RPG game console. This post documents the twists and turns of my journey into this adventure.
 
 [Jump to demo](#demo)
+
+![Device set](./media/device-set.webp)
+**Switchboard (black), Operator Unit-01 (red), and Operator Unit-02 (white)**
 
 ## The inspiration
 
@@ -741,6 +744,11 @@ I have two hypotheses that we can test in the future:
 
 1. The curved lines prevent the laser from building up heat
 2. The FDM process creates a directional substrate that is sensitive to laser movement direction
+
+With the engraving done, I could finally shift focus to programming. But before we dive into the code, a family photo of the entire system:
+
+![Cover](./media/cover.webp)
+**Family photo of all the physical components**
 
 ## Debugging sound
 
