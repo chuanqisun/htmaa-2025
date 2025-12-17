@@ -640,7 +640,7 @@ Knowing that rivet vias could be unreliable, I updated my PCB design. I reverted
 
 Throughout my final project, I used 2.54mm female headers to decouple PCB design from electronic components. This modularity allowed me to swap parts easily during development. However, the headers went through many cycles of plugging and unplugging. The repeated mechanical stress made me nervous.
 
-As an insurance policy, I reinforced all header joints with hot glue. I have a hunch Neil won't like this because headers are fundamentally less reliable than soldered joints. But for me, the trade-off was worth it. The electronic components supply became increasingly scarce towards the end of the semester. I needed to conserve and protect the parts I had.
+As an insurance policy, I reinforced all header joints with hot glue. I have a hunch Neil won't like this because headers are fundamentally less reliable than soldered joints. But for me, the trade-off was worth it. The electronic components supply became increasingly scarce towards the end of the semester. If my PCB used soldered SMDs, a single mistake could ruin the project. I needed to conserve and protect the parts I had.
 
 ![Reinforcing headers](../week-14/media/final-glue.webp)
 **"Solidifying" my design**
