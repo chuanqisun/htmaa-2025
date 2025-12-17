@@ -4,7 +4,7 @@ date: 2025-09-01
 libraries: ["image-comparison-slider"]
 ---
 
-I want to combine my background in AI application development with [my research group](https://tangible.media.mit.edu/)'s focus in Tangible Interface to build a voice-driven AI programming system inspired by telephone switchboard operators. After 2 months of hacking, the idea morphed into an AI powered RPG game console. This post documents the twists and turns of my journey into this adventure.
+I want to combine my background in AI application development with [my research group](https://tangible.media.mit.edu/)'s focus in Tangible Interface to build a voice-driven AI programming system inspired by telephone switchboard operators. After 2 months of hacking, the idea morphed into an AI powered RPG game console. This post documents the twists and turns of my own adventure.
 
 [Jump to demo](#demo)
 
@@ -754,12 +754,12 @@ With the engraving done, I could finally shift focus to programming. But before 
 
 I encountered an audio quality issue during integration testing. Playback sounded great, but the microphone output was terrible. I captured a sample from the microphone for analysis.
 
-Caution: loud sound ahead.
+⚠️ Caution: very loud sound ahead.
 
 <audio controls src="./media/debug-audio.wav"></audio>
 **My voice was completely inaudible from the microphone**
 
-Through many rounds of elimination and minimum reproduction, I discovered a key observation: I could either send audio or play sound, but never both. When I attempted both operations simultaneously, the microphone became either silent or extremely noisy. Alternating between the two tasks worked as expected.
+Through many rounds of elimination and minimum reproduction, I made a key observation: I could either send audio or play sound, but never both. When I attempted both operations simultaneously, the microphone became either silent or extremely noisy. Alternating between the two tasks worked as expected.
 
 ```cpp
 bool shouldSend = false;
