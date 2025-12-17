@@ -645,7 +645,7 @@ As an insurance policy, I reinforced all header joints with hot glue. I have a h
 ![Reinforcing headers](../week-14/media/final-glue.webp)
 **"Solidifying" my design**
 
-I also noticed an improvement in my soldering skills over the course of the project. I developed a habit of wetting the soldering tip with solder before touching the joint. This practice significantly improved heat transfer and resulted in cleaner, shinier joints. Anyone wants Hershey's kisses?
+I also noticed an improvement in my soldering skills over the course of the project. I developed a habit of wetting the soldering tip with solder before touching the joint. This practice significantly improved heat transfer and resulted in cleaner, shinier joints. Anyone wants Hershey's Kisses?
 
 ![Compare solder joints](../week-14/media/final-compare-solder.webp)
 **Operator mk1 (left) vs mk3 (right) solder joints**
