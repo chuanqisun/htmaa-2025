@@ -984,6 +984,33 @@ I switched to a text-in, voice-out pipeline, with a separate voice-to-text trans
 ![Pipeline](./media/pipeline.svg)
 **Final pipeline ([full size](./media/pipeline.svg))**
 
+## UI
+
+To run, monitor and debug the entire system, I implemented a web UI using minimal dependencies.
+
+![UI](./media/ui.webp)
+**Screenshot of the web UI**
+
+Features:
+
+- Connect/Disconnect each device
+- Displaying button states from each Operator
+- Play test audio through each Operator
+- Displaying current LED states on the Switchboard
+- Cycle each LED through pulsing, blinking, on, and off states.
+- Select audio output between Operators and laptop speakers
+
+To speed up development, I simulated all the physical inputs in software:
+
+- I can type in a message with an input box, instead of talking through the Operator
+- I can click an LED on each Operator, instead of probing into that jack
+- I can click `Btn1`, `Btn2`, or `Both`, instead of pressing the physical buttons
+
+Finally, to add ambience, I embedded a few YouTube channels to play table top gamming music.
+
+![UI with ambience](./media/ui-music.webp)
+**Music players inside the web UI**
+
 ## Demo
 
 This is the full game play, including character creation, exploration, action, and dice rolling.
