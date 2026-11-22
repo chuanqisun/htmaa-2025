@@ -6,7 +6,7 @@ keywords: ["input", "microphone", "electronics"]
 
 ## Group Assignment
 
-I joined [Typer](https://fab.cba.mit.edu/classes/863.25/people/TylerJensenHill/) and [Jacqueline](https://fab.cba.mit.edu/classes/863.25/people/JacquelineOrr/) to characterize input devices in our lab. We started by [probing a photo transistor](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week8/) to understand its behavior. Our key finding was that the resting resistance is quite high, and covering the sensor with a hand has only a modest effect. However, shining a flashlight on the sensor causes a significant drop in resistance, confirming its sensitivity to light.
+I joined [Typer](https://fab.cba.mit.edu/classes/863.25/people/TylerJensenHill/) and [Jacqueline](https://fab.cba.mit.edu/classes/863.25/people/JacquelineOrr/) to characterize input devices in our lab. We started by [probing a photo transistor](https://fab.cba.mit.edu/classes/863.25/CBA/group_assignments/week8/) to understand its behavior. Our key finding was that the resting resistance is quite high, and covering the sensor with a hand has only a modest effect. However, shining a flashlight on the sensor causes a significant drop in resistance, confirming its sensitivity to light.
 
 To gain more hands-on experience, I decided to probe the microphone breakout board I fabricated in [Week 6](../week-06/index.md) with [Saleae Logic 8](https://www.saleae.com/products/saleae-logic-8). Wiring up the probes proved tricky due to the small soldering joints on the board.
 
@@ -671,7 +671,7 @@ async function transcribeAudio(audioData) {
         yield Buffer.from(preamble, "utf-8");
         yield wavData;
         yield Buffer.from(epilogue, "utf-8");
-      })()
+      })(),
     );
 
     // Make request using fetch

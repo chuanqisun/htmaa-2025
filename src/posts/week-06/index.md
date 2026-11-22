@@ -16,7 +16,7 @@ Our first run resulted in large amounts of burrs along the edges of the traces. 
 ![Burrs everywhere](./media/group-02.webp)
 **Burrs everywhere**
 
-Later, I attended a second session with Kristof where we debugged the milling machine after it entered a halted state. We documented our debugging process and findings in our [group note](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week6/).
+Later, I attended a second session with Kristof where we debugged the milling machine after it entered a halted state. We documented our debugging process and findings in our [group note](https://fab.cba.mit.edu/classes/863.25/CBA/group_assignments/week6/).
 
 ## Fabricating
 

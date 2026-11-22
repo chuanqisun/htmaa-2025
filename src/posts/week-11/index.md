@@ -4,7 +4,7 @@ date: 2025-11-18
 keywords: ["machine-building", "collaboration"]
 ---
 
-This is a group project week. This document captures the tasks I was involved in. See the [group project page](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week11/) for the full context.
+This is a group project week. This document captures the tasks I was involved in. See the [group project page](https://fab.cba.mit.edu/classes/863.25/CBA/group_assignments/week11/) for the full context.
 
 ## Labubu
 
@@ -478,7 +478,7 @@ const send$ = interval(intervalMs).pipe(
     browserQueueSize--;
     messageSent$.next();
     log(`[Test 1] TX: ${message}`);
-  }, concurrency)
+  }, concurrency),
 );
 ```
 

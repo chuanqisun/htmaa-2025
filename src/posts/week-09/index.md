@@ -6,7 +6,7 @@ keywords: ["output", "speaker"]
 
 ## Group Assignment
 
-This week's theme is output devices. Since my final project involves a speaker, I invited our group to measure the power consumption of a speaker. We characterized the speaker to understand its how power consumption might be influenced. The detailed findings are documented in our [group notes](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week9/).
+This week's theme is output devices. Since my final project involves a speaker, I invited our group to measure the power consumption of a speaker. We characterized the speaker to understand its how power consumption might be influenced. The detailed findings are documented in our [group notes](https://fab.cba.mit.edu/classes/863.25/CBA/group_assignments/week9/).
 
 ![Group activity](./media/group-01.webp)
 **Ceci explaining multimeter setup**
@@ -146,7 +146,7 @@ function startSineWaveStream() {
       phase = result.phase;
       sendAudioPacket(result.buffer);
     },
-    (samplesPerPacket / SAMPLE_RATE) * 1000
+    (samplesPerPacket / SAMPLE_RATE) * 1000,
   );
 }
 

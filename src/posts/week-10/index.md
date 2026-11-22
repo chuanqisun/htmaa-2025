@@ -12,7 +12,7 @@ keywords: ["molding", "casting", "3d printing"]
 
 This week, I joined [Kat](https://fabacademy.org/2023/labs/kamakura/students/ekaterina-kormilitsyna/)'s training session to learn about molding and casting. She showed us several examples covering molding, casting techniques, and materials. I also reviewed Safety Data Sheets (SDS) for two materials by Smooth-On: Oomoo 30 silicone rubber and Smooth-Cast 300 plastic. Understanding material properties and safety protocols is essential when working with these chemicals.
 
-See additional documentation in the [group notes](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week10/).
+See additional documentation in the [group notes](https://fab.cba.mit.edu/classes/863.25/CBA/group_assignments/week10/).
 
 ## Manual Particle Accelerator
 

@@ -5,7 +5,7 @@ layout: "base.njk"
 
 ## Intro
 
-Hey, it's Sun. Welcome to my course blog for [How To Make (Almost) Anything](https://fab.cba.mit.edu/classes/MAS.863/) (HTMAA), fall 2025.
+Hey, it's Sun. Welcome to my course blog for [How To Make (Almost) Anything](https://fab.cba.mit.edu/classes/863.25/) (HTMAA), fall 2025.
 
 I'll publish weekly articles on the things I've learned and report progress towards the final project.
 

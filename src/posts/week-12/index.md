@@ -127,7 +127,7 @@ This was confirmed working in [Electronics fabrication week](../week-06/index.md
 
 ## Network 2: Mac and name as BLE address
 
-I added LED lights to the Switchboard (see the [Group assignment page](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week12/) for details). Since the TRRS connection provides only one-way communication from the Switchboard to the Operator, I needed a method for the Operator to send information back to change the LED states. A browser app was introduced to be the hub. The full data flow operates as follows:
+I added LED lights to the Switchboard (see the [Group assignment page](https://fab.cba.mit.edu/classes/863.25/CBA/group_assignments/week12/) for details). Since the TRRS connection provides only one-way communication from the Switchboard to the Operator, I needed a method for the Operator to send information back to change the LED states. A browser app was introduced to be the hub. The full data flow operates as follows:
 
 1.  The Operator reads a 3-bit address from the Switchboard.
 2.  The Operator sends the address to the browser app.
@@ -398,7 +398,7 @@ To satisfy the group assignment requirement of networking with another project, 
 +});
 ```
 
-With this add-on, the browser posts to the server whenever the score updates. See [Group assignment page](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week12/) for details.
+With this add-on, the browser posts to the server whenever the score updates. See [Group assignment page](https://fab.cba.mit.edu/classes/863.25/CBA/group_assignments/week12/) for details.
 
 ![Web app notifying remote server](./media/networking-sender-recorder.mp4)
 **Web app notifying remote server**

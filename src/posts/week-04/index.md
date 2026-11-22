@@ -6,7 +6,7 @@ keywords: ["3d printing", "3d scanning", "cad"]
 
 ## 3D printing
 
-I attended [Session 2](https://fab.cba.mit.edu/classes/MAS.863/CBA/group_assignments/week4/) for the group activity, where people were excited to get hands-on with the 3D printer. However, due to our rush to start printing, we didn't correctly set the right filament type in both the printer and slicer, which resulted in a big spaghetti ball. This experience taught us that next time, we need to carefully read the manuals and understand the machine before using it.
+I attended [Session 2](https://fab.cba.mit.edu/classes/863.25/CBA/group_assignments/week4/) for the group activity, where people were excited to get hands-on with the 3D printer. However, due to our rush to start printing, we didn't correctly set the right filament type in both the printer and slicer, which resulted in a big spaghetti ball. This experience taught us that next time, we need to carefully read the manuals and understand the machine before using it.
 
 ![Failed 3D print](./media//nozzle-clog.webp)
 **Nozzle clogged due to wrong filament setting.**
