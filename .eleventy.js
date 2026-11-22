@@ -3,6 +3,24 @@ import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import path from "path"; // Import path module to check extensions easily
 import { createHighlighter } from "shiki";
 
+const deployTarget = process.env.DEPLOY_TARGET || "gitlab";
+const deployTargets = {
+  gitlab: {
+    pathPrefix: "/classes/863.25/people/SunChuanqi/",
+    base: "https://fab.cba.mit.edu/classes/863.25/people/SunChuanqi/",
+  },
+  github: {
+    pathPrefix: "/htmaa-2025/",
+    base: "https://chuanqisun.github.io/htmaa-2025/",
+  },
+};
+
+if (!(deployTarget in deployTargets)) {
+  throw new Error(`Unknown DEPLOY_TARGET "${deployTarget}". Expected one of: ${Object.keys(deployTargets).join(", ")}`);
+}
+
+const { pathPrefix, base } = deployTargets[deployTarget];
+
 /**
  * @import { UserConfig } from "@11ty/eleventy"
  */
@@ -25,7 +43,7 @@ export default async function (eleventyConfig) {
     metadata: {
       language: "en",
       title: "HTMAA 2025 BLog",
-      base: "https://fab.cba.mit.edu/classes/863.25/people/SunChuanqi/",
+      base,
       author: {
         name: "Sun Chuanqi",
       },
@@ -105,5 +123,5 @@ export default async function (eleventyConfig) {
 }
 
 export const config = {
-  pathPrefix: "/classes/863.25/people/SunChuanqi/",
+  pathPrefix,
 };
