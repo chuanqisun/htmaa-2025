@@ -2,6 +2,9 @@
 
 A course blog for HTMAA (How to Make Almost Anything) 2025, built with [Eleventy](https://www.11ty.dev/) static site generator.
 
+- **Website (GitHub Pages)**: https://chuanqisun.github.io/htmaa-2025/
+- **Mirror (MIT GitLab Pages)**: https://fab.cba.mit.edu/classes/863.25/people/SunChuanqi/
+
 ## Quick Start
 
 ### Prerequisites
@@ -68,7 +71,9 @@ npm run dev
 ## Available Scripts
 
 - `npm run dev` - Start development server with live reload (automatically cleans and rebuilds)
-- `npm run build` - Build the site for production
+- `npm run build` - Build the site for production (defaults to GitLab)
+- `npm run build:github` - Build the site for GitHub Pages (`pathPrefix: /htmaa-2025/`)
+- `npm run build:gitlab` - Build the site for the MIT GitLab mirror (`pathPrefix: /classes/863.25/people/SunChuanqi/`)
 - `npm run clean` - Remove generated `public/posts` directory
 
 ## Project Structure
@@ -137,13 +142,17 @@ Adjust site settings in `.eleventy.js` including:
 
 ## Deployment
 
-This blog is configured for deployment to MIT's Fab Academy infrastructure with:
+This blog is automatically deployed to both GitHub Pages and the MIT GitLab mirror via GitHub Actions on pushes to `master`:
 
-- Base URL: `https://fab.cba.mit.edu/classes/863.25/people/SunChuanqi/`
-- Path prefix: `/classes/863.25/people/SunChuanqi/`
-- RSS feed metadata for course context
+- **GitHub Pages** (`npm run build:github`):
+  - URL: https://chuanqisun.github.io/htmaa-2025/
+  - Path prefix: `/htmaa-2025/`
+- **MIT GitLab Mirror** (`npm run build:gitlab`):
+  - URL: https://fab.cba.mit.edu/classes/863.25/people/SunChuanqi/
+  - Repository: https://gitlab.cba.mit.edu/classes/863.25/people/SunChuanqi
+  - Path prefix: `/classes/863.25/people/SunChuanqi/`
 
-To deploy, build the site and upload the `public/` directory contents to your assigned web space.
+To deploy manually, run the corresponding build script and publish the `public/` directory contents.
 
 ## Prompt
 
